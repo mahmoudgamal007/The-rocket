@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{7CC32F69-3C46-4385-BB9D-A19BF6827E41}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TheRocket/Entities/BaseEntity.cs">
+    <Files>
+      <File FileName="TheRocket/.gitignore" Line="1" Column="1" />
+      <File FileName="TheRocket/appsettings.Development.json" Line="1" Column="2" />
+      <File FileName="TheRocket/appsettings.json" Line="1" Column="1" />
+      <File FileName="TheRocket/Entities/BaseEntity.cs" Line="12" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TheRocket" expanded="True">
+            <Node name="TheRocket" expanded="True">
+              <Node name="Entities" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TheRocket" expanded="True">
+            <Node name="TheRocket" expanded="True">
+              <Node name="Entities" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.TheRocket FirstBuild="True" PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

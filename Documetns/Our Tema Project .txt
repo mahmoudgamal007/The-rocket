@@ -1,0 +1,81 @@
+
+
+Project & Team name - suggestions: 
+-  Asmaa: 
+-  Menna: Rocket (Rocket.online)
+-  Mahmoud: 
+-  Abdel-Salam: Lit-Zone
+-  Abdul-Rahman: 
+
+
+
+
+
+Team Leader : Abdul-Rahman Shabaka
+
+Project :Rocket (E-Commerce ) 
+
+Target Audience : primary : Sellers - secondary: Buyers
+
+Service : Online-preshopping & Delivery plus tracking system
+
+Product : Online-preshopping & Delivery plus tracking system
+
+problem : Customer's need for online shopping (Clothes-Electronics-Every Home Requirements -Skin Care Products)
+
+Solution : more Flexible online-shopping experience with a clean layout and more simplified "Z " eye flow for customer's satisfaction.
+
+Features:-
+1- Signin & sign up
+2- Search (Products) search(sellers)
+3- Categories 
+4- Support (including Live Support - gRPC)
+5- Seller Account & Buyer account => upon sign-up and cant switch from one to another. 
+6- Premium seller (monthly subscription) - advantages:unlimited product list for sale,premium seller products got more chance to appear in home page
+7- Shippment Tracking ( Address Book- manual user-entered)
+8- Check-out 
+9- Buyers-points ()
+10- Referral Program - only for new accounts both Seller &Buyers signing up with the promo code given"Random Hash key".
+11-Cart -> check-out -> cash-on delivery -> Submit-Order -> auto-printed bill
+
+
+
+
+
+
+
+
+
+
+
+
+
+Project-Flow :-
+ Home -> Products -> Categories -> items -> Add To Cart -> Checkout (Cart)-> Payment Widget -> Tracking-Shipment(Thank-you page)
+      -> Sign-in & Sign-up(either Buyer or Seller)
+      -> MyAccount -> Sign-in & Sign-up(either Buyer or Seller)
+      -> About page
+      -> Support 
+      -> Seller (nav appears only for seller accounts - Display:None for consumers account)
+      -> Hot Deals
+      -> Cart -> Order info
+              -> Check-out 
+
+
+EndPoints :-
+
+1-Home 
+2-About
+3-Product
+5-Signin & Signup
+6-Support
+7-Cart-> Checkout 
+8-My Account
+9-Hot Deals(Offers)
+10-Seller (nav appears only for seller accounts - Display:None for consumers account)
+11-Orders
+
+
+
+ 
+
