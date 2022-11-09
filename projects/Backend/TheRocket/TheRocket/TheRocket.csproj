@@ -22,7 +22,4 @@
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="Entities\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
 </Project>
