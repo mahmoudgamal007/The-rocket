@@ -3,9 +3,9 @@ namespace TheRocket.Entities
 {
     public class BaseEntity
     {
-        public BaseEntity()
-        {
-        }
+        public bool IsDeleted { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int CreatedBy {get;set;}
     }
 }
 
