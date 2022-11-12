@@ -1,6 +1,6 @@
 ﻿namespace TheRocket.Entities
 {
-    public class Subscription
+    public class Subscription//remove this class this task for asmaa
     {
         public int SubscriptionId { get; set; }
         public DateTime StartDate { get; set; }
