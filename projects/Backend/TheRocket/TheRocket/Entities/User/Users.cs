@@ -9,6 +9,7 @@ namespace TheRocket.EntitiesUsers
         public User()
         {
             Addresses=new();
+            Phones=new();
         }
         [Key]
         public int Id { get; set; }
@@ -17,14 +18,13 @@ namespace TheRocket.EntitiesUsers
         [EmailAddress]
         public string Email{get;set;}
         public DateTime BirthDate { get; set; }
-
-        [RegularExpression("01[0-2,5][0-9]{8}$")]
-        public List<string> Phones { get; set; }
         public string Password { get; set; }
 
         //custompropery
         public string UserName { get; set; }
         public Gender Gender { get; set; }
+        public virtual List<Phone> Phones { get; set; }
+
         public virtual List<Address> Addresses { get; set; }
         
     }
