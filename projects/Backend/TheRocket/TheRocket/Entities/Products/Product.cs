@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 
 namespace TheRocket.Entities.Products
 {
@@ -19,8 +18,8 @@ namespace TheRocket.Entities.Products
         public double Price { get; set; }
         public int Discount { get; set; }
         public string Brand { get; set; }
-        public virtual List<Color> Colors { get; set; }
-        public virtual List<Size> Sizes { get; set; }
+        public virtual List<ProductColor> Colors { get; set; }
+        public virtual List<ProductSize> Sizes { get; set; }
         public virtual List<ImgUrl> ImgsUrls { get; set; }
     }
 }
