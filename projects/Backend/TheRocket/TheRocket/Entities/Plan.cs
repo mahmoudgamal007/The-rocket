@@ -1,7 +1,10 @@
-﻿namespace TheRocket.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TheRocket.Entities
 {
     public class Plan:BaseEntity
     {
+        [Key]
         public int PlanId { get; set; }//just Id
         public string PlanName { get; set; }//just Name
         public string Description { get; set; }
