@@ -24,8 +24,14 @@
     <None Remove="Entities\" />
     <None Remove="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <None Remove="TheRocketDbContexts\" />
+    <None Remove="Repositories\" />
+    <None Remove="Repositories\RepoInterfaces\" />
+    <None Remove="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TheRocketDbContexts\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Repositories\RepoInterfaces\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 </Project>
