@@ -1,19 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using TheRocket.Entities.Users;
 
 namespace TheRocket.Entities
 {
-    public class Plan:BaseEntity
+    public class Plan:BaseEntity//Mahmoud
     {
+        public Plan()
+        {
+            Subscrips = new();
+        }
         [Key]
-        public int PlanId { get; set; }//just Id
-        public string PlanName { get; set; }//just Name
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
-        public double CurrentPrice { get; set; }//Price
+        public double Price { get; set; }
         public int Duration { get; set; }
-        public DateTime CreatedDate { get; set; }//remove
         public int Discount { get; set; }
-        public string CreatedBy { get; set; }//remove
-        public bool IsDeleted { get; set; } //remove
-
+        public virtual List<Subscrip>? Subscrips { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TheRocket.EntitiesUsers;
 
 namespace TheRocket.Entities.Users
 {
@@ -13,8 +12,8 @@ namespace TheRocket.Entities.Users
         public string City { get; set; }
         public string Street { get; set; }
 
-        [ForeignKey(nameof(user))]
-        public int UserId { get; set; }
-        public virtual User user { get; set; }
+        [ForeignKey(nameof(AppUser))]
+        public string AppUserId { get; set; }
+        public virtual AppUser AppUser { get; set; }
     }
 }

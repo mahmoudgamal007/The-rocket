@@ -1,40 +1,45 @@
 ﻿<Properties StartupConfiguration="{7CC32F69-3C46-4385-BB9D-A19BF6827E41}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="TheRocket/Entities/BaseEntity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TheRocket/Entities/FeedBack.cs">
     <Files>
-      <File FileName="TheRocket/.gitignore" Line="1" Column="1" />
-      <File FileName="TheRocket/appsettings.Development.json" Line="1" Column="2" />
-      <File FileName="TheRocket/appsettings.json" Line="1" Column="1" />
-      <File FileName="TheRocket/Entities/BaseEntity.cs" Line="12" Column="1" />
+      <File FileName="TheRocket/Entities/Users/Seller.cs" Line="29" Column="23" />
+      <File FileName="TheRocket/Entities/BaseEntity.cs" Line="1" Column="1" />
+      <File FileName="TheRocket/Entities/FeedBack.cs" Line="23" Column="1" />
+      <File FileName="TheRocket/Entities/Order.cs" Line="9" Column="34" />
+      <File FileName="TheRocket/Entities/Plan.cs" Line="11" Column="31" />
+      <File FileName="TheRocket/Entities/ReserveCart.cs" Line="22" Column="1" />
+      <File FileName="TheRocket/Entities/SubCategory.cs" Line="6" Column="48" />
+      <File FileName="TheRocket/Entities/Subscrip.cs" Line="25" Column="1" />
+      <File FileName="TheRocket/TheRocketDbContexts/TheRocketDbContext.cs" Line="18" Column="84" />
+      <File FileName="TheRocket/appsettings.Development.json" Line="2" Column="74" />
+      <File FileName="TheRocket/Program.cs" Line="25" Column="2" />
+      <File FileName="TheRocket/Entities/Products/Product.cs" Line="22" Column="42" />
+      <File FileName="TheRocket/Entities/Users/AppUser.cs" Line="5" Column="1" />
+      <File FileName="TheRocket/Entities/Users/Buyer.cs" Line="7" Column="20" />
+      <File FileName="TheRocket/Entities/Users/Phone.cs" Line="1" Column="1" />
+      <File FileName="TheRocket/Entities/Users/Locations.cs" Line="1" Column="1" />
+      <File FileName="TheRocket/Entities/Users/Address.cs" Line="8" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TheRocket" expanded="True">
             <Node name="TheRocket" expanded="True">
-              <Node name="Entities" expanded="True" />
+              <Node name="Entities" expanded="True">
+                <Node name="FeedBack.cs" selected="True" />
+              </Node>
+              <Node name="TheRocketDbContexts" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="TheRocket" expanded="True">
-            <Node name="TheRocket" expanded="True">
-              <Node name="Entities" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.TheRocket FirstBuild="True" PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.TheRocket FirstBuild="True" PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
 </Properties>
