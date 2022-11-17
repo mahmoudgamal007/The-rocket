@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using TheRocket.Repositories.RepoInterfaces;
+using TheRocket.Repositories;
 using Microsoft.EntityFrameworkCore;
 using TheRocket.Entities.Users;
 using TheRocket.TheRocketDbContexts;
@@ -21,7 +22,7 @@ builder.Services.AddDbContext<TheRocketDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<TheRocketDbContext>();
- builder.Services.AddScoped<IPlanRepository>();
+ builder.Services.AddScoped<IPlanRepository,PlanRepository>();
 
 
 var app = builder.Build();

@@ -2,49 +2,68 @@
 using Microsoft.AspNetCore.Http;
 using TheRocket.Repositories.RepoInterfaces;
 using TheRocket.Dtos;
+using TheRocket.TheRocketDbContexts;
 using TheRocket.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TheRocket.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class PlanController : ControllerBase
     {
         private readonly IPlanRepository Plan;
-        public PlanController(IPlanRepository plan)
+        private readonly TheRocketDbContext Context;
+        public PlanController(IPlanRepository plan,TheRocketDbContext context)
         {
             Plan=plan;
+            Context=context;
         }
         [HttpGet]
         public async Task<IActionResult> GetAllPlans()
         {
-            return Ok(Plan.GetAllPlans());
+            return Ok(await Plan.GetAllPlans());
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetPlanById(int id)
         {
-            return Ok(Plan.GetPlanById(id));
+            var p = Context.Plans.FirstOrDefault(p => p.Id==id && p.IsDeleted==false);
+            if (p!=null)
+                return Ok(await Plan.GetPlanById(id));
+            else
+                return NotFound();
         }
         [HttpGet("{name}")]
         public async Task<IActionResult> GetPlanByName(string name)
         {
-            return Ok(Plan.GetPlanByName(name));
+            var p = Context.Plans.FirstOrDefault(p => p.Name.ToLower()==name.ToLower() && p.IsDeleted==false);
+            if (p!=null)
+                return Ok(await Plan.GetPlanByName(name));
+            else
+                return NotFound();
         }
         [HttpDelete]
         public async Task<IActionResult> DeletePlan(int id)
         {
-            return Ok(Plan.DeletePlan(id));
+            var p = Context.Plans.FirstOrDefault(p => p.Id==id && p.IsDeleted==false);
+            if (p!=null)
+                return Ok(await Plan.DeletePlan(id));
+            else
+                return NotFound();
         }
         [HttpPut]
-        public async Task<IActionResult> UpdatePlan(Plan plan)
+        public async Task<IActionResult> UpdatePlan(PlanDto plan)
         {
-            return Ok(Plan.UpdatePlan(plan));
+            var p = Context.Plans.FirstOrDefault(p => p.Id==plan.Id && p.IsDeleted==false);
+            if (p!=null)
+                return Ok(await Plan.UpdatePlan(plan));
+            else
+                return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateNewPlan(Plan plan)
+        public async Task<IActionResult> CreateNewPlan(PlanDto plan)
         {
-            return Ok(Plan.CreatePlan(plan));
+            return Ok(await Plan.CreatePlan(plan));
         }
 
     }
