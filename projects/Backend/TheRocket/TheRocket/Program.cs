@@ -1,37 +1,28 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using TheRocket.Repositories.RepoInterfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using TheRocket.Entities.Users;
 using TheRocket.TheRocketDbContexts;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 
 builder.Services.AddDbContext<TheRocketDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<TheRocketDbContext>();
+ builder.Services.AddScoped<IPlanRepository>();
 
-//JWT validator
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateLifetime = true,
-        ValidateAudience=false,
-        ValidateIssuer=false,
-        ValidateIssuerSigningKey=true,
-        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my_secret_key_123456"))
-    };
-});
 
 var app = builder.Build();
 
@@ -44,7 +35,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();//identity and jwt
+
 app.UseAuthorization();
 
 app.MapControllers();

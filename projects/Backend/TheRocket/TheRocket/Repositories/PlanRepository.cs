@@ -3,15 +3,21 @@ using TheRocket.Repositories.RepoInterfaces;
 using System.Threading.Tasks;
 using TheRocket.TheRocketDbContexts;
 using Microsoft.AspNetCore.Mvc;
+using TheRocket.Dtos;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace TheRocket.Repositories
 {
+    
     public class PlanRepository : IPlanRepository
     {
+        private readonly IMapper Mapper;
         private readonly TheRocketDbContext Context;
-        public PlanRepository(TheRocketDbContext context)
+        public PlanRepository(TheRocketDbContext context, IMapper mapper)
         {
-            Context=context;       
+            Context=context;
+            Mapper=mapper;
         }
         public async Task<Plan> CreatePlan(Plan plan)
         {
@@ -22,29 +28,34 @@ namespace TheRocket.Repositories
            
         }
 
-        public Task DeletePlan(int id)
+        public async Task DeletePlan(int id)
         {
-            throw new NotImplementedException();
+            var p=await Context.Plans.FirstOrDefaultAsync(p =>p.Id==id);
+            p.IsDeleted=true;
+            UpdatePlan(p);
         }
 
-        public Task<List<Plan>> GetAllPlans()
+        public async Task<List<Plan>> GetAllPlans()
         {
-            throw new NotImplementedException();
+           
+                return await Context.Plans.ToListAsync();
         }
 
-        public Task<Plan> GetPlanById(int id)
+        public async Task<Plan> GetPlanById(int id)
         {
-            throw new NotImplementedException();
+            return await Context.Plans.FirstOrDefaultAsync(p => p.Id==id);
         }
 
-        public Task<Plan> GetPlanByName(string name)
+        public async Task<Plan> GetPlanByName(string name)
         {
-            throw new NotImplementedException();
+            return await Context.Plans.FirstOrDefaultAsync(p => p.Name.ToLower()==name.ToLower());
         }
 
-        public Task<Plan> UpdatePlan(Plan plan)
+        public async Task<Plan> UpdatePlan(Plan plan)
         {
-            throw new NotImplementedException();
+            var p = await Context.Plans.FirstOrDefaultAsync(p => p.Id==plan.Id);
+            Mapper.Map(p, plan);
+            return plan;
         }
     }
 }
