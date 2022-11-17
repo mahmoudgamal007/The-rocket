@@ -1,20 +1,17 @@
-using System.ComponentModel.DataAnnotations;
-using TheRocket.Entities.Products;
+﻿using TheRocket.Entities.Products;
 
-namespace TheRocket.Entities
+namespace TheRocket.Dtos
 {
-    public class SubCategory:BaseEntity// menna
+    public class SubCategoryDto
     {
-        public SubCategory()
+        public SubCategoryDto()
         {
             products = new();
+
         }
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string MainCategory { get; set; }
         public virtual List<Product>? products { get; set; }
-
-       
     }
 }
