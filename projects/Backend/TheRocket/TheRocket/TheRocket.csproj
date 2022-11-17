@@ -15,6 +15,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,9 @@
     <None Remove="Repositories\RepoInterfaces\" />
     <None Remove="Controllers\" />
     <None Remove="AutoMapper\" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="System.IdentityModel.Tokens.Jwt" />
+    <None Remove="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TheRocketDbContexts\" />
@@ -35,5 +40,6 @@
     <Folder Include="Repositories\RepoInterfaces\" />
     <Folder Include="Controllers\" />
     <Folder Include="AutoMapper\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
 </Project>
