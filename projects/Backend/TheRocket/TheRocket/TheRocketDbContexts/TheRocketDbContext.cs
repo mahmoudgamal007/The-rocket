@@ -25,6 +25,8 @@ namespace TheRocket.TheRocketDbContexts
             builder.Entity<Subscrip>().HasKey(s => new { s.SellerId, s.PlanId });
            
         }
+              
+
 
         public virtual  DbSet<Product> Products { get; set; }
         public virtual  DbSet<ProductColor> Colors { get; set; }
