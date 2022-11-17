@@ -27,11 +27,13 @@
     <None Remove="Repositories\" />
     <None Remove="Repositories\RepoInterfaces\" />
     <None Remove="Controllers\" />
+    <None Remove="AutoMapper\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TheRocketDbContexts\" />
     <Folder Include="Repositories\" />
     <Folder Include="Repositories\RepoInterfaces\" />
     <Folder Include="Controllers\" />
+    <Folder Include="AutoMapper\" />
   </ItemGroup>
 </Project>
