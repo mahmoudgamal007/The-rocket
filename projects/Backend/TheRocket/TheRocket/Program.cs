@@ -20,8 +20,12 @@ builder.Services.AddDbContext<TheRocketDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<TheRocketDbContext>();
-builder.Services.AddScoped<IPlanRepository>();
+builder.Services.AddScoped<IPlanRepository,PlanRepository>();
 builder.Services.AddScoped<ISubCategory,SubCategoryRepo>();
+
+builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
+
+Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 
 var app = builder.Build();

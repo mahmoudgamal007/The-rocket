@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using TheRocket.Dtos;
 using TheRocket.Entities;
 using TheRocket.Entities.Products;
 using TheRocket.Repositories.RepoInterfaces;
@@ -17,38 +18,47 @@ namespace TheRocket.Repositories
             _mapper = mapper;
         }
 
-        public async Task<SubCategory> Add(SubCategory subCategory)
+        public async Task<SubCategory> Create(SubCategoryDto subCategory)
         {
-            db.SubCategories.Add(subCategory);
+            var s = new SubCategory();
+            _mapper.Map(subCategory, s);
+            db.SubCategories.Add(s);
             await db.SaveChangesAsync();
-            return subCategory;
+            return s;
         }
 
-        public async Task<SubCategory> Update(SubCategory subCategory)
+        public async Task<SubCategory> Update(SubCategoryDto subCategory)
         {
-            var s = await db.SubCategories.FirstOrDefaultAsync(s => s.Id == subCategory.Id);
-            _mapper.Map(s, subCategory);
-            return subCategory;
+            var SubCategory = new SubCategory();
+            var s = await db.SubCategories.FirstOrDefaultAsync(s => s.Id == subCategory.Id && s.IsDeleted == false);
+            _mapper.Map(subCategory,s);
+            await db.SaveChangesAsync();
+            return s;
         }
 
-    
+
         public async Task< List<SubCategory>> GetAll()
         {
-
-            return await db.SubCategories.Include(s => s.products).ToListAsync();
+            return await db.SubCategories.Include(s => s.products).Where(p => p.IsDeleted == false).ToListAsync();
         }
    
         public async Task< List<Product> >GetAllProducts()
         {
-            return await db.Products.ToListAsync();
+            return await db.Products.Where(p => p.IsDeleted == false).ToListAsync();
         }
       
         public async Task<SubCategory> GetById(int id)
         {    
-            return await db.SubCategories.SingleOrDefaultAsync(s => s.Id == id);
+            return await db.SubCategories.SingleOrDefaultAsync(s => s.Id == id && s.IsDeleted == false);
 
         }
 
-
+        public async Task<List<SubCategory>> Delete(int id)
+        {
+            var p = await db.SubCategories.FirstOrDefaultAsync(p => p.Id == id && p.IsDeleted == false);
+            p.IsDeleted = true;
+            await db.SaveChangesAsync();
+            return await db.SubCategories.Where(s => s.IsDeleted == false).ToListAsync();
+        }
     }
 }
