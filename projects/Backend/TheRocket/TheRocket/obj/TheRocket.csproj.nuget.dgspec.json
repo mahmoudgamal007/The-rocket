@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "F:\\ITI\\Project\\TheRocket\\projects\\Backend\\TheRocket\\TheRocket\\TheRocket.csproj": {}
+    "/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/TheRocket.csproj": {}
   },
   "projects": {
-    "F:\\ITI\\Project\\TheRocket\\projects\\Backend\\TheRocket\\TheRocket\\TheRocket.csproj": {
+    "/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/TheRocket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\ITI\\Project\\TheRocket\\projects\\Backend\\TheRocket\\TheRocket\\TheRocket.csproj",
+        "projectUniqueName": "/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/TheRocket.csproj",
         "projectName": "TheRocket",
-        "projectPath": "F:\\ITI\\Project\\TheRocket\\projects\\Backend\\TheRocket\\TheRocket\\TheRocket.csproj",
-        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "F:\\ITI\\Project\\TheRocket\\projects\\Backend\\TheRocket\\TheRocket\\obj\\",
+        "projectPath": "/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/TheRocket.csproj",
+        "packagesPath": "/Users/abdulrahmanhassan/.nuget/packages/",
+        "outputPath": "/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/abdulrahmanhassan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -43,6 +41,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.10, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -66,9 +68,17 @@
               "target": "Package",
               "version": "[6.0.10, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.25.0, )"
             }
           },
           "imports": [
@@ -90,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }
