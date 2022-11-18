@@ -19,43 +19,48 @@ namespace TheRocket.Repositories
             Context=context;
             Mapper=mapper;
         }
-        public async Task<Plan> CreatePlan(Plan plan)
+        public async Task<Plan> CreatePlan(PlanDto plan)
         {
-           Context.Plans.Add(plan);
+            var p = new Plan();
+            Mapper.Map(plan, p);
+            Context.Plans.Add(p);
             await Context.SaveChangesAsync();
-            return plan;
+            return p;
 
            
         }
 
-        public async Task DeletePlan(int id)
+        public async Task<List<Plan>> DeletePlan(int id)
         {
-            var p=await Context.Plans.FirstOrDefaultAsync(p =>p.Id==id);
+            var p=await Context.Plans.FirstOrDefaultAsync(p =>p.Id==id && p.IsDeleted==false);
             p.IsDeleted=true;
-            UpdatePlan(p);
+            await Context.SaveChangesAsync();
+            return await Context.Plans.Where(p=>p.IsDeleted==false).ToListAsync();
         }
 
         public async Task<List<Plan>> GetAllPlans()
         {
            
-                return await Context.Plans.ToListAsync();
+                return await Context.Plans.Where(p=>p.IsDeleted==false).ToListAsync();
         }
 
         public async Task<Plan> GetPlanById(int id)
         {
-            return await Context.Plans.FirstOrDefaultAsync(p => p.Id==id);
+            return await Context.Plans.FirstOrDefaultAsync(p => p.Id==id && p.IsDeleted==false);
         }
 
         public async Task<Plan> GetPlanByName(string name)
         {
-            return await Context.Plans.FirstOrDefaultAsync(p => p.Name.ToLower()==name.ToLower());
+            return await Context.Plans.FirstOrDefaultAsync(p => p.Name.ToLower()==name.ToLower() && p.IsDeleted==false);
         }
 
-        public async Task<Plan> UpdatePlan(Plan plan)
+        public async Task<List<Plan>> UpdatePlan(PlanDto plan)
         {
-            var p = await Context.Plans.FirstOrDefaultAsync(p => p.Id==plan.Id);
-            Mapper.Map(p, plan);
-            return plan;
+            var Plan = new Plan();
+            var p = await Context.Plans.FirstOrDefaultAsync(p => p.Id==plan.Id && p.IsDeleted==false);
+            Mapper.Map(plan,p);
+            await Context.SaveChangesAsync();
+            return await Context.Plans.ToListAsync();
         }
     }
 }
