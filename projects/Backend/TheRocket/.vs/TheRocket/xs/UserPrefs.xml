@@ -1,39 +1,61 @@
 ﻿<Properties StartupConfiguration="{7CC32F69-3C46-4385-BB9D-A19BF6827E41}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="TheRocket/TheRocketDbContexts/TheRocketDbContext.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TheRocket/Repositories/AddressRepo.cs">
     <Files>
       <File FileName="TheRocket/Entities/Products/Product.cs" />
       <File FileName="TheRocket/Program.cs" />
       <File FileName="TheRocket/Entities/Subscrip.cs" />
       <File FileName="TheRocket/Entities/SubCategory.cs" />
       <File FileName="TheRocket/Entities/ReserveCart.cs" />
-      <File FileName="TheRocket/AutoMapper/init.cs" />
-      <File FileName="TheRocket/Dtos/init..cs" />
       <File FileName="TheRocket/appsettings.json" />
       <File FileName="TheRocket/appsettings.Development.json" />
-      <File FileName="TheRocket/TheRocketDbContexts/TheRocketDbContext.cs" Line="1" Column="1" />
+      <File FileName="TheRocket/TheRocketDbContexts/TheRocketDbContext.cs" />
+      <File FileName="TheRocket/.gitignore" />
+      <File FileName="TheRocket/AutoMapper/PlanMapper.cs" />
+      <File FileName="TheRocket/Dtos/PlanDto.cs" />
+      <File FileName="TheRocket/Repositories/PlanRepository.cs" />
+      <File FileName="TheRocket/Entities/Plan.cs" />
+      <File FileName="TheRocket/Entities/Users/AppUser.cs" />
+      <File FileName="TheRocket/Controllers/SellerController.cs" />
+      <File FileName="TheRocket/Dtos/UserDtos/SellerDto.cs" Line="19" Column="1" />
+      <File FileName="TheRocket/Entities/Users/Seller.cs" />
+      <File FileName="TheRocket/Entities/Products/ImgUrl.cs" />
+      <File FileName="TheRocket/Entities/Users/Address.cs" />
+      <File FileName="TheRocket/Repositories/SellerRepo.cs" Line="105" Column="47" />
+      <File FileName="TheRocket/AutoMapper/AppUserSellerProfile.cs" />
+      <File FileName="TheRocket/Repositories/AddressRepo.cs" Line="97" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="TheRocket" expanded="True">
-            <Node name="TheRocket" expanded="True" selected="True">
+            <Node name="TheRocket" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="AutoMapper" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Dtos" expanded="True">
+                <Node name="UserDtos" expanded="True" />
+              </Node>
               <Node name="Entities" expanded="True">
                 <Node name="Products" expanded="True" />
+                <Node name="Users" expanded="True" />
               </Node>
-              <Node name="Migrations" expanded="True" />
-              <Node name="TheRocketDbContexts" expanded="True" />
-              <Node name="appsettings.json" expanded="True" />
+              <Node name="Repositories" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.TheRocket PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.TheRocket PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/Controllers/SellerController.cs" relfile="TheRocket/Controllers/SellerController.cs" line="23" column="1" />
+      <Breakpoint file="/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/Repositories/AddressRepo.cs" relfile="TheRocket/Repositories/AddressRepo.cs" line="112" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>

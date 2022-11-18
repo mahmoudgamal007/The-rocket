@@ -12,8 +12,8 @@ using TheRocket.TheRocketDbContexts;
 namespace TheRocket.Migrations
 {
     [DbContext(typeof(TheRocketDbContext))]
-    [Migration("20221116180344_V1")]
-    partial class V1
+    [Migration("20221118210724_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,15 @@ namespace TheRocket.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c3b3f712-ea78-44d5-9ea0-cd900d5b1b33",
+                            ConcurrencyStamp = "80f8d857-06cd-4ca5-bed2-c1118b9b62a9",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -172,9 +181,6 @@ namespace TheRocket.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -201,9 +207,6 @@ namespace TheRocket.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DeliveryDate")
                         .HasColumnType("datetime2");
@@ -261,9 +264,6 @@ namespace TheRocket.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -300,9 +300,6 @@ namespace TheRocket.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -334,9 +331,6 @@ namespace TheRocket.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
 
                     b.Property<string>("Desctiption")
                         .IsRequired()
@@ -388,9 +382,6 @@ namespace TheRocket.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -414,9 +405,6 @@ namespace TheRocket.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -446,9 +434,6 @@ namespace TheRocket.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -476,9 +461,6 @@ namespace TheRocket.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -505,9 +487,6 @@ namespace TheRocket.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
 
                     b.Property<int>("Discount")
                         .HasColumnType("int");
@@ -557,9 +536,6 @@ namespace TheRocket.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Government")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -576,6 +552,40 @@ namespace TheRocket.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("TheRocket.Entities.Users.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("TheRocket.Entities.Users.AppUser", b =>
@@ -677,7 +687,7 @@ namespace TheRocket.Migrations
                     b.ToTable("Buyers");
                 });
 
-            modelBuilder.Entity("TheRocket.Entities.Users.Locations", b =>
+            modelBuilder.Entity("TheRocket.Entities.Users.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -688,6 +698,12 @@ namespace TheRocket.Migrations
                     b.Property<string>("AppUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Latitude")
                         .IsRequired()
@@ -715,6 +731,12 @@ namespace TheRocket.Migrations
                     b.Property<string>("AppUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("phone")
                         .IsRequired()
@@ -748,14 +770,12 @@ namespace TheRocket.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CoverImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Points")
                         .HasColumnType("int");
 
                     b.Property<string>("ProfileImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReferalCode")
@@ -968,6 +988,17 @@ namespace TheRocket.Migrations
                     b.Navigation("AppUser");
                 });
 
+            modelBuilder.Entity("TheRocket.Entities.Users.Admin", b =>
+                {
+                    b.HasOne("TheRocket.Entities.Users.AppUser", "AppUser")
+                        .WithOne("Admin")
+                        .HasForeignKey("TheRocket.Entities.Users.Admin", "AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("TheRocket.Entities.Users.Buyer", b =>
                 {
                     b.HasOne("TheRocket.Entities.Users.AppUser", "AppUser")
@@ -979,7 +1010,7 @@ namespace TheRocket.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("TheRocket.Entities.Users.Locations", b =>
+            modelBuilder.Entity("TheRocket.Entities.Users.Location", b =>
                 {
                     b.HasOne("TheRocket.Entities.Users.AppUser", "AppUser")
                         .WithMany("Locations")
@@ -1040,6 +1071,8 @@ namespace TheRocket.Migrations
             modelBuilder.Entity("TheRocket.Entities.Users.AppUser", b =>
                 {
                     b.Navigation("Addresses");
+
+                    b.Navigation("Admin");
 
                     b.Navigation("Buyer");
 

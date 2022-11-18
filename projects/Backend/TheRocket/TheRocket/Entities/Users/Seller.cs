@@ -18,8 +18,8 @@ namespace TheRocket.Entities.Users
         public string ReferalCode { get; set; }
         public int Points { get; set; }
         public string About { get; set; }
-        public string ProfileImageUrl { get; set; }
-        public string CoverImageUrl { get; set; }
+        public string? ProfileImageUrl { get; set; }
+        public string? CoverImageUrl { get; set; }
         public string BrandName { get; set; }
 
         [ForeignKey(nameof(AppUser))]
