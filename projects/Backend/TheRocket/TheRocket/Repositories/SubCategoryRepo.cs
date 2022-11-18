@@ -27,13 +27,13 @@ namespace TheRocket.Repositories
             return s;
         }
 
-        public async Task<SubCategory> Update(SubCategoryDto subCategory)
+        public async Task<List<SubCategory>> Update(SubCategoryDto subCategory)
         {
             var SubCategory = new SubCategory();
             var s = await db.SubCategories.FirstOrDefaultAsync(s => s.Id == subCategory.Id && s.IsDeleted == false);
             _mapper.Map(subCategory,s);
             await db.SaveChangesAsync();
-            return s;
+            return await db.SubCategories.ToListAsync();
         }
 
 

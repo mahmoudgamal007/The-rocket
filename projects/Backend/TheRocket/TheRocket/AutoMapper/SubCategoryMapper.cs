@@ -9,7 +9,7 @@ namespace AuotMapper
     {
         public SubCategoryMapper()
         {
-            CreateMap<SubCategory, SubCategoryDto>();
+            CreateMap< SubCategoryDto, SubCategory>();
                 
         }
     }

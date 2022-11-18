@@ -12,7 +12,7 @@ namespace TheRocket.Repositories.RepoInterfaces
        Task< List<Product>> GetAllProducts();
        Task< SubCategory> GetById(int id);
        Task< SubCategory >Create(SubCategoryDto subCategory);
-        Task<SubCategory?> Update(SubCategoryDto subCategory);
+        Task<List<SubCategory>> Update(SubCategoryDto subCategory);
         Task<List<SubCategory>> Delete(int id);
     }
 }

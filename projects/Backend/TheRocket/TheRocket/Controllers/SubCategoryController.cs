@@ -26,9 +26,9 @@ namespace TheRocket.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(SubCategory.GetAll());
+            return Ok(await SubCategory.GetAll());
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             var s = Context.SubCategories.FirstOrDefault(s => s.Id == id && s.IsDeleted == false);
@@ -51,7 +51,7 @@ namespace TheRocket.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(SubCategoryDto subCategory)
         {
-            var s = Context.Plans.FirstOrDefault(s => s.Id == subCategory.Id && s.IsDeleted == false);
+            var s = Context.SubCategories.FirstOrDefault(s => s.Id == subCategory.Id && s.IsDeleted == false);
             if (s != null)
                 return Ok(await SubCategory.Update(subCategory));
             else
