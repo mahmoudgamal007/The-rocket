@@ -1,4 +1,6 @@
+
 ﻿using System.Text;
+using DependancyInjection.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -56,7 +58,11 @@ builder.Services.AddScoped<IAdminRepo, AdminRepo>();
 builder.Services.AddScoped<IAddressRepo, AddressRepo>();
 builder.Services.AddScoped<IPhoneRepo, PhoneRepo>();
 builder.Services.AddScoped<ILocationRepo, LocationRepo>();
+builder.Services.AddScoped<IPlanRepository,PlanRepository>();
+builder.Services.AddScoped<ISubCategory,SubCategoryRepo>();
+builder.Services.AddScoped<IFeedbackRepo, FeedbackRepo>();
 
+builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddDbContext<TheRocketDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));

@@ -3,48 +3,64 @@ using TheRocket.Repositories.RepoInterfaces;
 using System.Threading.Tasks;
 using TheRocket.TheRocketDbContexts;
 using Microsoft.AspNetCore.Mvc;
+using TheRocket.Dtos;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace TheRocket.Repositories
 {
+    
     public class PlanRepository : IPlanRepository
     {
+        private readonly IMapper Mapper;
         private readonly TheRocketDbContext Context;
-        public PlanRepository(TheRocketDbContext context)
+        public PlanRepository(TheRocketDbContext context, IMapper mapper)
         {
-            Context=context;       
+            Context=context;
+            Mapper=mapper;
         }
-        public async Task<Plan> CreatePlan(Plan plan)
+        public async Task<Plan> CreatePlan(PlanDto plan)
         {
-           Context.Plans.Add(plan);
+            var p = new Plan();
+            Mapper.Map(plan, p);
+            Context.Plans.Add(p);
             await Context.SaveChangesAsync();
-            return plan;
+            return p;
 
            
         }
 
-        public Task DeletePlan(int id)
+        public async Task<List<Plan>> DeletePlan(int id)
         {
-            throw new NotImplementedException();
+            var p=await Context.Plans.FirstOrDefaultAsync(p =>p.Id==id && p.IsDeleted==false);
+            p.IsDeleted=true;
+            await Context.SaveChangesAsync();
+            return await Context.Plans.Where(p=>p.IsDeleted==false).ToListAsync();
         }
 
-        public Task<List<Plan>> GetAllPlans()
+        public async Task<List<Plan>> GetAllPlans()
         {
-            throw new NotImplementedException();
+           
+                return await Context.Plans.Where(p=>p.IsDeleted==false).ToListAsync();
         }
 
-        public Task<Plan> GetPlanById(int id)
+        public async Task<Plan> GetPlanById(int id)
         {
-            throw new NotImplementedException();
+            return await Context.Plans.FirstOrDefaultAsync(p => p.Id==id && p.IsDeleted==false);
         }
 
-        public Task<Plan> GetPlanByName(string name)
+        public async Task<Plan> GetPlanByName(string name)
         {
-            throw new NotImplementedException();
+            return await Context.Plans.FirstOrDefaultAsync(p => p.Name.ToLower()==name.ToLower() && p.IsDeleted==false);
         }
 
-        public Task<Plan> UpdatePlan(Plan plan)
+        public async Task<List<Plan>> UpdatePlan(PlanDto plan)
         {
-            throw new NotImplementedException();
+            var Plan = new Plan();
+            var p = await Context.Plans.FirstOrDefaultAsync(p => p.Id==plan.Id && p.IsDeleted==false);
+            Mapper.Map(plan,p);
+            await Context.SaveChangesAsync();
+            return await Context.Plans.ToListAsync();
         }
     }
 }

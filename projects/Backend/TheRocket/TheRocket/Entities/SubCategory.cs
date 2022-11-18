@@ -14,5 +14,7 @@ namespace TheRocket.Entities
         public string Name { get; set; }
         public string MainCategory { get; set; }
         public virtual List<Product>? products { get; set; }
+
+       
     }
 }

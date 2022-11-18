@@ -1,0 +1,218 @@
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\appsettings.json
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.exe
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.deps.json
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.runtimeconfig.json
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.pdb
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Humanizer.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Runtime.Caching.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Windows.Extensions.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.AssemblyReference.cache
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.GeneratedMSBuildEditorConfig.editorconfig
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.AssemblyInfoInputs.cache
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.AssemblyInfo.cs
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.CoreCompileInputs.cache
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.MvcApplicationPartsAssemblyInfo.cs
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.MvcApplicationPartsAssemblyInfo.cache
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\staticwebassets.build.json
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\staticwebassets.development.json
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\scopedcss\bundle\TheRocket.styles.css
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.CopyComplete
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\refint\TheRocket.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.pdb
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.genruntimeconfig.cache
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\ref\TheRocket.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\AutoMapper.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\iti study\Graduation\gradRepo\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\refint\TheRocket.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.pdb
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.AssemblyReference.cache
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.AssemblyInfoInputs.cache
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.AssemblyInfo.cs
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.CoreCompileInputs.cache
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.MvcApplicationPartsAssemblyInfo.cs
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.MvcApplicationPartsAssemblyInfo.cache
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\appsettings.json
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.exe
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.deps.json
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.runtimeconfig.json
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.pdb
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\AutoMapper.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Humanizer.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Runtime.Caching.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Windows.Extensions.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\staticwebassets.build.json
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\staticwebassets.development.json
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\scopedcss\bundle\TheRocket.styles.css
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.CopyComplete
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.genruntimeconfig.cache
+D:\ITI\GP\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\ref\TheRocket.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.AssemblyReference.cache
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.GeneratedMSBuildEditorConfig.editorconfig
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.AssemblyInfoInputs.cache
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.AssemblyInfo.cs
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.CoreCompileInputs.cache
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.MvcApplicationPartsAssemblyInfo.cs
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.MvcApplicationPartsAssemblyInfo.cache
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\refint\TheRocket.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.pdb
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\appsettings.json
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.exe
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.deps.json
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.runtimeconfig.json
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.pdb
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\AutoMapper.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Humanizer.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Newtonsoft.Json.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Drawing.Common.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Runtime.Caching.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Security.Permissions.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\System.Windows.Extensions.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\staticwebassets.build.json
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\staticwebassets.development.json
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\scopedcss\bundle\TheRocket.styles.css
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.csproj.CopyComplete
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.genruntimeconfig.cache
+F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\ref\TheRocket.dll
