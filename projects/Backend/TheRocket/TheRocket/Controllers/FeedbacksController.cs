@@ -32,6 +32,11 @@ namespace TheRocket.Controllers
         {
             return feedbackRepo.GetAllFeedbacks();
         }
+        //public async Task<IActionResult> GetAllFeedbacks()
+        //{
+        //    return Ok(await feedbackRepo.GetAllFeedbacks());
+        //}
+
 
         //GetById
         [HttpGet("{ProuductId}/{BuyerId}")]

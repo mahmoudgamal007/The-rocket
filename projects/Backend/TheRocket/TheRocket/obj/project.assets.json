@@ -2950,24 +2950,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/abdulrahmanhassan/.nuget/packages/": {}
+    "C:\\Users\\dell\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/TheRocket.csproj",
+      "projectUniqueName": "F:\\ITI\\Project\\TheRocket\\projects\\Backend\\TheRocket\\TheRocket\\TheRocket.csproj",
       "projectName": "TheRocket",
-      "projectPath": "/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/TheRocket.csproj",
-      "packagesPath": "/Users/abdulrahmanhassan/.nuget/packages/",
-      "outputPath": "/Users/abdulrahmanhassan/InternalStorage/learning/ITI/GP/TheRocket/projects/Backend/TheRocket/TheRocket/obj/",
+      "projectPath": "F:\\ITI\\Project\\TheRocket\\projects\\Backend\\TheRocket\\TheRocket\\TheRocket.csproj",
+      "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
+      "outputPath": "F:\\ITI\\Project\\TheRocket\\projects\\Backend\\TheRocket\\TheRocket\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/abdulrahmanhassan/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3048,7 +3050,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

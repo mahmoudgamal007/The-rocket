@@ -1,3 +1,6 @@
+using TheRocket.Dtos;
+using TheRocket.Shared;
+
 namespace TheRocket.Repositories.RepoInterfaces
 {
     public interface IBaseRepo<T1,T2>

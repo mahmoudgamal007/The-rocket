@@ -12,8 +12,6 @@ namespace TheRocket.Repositories
         IEnumerable<Feedback> GetAllFeedbacks();
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Buyer> GetAllBuyers();
-
-
         Task<Feedback> GetById(int ProductId, int BuyerId);
         Task<Feedback> AddFeedback(FeedbackDto feedback);
 
