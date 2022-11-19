@@ -8,5 +8,6 @@ namespace TheRocket.Dtos
         public int Id { get; set; }
         public string Name { get; set; }
         public string MainCategory { get; set; }
+    
     }
 }
