@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using TheRocket.Dtos;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using TheRocket.Shared;
+using System.Collections.Generic;
 
 namespace TheRocket.Repositories
 {
@@ -19,43 +21,59 @@ namespace TheRocket.Repositories
             Context=context;
             Mapper=mapper;
         }
-        public async Task<PlanDto> CreatePlan(PlanDto plan)
+        public async Task<SharedResponse<PlanDto>> Create(PlanDto model)
         {
-            var p = new Plan();
-            Mapper.Map(plan, p);
-            Context.Plans.Add(p);
-            await Context.SaveChangesAsync();
-            return plan;
 
-           
-        }
 
-        public async Task<List<Plan>> DeletePlan(int id)
-        {
-            var p=await Context.Plans.FirstOrDefaultAsync(p =>p.Id==id && p.IsDeleted==false);
-            p.IsDeleted=true;
-            await Context.SaveChangesAsync();
-            return await Context.Plans.Where(p=>p.IsDeleted==false).ToListAsync();
-        }
-
-        public async Task<List<PlanDto>> GetAllPlans()
-        {
-                
-             List<Plan>Plans = Context.Plans.Where(p=>p.IsDeleted==false).ToList();
-             List<PlanDto> plans=new List<PlanDto>();
-            foreach(var item in Plans)
+            if (Context.Plans == null)
             {
-                var p = new PlanDto();
-                Mapper.Map(item, p);
-                plans.Add(p);
+                return new SharedResponse<PlanDto>(Status.problem, null, "Entity Set 'db.Plans' is null");
             }
-             return  plans;
+            Plan plan = Mapper.Map<Plan>(model);
+            Context.Plans.Add(plan);
+            try
+            {
+                await Context.SaveChangesAsync();
+                model = Mapper.Map<PlanDto>(plan);
+                return new SharedResponse<PlanDto>(Status.createdAtAction, model);
+            }
+            catch (Exception ex)
+            {
+                return new SharedResponse<PlanDto>(Status.badRequest, null, ex.ToString());
+            }
+
         }
 
-        public async Task<PlanDto> GetPlanById(int id)
+        public async Task<SharedResponse<PlanDto>> Delete(int Id)
+        {
+            if (Context.Addresses == null)
+            {
+                return new SharedResponse<PlanDto>(Status.notFound, null);
+
+            }
+            var plan = await Context.Addresses.Where(p => p.Id == Id && p.IsDeleted == false).FirstOrDefaultAsync();
+            if (plan == null)
+            {
+                return new SharedResponse<PlanDto>(Status.notFound, null);
+            }
+            plan.IsDeleted = true;
+            await Context.SaveChangesAsync();
+            return new SharedResponse<PlanDto>(Status.noContent, null);
+        }
+
+        public Task<List<SharedResponse<PlanDto>>> GetAll()
         {
 
-            return await Context.Plans.FirstOrDefaultAsync(p => p.Id==id && p.IsDeleted==false);
+            throw new  NotImplementedException();
+        }
+
+        public async Task<SharedResponse<PlanDto>> GetById(int Id)
+        {
+
+            var plan = Context.Plans.Where(p => p.Id == Id).FirstOrDefaultAsync();
+            var p = new PlanDto();
+            Mapper.Map(plan, p);
+            return new SharedResponse<PlanDto>(Status.found, p);
         }
 
         public async Task<Plan> GetPlanByName(string name)
@@ -63,13 +81,36 @@ namespace TheRocket.Repositories
             return await Context.Plans.FirstOrDefaultAsync(p => p.Name.ToLower()==name.ToLower() && p.IsDeleted==false);
         }
 
-        public async Task<List<Plan>> UpdatePlan(PlanDto plan)
+        public bool IsExists(int Id)
         {
-            var Plan = new Plan();
-            var p = await Context.Plans.FirstOrDefaultAsync(p => p.Id==plan.Id && p.IsDeleted==false);
-            Mapper.Map(plan,p);
-            await Context.SaveChangesAsync();
-            return await Context.Plans.ToListAsync();
+            return (Context.Plans?.Any(p => p.Id == Id && p.IsDeleted==false)).GetValueOrDefault();
+        }
+   
+        public async Task<SharedResponse<PlanDto>> Update(int Id, PlanDto model)
+        {
+            if (Id != model.Id)
+            {
+                return new SharedResponse<PlanDto>(Status.badRequest, null);
+            }
+
+            Plan plan = Mapper.Map<Plan>(model);
+
+            Context.Entry(plan).State = EntityState.Modified;
+
+            try
+            {
+                if (IsExists(Id))
+                    await Context.SaveChangesAsync();
+                else
+                    return new SharedResponse<PlanDto>(Status.notFound, null);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                throw;
+            }
+
+            return new SharedResponse<PlanDto>(Status.noContent, null);
         }
     }
 }
