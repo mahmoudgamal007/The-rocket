@@ -47,15 +47,15 @@ namespace TheRocket.Controllers
                         }
                         var token = new JwtSecurityToken(
                             claims:claims,
-                            expires: DateTime.Now.AddMinutes(120),
+                            // expires: DateTime.Now.AddMinutes(1),
                             signingCredentials: credentials
                             
                         );
 
-                        
+                        var jwtToken=new JwtSecurityTokenHandler().WriteToken(token);
 
                         await signInManager.SignInWithClaimsAsync(appUser,loginDto.RememberMe,claims);
-                        return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                        return Ok(jwtToken);
                     }
                 }
 
