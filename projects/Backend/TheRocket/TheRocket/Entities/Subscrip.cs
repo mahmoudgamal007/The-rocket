@@ -4,7 +4,7 @@ using TheRocket.Entities.Users;
 
 namespace TheRocket.Entities
 {
-    public class Subscrip:BaseEntity
+    public class Subscrip:BaseEntity//Asmaa
     {
         public bool IsActivated { get; set; }
         public int Discount { get; set; }

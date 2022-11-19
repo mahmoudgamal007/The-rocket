@@ -7,7 +7,7 @@ namespace TheRocket.AutoMapper
     {
         public PlanMapper()
         {
-            CreateMap<PlanDto, Plan>();
+            CreateMap<PlanDto, Plan>().ReverseMap();
         }
     }
 }
