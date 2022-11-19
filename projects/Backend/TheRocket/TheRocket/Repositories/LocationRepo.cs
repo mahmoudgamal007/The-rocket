@@ -72,10 +72,7 @@ namespace TheRocket.Repositories
             return new SharedResponse<List<LocationDto>>(Status.found, Locationss);
         }
 
-        public Task<List<SharedResponse<LocationDto>>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public Task<SharedResponse<LocationDto>> GetById(int Id)
         {
@@ -114,6 +111,9 @@ namespace TheRocket.Repositories
             return (db.Locations?.Any(l => l.Id == Id&&l.IsDeleted==false)).GetValueOrDefault();
         }
 
-       
+        Task<SharedResponse<List<LocationDto>>> IBaseRepo<SharedResponse<LocationDto>, SharedResponse<List<LocationDto>>, LocationDto>.GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

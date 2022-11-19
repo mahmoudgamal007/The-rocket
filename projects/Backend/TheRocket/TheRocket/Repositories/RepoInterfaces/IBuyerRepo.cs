@@ -3,7 +3,7 @@ using TheRocket.Shared;
 
 namespace TheRocket.Repositories.RepoInterfaces
 {
-    public interface IBuyerRepo:IBaseRepo<SharedResponse<BuyerDto>,BuyerDto>
+    public interface IBuyerRepo:IBaseRepo<SharedResponse<BuyerDto>,SharedResponse<List<BuyerDto>>,BuyerDto>
     {
          
     }

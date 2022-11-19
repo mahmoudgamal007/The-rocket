@@ -138,10 +138,7 @@ namespace TheRocket.Repositories
             return new SharedResponse<AdminDto>(Status.noContent, null);
         }
 
-        public Task<List<SharedResponse<AdminDto>>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public Task<SharedResponse<AdminDto>> GetById(int Id)
         {
@@ -158,6 +155,9 @@ namespace TheRocket.Repositories
             throw new NotImplementedException();
         }
 
-
+        Task<SharedResponse<List<AdminDto>>> IBaseRepo<SharedResponse<AdminDto>, SharedResponse<List<AdminDto>>, AdminDto>.GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
