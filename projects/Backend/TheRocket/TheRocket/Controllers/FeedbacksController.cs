@@ -9,14 +9,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-
-
-
+using TheRocket.Repositories.RepoInterfaces;
+using TheRocket.Dtos.UserDtos;
+using TheRocket.Shared;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Buyer")]
+
     public class FeedbacksController : ControllerBase
     {
         private readonly IFeedbackRepo feedbackRepo;
@@ -25,33 +29,54 @@ namespace TheRocket.Controllers
         {
             this.feedbackRepo = feedbackRepo;
         }
+
         //GetAllFeedbacks
+
         [HttpGet]
-        public IEnumerable<Feedback> GetAllFeedbacks()
+        public async Task<IActionResult> GetAllFeedbacks()
         {
-            return feedbackRepo.GetAllFeedbacks();
+            SharedResponse<List<FeedbackDto>> response = await feedbackRepo.GetAllFeedbacks();
+            if (response.status == Status.notFound) { return NotFound(); }
+            else { return Ok(response.data); }
         }
-        //public async Task<IActionResult> GetAllFeedbacks()
-        //{
-        //    return Ok(feedbackRepo.GetAllFeedbacks());
-        //}
-        //GetById
+
+
+        // GetById
         [HttpGet("{ProuductId}/{BuyerId}")]
-        public async Task<IActionResult> GetById([FromRoute] int ProuductId, [FromRoute] int BuyerId)
+            public async Task<ActionResult<List<FeedbackDto>>> GetFeedbackById([FromRoute] int ProuductId, [FromRoute] int BuyerId)
+        { 
+            SharedResponse<List<FeedbackDto>> response = await feedbackRepo.GetFeedbackbyId(ProuductId, BuyerId);
+            if (response.status == Status.notFound) return NotFound();
+            return response.data;
+        }
+
+       // post
+  
+        [HttpPost]
+        public async Task<ActionResult<FeedbackDto>> Create(FeedbackDto feedback)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var feedback = await feedbackRepo.GetById(BuyerId, ProuductId);
-
-            if (feedback == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(feedback);
+            SharedResponse<FeedbackDto> response = await feedbackRepo.Create(feedback);
+            if (response.status == Status.problem) return Problem(response.message);
+            if (response.status == Status.badRequest) return BadRequest(response.message);
+            return Ok(response.data);
+        }
+        //put
+        [HttpPut("{ProductId}/{BuyerId}")]
+        public async Task<ActionResult<FeedbackDto>> UpdateFeedback(int ProductId, int BuyerId, FeedbackDto feedback)
+        {
+            SharedResponse<FeedbackDto> response = await feedbackRepo.UpdateFeedback(ProductId, BuyerId, feedback);
+            if (response.status == Status.badRequest) return BadRequest();
+            else if (response.status == Status.notFound) return NotFound();
+            return NoContent();
+        }
+        //Delete
+        [HttpDelete("{ProductId}/{BuyerId}")]
+        public async Task<ActionResult<FeedbackDto>> DeleteFeedback(int ProductId, int BuyerId)
+        {
+            SharedResponse<FeedbackDto> response = await feedbackRepo.DeleteFeedback(ProductId, BuyerId);
+            if (response.status == Status.notFound) return NotFound();
+            return NoContent();
         }
     }
+
 }

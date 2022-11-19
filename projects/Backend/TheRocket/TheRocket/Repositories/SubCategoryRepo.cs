@@ -5,7 +5,7 @@ using TheRocket.Entities;
 using TheRocket.Entities.Products;
 using TheRocket.Repositories.RepoInterfaces;
 using TheRocket.TheRocketDbContexts;
-
+using TheRocket.Shared;
 namespace TheRocket.Repositories
 {
     public class SubCategoryRepo : ISubCategory
@@ -18,47 +18,105 @@ namespace TheRocket.Repositories
             _mapper = mapper;
         }
 
-        public async Task<SubCategory> Create(SubCategoryDto subCategory)
+
+        public bool IsExists(int Id)
         {
-            var s = new SubCategory();
-            _mapper.Map(subCategory, s);
-            db.SubCategories.Add(s);
-            await db.SaveChangesAsync();
-            return s;
+            return (db.SubCategories?.Any(a => a.Id == Id&&a.IsDeleted==false)).GetValueOrDefault();
         }
 
-        public async Task<List<SubCategory>> Update(SubCategoryDto subCategory)
+        public async Task<SharedResponse<SubCategoryDto>> Create(SubCategoryDto model)
         {
-            var SubCategory = new SubCategory();
-            var s = await db.SubCategories.FirstOrDefaultAsync(s => s.Id == subCategory.Id && s.IsDeleted == false);
-            _mapper.Map(subCategory,s);
+            if (db.SubCategories ==null)
+            {
+                return new SharedResponse<SubCategoryDto>(Status.problem, null, "db.SubCategories is null");
+            }
+            SubCategory subCategory = _mapper.Map<SubCategory>(model);
+            db.SubCategories.Add(subCategory);
+            try{
+
             await db.SaveChangesAsync();
-            return await db.SubCategories.ToListAsync();
+            model= _mapper.Map<SubCategoryDto>(subCategory);
+            return new SharedResponse<SubCategoryDto>(Status.createdAtAction,model);
+            }
+            catch (Exception ex)
+            {
+                return new SharedResponse<SubCategoryDto>(Status.badRequest, null, ex.ToString());
+            }
+        }
+
+        public async Task<SharedResponse<SubCategoryDto>> Update(int Id,SubCategoryDto model)
+        {
+            if (Id != model.Id)
+            {
+                return new SharedResponse<SubCategoryDto>(Status.badRequest, null);
+            }
+
+            SubCategory subCategory = _mapper.Map<SubCategory>(model);
+            db.Entry(subCategory).State = EntityState.Modified;
+
+           try
+            {
+                if (IsExists(Id))
+                    await db.SaveChangesAsync();
+                else
+                    return new SharedResponse<SubCategoryDto>(Status.notFound, null);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                throw;
+            }
+
+            return new SharedResponse<SubCategoryDto>(Status.noContent, null);
+       
         }
 
 
-        public async Task< List<SubCategory>> GetAll()
+
+        public async Task<SharedResponse<List<SubCategoryDto>>> GetAll()
         {
-            return await db.SubCategories.Include(s => s.products).Where(p => p.IsDeleted == false).ToListAsync();
+              if (db.SubCategories ==null)
+            {
+                return  new SharedResponse<List<SubCategoryDto>>(Status.notFound, null, "Entity Set 'db.Address' is null");
+            }
+
+            var subCategoryDto = await db.SubCategories.Where( s => s.IsDeleted == false).ToListAsync();
+            List<SubCategoryDto> subCategories = _mapper.Map<List<SubCategoryDto>>(subCategoryDto);   
+            return  new  SharedResponse<List<SubCategoryDto>>(Status.found,subCategories);
         }
    
-        public async Task< List<Product> >GetAllProducts()
-        {
-            return await db.Products.Where(p => p.IsDeleted == false).ToListAsync();
-        }
-      
-        public async Task<SubCategory> GetById(int id)
-        {    
-            return await db.SubCategories.SingleOrDefaultAsync(s => s.Id == id && s.IsDeleted == false);
+        public async Task<SharedResponse<SubCategoryDto> >GetById(int id)
+        {  
+               if (db.SubCategories ==null)
+            {
+                return  new SharedResponse<SubCategoryDto>(Status.notFound, null, "Entity Set 'db.Address' is null");
+            }
+            var subCategory = await db.SubCategories.SingleOrDefaultAsync(s => s.Id == id && s.IsDeleted == false);
+              if (subCategory == null)
+            {
+                return new SharedResponse<SubCategoryDto>(Status.notFound, null);
+            }
+             var  model= _mapper.Map<SubCategoryDto>(subCategory);
 
+            return new SharedResponse<SubCategoryDto>(Status.found,model);
+       
         }
 
-        public async Task<List<SubCategory>> Delete(int id)
+        public async Task<SharedResponse<SubCategoryDto>> Delete(int id)
         {
-            var p = await db.SubCategories.FirstOrDefaultAsync(p => p.Id == id && p.IsDeleted == false);
-            p.IsDeleted = true;
+          if (db.SubCategories ==null)
+            {
+                return new SharedResponse<SubCategoryDto>(Status.notFound, null, "Entity Set 'db.Address' is null");
+            }
+
+            var subCategory = await db.SubCategories.SingleOrDefaultAsync(s => s.Id == id && s.IsDeleted == false);
+              if (subCategory == null)
+            {
+                return new SharedResponse<SubCategoryDto>(Status.notFound, null);
+            }
+            subCategory.IsDeleted = true;
             await db.SaveChangesAsync();
-            return await db.SubCategories.Where(s => s.IsDeleted == false).ToListAsync();
+            return new SharedResponse<SubCategoryDto>(Status.noContent,null);
         }
     }
 }

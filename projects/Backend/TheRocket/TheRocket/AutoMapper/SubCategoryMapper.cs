@@ -9,7 +9,7 @@ namespace AuotMapper
     {
         public SubCategoryMapper()
         {
-            CreateMap< SubCategoryDto, SubCategory>();
+            CreateMap< SubCategoryDto, SubCategory>().ReverseMap();
                 
         }
     }

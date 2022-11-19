@@ -1,3 +1,6 @@
+using TheRocket.Dtos;
+using TheRocket.Shared;
+
 namespace TheRocket.Repositories.RepoInterfaces
 {
     public interface IBaseRepo<T1,T2,T3>
@@ -7,7 +10,6 @@ namespace TheRocket.Repositories.RepoInterfaces
          public Task<T1> Create(T3 model);
          public Task<T1> Update(int Id,T3 model);
          public Task<T1> Delete(int Id);
-
          public bool IsExists(int Id);
     }
 }

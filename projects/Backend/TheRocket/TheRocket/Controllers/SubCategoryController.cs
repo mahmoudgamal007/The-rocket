@@ -6,61 +6,60 @@ using TheRocket.Entities;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using TheRocket.TheRocketDbContexts;
+using TheRocket.Repositories;
+using TheRocket.Shared;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles="Admin,Seller")]
+
 
     public class SubCategoryController : ControllerBase
     {
-        private readonly ISubCategory SubCategory;
-        private readonly TheRocketDbContext Context;
+        private readonly SubCategoryRepo repo;
 
-        public SubCategoryController(TheRocketDbContext context,ISubCategory subCategory)
+        public SubCategoryController(SubCategoryRepo repo)
         {
-            this.SubCategory = subCategory;
-            Context = context;
+            this.repo = repo;
 
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            return Ok(await SubCategory.GetAll());
+        public async Task<ActionResult<List<SubCategoryDto>>> GetAll(){
+         SharedResponse<List<SubCategoryDto>> response= await repo.GetAll();
+         if(response.status==Status.notFound)return NotFound();
+         return response.data;
         }
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var s = Context.SubCategories.FirstOrDefault(s => s.Id == id && s.IsDeleted == false);
-            if (s != null)
-                return Ok(await SubCategory.GetById(id));
-            else
-                return NotFound();
+          [HttpGet("{id}")]
+        public async Task<ActionResult<SubCategoryDto>> GetById(int id){
+         SharedResponse<SubCategoryDto> response= await repo.GetById(id);
+         if(response.status==Status.notFound)return NotFound();
+         return Ok(response.data);
         }
-      
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var p = Context.SubCategories.FirstOrDefault(p => p.Id == id && p.IsDeleted == false);
-            if (p != null)
-                return Ok(await SubCategory.Delete(id));
-            else
-                return NotFound();
-        }
-        [HttpPut]
-        public async Task<IActionResult> Update(SubCategoryDto subCategory)
-        {
-            var s = Context.SubCategories.FirstOrDefault(s => s.Id == subCategory.Id && s.IsDeleted == false);
-            if (s != null)
-                return Ok(await SubCategory.Update(subCategory));
-            else
-                return NotFound();
-        }
         [HttpPost]
-        public async Task<IActionResult> Create(SubCategoryDto subCategory)
-        {
-            return Ok(await SubCategory.Create(subCategory));
+        public async Task<ActionResult<SubCategoryDto>> PostSubCategory(SubCategoryDto SubCategory){
+            SharedResponse<SubCategoryDto> response=await repo.Create(SubCategory);
+            if(response.status==Status.problem)return Problem(response.message);
+            if(response.status==Status.badRequest) return BadRequest(response.message);
+            return Ok(response.data);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SubCategoryDto>> PutSubCategory(int id,SubCategoryDto SubCategory){
+            SharedResponse<SubCategoryDto> response=await repo.Update(id,SubCategory);
+            if(response.status==Status.badRequest)return BadRequest();
+            else if(response.status==Status.notFound)return NotFound();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+         public async Task<ActionResult<SubCategoryDto>> DeleteSubCategory(int id){
+            SharedResponse<SubCategoryDto> response=await repo.Delete(id);
+            if(response.status==Status.notFound)return NotFound();
+            return NoContent();
+         } 
     }
 }

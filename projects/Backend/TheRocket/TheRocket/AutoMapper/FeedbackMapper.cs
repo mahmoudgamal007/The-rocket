@@ -8,7 +8,7 @@ namespace TheRocket.AutoMapper
     {
         public FeedbackMapper()
         {
-            CreateMap< FeedbackDto, Feedback>();
+            CreateMap< FeedbackDto, Feedback>().ReverseMap();
         }
     }
 }

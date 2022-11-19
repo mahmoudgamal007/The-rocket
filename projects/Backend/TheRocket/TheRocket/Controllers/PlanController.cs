@@ -5,6 +5,7 @@ using TheRocket.Dtos;
 using TheRocket.TheRocketDbContexts;
 using TheRocket.Entities;
 using Microsoft.AspNetCore.Mvc;
+using TheRocket.Shared;
 
 namespace TheRocket.Controllers
 {
@@ -20,50 +21,44 @@ namespace TheRocket.Controllers
             Context=context;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllPlans()
+        public async Task<ActionResult<List<PlanDto>>> GetAll()
         {
-            return Ok(await Plan.GetAllPlans());
+            SharedResponse<List<PlanDto>> response = await Plan.GetAll();
+            if (response.status==Status.notFound) return NotFound();
+            return Ok(response.data);
         }
         [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetPlanById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var p = Context.Plans.FirstOrDefault(p => p.Id==id && p.IsDeleted==false);
-            if (p!=null)
-                return Ok(await Plan.GetPlanById(id));
-            else
-                return NotFound();
+            SharedResponse<PlanDto> response = await Plan.GetById(id);
+            if (response.status==Status.notFound) return NotFound();
+            return Ok(response.data);
+        
         }
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetPlanByName(string name)
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<PlanDto>> DeleteAddress(int id)
         {
-            var p = Context.Plans.FirstOrDefault(p => p.Name.ToLower()==name.ToLower() && p.IsDeleted==false);
-            if (p!=null)
-                return Ok(await Plan.GetPlanByName(name));
-            else
-                return NotFound();
+            SharedResponse<PlanDto> response = await Plan.Delete(id);
+            if (response.status==Status.notFound) return NotFound();
+            return NoContent();
         }
-        [HttpDelete]
-        public async Task<IActionResult> DeletePlan(int id)
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<PlanDto>> PutAddress(int id, PlanDto plan)
         {
-            var p = Context.Plans.FirstOrDefault(p => p.Id==id && p.IsDeleted==false);
-            if (p!=null)
-                return Ok(await Plan.DeletePlan(id));
-            else
-                return NotFound();
-        }
-        [HttpPut]
-        public async Task<IActionResult> UpdatePlan(PlanDto plan)
-        {
-            var p = Context.Plans.FirstOrDefault(p => p.Id==plan.Id && p.IsDeleted==false);
-            if (p!=null)
-                return Ok(await Plan.UpdatePlan(plan));
-            else
-                return NotFound();
+            SharedResponse<PlanDto> response = await Plan.Update(id, plan);
+            if (response.status==Status.badRequest) return BadRequest();
+            else if (response.status==Status.notFound) return NotFound();
+            return NoContent();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateNewPlan(PlanDto plan)
+        public async Task<ActionResult<PlanDto>> PostAddress(PlanDto plan)
         {
-            return Ok(await Plan.CreatePlan(plan));
+            SharedResponse<PlanDto> response = await Plan.Create(plan);
+            if (response.status==Status.problem) return Problem(response.message);
+            if (response.status==Status.badRequest) return BadRequest(response.message);
+            return Ok(response.data);
         }
 
     }
