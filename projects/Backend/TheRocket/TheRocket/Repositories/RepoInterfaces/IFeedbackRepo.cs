@@ -8,7 +8,12 @@ using TheRocket.Shared;
     {
     public interface IFeedbackRepo: IBaseRepo<SharedResponse<FeedbackDto>, FeedbackDto>
         {
-        public Task<SharedResponse<List<Product>>> GetAllProducts();
-        public Task<SharedResponse<List<Buyer>>> GetAllBuyers();
+        public Task<SharedResponse<List<FeedbackDto>>> GetAllFeedbacks();
+        public Task<SharedResponse<List<FeedbackDto>>> GetFeedbackbyId(int ProductId, int BuyerId);
+        public Task<SharedResponse<FeedbackDto>> UpdateFeedback(int ProductId, int BuyerId, FeedbackDto model);
+        public bool IsExist(int ProductId,int BuyerId);
+        public Task<SharedResponse<FeedbackDto>> DeleteFeedback(int ProductId, int BuyerId);
+
+
     }
 }

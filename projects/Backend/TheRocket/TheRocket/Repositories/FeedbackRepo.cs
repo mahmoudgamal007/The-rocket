@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using TheRocket.Dtos;
 using TheRocket.Dtos.UserDtos;
 using TheRocket.Entities;
@@ -22,34 +23,111 @@ namespace T.Repositories
             Mapper = mapper;
 
         }
-
-        public async Task<List<Feedback>> GetAll()
+        //GetAll
+        public async Task<SharedResponse<List<FeedbackDto>>> GetAllFeedbacks()
         {
-            return await db.Feedbacks.Include(E => E.Product).Include(E => E.Buyer).Where(n => n.IsDeleted == false).ToListAsync();
+            if (db.Feedbacks == null)
+            {
+                return new SharedResponse<List<FeedbackDto>>(Status.notFound, null);
+            }
+            else
+            {
+                var feedbacks = await db.Feedbacks.Include(E => E.Product)
+                    .Include(E => E.Buyer).Where(n => n.IsDeleted == false).ToListAsync();
+                if (feedbacks.Count == 0)
+                {
+                    return new SharedResponse<List<FeedbackDto>>(Status.notFound, null);
+                }
+                else
+                {
+                    var feedbacksData = Mapper.Map<List<FeedbackDto>>(feedbacks);
+
+                    return new SharedResponse<List<FeedbackDto>>(Status.found, feedbacksData);
+                }
+
+            }
+
+        }
+        //GetById
+        public async Task<SharedResponse<List<FeedbackDto>>> GetFeedbackbyId(int ProductId, int BuyerId)
+        {
+            if (db.Feedbacks == null)
+                return new SharedResponse<List<FeedbackDto>>(Status.notFound, null);
+            var feedbacks = await db.Feedbacks.Where(s => s.ProductId == ProductId && s.BuyerId == BuyerId && s.IsDeleted == false).ToListAsync();
+            var feedbacksData = Mapper.Map< List<FeedbackDto>>(feedbacks);
+            return new SharedResponse<List<FeedbackDto>>(Status.found, feedbacksData);
         }
 
-        public async Task<List<Product>> GetAllProducts()
+        //Create
+        public async Task<SharedResponse<FeedbackDto>> Create(FeedbackDto model)
         {
-            return await db.Products.Where(n => n.IsDeleted == false).ToListAsync();
-        }
-        public async Task<List<Buyer>> GetAllBuyers()
-        {
-            return await db.Buyers.ToListAsync();
-        }
+            if (db.Feedbacks == null)
+            {
+                return new SharedResponse<FeedbackDto>(Status.problem, null, "Entity Set 'db.Feedbacks' is null");
+            }
 
-        Task<SharedResponse<List<Product>>> IFeedbackRepo.GetAllProducts()
-        {
-            throw new NotImplementedException();
-        }
+            Feedback feedback = Mapper.Map<Feedback>(model);
+            db.Feedbacks.Add(feedback);
+            try
+            {
+                await db.SaveChangesAsync();
+             model = Mapper.Map<FeedbackDto>(feedback);
 
-        Task<SharedResponse<List<Buyer>>> IFeedbackRepo.GetAllBuyers()
-        {
-            throw new NotImplementedException();
-        }
+                return new SharedResponse<FeedbackDto>(Status.createdAtAction, model);
+            }
+            catch (Exception ex)
+            {
+                return new SharedResponse<FeedbackDto>(Status.badRequest, null, ex.ToString());
+            }
 
-        Task<List<SharedResponse<FeedbackDto>>> IBaseRepo<SharedResponse<FeedbackDto>, FeedbackDto>.GetAll()
+        }
+        //Update
+        public async Task<SharedResponse<FeedbackDto>> UpdateFeedback(int ProductId, int BuyerId, FeedbackDto model)
         {
-            throw new NotImplementedException();
+            if (ProductId != model.ProductId && BuyerId!=model.BuyerId)
+            {
+                return new SharedResponse<FeedbackDto>(Status.badRequest, null);
+            }
+
+            Feedback feedback = Mapper.Map<Feedback>(model);
+
+            db.Entry(feedback).State = EntityState.Modified;
+
+            try
+            {
+                if (IsExist(ProductId,BuyerId))
+                    await db.SaveChangesAsync();
+                else
+                    return new SharedResponse<FeedbackDto>(Status.notFound, null);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                throw;
+            }
+
+            return new SharedResponse<FeedbackDto>(Status.noContent, null);
+        }
+        public bool IsExist(int ProductId, int BuyerId)
+        {
+            return (db.Feedbacks?.Any(a => a.ProductId == ProductId && a.BuyerId == BuyerId && a.IsDeleted == false)).GetValueOrDefault();
+        }
+        //Delete
+        public async Task<SharedResponse<FeedbackDto>> DeleteFeedback(int ProductId,int BuyerId)
+        {
+            if (db.Feedbacks == null)
+            {
+                return new SharedResponse<FeedbackDto>(Status.notFound, null);
+
+            }
+            var feedback = await db.Feedbacks.Where(a => a.ProductId == ProductId && a.BuyerId == BuyerId && a.IsDeleted == false).FirstOrDefaultAsync();
+            if (feedback == null)
+            {
+                return new SharedResponse<FeedbackDto>(Status.notFound, null);
+            }
+            feedback.IsDeleted = true;
+            await db.SaveChangesAsync();
+            return new SharedResponse<FeedbackDto>(Status.noContent, null);
         }
 
         public Task<SharedResponse<FeedbackDto>> GetById(int Id)
@@ -57,10 +135,6 @@ namespace T.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<SharedResponse<FeedbackDto>> Create(FeedbackDto model)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<SharedResponse<FeedbackDto>> Update(int Id, FeedbackDto model)
         {
@@ -71,42 +145,14 @@ namespace T.Repositories
         {
             throw new NotImplementedException();
         }
-
         public bool IsExists(int Id)
         {
             throw new NotImplementedException();
         }
-        //    public async Task<Feedback> GetById(int ProductId, int BuyerId)
-        //    {
-        //        return await db.Feedbacks.Where(n => n.IsDeleted == false).SingleOrDefaultAsync(s => s.ProductId == ProductId && s.BuyerId == BuyerId);
-
-        //    }
-        //    public async Task<FeedbackDto> AddFeedback(FeedbackDto feedback)
-        //    {
-
-        //        //var f = new Feedback();
-        //        //Mapper.Map(feedback, f);
-        //        //db.Feedbacks.Add(f);
-        //        //await db.SaveChangesAsync();
-        //        //return f;
-
-        //        Feedback F = Mapper.Map<Feedback>(feedback);
-        //        db.Feedbacks.Add(F);
-
-        //            await db.SaveChangesAsync();
-        //            feedback = Mapper.Map<FeedbackDto>(F);
-        //        return feedback;
-
-        //    }
-
-        //    public async Task<List<Feedback>> UpdateFeedback(int ProductId, int BuyerId, FeedbackDto feedback)
-        //    {
-        //        Feedback f = Mapper.Map<Feedback>(feedback);
-
-        //        db.Entry(f).State = EntityState.Modified;
-        //        await db.SaveChangesAsync();
-        //        return await db.Feedbacks.ToListAsync();
-        //    }
-        //}       
+        public Task<List<SharedResponse<FeedbackDto>>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+    
     }
 }
