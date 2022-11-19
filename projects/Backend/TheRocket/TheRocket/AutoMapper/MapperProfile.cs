@@ -9,18 +9,15 @@ namespace TheRocket.AutoMapper
     {
         public MapperProfile()
         {
-            CreateMap<SellerDto, AppUser>();
-            CreateMap<SellerDto, Seller>();
-            CreateMap<BuyerDto, AppUser>();
-            CreateMap<BuyerDto, Buyer>();
-            CreateMap<AdminDto, AppUser>();
-            CreateMap<AdminDto, Admin>();
-            CreateMap<AddressDto,Address>();
-            CreateMap<Address,AddressDto>();
-            CreateMap<PhoneDto,Phone>();
-            CreateMap<Phone,PhoneDto>();
-            CreateMap<LocationDto,Location>();
-            CreateMap<Location,LocationDto>();
+            CreateMap<SellerDto, AppUser>().ReverseMap();
+            CreateMap<SellerDto, Seller>().ReverseMap();
+            CreateMap<BuyerDto, AppUser>().ReverseMap();
+            CreateMap<BuyerDto, Buyer>().ReverseMap();
+            CreateMap<AdminDto, AppUser>().ReverseMap();
+            CreateMap<AdminDto, Admin>().ReverseMap();
+            CreateMap<AddressDto,Address>().ReverseMap();
+            CreateMap<PhoneDto,Phone>().ReverseMap();
+            CreateMap<LocationDto,Location>().ReverseMap();
         }
     }
 }
