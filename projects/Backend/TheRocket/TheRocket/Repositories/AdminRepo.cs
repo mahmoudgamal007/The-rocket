@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -76,11 +80,19 @@ namespace TheRocket.Repositories
                     }
                     try
                     {
-                        await db.SaveChangesAsync();
+
                         var roles = await roleManager.FindByNameAsync("Admin");
                         if (roles != null)
+                        {
+                            await db.SaveChangesAsync();
                             identityResult = await userManager.AddToRoleAsync(appUser, "Admin");
-                        else throw new Exception("Admin Role not Found");
+
+                        }
+                        else
+                        {
+                            db.Admins.Remove(admin);
+                            throw new Exception("Admin Role not Found");
+                        }
                         return new SharedResponse<AdminDto>(Status.createdAtAction, model, message);
                     }
                     catch (Exception ex)

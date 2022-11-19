@@ -76,11 +76,18 @@ namespace TheRocket.Repositories
                     }
                     try
                     {
-                        await db.SaveChangesAsync();
+
                         var roles = await roleManager.FindByNameAsync("Buyer");
                         if (roles != null)
+                        {
+                            await db.SaveChangesAsync();
                             identityResult = await userManager.AddToRoleAsync(appUser, "Buyer");
-                        else throw new Exception("Buyer Role not Found");
+                        }
+                        else
+                        {
+                            db.Buyers.Remove(buyer);
+                            throw new Exception("Buyer Role not Found");
+                        }
                         return new SharedResponse<BuyerDto>(Status.createdAtAction, model, message);
                     }
                     catch (Exception ex)
@@ -89,14 +96,14 @@ namespace TheRocket.Repositories
                             await Delete(buyer.Id);
 
                         if (model.Addresse != null)
-                            addressResponse = await addressRepo.Delete(model.Addresse.Id);
+                            await addressRepo.Delete(model.Addresse.Id);
 
                         if (model.PhoneNumber != null)
-                            phoneResponse = await phoneRepo.Delete(model.PhoneNumber.Id);
+                            await phoneRepo.Delete(model.PhoneNumber.Id);
 
                         if (model.Location != null)
-                            locationResponse = await locationRepo.Delete(model.Location.Id);
-                        identityResult = await userManager.DeleteAsync(appUser);
+                            await locationRepo.Delete(model.Location.Id);
+                        await userManager.DeleteAsync(appUser);
                         return new SharedResponse<BuyerDto>(Status.badRequest, null, ex.ToString());
                     }
 

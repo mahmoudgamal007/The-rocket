@@ -23,7 +23,7 @@ namespace TheRocket.Dtos.UserDtos
 
         public LocationDto? Location{get; set;}
 
-        //Buyer
+        //Admin
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
