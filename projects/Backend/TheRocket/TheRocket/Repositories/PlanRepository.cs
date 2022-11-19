@@ -19,13 +19,13 @@ namespace TheRocket.Repositories
             Context=context;
             Mapper=mapper;
         }
-        public async Task<Plan> CreatePlan(PlanDto plan)
+        public async Task<PlanDto> CreatePlan(PlanDto plan)
         {
             var p = new Plan();
             Mapper.Map(plan, p);
             Context.Plans.Add(p);
             await Context.SaveChangesAsync();
-            return p;
+            return plan;
 
            
         }
@@ -38,14 +38,23 @@ namespace TheRocket.Repositories
             return await Context.Plans.Where(p=>p.IsDeleted==false).ToListAsync();
         }
 
-        public async Task<List<Plan>> GetAllPlans()
+        public async Task<List<PlanDto>> GetAllPlans()
         {
-           
-                return await Context.Plans.Where(p=>p.IsDeleted==false).ToListAsync();
+                
+             List<Plan>Plans = Context.Plans.Where(p=>p.IsDeleted==false).ToList();
+             List<PlanDto> plans=new List<PlanDto>();
+            foreach(var item in Plans)
+            {
+                var p = new PlanDto();
+                Mapper.Map(item, p);
+                plans.Add(p);
+            }
+             return  plans;
         }
 
-        public async Task<Plan> GetPlanById(int id)
+        public async Task<PlanDto> GetPlanById(int id)
         {
+
             return await Context.Plans.FirstOrDefaultAsync(p => p.Id==id && p.IsDeleted==false);
         }
 
