@@ -477,3 +477,6 @@ $RECYCLE.BIN/
 *.lnk
 .DS_Store
 .vs
+
+appsettings.json
+appsettings.Development.json
