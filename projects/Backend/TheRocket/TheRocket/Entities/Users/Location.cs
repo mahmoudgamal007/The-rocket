@@ -3,12 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TheRocket.Entities.Users
 {
-    public class Phone:BaseEntity
+    public class Location:BaseEntity
     {
         [Key]
         public int Id { get; set; }
-        [RegularExpression("01[0-2,5][0-9]{8}$")]
-        public string phone { get; set; }
+        public string Longitude { get; set; }
+        public string Latitude{get; set;}
+
         [ForeignKey(nameof(AppUser))]
         public string AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }

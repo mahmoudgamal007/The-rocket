@@ -9,6 +9,7 @@ namespace TheRocket.Entities.Products
         public int Id { get; set; }
         public string Url { get; set; }
 
+        
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
