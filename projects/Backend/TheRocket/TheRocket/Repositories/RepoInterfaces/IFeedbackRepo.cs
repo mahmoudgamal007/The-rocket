@@ -1,21 +1,14 @@
 ﻿using TheRocket.Dtos;
+using TheRocket.Dtos.UserDtos;
 using TheRocket.Entities;
 using TheRocket.Entities.Products;
 using TheRocket.Entities.Users;
-
-namespace TheRocket.Repositories
-{
-    public interface IFeedbackRepo
+using TheRocket.Shared;
+    namespace TheRocket.Repositories.RepoInterfaces
     {
-
-
-        Task<List<Feedback>> GetAllFeedbacks();
-        Task<List<Product>> GetAllProducts();
-        Task<List<Buyer>> GetAllBuyers();
-        Task<Feedback> GetById(int ProductId, int BuyerId);
-        Task<FeedbackDto> AddFeedback(FeedbackDto feedback);
-        Task<List<Feedback>> UpdateFeedback(int ProductId, int BuyerId,FeedbackDto feedback);
-
-
+    public interface IFeedbackRepo: IBaseRepo<SharedResponse<FeedbackDto>, FeedbackDto>
+        {
+        public Task<SharedResponse<List<Product>>> GetAllProducts();
+        public Task<SharedResponse<List<Buyer>>> GetAllBuyers();
     }
 }

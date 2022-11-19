@@ -1,18 +1,15 @@
-﻿using TheRocket.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using TheRocket.TheRocketDbContexts;
-using TheRocket.Entities.Products;
-using TheRocket.Entities.Users;
-using TheRocket.Repositories;
-using AutoMapper;
 using TheRocket.Dtos;
 using TheRocket.Dtos.UserDtos;
+using TheRocket.Entities;
+using TheRocket.Entities.Products;
+using TheRocket.Entities.Users;
+using TheRocket.Repositories.RepoInterfaces;
 using TheRocket.Shared;
-using System.Numerics;
+using TheRocket.TheRocketDbContexts;
 
-namespace DependancyInjection.Repositories
+namespace T.Repositories
 {
     public class FeedbackRepo : IFeedbackRepo
     {
@@ -26,11 +23,10 @@ namespace DependancyInjection.Repositories
 
         }
 
-        public async Task<List<Feedback>> GetAllFeedbacks()
+        public async Task<List<Feedback>> GetAll()
         {
             return await db.Feedbacks.Include(E => E.Product).Include(E => E.Buyer).Where(n => n.IsDeleted == false).ToListAsync();
         }
-
 
         public async Task<List<Product>> GetAllProducts()
         {
@@ -40,36 +36,77 @@ namespace DependancyInjection.Repositories
         {
             return await db.Buyers.ToListAsync();
         }
-        public async Task<Feedback> GetById(int ProductId, int BuyerId)
+
+        Task<SharedResponse<List<Product>>> IFeedbackRepo.GetAllProducts()
         {
-            return await db.Feedbacks.Where(n => n.IsDeleted == false).SingleOrDefaultAsync(s => s.ProductId == ProductId && s.BuyerId == BuyerId);
-
-        }
-        public async Task<FeedbackDto> AddFeedback(FeedbackDto feedback)
-        {
-
-            //var f = new Feedback();
-            //Mapper.Map(feedback, f);
-            //db.Feedbacks.Add(f);
-            //await db.SaveChangesAsync();
-            //return f;
-   
-            Feedback F = Mapper.Map<Feedback>(feedback);
-            db.Feedbacks.Add(F);
-           
-                await db.SaveChangesAsync();
-                feedback = Mapper.Map<FeedbackDto>(F);
-            return feedback;
-
+            throw new NotImplementedException();
         }
 
-        public async Task<List<Feedback>> UpdateFeedback(int ProductId, int BuyerId, FeedbackDto feedback)
+        Task<SharedResponse<List<Buyer>>> IFeedbackRepo.GetAllBuyers()
         {
-            Feedback f = Mapper.Map<Feedback>(feedback);
-
-            db.Entry(f).State = EntityState.Modified;
-            await db.SaveChangesAsync();
-            return await db.Feedbacks.ToListAsync();
+            throw new NotImplementedException();
         }
-    }       
+
+        Task<List<SharedResponse<FeedbackDto>>> IBaseRepo<SharedResponse<FeedbackDto>, FeedbackDto>.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<SharedResponse<FeedbackDto>> GetById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<SharedResponse<FeedbackDto>> Create(FeedbackDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<SharedResponse<FeedbackDto>> Update(int Id, FeedbackDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<SharedResponse<FeedbackDto>> Delete(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsExists(int Id)
+        {
+            throw new NotImplementedException();
+        }
+        //    public async Task<Feedback> GetById(int ProductId, int BuyerId)
+        //    {
+        //        return await db.Feedbacks.Where(n => n.IsDeleted == false).SingleOrDefaultAsync(s => s.ProductId == ProductId && s.BuyerId == BuyerId);
+
+        //    }
+        //    public async Task<FeedbackDto> AddFeedback(FeedbackDto feedback)
+        //    {
+
+        //        //var f = new Feedback();
+        //        //Mapper.Map(feedback, f);
+        //        //db.Feedbacks.Add(f);
+        //        //await db.SaveChangesAsync();
+        //        //return f;
+
+        //        Feedback F = Mapper.Map<Feedback>(feedback);
+        //        db.Feedbacks.Add(F);
+
+        //            await db.SaveChangesAsync();
+        //            feedback = Mapper.Map<FeedbackDto>(F);
+        //        return feedback;
+
+        //    }
+
+        //    public async Task<List<Feedback>> UpdateFeedback(int ProductId, int BuyerId, FeedbackDto feedback)
+        //    {
+        //        Feedback f = Mapper.Map<Feedback>(feedback);
+
+        //        db.Entry(f).State = EntityState.Modified;
+        //        await db.SaveChangesAsync();
+        //        return await db.Feedbacks.ToListAsync();
+        //    }
+        //}       
+    }
 }

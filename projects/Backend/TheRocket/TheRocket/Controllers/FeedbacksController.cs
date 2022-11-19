@@ -9,9 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-
-
-
+using TheRocket.Repositories.RepoInterfaces;
 
 namespace TheRocket.Controllers
 {
@@ -28,44 +26,45 @@ namespace TheRocket.Controllers
 
         //GetAllFeedbacks
         [HttpGet]
-        
-        public async Task<IActionResult> GetAllFeedbacks()
+
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(await feedbackRepo.GetAllFeedbacks());
+            return Ok(await feedbackRepo.GetAll());
         }
 
 
-        //GetById
-        [HttpGet("{ProuductId}/{BuyerId}")]
-        public async Task<IActionResult> GetById([FromRoute] int ProuductId, [FromRoute] int BuyerId)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        ////    GetById
+        ////    [HttpGet("{ProuductId}/{BuyerId}")]
+        ////    public async Task<IActionResult> GetById([FromRoute] int ProuductId, [FromRoute] int BuyerId)
+        ////    {
+        ////        if (!ModelState.IsValid)
+        ////        {
+        ////            return BadRequest(ModelState);
+        ////        }
 
-            var feedback = await feedbackRepo.GetById(BuyerId, ProuductId);
+        ////        var feedback = await feedbackRepo.GetById(BuyerId, ProuductId);
 
-            if (feedback == null)
-            {
-                return NotFound();
-            }   
-            
-            return Ok(feedback);
-        }
-        //post
-        [HttpPost]
-        public async Task<IActionResult> AddFeedback(FeedbackDto feedback)
-        {
-            return Ok(await feedbackRepo.AddFeedback(feedback));
-        }
-        
-        //put
-        [HttpPut("{ProductId}/{BuyerId}")]
-        public async Task<IActionResult> UpdateFeedback(int ProductId,int BuyerId, FeedbackDto feedback)
-        {
-            return Ok ( await feedbackRepo.UpdateFeedback(ProductId, BuyerId,feedback));
-       
-            }
-        } 
+        ////        if (feedback == null)
+        ////        {
+        ////            return NotFound();
+        ////        }
+
+        ////        return Ok(feedback);
+        ////    }
+        ////    post
+        ////    [HttpPost]
+        ////    public async Task<IActionResult> AddFeedback(FeedbackDto feedback)
+        ////    {
+        ////        return Ok(await feedbackRepo.AddFeedback(feedback));
+        ////    }
+
+        ////    put
+        ////    [HttpPut("{ProductId}/{BuyerId}")]
+        ////    public async Task<IActionResult> UpdateFeedback(int ProductId, int BuyerId, FeedbackDto feedback)
+        ////    {
+        ////        return Ok(await feedbackRepo.UpdateFeedback(ProductId, BuyerId, feedback));
+
+        ////    }
+        ////}
+    }
 }

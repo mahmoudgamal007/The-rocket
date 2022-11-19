@@ -235,7 +235,6 @@ F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\T
 F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\refint\TheRocket.dll
 F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\obj\Debug\net6.0\TheRocket.pdb
 F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\appsettings.Development.json
-F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\appsettings.json
 F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.exe
 F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.deps.json
 F:\ITI\Project\TheRocket\projects\Backend\TheRocket\TheRocket\bin\Debug\net6.0\TheRocket.runtimeconfig.json
