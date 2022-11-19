@@ -4,7 +4,7 @@ using TheRocket.Repositories;
 using Microsoft.EntityFrameworkCore;
 using TheRocket.Entities.Users;
 using TheRocket.TheRocketDbContexts;
-
+using DependancyInjection.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +23,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<TheRocketDbContext>();
 builder.Services.AddScoped<IPlanRepository,PlanRepository>();
 builder.Services.AddScoped<ISubCategory,SubCategoryRepo>();
+builder.Services.AddScoped<IFeedbackRepo, FeedbackRepo>();
+
 
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
