@@ -28,14 +28,11 @@ namespace TheRocket.Controllers
 
         //GetAllFeedbacks
         [HttpGet]
-        public IEnumerable<Feedback> GetAllFeedbacks()
+        
+        public async Task<IActionResult> GetAllFeedbacks()
         {
-            return feedbackRepo.GetAllFeedbacks();
+            return Ok(await feedbackRepo.GetAllFeedbacks());
         }
-        //public async Task<IActionResult> GetAllFeedbacks()
-        //{
-        //    return Ok(await feedbackRepo.GetAllFeedbacks());
-        //}
 
 
         //GetById
@@ -62,6 +59,13 @@ namespace TheRocket.Controllers
         {
             return Ok(await feedbackRepo.AddFeedback(feedback));
         }
-
-    } 
+        
+        //put
+        [HttpPut("{ProductId}/{BuyerId}")]
+        public async Task<IActionResult> UpdateFeedback(int ProductId,int BuyerId, FeedbackDto feedback)
+        {
+            return Ok ( await feedbackRepo.UpdateFeedback(ProductId, BuyerId,feedback));
+       
+            }
+        } 
 }
