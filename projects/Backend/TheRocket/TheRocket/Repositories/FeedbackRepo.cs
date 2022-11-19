@@ -7,6 +7,7 @@ using TheRocket.Entities.Products;
 using TheRocket.Entities.Users;
 using TheRocket.Repositories;
 using AutoMapper;
+using TheRocket.Dtos;
 
 namespace DependancyInjection.Repositories
 {
@@ -41,5 +42,16 @@ namespace DependancyInjection.Repositories
             return await db.Feedbacks.Where(n => n.IsDeleted == false).SingleOrDefaultAsync(s => s.ProductId == ProductId && s.BuyerId == BuyerId);
 
         }
+        public async Task<Feedback> AddFeedback(FeedbackDto feedback)
+        {
+            var f = new Feedback();
+            f = new Feedback()
+            { ProductId = f.ProductId,BuyerId = f.BuyerId};
+            Mapper.Map(feedback, f);
+            db.Feedbacks.Add(f);
+            await db.SaveChangesAsync();
+            return f;
+        }
+
     }
 }

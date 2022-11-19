@@ -18,7 +18,7 @@ namespace TheRocket.Entities
         [Required]
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
-
+        
         public virtual Product Product { get; set; }
     }
 }

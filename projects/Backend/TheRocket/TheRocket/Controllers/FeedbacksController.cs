@@ -25,16 +25,14 @@ namespace TheRocket.Controllers
         {
             this.feedbackRepo = feedbackRepo;
         }
+
         //GetAllFeedbacks
         [HttpGet]
         public IEnumerable<Feedback> GetAllFeedbacks()
         {
             return feedbackRepo.GetAllFeedbacks();
         }
-        //public async Task<IActionResult> GetAllFeedbacks()
-        //{
-        //    return Ok(feedbackRepo.GetAllFeedbacks());
-        //}
+
         //GetById
         [HttpGet("{ProuductId}/{BuyerId}")]
         public async Task<IActionResult> GetById([FromRoute] int ProuductId, [FromRoute] int BuyerId)
@@ -49,9 +47,16 @@ namespace TheRocket.Controllers
             if (feedback == null)
             {
                 return NotFound();
-            }
-
+            }   
+            
             return Ok(feedback);
         }
-    }
+        //post
+        [HttpPost]
+        public async Task<IActionResult> AddFeedback(FeedbackDto feedback)
+        {
+            return Ok(await feedbackRepo.AddFeedback(feedback));
+        }
+
+    } 
 }
