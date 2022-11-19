@@ -4,7 +4,7 @@ using TheRocket.Shared;
 
 namespace TheRocket.Repositories.RepoInterfaces
 {
-    public interface ILocationRepo:IBaseRepo<SharedResponse<LocationDto>,LocationDto>
+    public interface ILocationRepo:IBaseRepo<SharedResponse<LocationDto>,SharedResponse<List<LocationDto>>,LocationDto>
     {
           public Task<SharedResponse<List<LocationDto>>> GetLocationsByUserId(string AppUserId);
     }

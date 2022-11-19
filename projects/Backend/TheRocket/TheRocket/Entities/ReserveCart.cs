@@ -5,7 +5,7 @@ using TheRocket.Entities.Users;
 
 namespace TheRocket.Entities
 {
-    public class ReserveCart:BaseEntity
+    public class ReserveCart:BaseEntity//mennas
     {
         public int Quantity { get; set; }
         public bool IsSubmitted { get; set; }
