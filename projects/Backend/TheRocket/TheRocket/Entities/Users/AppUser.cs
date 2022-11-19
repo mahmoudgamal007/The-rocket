@@ -17,12 +17,13 @@ namespace TheRocket.Entities.Users
         public virtual Seller? Seller { get; set; }
 
         public virtual Buyer? Buyer { get; set; }
+        public virtual Admin? Admin { get; set; }
 
         public virtual List<Phone> PhoneNumbers { get; set; }
 
         public virtual List<Address> Addresses { get; set; }
 
-        public virtual List<Locations>? Locations{get; set;}
+        public virtual List<Location>? Locations{get; set;}
         
     }
 

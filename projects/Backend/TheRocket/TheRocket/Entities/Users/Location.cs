@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TheRocket.Entities.Users
 {
-    public class Locations
+    public class Location:BaseEntity
     {
         [Key]
         public int Id { get; set; }
@@ -11,7 +11,7 @@ namespace TheRocket.Entities.Users
         public string Latitude{get; set;}
 
         [ForeignKey(nameof(AppUser))]
-        public String AppUserId { get; set; }
+        public string AppUserId { get; set; }
         public virtual AppUser AppUser { get; set; }
     }
 }

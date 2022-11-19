@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TheRocket.Entities.Users
 {
-    public class Phone
+    public class Phone:BaseEntity
     {
         [Key]
         public int Id { get; set; }
