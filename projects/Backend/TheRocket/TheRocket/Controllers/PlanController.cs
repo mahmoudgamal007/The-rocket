@@ -5,6 +5,7 @@ using TheRocket.Dtos;
 using TheRocket.TheRocketDbContexts;
 using TheRocket.Entities;
 using Microsoft.AspNetCore.Mvc;
+using TheRocket.Shared;
 
 namespace TheRocket.Controllers
 {
@@ -20,9 +21,11 @@ namespace TheRocket.Controllers
             Context=context;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllPlans()
+        public async Task<ActionResult<List<PlanDto>>> GetAll()
         {
-            return Ok(await Plan.GetAllPlans());
+            SharedResponse<List<PlanDto>> response = await plan.GetAddressesByUserId(userId);
+            if (response.status==Status.notFound) return NotFound();
+            return response.data;
         }
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetPlanById(int id)
