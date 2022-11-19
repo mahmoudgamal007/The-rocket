@@ -149,10 +149,10 @@ namespace T.Repositories
         {
             throw new NotImplementedException();
         }
-        public Task<List<SharedResponse<FeedbackDto>>> GetAll()
+
+        Task<SharedResponse<List<FeedbackDto>>> IBaseRepo<SharedResponse<FeedbackDto>, SharedResponse<List<FeedbackDto>>, FeedbackDto>.GetAll()
         {
             throw new NotImplementedException();
         }
-    
     }
 }

@@ -10,7 +10,6 @@ namespace TheRocket.Repositories.RepoInterfaces
          public Task<T1> Create(T3 model);
          public Task<T1> Update(int Id,T3 model);
          public Task<T1> Delete(int Id);
-
          public bool IsExists(int Id);
     }
 }

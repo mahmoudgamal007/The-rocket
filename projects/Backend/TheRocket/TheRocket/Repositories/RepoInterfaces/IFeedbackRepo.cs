@@ -6,7 +6,7 @@ using TheRocket.Entities.Users;
 using TheRocket.Shared;
     namespace TheRocket.Repositories.RepoInterfaces
     {
-    public interface IFeedbackRepo: IBaseRepo<SharedResponse<FeedbackDto>, FeedbackDto>
+    public interface IFeedbackRepo: IBaseRepo<SharedResponse<FeedbackDto>, SharedResponse<List<FeedbackDto>>, FeedbackDto>
         {
         public Task<SharedResponse<List<FeedbackDto>>> GetAllFeedbacks();
         public Task<SharedResponse<List<FeedbackDto>>> GetFeedbackbyId(int ProductId, int BuyerId);
