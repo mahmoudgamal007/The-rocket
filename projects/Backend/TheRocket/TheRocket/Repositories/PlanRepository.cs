@@ -29,12 +29,13 @@ namespace TheRocket.Repositories
             {
                 return new SharedResponse<PlanDto>(Status.problem, null, "Entity Set 'db.Plans' is null");
             }
-            Plan plan = Mapper.Map<Plan>(plandto);
+            Plan plan = new Plan();
+            Mapper.Map(plandto, plan);
             Context.Plans.Add(plan);
             try
             {
                 await Context.SaveChangesAsync();
-                plandto = Mapper.Map<PlanDto>(plan);
+                plandto = Mapper.Map(plan,plandto);
                 return new SharedResponse<PlanDto>(Status.createdAtAction, plandto);
             }
             catch (Exception ex)
@@ -44,10 +45,7 @@ namespace TheRocket.Repositories
 
         }
 
-        public Task<SharedResponse<PlanDto>> Create(SharedResponse<List<PlanDto>> model)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public async Task<SharedResponse<PlanDto>> Delete(int Id)
         {
@@ -70,7 +68,7 @@ namespace TheRocket.Repositories
         {
             {
                 if (Context.Plans == null)
-                    return new SharedResponse<List<PlanDto>>(Status.notFound, null);
+                 return new SharedResponse<List<PlanDto>>(Status.notFound, null);
                 var plans = await Context.Plans.Where(p => p.IsDeleted == false).ToListAsync();
                 List<PlanDto> Plans = Mapper.Map<List<PlanDto>>(plans);
                 return new  SharedResponse<List<PlanDto>>(Status.found, Plans);
@@ -81,16 +79,12 @@ namespace TheRocket.Repositories
         public async Task<SharedResponse<PlanDto>> GetById(int Id)
         {
 
-            var plan = Context.Plans.Where(p => p.Id == Id).FirstOrDefaultAsync();
-            var p = new PlanDto();
-            Mapper.Map(plan, p);
+            var plan =await Context.Plans.Where(p => p.Id == Id).FirstOrDefaultAsync();
+            PlanDto p = Mapper.Map<PlanDto>(plan);
             return new SharedResponse<PlanDto>(Status.found, p);
         }
 
-        public async Task<Plan> GetPlanByName(string name)
-        {
-            return await Context.Plans.FirstOrDefaultAsync(p => p.Name.ToLower()==name.ToLower() && p.IsDeleted==false);
-        }
+      
 
         public bool IsExists(int Id)
         {
@@ -124,14 +118,8 @@ namespace TheRocket.Repositories
             return new SharedResponse<PlanDto>(Status.noContent, null);
         }
 
-        public Task<SharedResponse<PlanDto>> Update(int Id, SharedResponse<List<PlanDto>> model)
-        {
-            throw new NotImplementedException();
-        }
+     
 
-        Task<PlanDto> IBaseRepo<SharedResponse<PlanDto>, PlanDto, SharedResponse<List<PlanDto>>>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

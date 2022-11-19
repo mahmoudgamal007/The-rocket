@@ -4,9 +4,10 @@ using TheRocket.Shared;
 
 namespace TheRocket.Repositories.RepoInterfaces
 {
-    public interface IPlanRepository : IBaseRepo<SharedResponse<PlanDto>, PlanDto,SharedResponse<List<PlanDto>>>
+    public interface IPlanRepository : IBaseRepo<SharedResponse<PlanDto>, SharedResponse<List<PlanDto>>, PlanDto>
     {
-        Task<Plan> GetPlanByName(string name);  
+       
       
     }
+  
 }
