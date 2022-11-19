@@ -30,6 +30,7 @@ namespace TheRocket.Controllers
         public async Task<ActionResult<AddressDto>> PostAddress(AddressDto address){
             SharedResponse<AddressDto> response=await repo.Create(address);
             if(response.status==Status.problem)return Problem(response.message);
+            if(response.status==Status.badRequest) return BadRequest(response.message);
             return Ok(response.data);
         }
 
