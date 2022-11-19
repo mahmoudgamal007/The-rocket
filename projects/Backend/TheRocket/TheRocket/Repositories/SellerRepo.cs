@@ -76,28 +76,36 @@ namespace TheRocket.Repositories
                     }
                     try
                     {
-                        await db.SaveChangesAsync();
+
                         var roles = await roleManager.FindByNameAsync("Seller");
                         if (roles != null)
+                        {
+                            await db.SaveChangesAsync();
                             identityResult = await userManager.AddToRoleAsync(appUser, "Seller");
-                        else throw new Exception("Seller Role not Found");
+                        }
+
+                        else
+                        {
+                            db.Sellers.Remove(seller);
+                            throw new Exception("Seller Role not Found");
+                        }
                         return new SharedResponse<SellerDto>(Status.createdAtAction, model, message);
                     }
                     catch (Exception ex)
                     {
-                        if(seller!=null)
-                        await Delete(seller.Id);
+                        if (seller != null)
+                            await Delete(seller.Id);
 
                         if (model.Addresse != null)
-                            addressResponse = await addressRepo.Delete(model.Addresse.Id);
+                            await addressRepo.Delete(model.Addresse.Id);
 
                         if (model.PhoneNumber != null)
-                            phoneResponse = await phoneRepo.Delete(model.PhoneNumber.Id);
+                            await phoneRepo.Delete(model.PhoneNumber.Id);
 
                         if (model.Location != null)
-                            locationResponse = await locationRepo.Delete(model.Location.Id);
+                            await locationRepo.Delete(model.Location.Id);
 
-                            identityResult = await userManager.DeleteAsync(appUser);
+                        await userManager.DeleteAsync(appUser);
                         return new SharedResponse<SellerDto>(Status.badRequest, null, ex.ToString());
                     }
 
@@ -114,10 +122,10 @@ namespace TheRocket.Repositories
         {
             if (db.Admins == null)
             {
-               return new SharedResponse<SellerDto>(Status.notFound,null);
+                return new SharedResponse<SellerDto>(Status.notFound, null);
 
             }
-            var admin = await db.Admins.Where(a => a.Id == Id ).FirstOrDefaultAsync();
+            var admin = await db.Admins.Where(a => a.Id == Id).FirstOrDefaultAsync();
             if (admin == null)
             {
                 return new SharedResponse<SellerDto>(Status.notFound, null);
