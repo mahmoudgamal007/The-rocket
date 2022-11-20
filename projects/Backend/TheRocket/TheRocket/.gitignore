@@ -479,6 +479,10 @@ $RECYCLE.BIN/
 .vs
 
 appsettings.json
+<<<<<<< HEAD
+appsettings.Development.json
+=======
 appsettings.Development.json
 
 .vscode/
+>>>>>>> 5054c391558b3485935fd044c8f44f052881c18b

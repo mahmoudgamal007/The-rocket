@@ -10,4 +10,5 @@ namespace TheRocket.Dtos
         public string MainCategory { get; set; }
     
     }
+
 }

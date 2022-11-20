@@ -1,11 +1,11 @@
 
-﻿using System.Text;
-using DependancyInjection.Repositories;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using T.Repositories;
 using TheRocket.Entities.Users;
 using TheRocket.Repositories;
 using TheRocket.Repositories.RepoInterfaces;
@@ -58,11 +58,11 @@ builder.Services.AddScoped<IAdminRepo, AdminRepo>();
 builder.Services.AddScoped<IAddressRepo, AddressRepo>();
 builder.Services.AddScoped<IPhoneRepo, PhoneRepo>();
 builder.Services.AddScoped<ILocationRepo, LocationRepo>();
-builder.Services.AddScoped<IPlanRepository,PlanRepository>();
-builder.Services.AddScoped<ISubCategory,SubCategoryRepo>();
+builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+builder.Services.AddScoped<ISubCategory, SubCategoryRepo>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackRepo>();
 
-builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddDbContext<TheRocketDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
@@ -86,12 +86,15 @@ builder.Services.Configure<IdentityOptions>(opts =>
     opts.User.RequireUniqueEmail = true;
 });
 
-//JWT validator
+// // JWT validator
 // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 // {
+
 //     options.TokenValidationParameters = new TokenValidationParameters
 //     {
+
 //         ValidateLifetime = true,
+//         ClockSkew=TimeSpan.Zero,
 //         ValidateAudience = false,
 //         ValidateIssuer = false,
 //         ValidateIssuerSigningKey = true,
@@ -113,11 +116,15 @@ builder.Services.AddAuthentication(options =>
            options.RequireHttpsMetadata = false;
            options.TokenValidationParameters = new TokenValidationParameters()
            {
+               RequireExpirationTime = false,
+               ClockSkew = TimeSpan.Zero,
+               ValidateLifetime = false,
                ValidateIssuer = false,
                ValidateAudience = false,
                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my_secret_key_123456"))
            };
        });
+
 
 
 var app = builder.Build();

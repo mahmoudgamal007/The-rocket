@@ -5,3 +5,4 @@ projects/Backend/gitignore
 ../../.DS_Store
 ../.DS_Store
 .DS_Store
+projects/Backend/TheRocket/.vscode/

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+
 namespace TheRocket.Shared
 {
     public class SharedResponse<T>

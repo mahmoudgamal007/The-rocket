@@ -7,6 +7,8 @@ namespace TheRocket.Entities
 {
     public class Feedback:BaseEntity //Asmaa
     {
+        [Key]
+        public int Id { get; set; }
         public string Comment { get; set; }
         [Range(1,5)]
         public int Rating { get; set; }
@@ -18,7 +20,7 @@ namespace TheRocket.Entities
         [Required]
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
-
+        
         public virtual Product Product { get; set; }
     }
 }

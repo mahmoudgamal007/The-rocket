@@ -6,6 +6,8 @@ namespace TheRocket.Entities
 {
     public class Subscrip:BaseEntity//Asmaa
     {
+        [Key]
+        public int Id { get; set; }
         public bool IsActivated { get; set; }
         public int Discount { get; set; }
         public double Price { get; set; }
