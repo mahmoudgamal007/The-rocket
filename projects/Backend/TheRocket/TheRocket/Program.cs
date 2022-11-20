@@ -61,6 +61,7 @@ builder.Services.AddScoped<ILocationRepo, LocationRepo>();
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<ISubCategory, SubCategoryRepo>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackRepo>();
+builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
