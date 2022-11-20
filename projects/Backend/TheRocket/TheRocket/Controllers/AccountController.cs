@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TheRocket.Dtos.AccountDto;
 using TheRocket.Entities.Users;
+using TheRocket.Shared;
 
 namespace TheRocket.Controllers
 {
@@ -33,28 +34,18 @@ namespace TheRocket.Controllers
                     bool found = await userManager.CheckPasswordAsync(appUser, loginDto.Password);
                     if (found)
                     {
-                        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my_secret_key_123456"));
-                        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
                         var userRoles = await userManager.GetRolesAsync(appUser);
 
-                        List<Claim> claims=new (){
+                        List<Claim> claims = new(){
                             new Claim("UserName",appUser.UserName)
                         };
-                        foreach( var role in userRoles){
-                            claims.Add(new Claim(ClaimTypes.Role,role));
-                            System.Console.WriteLine(role);
+                        foreach (var role in userRoles)
+                        {
+                            claims.Add(new Claim(ClaimTypes.Role, role));
 
                         }
-                        var token = new JwtSecurityToken(
-                            claims:claims,
-                            // expires: DateTime.Now.AddMinutes(1),
-                            signingCredentials: credentials
-                            
-                        );
-
-                        var jwtToken=new JwtSecurityTokenHandler().WriteToken(token);
-
-                        await signInManager.SignInWithClaimsAsync(appUser,loginDto.RememberMe,claims);
+                        string jwtToken = JwtTokenGenerator.Generate(claims);
+                        await signInManager.SignInWithClaimsAsync(appUser, loginDto.RememberMe, claims);
                         return Ok(jwtToken);
                     }
                 }
@@ -64,7 +55,8 @@ namespace TheRocket.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Logout(){
+        public async Task<ActionResult> Logout()
+        {
             await signInManager.SignOutAsync();
             return Ok("Signed Out");
         }

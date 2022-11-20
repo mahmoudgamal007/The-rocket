@@ -21,10 +21,6 @@ namespace TheRocket.TheRocketDbContexts
             }
             base.OnModelCreating(builder);
 
-            builder.Entity<Feedback>().HasKey(f => new { f.BuyerId, f.ProductId });
-            builder.Entity<ReserveCart>().HasKey(r => new { r.BuyerId, r.ProductId });
-            builder.Entity<Subscrip>().HasKey(s => new { s.SellerId, s.PlanId });
-
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin" ,NormalizedName="ADMIN"});
 
         }

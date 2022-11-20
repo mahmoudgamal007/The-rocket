@@ -6,7 +6,8 @@ using TheRocket.Shared;
 
 namespace TheRocket.Repositories.RepoInterfaces
 {
-    public interface ISubCategory:IBaseRepo<SharedResponse<SubCategoryDto>,SubCategoryDto>
+    public interface ISubCategory
+    // :IBaseRepo<SharedResponse<SubCategoryDto>,SubCategoryDto>
     {
 
 
