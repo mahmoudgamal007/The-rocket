@@ -42,7 +42,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TheRocketDbContexts\" />
-    <Folder Include="AutoMapper\" />
-    <Folder Include="Dtos\" />
   </ItemGroup>
 </Project>
