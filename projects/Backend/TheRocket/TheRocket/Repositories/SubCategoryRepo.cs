@@ -2,10 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using TheRocket.Dtos;
 using TheRocket.Entities;
-using TheRocket.Entities.Products;
 using TheRocket.Repositories.RepoInterfaces;
-using TheRocket.TheRocketDbContexts;
 using TheRocket.Shared;
+using TheRocket.TheRocketDbContexts;
 namespace TheRocket.Repositories
 {
     public class SubCategoryRepo : ISubCategory
@@ -14,14 +13,13 @@ namespace TheRocket.Repositories
         private readonly IMapper _mapper;
         public SubCategoryRepo( TheRocketDbContext context, IMapper mapper)
         {
-            db = context;
-            _mapper = mapper;
+           this.db = context;
+          this._mapper = mapper;
         }
-
 
         public bool IsExists(int Id)
         {
-            return (db.SubCategories?.Any(a => a.Id == Id&&a.IsDeleted==false)).GetValueOrDefault();
+            return (db.SubCategories?.Any(a => a.Id == Id && a.IsDeleted ==false)).GetValueOrDefault();
         }
 
         public async Task<SharedResponse<SubCategoryDto>> Create(SubCategoryDto model)
@@ -77,7 +75,7 @@ namespace TheRocket.Repositories
         {
               if (db.SubCategories ==null)
             {
-                return  new SharedResponse<List<SubCategoryDto>>(Status.notFound, null, "Entity Set 'db.Address' is null");
+                return  new SharedResponse<List<SubCategoryDto>>(Status.notFound, null);
             }
 
             var subCategoryDto = await db.SubCategories.Where( s => s.IsDeleted == false).ToListAsync();
@@ -89,7 +87,7 @@ namespace TheRocket.Repositories
         {  
                if (db.SubCategories ==null)
             {
-                return  new SharedResponse<SubCategoryDto>(Status.notFound, null, "Entity Set 'db.Address' is null");
+                return  new SharedResponse<SubCategoryDto>(Status.notFound, null, "db.SubCategory is null");
             }
             var subCategory = await db.SubCategories.SingleOrDefaultAsync(s => s.Id == id && s.IsDeleted == false);
               if (subCategory == null)
@@ -106,7 +104,7 @@ namespace TheRocket.Repositories
         {
           if (db.SubCategories ==null)
             {
-                return new SharedResponse<SubCategoryDto>(Status.notFound, null, "Entity Set 'db.Address' is null");
+                return new SharedResponse<SubCategoryDto>(Status.notFound, null, "db.SubCategory is null");
             }
 
             var subCategory = await db.SubCategories.SingleOrDefaultAsync(s => s.Id == id && s.IsDeleted == false);
@@ -118,5 +116,9 @@ namespace TheRocket.Repositories
             await db.SaveChangesAsync();
             return new SharedResponse<SubCategoryDto>(Status.noContent,null);
         }
+
+       
+
+        
     }
 }
