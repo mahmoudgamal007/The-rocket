@@ -1,44 +1,39 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using TheRocket.Repositories.RepoInterfaces;
+﻿using Microsoft.AspNetCore.Mvc;
 using TheRocket.Dtos;
-using TheRocket.Entities;
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using TheRocket.TheRocketDbContexts;
-using TheRocket.Repositories;
+using TheRocket.Repositories.RepoInterfaces;
 using TheRocket.Shared;
-using Microsoft.AspNetCore.Authorization;
 
 namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles="Admin,Seller")]
+  //[Authorize(Roles="Admin,Seller")]
 
 
     public class SubCategoryController : ControllerBase
     {
-        private readonly SubCategoryRepo repo;
+        private readonly ISubCategory repo;
 
-        public SubCategoryController(SubCategoryRepo repo)
+        public SubCategoryController(ISubCategory repo)
         {
             this.repo = repo;
 
         }
+        // Get All SubCategories
         [HttpGet]
         public async Task<ActionResult<List<SubCategoryDto>>> GetAll(){
          SharedResponse<List<SubCategoryDto>> response= await repo.GetAll();
          if(response.status==Status.notFound)return NotFound();
-         return response.data;
+         return Ok( response.data);
         }
-          [HttpGet("{id}")]
+        // Get By ID
+        [HttpGet("{id}")]
         public async Task<ActionResult<SubCategoryDto>> GetById(int id){
          SharedResponse<SubCategoryDto> response= await repo.GetById(id);
          if(response.status==Status.notFound)return NotFound();
          return Ok(response.data);
         }
-
+        // Create SubCategory
         [HttpPost]
         public async Task<ActionResult<SubCategoryDto>> PostSubCategory(SubCategoryDto SubCategory){
             SharedResponse<SubCategoryDto> response=await repo.Create(SubCategory);
@@ -47,6 +42,7 @@ namespace TheRocket.Controllers
             return Ok(response.data);
         }
 
+        //Update Action
         [HttpPut("{id}")]
         public async Task<ActionResult<SubCategoryDto>> PutSubCategory(int id,SubCategoryDto SubCategory){
             SharedResponse<SubCategoryDto> response=await repo.Update(id,SubCategory);
@@ -55,6 +51,7 @@ namespace TheRocket.Controllers
             return NoContent();
         }
 
+       //Delete Action
         [HttpDelete("{id}")]
          public async Task<ActionResult<SubCategoryDto>> DeleteSubCategory(int id){
             SharedResponse<SubCategoryDto> response=await repo.Delete(id);

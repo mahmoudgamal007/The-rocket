@@ -2,8 +2,8 @@
 using TheRocket.Shared;
     namespace TheRocket.Repositories.RepoInterfaces
     {
-    public interface IFeedbackRepo: IBaseRepo<SharedResponse<FeedbackDto>, SharedResponse<List<FeedbackDto>>, FeedbackDto>
+    public interface ISubscripRepo: IBaseRepo<SharedResponse<SubscripDto>, SharedResponse<List<SubscripDto>>, SubscripDto>
         {
-
+ 
     }
 }
