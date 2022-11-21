@@ -63,6 +63,7 @@ builder.Services.AddScoped<ISubCategory, SubCategoryRepo>();
 builder.Services.AddScoped<IReserveCart, ReserveCartRepo>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackRepo>();
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
+builder.Services.AddScoped<ISubscripRepo, SubscripRepo>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 

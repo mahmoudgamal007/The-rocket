@@ -1,26 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using TheRocket.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using TheRocket.Dtos;
-using TheRocket.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using TheRocket.Repositories.RepoInterfaces;
-using TheRocket.Dtos.UserDtos;
 using TheRocket.Shared;
 using Microsoft.AspNetCore.Authorization;
-using System.Data;
 
 namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Roles = "Buyer")]
-
     public class FeedbacksController : ControllerBase
     {
         private readonly IFeedbackRepo feedbackRepo;
@@ -33,25 +21,25 @@ namespace TheRocket.Controllers
         //GetAllFeedbacks
 
         [HttpGet]
-        public async Task<IActionResult> GetAllFeedbacks()
+        public async Task<IActionResult> GetAll()
         {
-            SharedResponse<List<FeedbackDto>> response = await feedbackRepo.GetAllFeedbacks();
+            SharedResponse<List<FeedbackDto>> response = await feedbackRepo.GetAll();
             if (response.status == Status.notFound) { return NotFound(); }
             else { return Ok(response.data); }
         }
 
 
         // GetById
-        [HttpGet("{ProuductId}/{BuyerId}")]
-            public async Task<ActionResult<List<FeedbackDto>>> GetFeedbackById([FromRoute] int ProuductId, [FromRoute] int BuyerId)
-        { 
-            SharedResponse<List<FeedbackDto>> response = await feedbackRepo.GetFeedbackbyId(ProuductId, BuyerId);
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<FeedbackDto>> GetById(int Id)
+        {
+            SharedResponse<FeedbackDto> response = await feedbackRepo.GetById(Id);
             if (response.status == Status.notFound) return NotFound();
             return response.data;
         }
 
-       // post
-  
+        // post
+
         [HttpPost]
         public async Task<ActionResult<FeedbackDto>> Create(FeedbackDto feedback)
         {
@@ -61,19 +49,19 @@ namespace TheRocket.Controllers
             return Ok(response.data);
         }
         //put
-        [HttpPut("{ProductId}/{BuyerId}")]
-        public async Task<ActionResult<FeedbackDto>> UpdateFeedback(int ProductId, int BuyerId, FeedbackDto feedback)
+        [HttpPut("{Id}")]
+        public async Task<ActionResult<FeedbackDto>> Update(int Id, FeedbackDto feedback)
         {
-            SharedResponse<FeedbackDto> response = await feedbackRepo.UpdateFeedback(ProductId, BuyerId, feedback);
+            SharedResponse<FeedbackDto> response = await feedbackRepo.Update(Id, feedback);
             if (response.status == Status.badRequest) return BadRequest();
             else if (response.status == Status.notFound) return NotFound();
             return NoContent();
         }
         //Delete
-        [HttpDelete("{ProductId}/{BuyerId}")]
-        public async Task<ActionResult<FeedbackDto>> DeleteFeedback(int ProductId, int BuyerId)
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult<FeedbackDto>> Delete( int Id)
         {
-            SharedResponse<FeedbackDto> response = await feedbackRepo.DeleteFeedback(ProductId, BuyerId);
+            SharedResponse<FeedbackDto> response = await feedbackRepo.Delete(Id);
             if (response.status == Status.notFound) return NotFound();
             return NoContent();
         }
