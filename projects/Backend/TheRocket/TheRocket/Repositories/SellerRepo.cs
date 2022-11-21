@@ -135,7 +135,7 @@ namespace TheRocket.Repositories
             return new SharedResponse<SellerDto>(Status.noContent, null);
         }
 
-       
+
         public Task<SharedResponse<SellerDto>> GetById(int Id)
         {
             throw new NotImplementedException();
@@ -143,7 +143,7 @@ namespace TheRocket.Repositories
 
         public bool IsExists(int Id)
         {
-            throw new NotImplementedException();
+            return (db.Sellers?.Any(a => a.Id == Id)).GetValueOrDefault();
         }
 
         public Task<SharedResponse<SellerDto>> Update(int Id, SellerDto model)

@@ -111,7 +111,7 @@ namespace TheRocket.Repositories
             return (db.Locations?.Any(l => l.Id == Id&&l.IsDeleted==false)).GetValueOrDefault();
         }
 
-        Task<SharedResponse<List<LocationDto>>> IBaseRepo<SharedResponse<LocationDto>, SharedResponse<List<LocationDto>>, LocationDto>.GetAll()
+        public Task<SharedResponse<List<LocationDto>>> GetAll()
         {
             throw new NotImplementedException();
         }

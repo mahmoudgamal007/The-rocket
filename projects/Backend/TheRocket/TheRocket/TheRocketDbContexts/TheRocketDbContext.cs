@@ -15,6 +15,9 @@ namespace TheRocket.TheRocketDbContexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<ProductColor>().HasKey(p=>new{p.ProductId,p.ColourId});
+            builder.Entity<ProductSize>().HasKey(p=>new{p.ProductId,p.SizeId});
+
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
@@ -28,9 +31,11 @@ namespace TheRocket.TheRocketDbContexts
 
 
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductColor> Colors { get; set; }
-        public virtual DbSet<ProductSize> Sizes { get; set; }
-        public virtual DbSet<ImgUrl> ImgUrls { get; set; }
+        public virtual DbSet<Colour> Colors { get; set; }
+        public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<ProductColor> ProductColors { get; set; }
+        public virtual DbSet<ProductSize> ProductSizes { get; set; }
+        public virtual DbSet<ProductImgUrl> ProductImgUrls { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Buyer> Buyers { get; set; }
         public virtual DbSet<Location> Locations { get; set; }

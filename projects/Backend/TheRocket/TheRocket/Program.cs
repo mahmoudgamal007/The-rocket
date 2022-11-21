@@ -61,6 +61,13 @@ builder.Services.AddScoped<ILocationRepo, LocationRepo>();
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<ISubCategory, SubCategoryRepo>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackRepo>();
+builder.Services.AddScoped<IColorRepo,ColourRepo>();
+builder.Services.AddScoped<ISizeRepo,SizeRepo>();
+builder.Services.AddScoped<IProdcutRepo,ProductRepo>();
+builder.Services.AddScoped<IProductColorRepo,ProductColorRepo>();
+builder.Services.AddScoped<IProductSizeRepo,ProductSizeRepo>();
+builder.Services.AddScoped<IProductImgUrlRepo,ProductImgUrlRepo>();
+
 
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 

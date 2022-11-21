@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheRocket.TheRocketDbContexts;
 
@@ -11,9 +12,10 @@ using TheRocket.TheRocketDbContexts;
 namespace TheRocket.Migrations
 {
     [DbContext(typeof(TheRocketDbContext))]
-    partial class TheRocketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120080021_v3")]
+    partial class v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,8 +53,8 @@ namespace TheRocket.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "624f4da3-1d1f-4001-8377-7a6418603345",
-                            ConcurrencyStamp = "1dd27aa5-fb04-4d0e-84e6-de33e5b0a59c",
+                            Id = "49baf939-e848-458d-9b3c-d5260ab06807",
+                            ConcurrencyStamp = "2d7b687f-92a0-4f28-aed4-64991524dcd5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -303,15 +305,15 @@ namespace TheRocket.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -424,9 +426,6 @@ namespace TheRocket.Migrations
 
                     b.Property<int>("SizeId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ProductId", "SizeId");
 

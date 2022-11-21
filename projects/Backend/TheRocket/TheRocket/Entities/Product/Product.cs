@@ -8,8 +8,8 @@ namespace TheRocket.Entities.Products
     {
         public Product()
         {
-            Colors = new();
-            Sizes = new();
+            ProductColors = new();
+            ProductSizes = new();
             ImgsUrls = new();
             Feedbacks = new();
             ReserveCarts = new();
@@ -34,9 +34,10 @@ namespace TheRocket.Entities.Products
 
 
 
-        public virtual List<ProductColor>? Colors { get; set; }
-        public virtual List<ProductSize>? Sizes { get; set; }
-        public virtual List<ImgUrl> ImgsUrls { get; set; }
+        public virtual List<ProductColor>? ProductColors { get; set; }
+        public virtual List<ProductSize>? ProductSizes { get; set; }
+
+        public virtual List<ProductImgUrl>? ImgsUrls { get; set; }
         public virtual List<Feedback>? Feedbacks { get; set; }
         public virtual List<ReserveCart>? ReserveCarts { get; set; }
         public virtual List<Order>? Orders { get; set; }

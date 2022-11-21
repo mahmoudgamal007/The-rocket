@@ -1,12 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TheRocket.Entities.ProductDtos
+namespace TheRocket.Dtos.ProductDtos
 {
-    public class ProductColorDto
+    public class ColorDto
     {
         public int Id { get; set; }
-        public string Color { get; set; }
-        public int ProductId { get; set; }
+        public string Name { get; set; }
     }
 }

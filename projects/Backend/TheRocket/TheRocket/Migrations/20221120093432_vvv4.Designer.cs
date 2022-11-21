@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheRocket.TheRocketDbContexts;
 
@@ -11,9 +12,10 @@ using TheRocket.TheRocketDbContexts;
 namespace TheRocket.Migrations
 {
     [DbContext(typeof(TheRocketDbContext))]
-    partial class TheRocketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120093432_vvv4")]
+    partial class vvv4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,8 +53,8 @@ namespace TheRocket.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "624f4da3-1d1f-4001-8377-7a6418603345",
-                            ConcurrencyStamp = "1dd27aa5-fb04-4d0e-84e6-de33e5b0a59c",
+                            Id = "2913d152-4f86-49c0-8356-0410cc3ad7e4",
+                            ConcurrencyStamp = "3d8ccbbf-b950-4eb0-ac87-a0e584f2850e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -424,9 +426,6 @@ namespace TheRocket.Migrations
 
                     b.Property<int>("SizeId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ProductId", "SizeId");
 

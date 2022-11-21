@@ -1,11 +1,13 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TheRocket.Entities.ProductDtos
+
+using System.ComponentModel.DataAnnotations;
+
+namespace TheRocket.Dtos.ProductDtos
 {
-    public class ImgUrlDto
+    public class ProductImgUrlDto
     {
         public int Id { get; set; }
+        [Required]
         public string Url { get; set; }
         public int ProductId { get; set; }
     }
