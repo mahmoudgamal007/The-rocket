@@ -62,12 +62,12 @@ builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<ISubCategory, SubCategoryRepo>();
 builder.Services.AddScoped<IReserveCart, ReserveCartRepo>();
 builder.Services.AddScoped<IFeedbackRepo, FeedbackRepo>();
-builder.Services.AddScoped<IColorRepo,ColourRepo>();
-builder.Services.AddScoped<ISizeRepo,SizeRepo>();
-builder.Services.AddScoped<IProdcutRepo,ProductRepo>();
-builder.Services.AddScoped<IProductColorRepo,ProductColorRepo>();
-builder.Services.AddScoped<IProductSizeRepo,ProductSizeRepo>();
-builder.Services.AddScoped<IProductImgUrlRepo,ProductImgUrlRepo>();
+builder.Services.AddScoped<IColorRepo, ColourRepo>();
+builder.Services.AddScoped<ISizeRepo, SizeRepo>();
+builder.Services.AddScoped<IProdcutRepo, ProductRepo>();
+builder.Services.AddScoped<IProductColorRepo, ProductColorRepo>();
+builder.Services.AddScoped<IProductSizeRepo, ProductSizeRepo>();
+builder.Services.AddScoped<IProductImgUrlRepo, ProductImgUrlRepo>();
 
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 builder.Services.AddScoped<ISubscripRepo, SubscripRepo>();
@@ -135,7 +135,17 @@ builder.Services.AddAuthentication(options =>
            };
        });
 
-
+string cors = "";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(cors,
+    builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyMethod();
+        builder.AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -150,7 +160,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();//identity and jwt
 app.UseAuthorization();
-
+app.UseCors(cors);
 app.MapControllers();
 
 app.Run();
