@@ -24,27 +24,32 @@ namespace TheRocket.Repositories
             {
                 return new SharedResponse<ProductSizeDto>(Status.problem, null, "Entity 'db.ProductSizes' is null");
             }
-            foreach (var sizeId in model.SizeIds)
+            if (model.ProductId != null && model.SizeIds != null)
             {
-                ProductSize productSize = new() { ProductId = model.ProductId, SizeId = sizeId };
-                db.ProductSizes.Add(productSize);
+                foreach (var sizeId in model.SizeIds)
+                {
+                    ProductSize productSize = new() { ProductId = model.ProductId, SizeId = sizeId };
+                    db.ProductSizes.Add(productSize);
+                }
+                try
+                {
+                    await db.SaveChangesAsync();
+                    return new SharedResponse<ProductSizeDto>(Status.createdAtAction, model);
+                }
+                catch (Exception ex)
+                {
+                    return new SharedResponse<ProductSizeDto>(Status.badRequest, null, ex.ToString());
+                }
             }
-            try
-            {
-                await db.SaveChangesAsync();
-                return new SharedResponse<ProductSizeDto>(Status.createdAtAction, model);
-            }
-            catch (Exception ex)
-            {
-                return new SharedResponse<ProductSizeDto>(Status.badRequest, null, ex.ToString());
-            }
+            return new SharedResponse<ProductSizeDto>(Status.badRequest, null);
+
         }
 
         public async Task<SharedResponse<ProductSizeDto>> UnAssignSizesToProdcut(ProductSizeDto model)
         {
             if (db.ProductSizes == null)
             {
-                return new SharedResponse<ProductSizeDto>(Status.noContent, null);
+                return new SharedResponse<ProductSizeDto>(Status.problem, null, "Entity 'db.ProductSizes' is null");
             }
             if (model.ProductId != null && model.SizeIds != null)
             {

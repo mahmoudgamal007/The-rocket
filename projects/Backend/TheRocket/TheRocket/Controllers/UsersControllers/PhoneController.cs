@@ -9,7 +9,7 @@ namespace TheRocket.Controllers
 {
     [ApiController]
     [Route("Api/[Controller]")]
-    [Authorize(Roles = "Buyer,Seller")]
+    [Authorize]
 
     public class PhoneController : ControllerBase
     {
@@ -19,25 +19,44 @@ namespace TheRocket.Controllers
             this.repo = repo;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<PhoneDto>>> GetPhoneByUserId(String userId)
+        [HttpGet("[action]")]
+        public async Task<ActionResult<List<PhoneDto>>> GetPhoneByUserId([FromQuery] String userId)
         {
             SharedResponse<List<PhoneDto>> response = await repo.GetPhonesByUserId(userId);
             if (response.status == Status.notFound) return NotFound();
             return response.data;
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+
+        public async Task<ActionResult<List<PhoneDto>>> GetAllPhones()
+        {
+            SharedResponse<List<PhoneDto>> response = await repo.GetAll();
+            if (response.status == Status.notFound) return NotFound();
+            return response.data;
+        }
+        [HttpGet("[action]")]
+        [Authorize(Roles = "Admin")]
+
+        public async Task<ActionResult<PhoneDto>> GetPhoneById([FromQuery] int Id)
+
+        {
+            SharedResponse<PhoneDto> response = await repo.GetById(Id);
+            if (response.status == Status.notFound) return NotFound();
+            return response.data;
+        }
         [HttpPost]
         public async Task<ActionResult<PhoneDto>> PostPhone(PhoneDto Phone)
         {
-            SharedResponse<PhoneDto> response = await repo.Create(Phone); 
+            SharedResponse<PhoneDto> response = await repo.Create(Phone);
             if (response.status == Status.badRequest) return BadRequest(response.message);
             if (response.status == Status.problem) return Problem(response.message);
             return Ok(response.data);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<PhoneDto>> PutPhone(int id, PhoneDto Phone)
+        public async Task<ActionResult<PhoneDto>> PutPhone([FromQuery] int id, PhoneDto Phone)
         {
             SharedResponse<PhoneDto> response = await repo.Update(id, Phone);
             if (response.status == Status.badRequest) return BadRequest();
@@ -46,7 +65,7 @@ namespace TheRocket.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PhoneDto>> DeletePhone(int id)
+        public async Task<ActionResult<PhoneDto>> DeletePhone([FromQuery] int id)
         {
             SharedResponse<PhoneDto> response = await repo.Delete(id);
             if (response.status == Status.notFound) return NotFound();

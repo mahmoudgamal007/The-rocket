@@ -38,7 +38,7 @@ namespace TheRocket.Repositories
         }
         public async Task<SharedResponse<AdminDto>> Create(AdminDto model)
         {
-            if (db.Sellers == null) return new SharedResponse<AdminDto>(Status.problem, null, "Entity set 'db.Admin' is null");
+            if (db.Admins == null) return new SharedResponse<AdminDto>(Status.problem, null, "Entity set 'db.Admin' is null");
             SharedResponse<AddressDto> addressResponse;
             SharedResponse<PhoneDto> phoneResponse;
             SharedResponse<LocationDto> locationResponse;
@@ -85,6 +85,7 @@ namespace TheRocket.Repositories
                         if (roles != null)
                         {
                             await db.SaveChangesAsync();
+                            model = mapper.Map<AdminDto>(admin);
                             identityResult = await userManager.AddToRoleAsync(appUser, "Admin");
 
                         }
@@ -99,7 +100,7 @@ namespace TheRocket.Repositories
                     {
                         if (admin != null)
 
-                            await Delete(admin.Id);
+                            await Delete(admin.AdminId);
                         if (model.Addresse != null)
                             addressResponse = await addressRepo.Delete(model.Addresse.Id);
 
@@ -128,7 +129,7 @@ namespace TheRocket.Repositories
                 return new SharedResponse<AdminDto>(Status.notFound, null);
 
             }
-            var admin = await db.Admins.Where(a => a.Id == Id).FirstOrDefaultAsync();
+            var admin = await db.Admins.Where(a => a.AdminId == Id).FirstOrDefaultAsync();
             if (admin == null)
             {
                 return new SharedResponse<AdminDto>(Status.notFound, null);
@@ -138,26 +139,69 @@ namespace TheRocket.Repositories
             return new SharedResponse<AdminDto>(Status.noContent, null);
         }
 
-       
 
-        public Task<SharedResponse<AdminDto>> GetById(int Id)
+
+        public async Task<SharedResponse<AdminDto>> GetById(int Id)
         {
-            throw new NotImplementedException();
+            if (db.Admins == null)
+                return new SharedResponse<AdminDto>(Status.notFound, null);
+            var Admin = await db.Admins.Where(a => a.AdminId == Id).FirstOrDefaultAsync();
+            AdminDto AdminDto = mapper.
+            Map<AdminDto>(Admin);
+            return new SharedResponse<AdminDto>(Status.found, AdminDto);
+        }
+
+        public async Task<SharedResponse<AdminDto>> GetByUserId(string AppUserId)
+        {
+            if (db.Admins == null)
+                return new SharedResponse<AdminDto>(Status.notFound, null);
+            var Admin = await db.Admins.Where(a => a.AppUserId == AppUserId).FirstOrDefaultAsync();
+            AdminDto AdminDto = mapper.
+            Map<AdminDto>(Admin);
+            return new SharedResponse<AdminDto>(Status.found, AdminDto);
         }
 
         public bool IsExists(int Id)
         {
-            throw new NotImplementedException();
+            return (db.Admins?.Any(a => a.AdminId == Id)).GetValueOrDefault();
+
         }
 
-        public Task<SharedResponse<AdminDto>> Update(int Id, AdminDto model)
+        public async Task<SharedResponse<AdminDto>> Update(int Id, AdminDto model)
         {
-            throw new NotImplementedException();
+             if (Id != model.AdminId)
+            {
+                return new SharedResponse<AdminDto>(Status.badRequest, null);
+            }
+
+            Admin admin = mapper.Map<Admin>(model);
+
+            db.Entry(admin).State = EntityState.Modified;
+
+            try
+            {
+                if (IsExists(Id))
+                    await db.SaveChangesAsync();
+                else
+                    return new SharedResponse<AdminDto>(Status.notFound, null);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                throw;
+            }
+
+            return new SharedResponse<AdminDto>(Status.noContent, null);
         }
 
-        Task<SharedResponse<List<AdminDto>>> IBaseRepo<SharedResponse<AdminDto>, SharedResponse<List<AdminDto>>, AdminDto>.GetAll()
+        public async Task<SharedResponse<List<AdminDto>>> GetAll()
         {
-            throw new NotImplementedException();
+             if (db.Admins == null)
+                return new SharedResponse<List<AdminDto>>(Status.notFound, null);
+            var admins = await db.Admins.ToListAsync();
+            List<AdminDto> adminDtos = mapper.
+            Map<List<AdminDto>>(admins);
+            return new SharedResponse<List<AdminDto>>(Status.found, adminDtos);
         }
     }
 }

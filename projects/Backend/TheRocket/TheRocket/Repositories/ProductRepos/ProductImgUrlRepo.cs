@@ -62,9 +62,17 @@ namespace TheRocket.Repositories
 
        
 
-        public Task<SharedResponse<ProductImgUrlDto>> GetById(int Id)
+        public async Task<SharedResponse<ProductImgUrlDto>> GetById(int Id)
         {
-            throw new NotImplementedException();
+            if (db.ProductImgUrls == null)
+            {
+                return new SharedResponse<ProductImgUrlDto>(Status.notFound, null);
+            }
+            var ProductImgUrl = await db.ProductImgUrls.Where(c => c.Id == Id && c.IsDeleted == false).FirstOrDefaultAsync();
+            if (ProductImgUrl == null)
+                return new SharedResponse<ProductImgUrlDto>(Status.notFound, null);
+            var ProductImgUrlDto = mapper.Map<ProductImgUrlDto>(ProductImgUrl);
+            return new SharedResponse<ProductImgUrlDto>(Status.found, ProductImgUrlDto);
         }
 
         public async Task<SharedResponse<ProductImgUrlDto>> Update(int Id, ProductImgUrlDto model)

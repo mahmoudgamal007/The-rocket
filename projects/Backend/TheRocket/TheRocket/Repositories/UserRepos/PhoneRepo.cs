@@ -74,9 +74,15 @@ namespace TheRocket.Repositories
 
       
 
-        public Task<SharedResponse<PhoneDto>> GetById(int Id)
+        public async Task<SharedResponse<PhoneDto>> GetById(int Id)
         {
-            throw new NotImplementedException();
+            if (db.Phones == null)
+                return new SharedResponse<PhoneDto>(Status.notFound, null);
+            var PhoneDto = await db.Phones.Where(a => a.Id == Id && a.IsDeleted == false).FirstOrDefaultAsync();
+            PhoneDto Phone = mapper.
+            Map<PhoneDto>(PhoneDto);
+            return new SharedResponse<PhoneDto>(Status.found, Phone);
+
         }
 
         public async Task<SharedResponse<PhoneDto>> Update(int Id, PhoneDto model)
@@ -111,9 +117,15 @@ namespace TheRocket.Repositories
             return (db.Phones?.Any(p => p.Id == Id&&p.IsDeleted==false)).GetValueOrDefault();
         }
 
-        Task<SharedResponse<List<PhoneDto>>> IBaseRepo<SharedResponse<PhoneDto>, SharedResponse<List<PhoneDto>>, PhoneDto>.GetAll()
+       public async Task<SharedResponse<List<PhoneDto>>> GetAll()
         {
-            throw new NotImplementedException();
+            
+            if (db.Phones == null)
+                return new SharedResponse<List<PhoneDto>>(Status.notFound, null);
+            var PhonesDto = await db.Phones.Where(a => a.IsDeleted == false).ToListAsync();
+            List<PhoneDto> Phones = mapper.
+            Map<List<PhoneDto>>(PhonesDto);
+            return new SharedResponse<List<PhoneDto>>(Status.found, Phones);
         }
     }
 }

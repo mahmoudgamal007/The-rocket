@@ -24,7 +24,7 @@ namespace TheRocket.Repositories
             if (db.ReserveCarts == null)
             {
                 return new SharedResponse<ReserveCartDto>(Status.problem, null, "Entity Set 'db.ReserveCarts' is null");
-}
+            }
             ReserveCart reserveCart = _mapper.Map<ReserveCart>(model);
             db.ReserveCarts.Add(reserveCart);
             try
@@ -36,7 +36,8 @@ namespace TheRocket.Repositories
             catch (Exception ex)
             {
                 return new SharedResponse<ReserveCartDto>(Status.badRequest, null, ex.ToString());
-            }        }
+            }
+        }
 
         public async Task<SharedResponse<ReserveCartDto>> Delete(int Id)
         {

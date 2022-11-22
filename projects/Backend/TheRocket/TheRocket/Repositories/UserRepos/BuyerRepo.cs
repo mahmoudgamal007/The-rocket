@@ -34,7 +34,7 @@ namespace TheRocket.Repositories
         }
         public async Task<SharedResponse<BuyerDto>> Create(BuyerDto model)
         {
-            if (db.Sellers == null) return new SharedResponse<BuyerDto>(Status.problem, null, "Entity set 'db.Buyer' is null");
+            if (db.Buyers == null) return new SharedResponse<BuyerDto>(Status.problem, null, "Entity set 'db.Buyer' is null");
             SharedResponse<AddressDto> addressResponse;
             SharedResponse<PhoneDto> phoneResponse;
             SharedResponse<LocationDto> locationResponse;
@@ -81,6 +81,7 @@ namespace TheRocket.Repositories
                         if (roles != null)
                         {
                             await db.SaveChangesAsync();
+                            model=mapper.Map<BuyerDto>(buyer);
                             identityResult = await userManager.AddToRoleAsync(appUser, "Buyer");
                         }
                         else
@@ -93,7 +94,7 @@ namespace TheRocket.Repositories
                     catch (Exception ex)
                     {
                         if (buyer != null)
-                            await Delete(buyer.Id);
+                            await Delete(buyer.BuyerId);
 
                         if (model.Addresse != null)
                             await addressRepo.Delete(model.Addresse.Id);
@@ -118,41 +119,85 @@ namespace TheRocket.Repositories
 
         public async Task<SharedResponse<BuyerDto>> Delete(int Id)
         {
-            if (db.Admins == null)
+            if (db.Buyers == null)
             {
                 return new SharedResponse<BuyerDto>(Status.notFound, null);
 
             }
-            var admin = await db.Admins.Where(a => a.Id == Id).FirstOrDefaultAsync();
+            var admin = await db.Buyers.Where(a => a.BuyerId == Id).FirstOrDefaultAsync();
             if (admin == null)
             {
                 return new SharedResponse<BuyerDto>(Status.notFound, null);
             }
-            db.Admins.Remove(admin);
+            db.Buyers.Remove(admin);
             await db.SaveChangesAsync();
             return new SharedResponse<BuyerDto>(Status.noContent, null);
         }
 
        
 
-        public Task<SharedResponse<BuyerDto>> GetById(int Id)
+        public async Task<SharedResponse<BuyerDto>> GetById(int Id)
         {
-            throw new NotImplementedException();
+            
+            if (db.Buyers == null)
+                return new SharedResponse<BuyerDto>(Status.notFound, null);
+            var Admin = await db.Buyers.Where(a => a.BuyerId == Id).FirstOrDefaultAsync();
+            BuyerDto BuyerDto = mapper.
+            Map<BuyerDto>(Admin);
+            return new SharedResponse<BuyerDto>(Status.found, BuyerDto);
+        
+        }
+
+        public async Task<SharedResponse<BuyerDto>> GetByUserId(string AppUserId)
+        {
+             if (db.Buyers == null)
+                return new SharedResponse<BuyerDto>(Status.notFound, null);
+            var Buyers = await db.Buyers.Where(a => a.AppUserId == AppUserId ).FirstOrDefaultAsync();
+            BuyerDto BuyerDto = mapper.
+            Map<BuyerDto>(Buyers);
+            return new SharedResponse<BuyerDto>(Status.found, BuyerDto);
         }
 
         public bool IsExists(int Id)
         {
-            throw new NotImplementedException();
+           return (db.Buyers?.Any(a => a.BuyerId == Id)).GetValueOrDefault();
         }
 
-        public Task<SharedResponse<BuyerDto>> Update(int Id, BuyerDto model)
+        public async Task<SharedResponse<BuyerDto>> Update(int Id, BuyerDto model)
         {
-            throw new NotImplementedException();
+             if (Id != model.BuyerId)
+            {
+                return new SharedResponse<BuyerDto>(Status.badRequest, null);
+            }
+
+            Admin admin = mapper.Map<Admin>(model);
+
+            db.Entry(admin).State = EntityState.Modified;
+
+            try
+            {
+                if (IsExists(Id))
+                    await db.SaveChangesAsync();
+                else
+                    return new SharedResponse<BuyerDto>(Status.notFound, null);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                throw;
+            }
+
+            return new SharedResponse<BuyerDto>(Status.noContent, null);
         }
 
-        Task<SharedResponse<List<BuyerDto>>> IBaseRepo<SharedResponse<BuyerDto>, SharedResponse<List<BuyerDto>>, BuyerDto>.GetAll()
+       public async Task<SharedResponse<List<BuyerDto>>> GetAll()
         {
-            throw new NotImplementedException();
+             if (db.Buyers == null)
+                return new SharedResponse<List<BuyerDto>>(Status.notFound, null);
+            var Buyers = await db.Buyers.ToListAsync();
+            List<BuyerDto> BuyerDtos = mapper.
+            Map<List<BuyerDto>>(Buyers);
+            return new SharedResponse<List<BuyerDto>>(Status.found, BuyerDtos);
         }
     }
 }

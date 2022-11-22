@@ -14,7 +14,7 @@ namespace TheRocket.Entities.Users
         }
 
         [Key]
-        public int Id { get; set; }
+        public int SellerId { get; set; }
         public string ReferalCode { get; set; }
         public int Points { get; set; }
         public string About { get; set; }

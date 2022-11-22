@@ -24,20 +24,24 @@ namespace TheRocket.Repositories
             {
                 return new SharedResponse<ProductColorDto>(Status.problem, null, "Entity 'db.ProductColors' is null");
             }
-            foreach (var ColourId in model.ColourIds)
+            if (model.ProductId != null && model.ColourIds != null)
             {
-                ProductColor ProductColor = new() { ProductId = model.ProductId, ColourId = ColourId };
-                db.ProductColors.Add(ProductColor);
+                foreach (var ColourId in model.ColourIds)
+                {
+                    ProductColor ProductColor = new() { ProductId = model.ProductId, ColourId = ColourId };
+                    db.ProductColors.Add(ProductColor);
+                }
+                try
+                {
+                    await db.SaveChangesAsync();
+                    return new SharedResponse<ProductColorDto>(Status.createdAtAction, model);
+                }
+                catch (Exception ex)
+                {
+                    return new SharedResponse<ProductColorDto>(Status.badRequest, null, ex.ToString());
+                }
             }
-            try
-            {
-                await db.SaveChangesAsync();
-                return new SharedResponse<ProductColorDto>(Status.createdAtAction, model);
-            }
-            catch (Exception ex)
-            {
-                return new SharedResponse<ProductColorDto>(Status.badRequest, null, ex.ToString());
-            }
+            return new SharedResponse<ProductColorDto>(Status.badRequest, null);
         }
 
         public async Task<SharedResponse<ProductColorDto>> UnAssignColorsToProdcut(ProductColorDto model)
