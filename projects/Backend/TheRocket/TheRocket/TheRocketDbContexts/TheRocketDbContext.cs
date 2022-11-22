@@ -15,8 +15,8 @@ namespace TheRocket.TheRocketDbContexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<ProductColor>().HasKey(p=>new{p.ProductId,p.ColourId});
-            builder.Entity<ProductSize>().HasKey(p=>new{p.ProductId,p.SizeId});
+            builder.Entity<ProductColor>().HasKey(p => new { p.ProductId, p.ColourId });
+            builder.Entity<ProductSize>().HasKey(p => new { p.ProductId, p.SizeId });
 
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
@@ -24,7 +24,26 @@ namespace TheRocket.TheRocketDbContexts
             }
             base.OnModelCreating(builder);
 
-            builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin" ,NormalizedName="ADMIN"});
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Name = "Seller", NormalizedName = "SELLER" },
+                new IdentityRole { Name = "Buyer", NormalizedName = "BUYER" }
+             );
+
+             builder.Entity<Colour>().HasData(
+                new Colour{Id=1,Name="White"},
+                new Colour{Id=2,Name="Red"},
+                new Colour{Id=3,Name="Blue"},
+                new Colour{Id=4,Name="Yellow"},
+                new Colour{Id=5,Name="Black"}
+             );
+
+             builder.Entity<Size>().HasData(
+                new Size{Id=1,Name="S"},
+                new Size{Id=2,Name="M"},
+                new Size{Id=3,Name="L"},
+                new Size{Id=4,Name="XL"}
+             );
 
         }
 

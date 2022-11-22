@@ -120,6 +120,15 @@ namespace TheRocket.Repositories
             return new SharedResponse<List<ColorDto>>(Status.found, colors);
         }
 
-
+        public async Task<SharedResponse<List<ColorDto>>> GetColorsByIds(List<int> Ids)
+        {
+            List<ColorDto> colorDtos=new();
+            SharedResponse<ColorDto> colorDto;
+            foreach(int id in Ids){
+                colorDto=await GetById(id);
+                colorDtos.Add(colorDto.data);
+            }
+            return new SharedResponse<List<ColorDto>>(Status.found,colorDtos);
+        }
     }
 }

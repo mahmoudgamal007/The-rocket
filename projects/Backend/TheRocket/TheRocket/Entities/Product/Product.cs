@@ -10,7 +10,7 @@ namespace TheRocket.Entities.Products
         {
             ProductColors = new();
             ProductSizes = new();
-            ImgsUrls = new();
+            Imgs = new();
             Feedbacks = new();
             ReserveCarts = new();
             Orders = new();
@@ -37,7 +37,7 @@ namespace TheRocket.Entities.Products
         public virtual List<ProductColor>? ProductColors { get; set; }
         public virtual List<ProductSize>? ProductSizes { get; set; }
 
-        public virtual List<ProductImgUrl>? ImgsUrls { get; set; }
+        public virtual List<ProductImgUrl>? Imgs { get; set; }
         public virtual List<Feedback>? Feedbacks { get; set; }
         public virtual List<ReserveCart>? ReserveCarts { get; set; }
         public virtual List<Order>? Orders { get; set; }

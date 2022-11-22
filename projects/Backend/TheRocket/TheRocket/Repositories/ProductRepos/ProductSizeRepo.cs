@@ -12,9 +12,11 @@ namespace TheRocket.Repositories
 
         private readonly IMapper mapper;
         private readonly TheRocketDbContext db;
+        private readonly ISizeRepo sizeRepo;
 
-        public ProductSizeRepo(TheRocketDbContext db, IMapper mapper)
+        public ProductSizeRepo(TheRocketDbContext db, IMapper mapper, ISizeRepo sizeRepo)
         {
+            this.sizeRepo = sizeRepo;
             this.db = db;
             this.mapper = mapper;
         }
@@ -45,6 +47,22 @@ namespace TheRocket.Repositories
 
         }
 
+        public async Task<SharedResponse<List<SizeDto>>> GetSizesByProductId(int productId)
+        {
+
+            if (db.ProductSizes == null)
+            {
+                return new SharedResponse<List<SizeDto>>(Status.notFound, null);
+            }
+            var productSizes = db.ProductSizes.Where(pc => pc.ProductId == productId).ToList();
+            List<int> SizeIds = new();
+            foreach (var productSize in productSizes)
+            {
+                SizeIds.Add(productSize.SizeId);
+            }
+            return await sizeRepo.GetSizesByIds(SizeIds);
+
+        }
         public async Task<SharedResponse<ProductSizeDto>> UnAssignSizesToProdcut(ProductSizeDto model)
         {
             if (db.ProductSizes == null)

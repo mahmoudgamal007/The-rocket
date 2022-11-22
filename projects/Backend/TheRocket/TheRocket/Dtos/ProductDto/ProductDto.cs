@@ -25,10 +25,10 @@ namespace TheRocket.Dtos.ProductDtos
 
 
 
-        public ProductColorDto? productColorDtos { get; set; }
-        public ProductSizeDto? productSizeDtos { get; set; }
+        public List<ColorDto> Colors { get; set; }
+        public List<SizeDto> Sizes { get; set; }
         [Required]
-        public ProductImgUrlDto ProductImgUrlDto { get; set; }
+        public List<ProductImgUrlDto> Imgs { get; set; }
    
     }
 }

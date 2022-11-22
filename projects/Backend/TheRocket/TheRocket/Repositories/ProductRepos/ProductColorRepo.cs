@@ -12,9 +12,11 @@ namespace TheRocket.Repositories
 
         private readonly IMapper mapper;
         private readonly TheRocketDbContext db;
+        private readonly IColorRepo colorRepo;
 
-        public ProductColorRepo(TheRocketDbContext db, IMapper mapper)
+        public ProductColorRepo(TheRocketDbContext db, IMapper mapper, IColorRepo colorRepo)
         {
+            this.colorRepo = colorRepo;
             this.db = db;
             this.mapper = mapper;
         }
@@ -42,6 +44,22 @@ namespace TheRocket.Repositories
                 }
             }
             return new SharedResponse<ProductColorDto>(Status.badRequest, null);
+        }
+
+        public async Task<SharedResponse<List<ColorDto>>> GetColorsByProductId(int productId)
+        {
+
+            if (db.ProductColors == null)
+            {
+                return new SharedResponse<List<ColorDto>>(Status.notFound, null);
+            }
+            var productColors = db.ProductColors.Where(pc => pc.ProductId == productId).ToList();
+            List<int>colorIds=new();
+            foreach(var productColor in productColors){
+                colorIds.Add(productColor.ColourId);
+            }
+            return await colorRepo.GetColorsByIds(colorIds);
+            
         }
 
         public async Task<SharedResponse<ProductColorDto>> UnAssignColorsToProdcut(ProductColorDto model)

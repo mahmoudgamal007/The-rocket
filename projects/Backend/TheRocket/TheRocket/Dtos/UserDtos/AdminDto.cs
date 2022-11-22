@@ -31,6 +31,8 @@ namespace TheRocket.Dtos.UserDtos
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
         public string? AppUserId { get; set; }
+
+        public AppUser AppUser { get; set; }
         
         //Identity Result
         public IdentityResult? IdentityResult { get; set; }

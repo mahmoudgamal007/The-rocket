@@ -7,5 +7,7 @@ namespace TheRocket.Repositories.RepoInterfaces
     {
         public Task<SharedResponse<ProductSizeDto>> AssignSizesToProdcut(ProductSizeDto model);
         public Task<SharedResponse<ProductSizeDto>> UnAssignSizesToProdcut(ProductSizeDto model);
+        public Task<SharedResponse<List<SizeDto>>> GetSizesByProductId(int PoductID);
+
     }
 }

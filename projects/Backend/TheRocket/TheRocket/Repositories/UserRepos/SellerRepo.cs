@@ -51,6 +51,7 @@ namespace TheRocket.Repositories
                 identityResult = await userManager.CreateAsync(appUser, model.Password);
                 if (identityResult.Succeeded)
                 {
+                    model = mapper.Map<SellerDto>(appUser);
                     seller.AppUserId = appUser.Id;
                     db.Sellers.Add(seller);
                     if (model.Addresse != null)
@@ -81,7 +82,9 @@ namespace TheRocket.Repositories
                         if (roles != null)
                         {
                             await db.SaveChangesAsync();
-                            model=mapper.Map<SellerDto>(seller);
+                            model = mapper.Map<SellerDto>(seller);
+                            model.UserName = appUser.UserName;
+                            model.Email = appUser.Email;
                             identityResult = await userManager.AddToRoleAsync(appUser, "Seller");
                         }
 
@@ -133,28 +136,28 @@ namespace TheRocket.Repositories
             }
             db.Sellers.Remove(seller);
             await db.SaveChangesAsync();
-            
+
             return new SharedResponse<SellerDto>(Status.noContent, null);
         }
 
 
-           public async Task<SharedResponse<SellerDto>> GetById(int Id)
+        public async Task<SharedResponse<SellerDto>> GetById(int Id)
         {
-            
+
             if (db.Sellers == null)
                 return new SharedResponse<SellerDto>(Status.notFound, null);
             var Admin = await db.Sellers.Where(a => a.SellerId == Id).FirstOrDefaultAsync();
             SellerDto SellerDto = mapper.
             Map<SellerDto>(Admin);
             return new SharedResponse<SellerDto>(Status.found, SellerDto);
-        
+
         }
 
         public async Task<SharedResponse<SellerDto>> GetByUserId(string AppUserId)
         {
-             if (db.Sellers == null)
+            if (db.Sellers == null)
                 return new SharedResponse<SellerDto>(Status.notFound, null);
-            var Sellers = await db.Sellers.Where(a => a.AppUserId == AppUserId ).FirstOrDefaultAsync();
+            var Sellers = await db.Sellers.Where(a => a.AppUserId == AppUserId).FirstOrDefaultAsync();
             SellerDto SellerDto = mapper.
             Map<SellerDto>(Sellers);
             return new SharedResponse<SellerDto>(Status.found, SellerDto);
@@ -162,12 +165,12 @@ namespace TheRocket.Repositories
 
         public bool IsExists(int Id)
         {
-           return (db.Sellers?.Any(a => a.SellerId == Id)).GetValueOrDefault();
+            return (db.Sellers?.Any(a => a.SellerId == Id)).GetValueOrDefault();
         }
 
         public async Task<SharedResponse<SellerDto>> Update(int Id, SellerDto model)
         {
-             if (Id != model.SellerId)
+            if (Id != model.SellerId)
             {
                 return new SharedResponse<SellerDto>(Status.badRequest, null);
             }
@@ -192,15 +195,15 @@ namespace TheRocket.Repositories
             return new SharedResponse<SellerDto>(Status.noContent, null);
         }
 
-       public async Task<SharedResponse<List<SellerDto>>> GetAll()
+        public async Task<SharedResponse<List<SellerDto>>> GetAll()
         {
-             if (db.Sellers == null)
+            if (db.Sellers == null)
                 return new SharedResponse<List<SellerDto>>(Status.notFound, null);
             var Sellers = await db.Sellers.ToListAsync();
             List<SellerDto> SellerDtos = mapper.
             Map<List<SellerDto>>(Sellers);
             return new SharedResponse<List<SellerDto>>(Status.found, SellerDtos);
         }
-      
+
     }
 }

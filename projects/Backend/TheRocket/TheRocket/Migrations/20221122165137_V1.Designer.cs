@@ -12,8 +12,8 @@ using TheRocket.TheRocketDbContexts;
 namespace TheRocket.Migrations
 {
     [DbContext(typeof(TheRocketDbContext))]
-    [Migration("20221120080021_v3")]
-    partial class v3
+    [Migration("20221122165137_V1")]
+    partial class V1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,10 +53,24 @@ namespace TheRocket.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "49baf939-e848-458d-9b3c-d5260ab06807",
-                            ConcurrencyStamp = "2d7b687f-92a0-4f28-aed4-64991524dcd5",
+                            Id = "1fa552a8-530f-401e-be8b-f1ff06a30d53",
+                            ConcurrencyStamp = "48141439-b625-4a09-9f52-5da66ecc2742",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "d7cd762b-f98f-4d74-8dca-890155ec30b2",
+                            ConcurrencyStamp = "c2bd2f99-0879-44d2-87c2-900981587385",
+                            Name = "Seller",
+                            NormalizedName = "SELLER"
+                        },
+                        new
+                        {
+                            Id = "3cc0f266-fbc3-42c4-9ddd-25644b591c7b",
+                            ConcurrencyStamp = "cf6d1bd7-e510-4264-ac42-a5ea0ae34c0a",
+                            Name = "Buyer",
+                            NormalizedName = "BUYER"
                         });
                 });
 
@@ -305,19 +319,56 @@ namespace TheRocket.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Colors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(320),
+                            IsDeleted = false,
+                            Name = "White"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            IsDeleted = false,
+                            Name = "Red"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            IsDeleted = false,
+                            Name = "Blue"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            IsDeleted = false,
+                            Name = "Yellow"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(370),
+                            IsDeleted = false,
+                            Name = "Black"
+                        });
                 });
 
             modelBuilder.Entity("TheRocket.Entities.Products.Product", b =>
@@ -427,6 +478,9 @@ namespace TheRocket.Migrations
                     b.Property<int>("SizeId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ProductId", "SizeId");
 
                     b.HasIndex("SizeId");
@@ -455,6 +509,36 @@ namespace TheRocket.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sizes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            IsDeleted = false,
+                            Name = "S"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            IsDeleted = false,
+                            Name = "M"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            IsDeleted = false,
+                            Name = "L"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            IsDeleted = false,
+                            Name = "XL"
+                        });
                 });
 
             modelBuilder.Entity("TheRocket.Entities.ReserveCart", b =>
@@ -606,11 +690,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Admin", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AdminId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminId"), 1L, 1);
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -630,7 +714,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AdminId");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
@@ -705,11 +789,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Buyer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BuyerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyerId"), 1L, 1);
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -729,7 +813,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("BuyerId");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
@@ -801,11 +885,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Seller", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SellerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SellerId"), 1L, 1);
 
                     b.Property<string>("About")
                         .IsRequired()
@@ -832,7 +916,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SellerId");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();

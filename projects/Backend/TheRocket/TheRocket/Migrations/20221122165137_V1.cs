@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheRocket.Migrations
 {
-    public partial class v1 : Migration
+    public partial class V1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,6 +49,21 @@ namespace TheRocket.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Colors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Colors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Plans",
                 columns: table => new
                 {
@@ -65,6 +80,21 @@ namespace TheRocket.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Plans", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sizes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sizes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,7 +163,7 @@ namespace TheRocket.Migrations
                 name: "Admins",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    AdminId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -143,7 +173,7 @@ namespace TheRocket.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admins", x => x.Id);
+                    table.PrimaryKey("PK_Admins", x => x.AdminId);
                     table.ForeignKey(
                         name: "FK_Admins_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
@@ -241,7 +271,7 @@ namespace TheRocket.Migrations
                 name: "Buyers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    BuyerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -251,7 +281,7 @@ namespace TheRocket.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Buyers", x => x.Id);
+                    table.PrimaryKey("PK_Buyers", x => x.BuyerId);
                     table.ForeignKey(
                         name: "FK_Buyers_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
@@ -309,7 +339,7 @@ namespace TheRocket.Migrations
                 name: "Sellers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    SellerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ReferalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Points = table.Column<int>(type: "int", nullable: false),
@@ -321,7 +351,7 @@ namespace TheRocket.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sellers", x => x.Id);
+                    table.PrimaryKey("PK_Sellers", x => x.SellerId);
                     table.ForeignKey(
                         name: "FK_Sellers_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
@@ -354,7 +384,7 @@ namespace TheRocket.Migrations
                         name: "FK_Products_Sellers_SellerId",
                         column: x => x.SellerId,
                         principalTable: "Sellers",
-                        principalColumn: "Id",
+                        principalColumn: "SellerId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Products_SubCategories_SubCategoryId",
@@ -368,19 +398,21 @@ namespace TheRocket.Migrations
                 name: "Subscrips",
                 columns: table => new
                 {
-                    SellerId = table.Column<int>(type: "int", nullable: false),
-                    PlanId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     IsActivated = table.Column<bool>(type: "bit", nullable: false),
                     Discount = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SellerId = table.Column<int>(type: "int", nullable: false),
+                    PlanId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Subscrips", x => new { x.SellerId, x.PlanId });
+                    table.PrimaryKey("PK_Subscrips", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Subscrips_Plans_PlanId",
                         column: x => x.PlanId,
@@ -391,29 +423,7 @@ namespace TheRocket.Migrations
                         name: "FK_Subscrips_Sellers_SellerId",
                         column: x => x.SellerId,
                         principalTable: "Sellers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Colors",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Colors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Colors_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
+                        principalColumn: "SellerId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -421,46 +431,26 @@ namespace TheRocket.Migrations
                 name: "Feedbacks",
                 columns: table => new
                 {
-                    BuyerId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: false),
+                    BuyerId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Feedbacks", x => new { x.BuyerId, x.ProductId });
+                    table.PrimaryKey("PK_Feedbacks", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Feedbacks_Buyers_BuyerId",
                         column: x => x.BuyerId,
                         principalTable: "Buyers",
-                        principalColumn: "Id",
+                        principalColumn: "BuyerId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Feedbacks_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ImgUrls",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ImgUrls", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ImgUrls_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -494,7 +484,7 @@ namespace TheRocket.Migrations
                         name: "FK_Orders_Buyers_BuyerId",
                         column: x => x.BuyerId,
                         principalTable: "Buyers",
-                        principalColumn: "Id",
+                        principalColumn: "BuyerId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_Products_ProductId",
@@ -506,6 +496,79 @@ namespace TheRocket.Migrations
                         name: "FK_Orders_Sellers_SellerId",
                         column: x => x.SellerId,
                         principalTable: "Sellers",
+                        principalColumn: "SellerId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductColors",
+                columns: table => new
+                {
+                    ColourId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductColors", x => new { x.ProductId, x.ColourId });
+                    table.ForeignKey(
+                        name: "FK_ProductColors_Colors_ColourId",
+                        column: x => x.ColourId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductColors_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductImgUrls",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductImgUrls", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductImgUrls_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductSizes",
+                columns: table => new
+                {
+                    SizeId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductSizes", x => new { x.ProductId, x.SizeId });
+                    table.ForeignKey(
+                        name: "FK_ProductSizes_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductSizes_Sizes_SizeId",
+                        column: x => x.SizeId,
+                        principalTable: "Sizes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -514,21 +577,23 @@ namespace TheRocket.Migrations
                 name: "ReserveCarts",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    BuyerId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     IsSubmitted = table.Column<bool>(type: "bit", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    BuyerId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReserveCarts", x => new { x.BuyerId, x.ProductId });
+                    table.PrimaryKey("PK_ReserveCarts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ReserveCarts_Buyers_BuyerId",
                         column: x => x.BuyerId,
                         principalTable: "Buyers",
-                        principalColumn: "Id",
+                        principalColumn: "BuyerId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ReserveCarts_Products_ProductId",
@@ -538,32 +603,38 @@ namespace TheRocket.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Sizes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Size = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sizes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sizes_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c3b3f712-ea78-44d5-9ea0-cd900d5b1b33", "80f8d857-06cd-4ca5-bed2-c1118b9b62a9", "Admin", "ADMIN" });
+                values: new object[,]
+                {
+                    { "1fa552a8-530f-401e-be8b-f1ff06a30d53", "48141439-b625-4a09-9f52-5da66ecc2742", "Admin", "ADMIN" },
+                    { "3cc0f266-fbc3-42c4-9ddd-25644b591c7b", "cf6d1bd7-e510-4264-ac42-a5ea0ae34c0a", "Buyer", "BUYER" },
+                    { "d7cd762b-f98f-4d74-8dca-890155ec30b2", "c2bd2f99-0879-44d2-87c2-900981587385", "Seller", "SELLER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Colors",
+                columns: new[] { "Id", "CreatedAt", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(320), false, "White" },
+                    { 2, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360), false, "Red" },
+                    { 3, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360), false, "Blue" },
+                    { 4, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360), false, "Yellow" },
+                    { 5, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(370), false, "Black" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sizes",
+                columns: new[] { "Id", "CreatedAt", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390), false, "S" },
+                    { 2, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390), false, "M" },
+                    { 3, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390), false, "L" },
+                    { 4, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390), false, "XL" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_AppUserId",
@@ -622,18 +693,13 @@ namespace TheRocket.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Colors_ProductId",
-                table: "Colors",
-                column: "ProductId");
+                name: "IX_Feedbacks_BuyerId",
+                table: "Feedbacks",
+                column: "BuyerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ProductId",
                 table: "Feedbacks",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ImgUrls_ProductId",
-                table: "ImgUrls",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -662,6 +728,16 @@ namespace TheRocket.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductColors_ColourId",
+                table: "ProductColors",
+                column: "ColourId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductImgUrls_ProductId",
+                table: "ProductImgUrls",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_SellerId",
                 table: "Products",
                 column: "SellerId");
@@ -670,6 +746,16 @@ namespace TheRocket.Migrations
                 name: "IX_Products_SubCategoryId",
                 table: "Products",
                 column: "SubCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductSizes_SizeId",
+                table: "ProductSizes",
+                column: "SizeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReserveCarts_BuyerId",
+                table: "ReserveCarts",
+                column: "BuyerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReserveCarts_ProductId",
@@ -683,14 +769,14 @@ namespace TheRocket.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sizes_ProductId",
-                table: "Sizes",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Subscrips_PlanId",
                 table: "Subscrips",
                 column: "PlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Subscrips_SellerId",
+                table: "Subscrips",
+                column: "SellerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -717,13 +803,7 @@ namespace TheRocket.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Colors");
-
-            migrationBuilder.DropTable(
                 name: "Feedbacks");
-
-            migrationBuilder.DropTable(
-                name: "ImgUrls");
 
             migrationBuilder.DropTable(
                 name: "Locations");
@@ -735,16 +815,28 @@ namespace TheRocket.Migrations
                 name: "Phones");
 
             migrationBuilder.DropTable(
-                name: "ReserveCarts");
+                name: "ProductColors");
 
             migrationBuilder.DropTable(
-                name: "Sizes");
+                name: "ProductImgUrls");
+
+            migrationBuilder.DropTable(
+                name: "ProductSizes");
+
+            migrationBuilder.DropTable(
+                name: "ReserveCarts");
 
             migrationBuilder.DropTable(
                 name: "Subscrips");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Colors");
+
+            migrationBuilder.DropTable(
+                name: "Sizes");
 
             migrationBuilder.DropTable(
                 name: "Buyers");

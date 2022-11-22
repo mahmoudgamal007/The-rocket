@@ -120,6 +120,15 @@ namespace TheRocket.Repositories
             return new SharedResponse<List<SizeDto>>(Status.found, Sizes);
         }
 
-
+      public async Task<SharedResponse<List<SizeDto>>> GetSizesByIds(List<int> Ids)
+        {
+            List<SizeDto> SizeDtos=new();
+            SharedResponse<SizeDto> SizeDto;
+            foreach(int id in Ids){
+                SizeDto=await GetById(id);
+                SizeDtos.Add(SizeDto.data);
+            }
+            return new SharedResponse<List<SizeDto>>(Status.found,SizeDtos);
+        }
     }
 }

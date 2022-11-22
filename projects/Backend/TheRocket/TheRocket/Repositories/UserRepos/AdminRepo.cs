@@ -55,6 +55,7 @@ namespace TheRocket.Repositories
                 identityResult = await userManager.CreateAsync(appUser, model.Password);
                 if (identityResult.Succeeded)
                 {
+                    
                     admin.AppUserId = appUser.Id;
                     db.Admins.Add(admin);
                     if (model.Addresse != null)
@@ -86,6 +87,8 @@ namespace TheRocket.Repositories
                         {
                             await db.SaveChangesAsync();
                             model = mapper.Map<AdminDto>(admin);
+                            model.UserName=appUser.UserName;
+                            model.Email=appUser.Email;
                             identityResult = await userManager.AddToRoleAsync(appUser, "Admin");
 
                         }
@@ -145,7 +148,7 @@ namespace TheRocket.Repositories
         {
             if (db.Admins == null)
                 return new SharedResponse<AdminDto>(Status.notFound, null);
-            var Admin = await db.Admins.Where(a => a.AdminId == Id).FirstOrDefaultAsync();
+            var Admin = await db.Admins.Include(a=>a.AppUser).Where(a => a.AdminId == Id).FirstOrDefaultAsync();
             AdminDto AdminDto = mapper.
             Map<AdminDto>(Admin);
             return new SharedResponse<AdminDto>(Status.found, AdminDto);

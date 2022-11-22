@@ -49,31 +49,42 @@ namespace TheRocket.Repositories
             try
             {
                 db.SaveChanges();
-                model.Id=Product.Id;
+                model.Id = Product.Id;
                 SharedResponse<ProductColorDto> colorResponse;
 
-                if (model.productColorDtos != null)
+                if (model.Colors != null)
                 {
-                    model.productColorDtos.ProductId = model.Id;
-                    colorResponse = await colorRepo.AssignColorsToProdcut(model.productColorDtos);
+                    ProductColorDto productColorDto = new();
+                    foreach (var color in model.Colors)
+                    {
+                        productColorDto.ColourIds.Add(color.Id);
+                    }
+                    productColorDto.ProductId = model.Id;
+                    colorResponse = await colorRepo.AssignColorsToProdcut(productColorDto);
                     if (colorResponse.message != "") message += colorResponse.message + ", ";
                 }
 
                 SharedResponse<ProductSizeDto> sizeResponse;
-                if (model.productSizeDtos != null)
+                if (model.Sizes != null)
                 {
-                    model.productSizeDtos.ProductId = model.Id;
-                    sizeResponse = await sizeRepo.AssignSizesToProdcut(model.productSizeDtos);
+                    ProductSizeDto productSizeDto = new();
+                    foreach (var Size in model.Sizes)
+                    {
+                        productSizeDto.SizeIds.Add(Size.Id);
+                    }
+                    productSizeDto.ProductId = model.Id;
+                    sizeResponse = await sizeRepo.AssignSizesToProdcut(productSizeDto);
                     if (sizeResponse.message != "") message += sizeResponse.message + ", ";
                 }
 
-                if (model.ProductImgUrlDto == null) return new SharedResponse<ProductDto>(Status.badRequest, null);
-
-                SharedResponse<ProductImgUrlDto> imgUrlResponse;
-                model.ProductImgUrlDto.ProductId = model.Id;
-                imgUrlResponse = await imgUrlRepo.Create(model.ProductImgUrlDto);
-                if (imgUrlResponse.message != null) message += imgUrlResponse.message + ", ";
-
+                // if (model.Imgs == null) return new SharedResponse<ProductDto>(Status.badRequest, null);
+                // SharedResponse<ProductImgUrlDto> imgResponse;
+                // foreach (var img in model.Imgs)
+                // {
+                //     img.ProductId = model.Id;
+                //     imgResponse = await imgUrlRepo.Create(img);
+                //     if (imgResponse.message != "") message += imgResponse.message + ", ";
+                // }
                 return new SharedResponse<ProductDto>(Status.createdAtAction, model, message);
 
             }
@@ -125,14 +136,16 @@ namespace TheRocket.Repositories
             if (db.Products == null)
                 return new SharedResponse<List<ProductDto>>(Status.notFound, null);
 
-            IQueryable<Product> products = db.Products.Where(p => p.IsDeleted == false);
+            var products = db.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.Imgs).Where(p => p.IsDeleted == false);
 
             if (products == null)
                 return new SharedResponse<List<ProductDto>>(Status.notFound, null);
 
             if (!string.IsNullOrEmpty(queryParameter.SearchTerm))
                 products = products.Where(p => p.Name.ToLower().Contains(queryParameter.SearchTerm.ToLower()) ||
-                p.Desctiption.ToLower().Contains(queryParameter.Desctiption.ToLower()));
+                p.Desctiption.ToLower().Contains(queryParameter.SearchTerm.ToLower()) ||
+                p.SubCategory.Name.ToLower().Contains(queryParameter.SearchTerm.ToLower()) ||
+                p.SubCategory.MainCategory.ToLower().Contains(queryParameter.SearchTerm.ToLower()));
 
             if (!string.IsNullOrEmpty(queryParameter.Name))
                 products = products.Where(p => p.Name.ToLower() == queryParameter.Name.ToLower());
@@ -145,10 +158,30 @@ namespace TheRocket.Repositories
 
             products = products.Skip(queryParameter.Size * (queryParameter.Page - 1))
             .Take(queryParameter.Size);
-
-            List<ProductDto> productDtos = mapper.Map<List<ProductDto>>(products);
+            var response = products.ToList();
+            List<ProductDto> productDtos = mapper.Map<List<ProductDto>>(response);
+            foreach (var productDto in productDtos)
+            {
+                var colorResponse = await colorRepo.GetColorsByProductId(productDto.Id);
+                var sizeResponse=await sizeRepo.GetSizesByProductId(productDto.Id);
+                productDto.Colors = colorResponse.data;
+                productDto.Sizes=sizeResponse.data;
+            }
             return new SharedResponse<List<ProductDto>>(Status.found, productDtos);
 
+        }
+
+        public async Task<SharedResponse<List<ProductDto>>> GetProductsWithSellerId(int SellerId)
+        {
+            if (db.Products == null)
+            {
+                return new SharedResponse<List<ProductDto>>(Status.notFound, null);
+            }
+            var product = await db.Products.Where(p => p.SellerId == SellerId && p.IsDeleted == false).FirstOrDefaultAsync();
+            if (product == null)
+                return new SharedResponse<List<ProductDto>>(Status.notFound, null);
+            var productDto = mapper.Map<List<ProductDto>>(product);
+            return new SharedResponse<List<ProductDto>>(Status.found, productDto);
         }
 
         public bool IsExists(int Id)
