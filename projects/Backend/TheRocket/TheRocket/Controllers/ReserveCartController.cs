@@ -34,7 +34,7 @@ namespace TheRocket.Controllers
         }
         // Create ReserveCart
         [HttpPost]
-        public async Task<ActionResult<ReserveCartDto>> PostSubCategory(ReserveCartDto ReserveCart)
+        public async Task<ActionResult<ReserveCartDto>> PostReserveCart(ReserveCartDto ReserveCart)
         {
             SharedResponse<ReserveCartDto> response = await repo.Create(ReserveCart);
             if (response.status == Status.problem) return Problem(response.message);
@@ -44,7 +44,7 @@ namespace TheRocket.Controllers
 
         //Update Action
         [HttpPut("{id}")]
-        public async Task<ActionResult<ReserveCartDto>> PutSubCategory(int id, ReserveCartDto ReserveCart)
+        public async Task<ActionResult<ReserveCartDto>> PutReserveCart(int id, ReserveCartDto ReserveCart)
         {
             SharedResponse<ReserveCartDto> response = await repo.Update(id, ReserveCart);
             if (response.status == Status.badRequest) return BadRequest();
