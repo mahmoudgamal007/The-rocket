@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheRocket.TheRocketDbContexts;
 
@@ -11,9 +12,10 @@ using TheRocket.TheRocketDbContexts;
 namespace TheRocket.Migrations
 {
     [DbContext(typeof(TheRocketDbContext))]
-    partial class TheRocketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221121214230_v7")]
+    partial class v7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,8 +53,8 @@ namespace TheRocket.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7cff3980-7e6f-4da6-abae-a84fd1d352e6",
-                            ConcurrencyStamp = "334e2843-9741-4c0b-80aa-64f0c2e4a4c8",
+                            Id = "5bb8d20d-cffd-423f-8639-6eb6cbc76b5b",
+                            ConcurrencyStamp = "2438789d-9ef0-4c06-bec6-07ba09268be3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -607,11 +609,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Admin", b =>
                 {
-                    b.Property<int>("AdminId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -631,7 +633,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AdminId");
+                    b.HasKey("ID");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
@@ -706,11 +708,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Buyer", b =>
                 {
-                    b.Property<int>("BuyerId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyerId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -730,7 +732,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("BuyerId");
+                    b.HasKey("ID");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
@@ -802,11 +804,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Seller", b =>
                 {
-                    b.Property<int>("SellerId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SellerId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("About")
                         .IsRequired()
@@ -833,7 +835,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SellerId");
+                    b.HasKey("ID");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();

@@ -7,6 +7,7 @@ namespace TheRocket.Dtos.UserDtos
     public class SellerDto
     {
         //AppUser
+        public int SellerId { get; set; }
         public string UserName { get; set; }
 
         [EmailAddress]
@@ -30,7 +31,7 @@ namespace TheRocket.Dtos.UserDtos
         public string? ProfileImageUrl { get; set; }
         public string? CoverImageUrl { get; set; }
         public string BrandName { get; set; }
-        public string AppUserId { get; set; }
+        public string? AppUserId { get; set; }
 
         //Identity Result
         public IdentityResult? IdentityResult { get; set; }

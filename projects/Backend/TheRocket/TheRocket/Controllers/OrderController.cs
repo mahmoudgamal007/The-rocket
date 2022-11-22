@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheRocket.Dtos;
 using TheRocket.Repositories;
@@ -10,52 +11,61 @@ namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Buyer")]
+
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepo Order;
         private readonly TheRocketDbContext Context;
         public OrderController(IOrderRepo order, TheRocketDbContext context)
         {
-            Order=order;
-            Context=context;
+            Order = order;
+            Context = context;
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
+
         public async Task<ActionResult<List<OrderDto>>> GetAll()
         {
             SharedResponse<List<OrderDto>> response = await Order.GetAll();
-            if (response.status==Status.notFound) return NotFound();
+            if (response.status == Status.notFound) return NotFound();
             return Ok(response.data);
         }
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> GetById([FromQuery] int id)
         {
             SharedResponse<OrderDto> response = await Order.GetById(id);
-            if (response.status==Status.notFound) return NotFound();
+            if (response.status == Status.notFound) return NotFound();
             return Ok(response.data);
 
         }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<OrderDto>> DeleteAddress(int id)
+        [HttpDelete]
+
+
+        public async Task<ActionResult<OrderDto>> DeleteOrder([FromQuery] int id)
         {
             SharedResponse<OrderDto> response = await Order.Delete(id);
-            if (response.status==Status.notFound) return NotFound();
+            if (response.status == Status.notFound) return NotFound();
             return NoContent();
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<OrderDto>> PutAddress(int id, OrderDto order)
+        [HttpPut]
+
+
+        public async Task<ActionResult<OrderDto>> PutOrder([FromQuery] int id, OrderDto order)
         {
             SharedResponse<OrderDto> response = await Order.Update(id, order);
-            if (response.status==Status.badRequest) return BadRequest();
-            else if (response.status==Status.notFound) return NotFound();
+            if (response.status == Status.badRequest) return BadRequest();
+            else if (response.status == Status.notFound) return NotFound();
             return NoContent();
         }
         [HttpPost]
-        public async Task<ActionResult<OrderDto>> PostAddress(OrderDto order)
+        public async Task<ActionResult<OrderDto>> PostOrder(OrderDto order)
         {
             SharedResponse<OrderDto> response = await Order.Create(order);
-            if (response.status==Status.problem) return Problem(response.message);
-            if (response.status==Status.badRequest) return BadRequest(response.message);
+            if (response.status == Status.problem) return Problem(response.message);
+            if (response.status == Status.badRequest) return BadRequest(response.message);
             return Ok(response.data);
         }
     }

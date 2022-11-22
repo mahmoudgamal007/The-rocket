@@ -81,6 +81,7 @@ namespace TheRocket.Repositories
                         if (roles != null)
                         {
                             await db.SaveChangesAsync();
+                            model=mapper.Map<SellerDto>(seller);
                             identityResult = await userManager.AddToRoleAsync(appUser, "Seller");
                         }
 
@@ -94,7 +95,7 @@ namespace TheRocket.Repositories
                     catch (Exception ex)
                     {
                         if (seller != null)
-                            await Delete(seller.Id);
+                            await Delete(seller.SellerId);
 
                         if (model.Addresse != null)
                             await addressRepo.Delete(model.Addresse.Id);
@@ -120,40 +121,86 @@ namespace TheRocket.Repositories
 
         public async Task<SharedResponse<SellerDto>> Delete(int Id)
         {
-            if (db.Admins == null)
+            if (db.Sellers == null)
             {
                 return new SharedResponse<SellerDto>(Status.notFound, null);
 
             }
-            var admin = await db.Admins.Where(a => a.Id == Id).FirstOrDefaultAsync();
-            if (admin == null)
+            var seller = await db.Sellers.Where(a => a.SellerId == Id).FirstOrDefaultAsync();
+            if (seller == null)
             {
                 return new SharedResponse<SellerDto>(Status.notFound, null);
             }
-            db.Admins.Remove(admin);
+            db.Sellers.Remove(seller);
             await db.SaveChangesAsync();
+            
             return new SharedResponse<SellerDto>(Status.noContent, null);
         }
 
 
-        public Task<SharedResponse<SellerDto>> GetById(int Id)
+           public async Task<SharedResponse<SellerDto>> GetById(int Id)
         {
-            throw new NotImplementedException();
+            
+            if (db.Sellers == null)
+                return new SharedResponse<SellerDto>(Status.notFound, null);
+            var Admin = await db.Sellers.Where(a => a.SellerId == Id).FirstOrDefaultAsync();
+            SellerDto SellerDto = mapper.
+            Map<SellerDto>(Admin);
+            return new SharedResponse<SellerDto>(Status.found, SellerDto);
+        
+        }
+
+        public async Task<SharedResponse<SellerDto>> GetByUserId(string AppUserId)
+        {
+             if (db.Sellers == null)
+                return new SharedResponse<SellerDto>(Status.notFound, null);
+            var Sellers = await db.Sellers.Where(a => a.AppUserId == AppUserId ).FirstOrDefaultAsync();
+            SellerDto SellerDto = mapper.
+            Map<SellerDto>(Sellers);
+            return new SharedResponse<SellerDto>(Status.found, SellerDto);
         }
 
         public bool IsExists(int Id)
         {
-            return (db.Sellers?.Any(a => a.Id == Id)).GetValueOrDefault();
+           return (db.Sellers?.Any(a => a.SellerId == Id)).GetValueOrDefault();
         }
 
-        public Task<SharedResponse<SellerDto>> Update(int Id, SellerDto model)
+        public async Task<SharedResponse<SellerDto>> Update(int Id, SellerDto model)
         {
-            throw new NotImplementedException();
+             if (Id != model.SellerId)
+            {
+                return new SharedResponse<SellerDto>(Status.badRequest, null);
+            }
+
+            Admin admin = mapper.Map<Admin>(model);
+
+            db.Entry(admin).State = EntityState.Modified;
+
+            try
+            {
+                if (IsExists(Id))
+                    await db.SaveChangesAsync();
+                else
+                    return new SharedResponse<SellerDto>(Status.notFound, null);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                throw;
+            }
+
+            return new SharedResponse<SellerDto>(Status.noContent, null);
         }
 
-        Task<SharedResponse<List<SellerDto>>> IBaseRepo<SharedResponse<SellerDto>, SharedResponse<List<SellerDto>>, SellerDto>.GetAll()
+       public async Task<SharedResponse<List<SellerDto>>> GetAll()
         {
-            throw new NotImplementedException();
+             if (db.Sellers == null)
+                return new SharedResponse<List<SellerDto>>(Status.notFound, null);
+            var Sellers = await db.Sellers.ToListAsync();
+            List<SellerDto> SellerDtos = mapper.
+            Map<List<SellerDto>>(Sellers);
+            return new SharedResponse<List<SellerDto>>(Status.found, SellerDtos);
         }
+      
     }
 }

@@ -1,11 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using TheRocket.Dtos.AccountDto;
+using TheRocket.Dtos.UserDtos;
 using TheRocket.Entities.Users;
+using TheRocket.Repositories.RepoInterfaces;
 using TheRocket.Shared;
 
 namespace TheRocket.Controllers
@@ -16,9 +19,16 @@ namespace TheRocket.Controllers
     {
         private readonly SignInManager<AppUser> signInManager;
         private readonly UserManager<AppUser> userManager;
+        private readonly ISellerRepo sellerRepo;
+        private readonly IBuyerRepo buyerRepo;
+        private readonly IAdminRepo adminRepo;
 
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager,
+         ISellerRepo sellerRepo, IBuyerRepo buyerRepo, IAdminRepo adminRepo)
         {
+            this.adminRepo = adminRepo;
+            this.buyerRepo = buyerRepo;
+            this.sellerRepo = sellerRepo;
             this.signInManager = signInManager;
             this.userManager = userManager;
         }
@@ -26,6 +36,7 @@ namespace TheRocket.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
+            LoginResponseDto response = new();
             if (loginDto != null)
             {
                 AppUser appUser = await userManager.FindByEmailAsync(loginDto.Email);
@@ -35,18 +46,39 @@ namespace TheRocket.Controllers
                     if (found)
                     {
                         var userRoles = await userManager.GetRolesAsync(appUser);
+                        response.UserId=appUser.Id;
+                        response.UserName = appUser.UserName;
+                        if (userRoles[0] == "Seller")
+                        {
+                            SharedResponse<SellerDto> sellerResponse = await sellerRepo.GetByUserId(appUser.Id);
+                            response.AccountId = sellerResponse.data.SellerId;
+                            response.BrandName = sellerResponse.data.BrandName;
+                            response.AccountType="Seller";
+                        }
 
-                        List<Claim> claims = new(){
-                            new Claim("UserName",appUser.UserName)
-                        };
+                        if (userRoles[0] == "Buyer")
+                        {
+                            SharedResponse<BuyerDto> buyerResponse = await buyerRepo.GetByUserId(appUser.Id);
+                            response.AccountId = buyerResponse.data.BuyerId;
+                            response.FirstName = buyerResponse.data.FirstName;
+                            response.LastName = buyerResponse.data.LastName;
+                            response.AccountType="Buyer";
+                        }
+                        if (userRoles[0] == "Admin")
+                        {
+                            SharedResponse<AdminDto> adminResponse = await adminRepo.GetByUserId(appUser.Id);
+                            response.AccountId = adminResponse.data.AdminId;
+                            response.AccountType="Admin";
+                        }
+                        List<Claim> claims = new();
                         foreach (var role in userRoles)
                         {
                             claims.Add(new Claim(ClaimTypes.Role, role));
-
                         }
                         string jwtToken = JwtTokenGenerator.Generate(claims);
                         await signInManager.SignInWithClaimsAsync(appUser, loginDto.RememberMe, claims);
-                        return Ok(jwtToken);
+                        response.JwtToken=jwtToken;
+                        return Ok(response);
                     }
                 }
 
@@ -55,6 +87,7 @@ namespace TheRocket.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult> Logout()
         {
             await signInManager.SignOutAsync();

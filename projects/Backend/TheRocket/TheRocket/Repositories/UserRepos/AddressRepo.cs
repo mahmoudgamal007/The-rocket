@@ -70,11 +70,16 @@ namespace TheRocket.Repositories
             return new SharedResponse<List<AddressDto>>(Status.found, addresses);
         }
 
-       
 
-        public Task<SharedResponse<AddressDto>> GetById(int Id)
+
+        public async Task<SharedResponse<AddressDto>> GetById(int Id)
         {
-            throw new NotImplementedException();
+            if (db.Addresses == null)
+                return new SharedResponse<AddressDto>(Status.notFound, null);
+            var addressDto = await db.Addresses.Where(a => a.Id == Id && a.IsDeleted == false).FirstOrDefaultAsync();
+            AddressDto address = mapper.
+            Map<AddressDto>(addressDto);
+            return new SharedResponse<AddressDto>(Status.found, address);
         }
 
         public async Task<SharedResponse<AddressDto>> Update(int Id, AddressDto model)
@@ -106,14 +111,19 @@ namespace TheRocket.Repositories
 
         public bool IsExists(int Id)
         {
-            return (db.Addresses?.Any(a => a.Id == Id&&a.IsDeleted==false)).GetValueOrDefault();
+            return (db.Addresses?.Any(a => a.Id == Id && a.IsDeleted == false)).GetValueOrDefault();
         }
 
-        public Task<SharedResponse<List<AddressDto>>> GetAll()
+        public async Task<SharedResponse<List<AddressDto>>> GetAll()
         {
-            throw new NotImplementedException();
+            if (db.Addresses == null)
+                return new SharedResponse<List<AddressDto>>(Status.notFound, null);
+            var addressesDto = await db.Addresses.Where(a => a.IsDeleted == false).ToListAsync();
+            List<AddressDto> addresses = mapper.
+            Map<List<AddressDto>>(addressesDto);
+            return new SharedResponse<List<AddressDto>>(Status.found, addresses);
         }
 
-      
+
     }
 }

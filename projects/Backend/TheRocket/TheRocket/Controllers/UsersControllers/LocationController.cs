@@ -9,7 +9,7 @@ namespace TheRocket.Controllers
 {
     [ApiController]
     [Route("Api/[Controller]")]
-    [Authorize(Roles = "Buyer,Seller")]
+    [Authorize]
     public class LocationController : ControllerBase
     {
         private readonly ILocationRepo repo;
@@ -18,10 +18,29 @@ namespace TheRocket.Controllers
             this.repo = repo;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<LocationDto>>> GetLocationByUserId(String userId)
+       [HttpGet("[action]")]
+        public async Task<ActionResult<List<LocationDto>>> GetLocationByUserId([FromQuery] String userId)
         {
             SharedResponse<List<LocationDto>> response = await repo.GetLocationsByUserId(userId);
+            if (response.status == Status.notFound) return NotFound();
+            return response.data;
+        }
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+
+        public async Task<ActionResult<List<LocationDto>>> GetAllLocations()
+        
+        {
+            SharedResponse<List<LocationDto>> response = await repo.GetAll();
+            if (response.status == Status.notFound) return NotFound();
+            return response.data;
+        }
+       [HttpGet("[action]")]
+        [Authorize(Roles = "Admin")]
+
+        public async Task<ActionResult<LocationDto>> GetLocationById([FromQuery] int Id)
+        {
+            SharedResponse<LocationDto> response = await repo.GetById(Id);
             if (response.status == Status.notFound) return NotFound();
             return response.data;
         }
@@ -35,8 +54,8 @@ namespace TheRocket.Controllers
             return Ok(response.data);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<LocationDto>> PutLocation(int id, LocationDto Location)
+        [HttpPut]
+        public async Task<ActionResult<LocationDto>> PutLocation([FromQuery] int id, LocationDto Location)
         {
             SharedResponse<LocationDto> response = await repo.Update(id, Location);
             if (response.status == Status.badRequest) return BadRequest();
@@ -44,12 +63,14 @@ namespace TheRocket.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<LocationDto>> DeleteLocation(int id)
+        [HttpDelete]
+        public async Task<ActionResult<LocationDto>> DeleteLocation([FromQuery] int id)
         {
             SharedResponse<LocationDto> response = await repo.Delete(id);
             if (response.status == Status.notFound) return NotFound();
             return NoContent();
         }
+
+
     }
 }

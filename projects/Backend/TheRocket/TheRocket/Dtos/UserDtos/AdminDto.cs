@@ -7,6 +7,8 @@ namespace TheRocket.Dtos.UserDtos
     public class AdminDto
     {
             //AppUser
+        public int AdminId { get; set; }
+
         public string UserName { get; set; }
 
         [EmailAddress]
@@ -28,7 +30,7 @@ namespace TheRocket.Dtos.UserDtos
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
-        public string AppUserId { get; set; }
+        public string? AppUserId { get; set; }
         
         //Identity Result
         public IdentityResult? IdentityResult { get; set; }

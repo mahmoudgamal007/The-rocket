@@ -8,7 +8,7 @@ namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Buyer")]
+    
     public class FeedbacksController : ControllerBase
     {
         private readonly IFeedbackRepo feedbackRepo;
@@ -30,8 +30,10 @@ namespace TheRocket.Controllers
 
 
         // GetById
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<FeedbackDto>> GetById(int Id)
+      [HttpGet("[action]")]
+        [Authorize(Roles = "Admin,Seller")]
+
+        public async Task<ActionResult<FeedbackDto>> GetById([FromQuery]int Id)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.GetById(Id);
             if (response.status == Status.notFound) return NotFound();
@@ -41,7 +43,9 @@ namespace TheRocket.Controllers
         // post
 
         [HttpPost]
-        public async Task<ActionResult<FeedbackDto>> Create(FeedbackDto feedback)
+        [Authorize(Roles = "Buyer")]
+
+        public async Task<ActionResult<FeedbackDto>> Create([FromQuery]FeedbackDto feedback)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.Create(feedback);
             if (response.status == Status.problem) return Problem(response.message);
@@ -49,8 +53,10 @@ namespace TheRocket.Controllers
             return Ok(response.data);
         }
         //put
-        [HttpPut("{Id}")]
-        public async Task<ActionResult<FeedbackDto>> Update(int Id, FeedbackDto feedback)
+        [HttpPut]
+        [Authorize(Roles = "Buyer")]
+
+        public async Task<ActionResult<FeedbackDto>> Update([FromQuery]int Id, FeedbackDto feedback)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.Update(Id, feedback);
             if (response.status == Status.badRequest) return BadRequest();
@@ -58,8 +64,10 @@ namespace TheRocket.Controllers
             return NoContent();
         }
         //Delete
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult<FeedbackDto>> Delete( int Id)
+        [HttpDelete]
+        [Authorize(Roles = "Admin,Buyer")]
+
+        public async Task<ActionResult<FeedbackDto>> Delete([FromQuery] int Id)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.Delete(Id);
             if (response.status == Status.notFound) return NotFound();

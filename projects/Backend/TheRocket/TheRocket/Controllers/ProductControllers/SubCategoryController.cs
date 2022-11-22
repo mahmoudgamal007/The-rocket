@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheRocket.Dtos;
 using TheRocket.Repositories.RepoInterfaces;
@@ -9,37 +8,41 @@ namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Buyer")]
-    
-    public class ReserveCartController : ControllerBase
-    {
+    [Authorize(Roles = "Admin")]
 
-        private readonly IReserveCart repo;
-        public ReserveCartController(IReserveCart repo)
+
+    public class SubCategoryController : ControllerBase
+    {
+        private readonly ISubCategory repo;
+
+        public SubCategoryController(ISubCategory repo)
         {
             this.repo = repo;
-        }
 
+        }
+        // Get All SubCategories
         [HttpGet]
-        public async Task<ActionResult<List<ReserveCartDto>>> GetAll()
+        [Authorize(Roles = "Admin,Seller")]
+
+        public async Task<ActionResult<List<SubCategoryDto>>> GetAll()
         {
-            SharedResponse<List<ReserveCartDto>> response = await repo.GetAll();
+            SharedResponse<List<SubCategoryDto>> response = await repo.GetAll();
             if (response.status == Status.notFound) return NotFound();
             return Ok(response.data);
         }
         // Get By ID
-       [HttpGet("[action]")]
-        public async Task<ActionResult<ReserveCartDto>> GetById([FromQuery]int id)
+        [HttpGet("[action]")]
+        public async Task<ActionResult<SubCategoryDto>> GetById([FromQuery] int id)
         {
-            SharedResponse<ReserveCartDto> response = await repo.GetById(id);
+            SharedResponse<SubCategoryDto> response = await repo.GetById(id);
             if (response.status == Status.notFound) return NotFound();
             return Ok(response.data);
         }
-        // Create ReserveCart
+        // Create SubCategory
         [HttpPost]
-        public async Task<ActionResult<ReserveCartDto>> PostReserveCart(ReserveCartDto ReserveCart)
+        public async Task<ActionResult<SubCategoryDto>> PostSubCategory(SubCategoryDto SubCategory)
         {
-            SharedResponse<ReserveCartDto> response = await repo.Create(ReserveCart);
+            SharedResponse<SubCategoryDto> response = await repo.Create(SubCategory);
             if (response.status == Status.problem) return Problem(response.message);
             if (response.status == Status.badRequest) return BadRequest(response.message);
             return Ok(response.data);
@@ -47,9 +50,10 @@ namespace TheRocket.Controllers
 
         //Update Action
         [HttpPut]
-        public async Task<ActionResult<ReserveCartDto>> PutReserveCart([FromQuery]int id, ReserveCartDto ReserveCart)
+
+        public async Task<ActionResult<SubCategoryDto>> PutSubCategory([FromQuery] int id, SubCategoryDto SubCategory)
         {
-            SharedResponse<ReserveCartDto> response = await repo.Update(id, ReserveCart);
+            SharedResponse<SubCategoryDto> response = await repo.Update(id, SubCategory);
             if (response.status == Status.badRequest) return BadRequest();
             else if (response.status == Status.notFound) return NotFound();
             return NoContent();
@@ -57,9 +61,10 @@ namespace TheRocket.Controllers
 
         //Delete Action
         [HttpDelete]
-        public async Task<ActionResult<ReserveCartDto>> DeleteReserveCart([FromQuery]int id)
+
+        public async Task<ActionResult<SubCategoryDto>> DeleteSubCategory([FromQuery] int id)
         {
-            SharedResponse<ReserveCartDto> response = await repo.Delete(id);
+            SharedResponse<SubCategoryDto> response = await repo.Delete(id);
             if (response.status == Status.notFound) return NotFound();
             return NoContent();
         }

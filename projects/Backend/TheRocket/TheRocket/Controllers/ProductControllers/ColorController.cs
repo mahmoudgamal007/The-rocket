@@ -10,50 +10,54 @@ namespace TheRocket.Controllers
 {
     [ApiController]
     [Route("Api/[Controller]")]
-    // [Authorize(Roles="Buyer,Seller")]
+    [Authorize(Roles="Admin,Seller")]
 
-    public class SizeController : ControllerBase
+    public class ColorController : ControllerBase
     {
-        private readonly ISizeRepo repo;
-        public SizeController(ISizeRepo repo)
+        private readonly IColorRepo repo;
+        public ColorController(IColorRepo repo)
         {
             this.repo = repo;
         }
 
         [HttpGet]
-        public async Task<ActionResult<SizeDto>> AllSizes(){
-            SharedResponse<List<SizeDto>> response=await repo.GetAll();
+        
+        public async Task<ActionResult<ColorDto>> AllColors(){
+            SharedResponse<List<ColorDto>> response=await repo.GetAll();
             if(response.status==Status.notFound)return NotFound();
             return Ok(response.data);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<SizeDto>> GetSizeById(int id){
-            SharedResponse<SizeDto> response=await repo.GetById(id);
+        [HttpGet("[action]")]
+        public async Task<ActionResult<ColorDto>> GetColorById([FromQuery]int id){
+            SharedResponse<ColorDto> response=await repo.GetById(id);
             if(response.status==Status.notFound)return NotFound();
             return Ok(response.data);
         }
 
         [HttpPost]
-        public async Task<ActionResult<SizeDto>> PostSize(SizeDto Size){
-            SharedResponse<SizeDto> response=await repo.Create(Size);
+        public async Task<ActionResult<ColorDto>> PostColor(ColorDto color){
+            SharedResponse<ColorDto> response=await repo.Create(color);
             if(response.status==Status.problem)return Problem(response.message);
             if(response.status==Status.badRequest) return BadRequest(response.message);
             if(response.status==Status.found)return Ok(response);
             return Ok(response.data);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<SizeDto>> PutSize(int id,SizeDto Size){
-            SharedResponse<SizeDto> response=await repo.Update(id,Size);
+        [HttpPut]
+        [Authorize(Roles ="Admin")]
+
+        public async Task<ActionResult<ColorDto>> PutColor([FromQuery]int id,ColorDto color){
+            SharedResponse<ColorDto> response=await repo.Update(id,color);
             if(response.status==Status.badRequest)return BadRequest();
             else if(response.status==Status.notFound)return NotFound();
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-         public async Task<ActionResult<SizeDto>> DeleteSize(int id){
-            SharedResponse<SizeDto> response=await repo.Delete(id);
+        [HttpDelete]
+        [Authorize(Roles ="Admin")]
+         public async Task<ActionResult<ColorDto>> DeleteColor([FromQuery]int id){
+            SharedResponse<ColorDto> response=await repo.Delete(id);
             if(response.status==Status.notFound)return NotFound();
             return NoContent();
          } 

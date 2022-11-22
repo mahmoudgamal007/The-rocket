@@ -34,6 +34,8 @@ namespace TheRocket.Controllers
         //GetAll
 
         [HttpGet]
+    [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> GetAll()
         {
             SharedResponse<List<SubscripDto>> response = await subscripRepo.GetAll();
@@ -43,8 +45,8 @@ namespace TheRocket.Controllers
 
 
         // GetById
-        [HttpGet("{Id}")]
-            public async Task<ActionResult<SubscripDto>> GetById(int Id)
+       [HttpGet("[action]")]
+            public async Task<ActionResult<SubscripDto>> GetById([FromQuery]int Id)
         { 
             SharedResponse<SubscripDto> response = await subscripRepo.GetById(Id);
             if (response.status == Status.notFound) return NotFound();
@@ -62,8 +64,8 @@ namespace TheRocket.Controllers
             return Ok(response.data);
         }
         //put
-        [HttpPut("{Id}")]
-        public async Task<ActionResult<SubscripDto>> Update(int Id, SubscripDto subscrip)
+        [HttpPut]
+        public async Task<ActionResult<SubscripDto>> Update([FromQuery]int Id, SubscripDto subscrip)
         {
             SharedResponse<SubscripDto> response = await subscripRepo.Update(Id, subscrip);
             if (response.status == Status.badRequest) return BadRequest();
@@ -71,8 +73,8 @@ namespace TheRocket.Controllers
             return NoContent();
         }
         //Delete
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult<SubscripDto>> Delete(int Id)
+        [HttpDelete]
+        public async Task<ActionResult<SubscripDto>> Delete([FromQuery]int Id)
         {
             SharedResponse<SubscripDto> response = await subscripRepo.Delete(Id);
             if (response.status == Status.notFound) return NotFound();

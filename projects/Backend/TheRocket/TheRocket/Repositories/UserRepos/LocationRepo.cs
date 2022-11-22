@@ -74,9 +74,14 @@ namespace TheRocket.Repositories
 
        
 
-        public Task<SharedResponse<LocationDto>> GetById(int Id)
+        public async Task<SharedResponse<LocationDto>> GetById(int Id)
         {
-            throw new NotImplementedException();
+            if (db.Locations == null)
+                return new SharedResponse<LocationDto>(Status.notFound, null);
+            var LocationDto = await db.Locations.Where(a => a.Id == Id && a.IsDeleted == false).FirstOrDefaultAsync();
+            LocationDto Location = mapper.
+            Map<LocationDto>(LocationDto);
+            return new SharedResponse<LocationDto>(Status.found, Location);
         }
 
         public async Task<SharedResponse<LocationDto>> Update(int Id, LocationDto model)
@@ -111,9 +116,14 @@ namespace TheRocket.Repositories
             return (db.Locations?.Any(l => l.Id == Id&&l.IsDeleted==false)).GetValueOrDefault();
         }
 
-        public Task<SharedResponse<List<LocationDto>>> GetAll()
+        public async Task<SharedResponse<List<LocationDto>>> GetAll()
         {
-            throw new NotImplementedException();
+             if (db.Locations == null)
+                return new SharedResponse<List<LocationDto>>(Status.notFound, null);
+            var LocationsDto = await db.Locations.Where(a => a.IsDeleted == false).ToListAsync();
+            List<LocationDto> Locations = mapper.
+            Map<List<LocationDto>>(LocationsDto);
+            return new SharedResponse<List<LocationDto>>(Status.found, Locations);
         }
     }
 }
