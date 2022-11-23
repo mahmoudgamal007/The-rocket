@@ -54,8 +54,13 @@ namespace TheRocket.Migrations
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                             Id = "624f4da3-1d1f-4001-8377-7a6418603345",
                             ConcurrencyStamp = "1dd27aa5-fb04-4d0e-84e6-de33e5b0a59c",
+=======
+                            Id = "1fa552a8-530f-401e-be8b-f1ff06a30d53",
+                            ConcurrencyStamp = "48141439-b625-4a09-9f52-5da66ecc2742",
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
                             Id = "1fa552a8-530f-401e-be8b-f1ff06a30d53",
                             ConcurrencyStamp = "48141439-b625-4a09-9f52-5da66ecc2742",
@@ -348,7 +353,10 @@ namespace TheRocket.Migrations
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
@@ -392,6 +400,9 @@ namespace TheRocket.Migrations
                         });
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9

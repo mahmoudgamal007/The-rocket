@@ -9,8 +9,14 @@ namespace TheRocket.QueryParameters
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public string Desctiption{get;set;}=string.Empty;
         public string SearchTerm { get; set; } = string.Empty;
+=======
+        public string SearchTerm { get; set; } = string.Empty;
+
+        public int? SellerId{get;set;}
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
         public string SearchTerm { get; set; } = string.Empty;
 

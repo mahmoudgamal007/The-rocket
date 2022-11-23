@@ -36,6 +36,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               "./node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.scss"
             ],
@@ -43,6 +44,8 @@
               "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
 =======
+=======
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
@@ -56,6 +59,9 @@
             "scripts": []
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9

@@ -49,8 +49,13 @@ namespace TheRocket.Controllers
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         [HttpPut("{id}")]
         public async Task<ActionResult<ReserveCartDto>> PutReserveCart(int id, ReserveCartDto ReserveCart)
+=======
+        [HttpPut]
+        public async Task<ActionResult<ReserveCartDto>> PutReserveCart([FromQuery]int id, ReserveCartDto ReserveCart)
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
         [HttpPut]
         public async Task<ActionResult<ReserveCartDto>> PutReserveCart([FromQuery]int id, ReserveCartDto ReserveCart)

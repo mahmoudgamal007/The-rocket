@@ -118,11 +118,15 @@ namespace TheRocket.Repositories
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:projects/Backend/TheRocket/TheRocket/Repositories/LocationRepo.cs
         public Task<SharedResponse<List<LocationDto>>> GetAll()
 =======
         public async Task<SharedResponse<List<LocationDto>>> GetAll()
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9:projects/Backend/TheRocket/TheRocket/Repositories/UserRepos/LocationRepo.cs
+=======
+        public async Task<SharedResponse<List<LocationDto>>> GetAll()
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
         public async Task<SharedResponse<List<LocationDto>>> GetAll()
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9

@@ -29,11 +29,14 @@ namespace TheRocket.Dtos.ProductDtos
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public ProductColorDto? productColorDtos { get; set; }
         public ProductSizeDto? productSizeDtos { get; set; }
         [Required]
         public ProductImgUrlDto ProductImgUrlDto { get; set; }
 =======
+=======
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
@@ -45,6 +48,9 @@ namespace TheRocket.Dtos.ProductDtos
         public List<ProductImgUrlDto> Imgs { get; set; }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9

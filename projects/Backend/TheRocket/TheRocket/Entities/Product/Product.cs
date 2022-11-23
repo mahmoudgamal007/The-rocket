@@ -13,7 +13,11 @@ namespace TheRocket.Entities.Products
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             ImgsUrls = new();
+=======
+            Imgs = new();
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
             Imgs = new();
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
@@ -52,7 +56,11 @@ namespace TheRocket.Entities.Products
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public virtual List<ProductImgUrl>? ImgsUrls { get; set; }
+=======
+        public virtual List<ProductImgUrl>? Imgs { get; set; }
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
         public virtual List<ProductImgUrl>? Imgs { get; set; }
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9

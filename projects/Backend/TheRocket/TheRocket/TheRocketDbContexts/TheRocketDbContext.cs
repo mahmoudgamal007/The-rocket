@@ -18,8 +18,13 @@ namespace TheRocket.TheRocketDbContexts
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             builder.Entity<ProductColor>().HasKey(p=>new{p.ProductId,p.ColourId});
             builder.Entity<ProductSize>().HasKey(p=>new{p.ProductId,p.SizeId});
+=======
+            builder.Entity<ProductColor>().HasKey(p => new { p.ProductId, p.ColourId });
+            builder.Entity<ProductSize>().HasKey(p => new { p.ProductId, p.SizeId });
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
             builder.Entity<ProductColor>().HasKey(p => new { p.ProductId, p.ColourId });
             builder.Entity<ProductSize>().HasKey(p => new { p.ProductId, p.SizeId });

@@ -143,11 +143,15 @@ namespace TheRocket.Repositories
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:projects/Backend/TheRocket/TheRocket/Repositories/SellerRepo.cs
         public Task<SharedResponse<SellerDto>> GetById(int Id)
 =======
         public async Task<SharedResponse<SellerDto>> GetById(int Id)
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9:projects/Backend/TheRocket/TheRocket/Repositories/UserRepos/SellerRepo.cs
+=======
+        public async Task<SharedResponse<SellerDto>> GetById(int Id)
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
         public async Task<SharedResponse<SellerDto>> GetById(int Id)
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
@@ -179,11 +183,15 @@ namespace TheRocket.Repositories
         {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:projects/Backend/TheRocket/TheRocket/Repositories/SellerRepo.cs
             return (db.Sellers?.Any(a => a.Id == Id)).GetValueOrDefault();
 =======
             return (db.Sellers?.Any(a => a.SellerId == Id)).GetValueOrDefault();
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9:projects/Backend/TheRocket/TheRocket/Repositories/UserRepos/SellerRepo.cs
+=======
+            return (db.Sellers?.Any(a => a.SellerId == Id)).GetValueOrDefault();
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
             return (db.Sellers?.Any(a => a.SellerId == Id)).GetValueOrDefault();
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9

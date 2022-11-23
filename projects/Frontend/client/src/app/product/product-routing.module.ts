@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 
 
 =======
+=======
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
@@ -18,6 +21,9 @@ const routes: Routes = [
 ]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
@@ -30,8 +36,14 @@ const routes: Routes = [
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     CommonModule
   ]
+=======
+    RouterModule.forChild(routes)
+  ],
+  exports: [RouterModule]
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
     RouterModule.forChild(routes)
   ],

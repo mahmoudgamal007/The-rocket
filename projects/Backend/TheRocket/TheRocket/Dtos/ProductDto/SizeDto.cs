@@ -9,7 +9,11 @@ namespace TheRocket.Dtos.ProductDtos
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         public string Name { get; set; }
+=======
+        public string? Name { get; set; }
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 =======
         public string? Name { get; set; }
 >>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
