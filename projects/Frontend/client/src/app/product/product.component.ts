@@ -10,11 +10,16 @@ import { ProductService } from './product.service';
 })
 export class ProductComponent implements OnInit {
   @ViewChild('search', { static: false }) searchTermVC!: ElementRef;
-  products: IProduct[] | null = [];
+  products: IProduct[] | undefined = [];
   shopParams = new shopParams();
   totalCount: number = 0;
-
-
+  sortOptions = [
+    { name: 'Alphabetical', value: 'Name' },
+    { name: 'Price', value: 'Price' },
+    { name: 'Brand', value: 'Brand' },
+    { name: 'Seller', value: 'SellerId' },
+    { name: 'Category', value: 'subCategoryId' },
+  ];
 
 
   constructor(private productService: ProductService) { }
@@ -25,7 +30,7 @@ export class ProductComponent implements OnInit {
 
   getProducts() {
     this.productService.getProducts(this.shopParams).subscribe(
-      (response) => { this.products = response },
+      (response) => { this.products = response?.products },
       (error) => { console.log(error) });
   }
 
@@ -39,6 +44,18 @@ export class ProductComponent implements OnInit {
     this.searchTermVC.nativeElement.value = '';
     this.shopParams = new shopParams();
     this.getProducts();
+  }
+
+  onSortSelected(sort: string) {
+    this.shopParams.sortBy = sort;
+    this.getProducts();
+  }
+
+  onPageChanged(event: any) {
+    if (this.shopParams.pageNumber !== event) {
+      this.shopParams.pageNumber = event;
+      this.getProducts();
+    }
   }
 
 }
