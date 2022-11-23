@@ -14,7 +14,7 @@ namespace TheRocket.Entities.Users
 		}
 
         [Key]
-        public int Id { get; set; }
+        public int BuyerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }

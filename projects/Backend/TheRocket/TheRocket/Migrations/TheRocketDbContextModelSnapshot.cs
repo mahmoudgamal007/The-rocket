@@ -51,10 +51,39 @@ namespace TheRocket.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ae326f0e-6764-4e31-8081-77ab533078ac",
-                            ConcurrencyStamp = "2d8993e4-361f-48c7-bee6-c00597a8a944",
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+                            Id = "624f4da3-1d1f-4001-8377-7a6418603345",
+                            ConcurrencyStamp = "1dd27aa5-fb04-4d0e-84e6-de33e5b0a59c",
+=======
+                            Id = "1fa552a8-530f-401e-be8b-f1ff06a30d53",
+                            ConcurrencyStamp = "48141439-b625-4a09-9f52-5da66ecc2742",
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+                            Id = "1fa552a8-530f-401e-be8b-f1ff06a30d53",
+                            ConcurrencyStamp = "48141439-b625-4a09-9f52-5da66ecc2742",
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+                            Id = "1fa552a8-530f-401e-be8b-f1ff06a30d53",
+                            ConcurrencyStamp = "48141439-b625-4a09-9f52-5da66ecc2742",
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "d7cd762b-f98f-4d74-8dca-890155ec30b2",
+                            ConcurrencyStamp = "c2bd2f99-0879-44d2-87c2-900981587385",
+                            Name = "Seller",
+                            NormalizedName = "SELLER"
+                        },
+                        new
+                        {
+                            Id = "3cc0f266-fbc3-42c4-9ddd-25644b591c7b",
+                            ConcurrencyStamp = "cf6d1bd7-e510-4264-ac42-a5ea0ae34c0a",
+                            Name = "Buyer",
+                            NormalizedName = "BUYER"
                         });
                 });
 
@@ -295,7 +324,7 @@ namespace TheRocket.Migrations
                     b.ToTable("Plans");
                 });
 
-            modelBuilder.Entity("TheRocket.Entities.Products.ImgUrl", b =>
+            modelBuilder.Entity("TheRocket.Entities.Products.Colour", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -309,18 +338,65 @@ namespace TheRocket.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.ToTable("Colors");
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
 
-                    b.ToTable("ImgUrls");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(320),
+                            IsDeleted = false,
+                            Name = "White"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            IsDeleted = false,
+                            Name = "Red"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            IsDeleted = false,
+                            Name = "Blue"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            IsDeleted = false,
+                            Name = "Yellow"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(370),
+                            IsDeleted = false,
+                            Name = "Black"
+                        });
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
                 });
 
             modelBuilder.Entity("TheRocket.Entities.Products.Product", b =>
@@ -375,15 +451,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Products.ProductColor", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ColourId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -391,17 +463,14 @@ namespace TheRocket.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.HasKey("ProductId", "ColourId");
 
-                    b.HasKey("Id");
+                    b.HasIndex("ColourId");
 
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Colors");
+                    b.ToTable("ProductColors");
                 });
 
-            modelBuilder.Entity("TheRocket.Entities.Products.ProductSize", b =>
+            modelBuilder.Entity("TheRocket.Entities.Products.ProductImgUrl", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -418,7 +487,7 @@ namespace TheRocket.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Size")
+                    b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -426,7 +495,78 @@ namespace TheRocket.Migrations
 
                     b.HasIndex("ProductId");
 
+                    b.ToTable("ProductImgUrls");
+                });
+
+            modelBuilder.Entity("TheRocket.Entities.Products.ProductSize", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ProductId", "SizeId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("ProductSizes");
+                });
+
+            modelBuilder.Entity("TheRocket.Entities.Products.Size", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
                     b.ToTable("Sizes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            IsDeleted = false,
+                            Name = "S"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            IsDeleted = false,
+                            Name = "M"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            IsDeleted = false,
+                            Name = "L"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            IsDeleted = false,
+                            Name = "XL"
+                        });
                 });
 
             modelBuilder.Entity("TheRocket.Entities.ReserveCart", b =>
@@ -578,11 +718,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Admin", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AdminId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminId"), 1L, 1);
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -602,7 +742,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AdminId");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
@@ -677,11 +817,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Buyer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BuyerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyerId"), 1L, 1);
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -701,7 +841,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("BuyerId");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
@@ -773,11 +913,11 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Users.Seller", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SellerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SellerId"), 1L, 1);
 
                     b.Property<string>("About")
                         .IsRequired()
@@ -804,7 +944,7 @@ namespace TheRocket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SellerId");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
@@ -909,17 +1049,6 @@ namespace TheRocket.Migrations
                     b.Navigation("Seller");
                 });
 
-            modelBuilder.Entity("TheRocket.Entities.Products.ImgUrl", b =>
-                {
-                    b.HasOne("TheRocket.Entities.Products.Product", "Product")
-                        .WithMany("ImgsUrls")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("TheRocket.Entities.Products.Product", b =>
                 {
                     b.HasOne("TheRocket.Entities.Users.Seller", "Seller")
@@ -941,8 +1070,27 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Products.ProductColor", b =>
                 {
+                    b.HasOne("TheRocket.Entities.Products.Colour", "Colour")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ColourId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("TheRocket.Entities.Products.Product", "Product")
-                        .WithMany("Colors")
+                        .WithMany("ProductColors")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Colour");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("TheRocket.Entities.Products.ProductImgUrl", b =>
+                {
+                    b.HasOne("TheRocket.Entities.Products.Product", "Product")
+                        .WithMany("ImgsUrls")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -952,13 +1100,21 @@ namespace TheRocket.Migrations
 
             modelBuilder.Entity("TheRocket.Entities.Products.ProductSize", b =>
                 {
-                    b.HasOne("TheRocket.Entities.Products.Product", "Product")
-                        .WithMany("Sizes")
+                    b.HasOne("TheRocket.Entities.Products.Product", "product")
+                        .WithMany("ProductSizes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.HasOne("TheRocket.Entities.Products.Size", "size")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("product");
+
+                    b.Navigation("size");
                 });
 
             modelBuilder.Entity("TheRocket.Entities.ReserveCart", b =>
@@ -1070,19 +1226,29 @@ namespace TheRocket.Migrations
                     b.Navigation("Subscrips");
                 });
 
+            modelBuilder.Entity("TheRocket.Entities.Products.Colour", b =>
+                {
+                    b.Navigation("ProductColors");
+                });
+
             modelBuilder.Entity("TheRocket.Entities.Products.Product", b =>
                 {
-                    b.Navigation("Colors");
-
                     b.Navigation("Feedbacks");
 
                     b.Navigation("ImgsUrls");
 
                     b.Navigation("Orders");
 
-                    b.Navigation("ReserveCarts");
+                    b.Navigation("ProductColors");
 
-                    b.Navigation("Sizes");
+                    b.Navigation("ProductSizes");
+
+                    b.Navigation("ReserveCarts");
+                });
+
+            modelBuilder.Entity("TheRocket.Entities.Products.Size", b =>
+                {
+                    b.Navigation("ProductSizes");
                 });
 
             modelBuilder.Entity("TheRocket.Entities.SubCategory", b =>

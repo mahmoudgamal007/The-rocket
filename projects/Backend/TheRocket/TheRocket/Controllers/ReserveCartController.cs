@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheRocket.Dtos;
 using TheRocket.Repositories.RepoInterfaces;
@@ -8,6 +9,8 @@ namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Buyer")]
+    
     public class ReserveCartController : ControllerBase
     {
 
@@ -25,8 +28,8 @@ namespace TheRocket.Controllers
             return Ok(response.data);
         }
         // Get By ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ReserveCartDto>> GetById(int id)
+       [HttpGet("[action]")]
+        public async Task<ActionResult<ReserveCartDto>> GetById([FromQuery]int id)
         {
             SharedResponse<ReserveCartDto> response = await repo.GetById(id);
             if (response.status == Status.notFound) return NotFound();
@@ -34,7 +37,7 @@ namespace TheRocket.Controllers
         }
         // Create ReserveCart
         [HttpPost]
-        public async Task<ActionResult<ReserveCartDto>> PostSubCategory(ReserveCartDto ReserveCart)
+        public async Task<ActionResult<ReserveCartDto>> PostReserveCart(ReserveCartDto ReserveCart)
         {
             SharedResponse<ReserveCartDto> response = await repo.Create(ReserveCart);
             if (response.status == Status.problem) return Problem(response.message);
@@ -43,8 +46,23 @@ namespace TheRocket.Controllers
         }
 
         //Update Action
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
         [HttpPut("{id}")]
-        public async Task<ActionResult<ReserveCartDto>> PutSubCategory(int id, ReserveCartDto ReserveCart)
+        public async Task<ActionResult<ReserveCartDto>> PutReserveCart(int id, ReserveCartDto ReserveCart)
+=======
+        [HttpPut]
+        public async Task<ActionResult<ReserveCartDto>> PutReserveCart([FromQuery]int id, ReserveCartDto ReserveCart)
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+        [HttpPut]
+        public async Task<ActionResult<ReserveCartDto>> PutReserveCart([FromQuery]int id, ReserveCartDto ReserveCart)
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+        [HttpPut]
+        public async Task<ActionResult<ReserveCartDto>> PutReserveCart([FromQuery]int id, ReserveCartDto ReserveCart)
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
         {
             SharedResponse<ReserveCartDto> response = await repo.Update(id, ReserveCart);
             if (response.status == Status.badRequest) return BadRequest();
@@ -53,8 +71,8 @@ namespace TheRocket.Controllers
         }
 
         //Delete Action
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ReserveCartDto>> DeleteReserveCart(int id)
+        [HttpDelete]
+        public async Task<ActionResult<ReserveCartDto>> DeleteReserveCart([FromQuery]int id)
         {
             SharedResponse<ReserveCartDto> response = await repo.Delete(id);
             if (response.status == Status.notFound) return NotFound();

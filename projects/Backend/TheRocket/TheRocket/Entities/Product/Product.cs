@@ -8,9 +8,21 @@ namespace TheRocket.Entities.Products
     {
         public Product()
         {
-            Colors = new();
-            Sizes = new();
+            ProductColors = new();
+            ProductSizes = new();
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
             ImgsUrls = new();
+=======
+            Imgs = new();
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+            Imgs = new();
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+            Imgs = new();
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
             Feedbacks = new();
             ReserveCarts = new();
             Orders = new();
@@ -34,9 +46,22 @@ namespace TheRocket.Entities.Products
 
 
 
-        public virtual List<ProductColor>? Colors { get; set; }
-        public virtual List<ProductSize>? Sizes { get; set; }
-        public virtual List<ImgUrl> ImgsUrls { get; set; }
+        public virtual List<ProductColor>? ProductColors { get; set; }
+        public virtual List<ProductSize>? ProductSizes { get; set; }
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+        public virtual List<ProductImgUrl>? ImgsUrls { get; set; }
+=======
+        public virtual List<ProductImgUrl>? Imgs { get; set; }
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+        public virtual List<ProductImgUrl>? Imgs { get; set; }
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+        public virtual List<ProductImgUrl>? Imgs { get; set; }
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
         public virtual List<Feedback>? Feedbacks { get; set; }
         public virtual List<ReserveCart>? ReserveCarts { get; set; }
         public virtual List<Order>? Orders { get; set; }

@@ -15,22 +15,61 @@ namespace TheRocket.TheRocketDbContexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+            builder.Entity<ProductColor>().HasKey(p=>new{p.ProductId,p.ColourId});
+            builder.Entity<ProductSize>().HasKey(p=>new{p.ProductId,p.SizeId});
+=======
+            builder.Entity<ProductColor>().HasKey(p => new { p.ProductId, p.ColourId });
+            builder.Entity<ProductSize>().HasKey(p => new { p.ProductId, p.SizeId });
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+            builder.Entity<ProductColor>().HasKey(p => new { p.ProductId, p.ColourId });
+            builder.Entity<ProductSize>().HasKey(p => new { p.ProductId, p.SizeId });
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+=======
+            builder.Entity<ProductColor>().HasKey(p => new { p.ProductId, p.ColourId });
+            builder.Entity<ProductSize>().HasKey(p => new { p.ProductId, p.SizeId });
+>>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
+
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
             base.OnModelCreating(builder);
 
-            builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin" ,NormalizedName="ADMIN"});
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Name = "Seller", NormalizedName = "SELLER" },
+                new IdentityRole { Name = "Buyer", NormalizedName = "BUYER" }
+             );
+
+             builder.Entity<Colour>().HasData(
+                new Colour{Id=1,Name="White"},
+                new Colour{Id=2,Name="Red"},
+                new Colour{Id=3,Name="Blue"},
+                new Colour{Id=4,Name="Yellow"},
+                new Colour{Id=5,Name="Black"}
+             );
+
+             builder.Entity<Size>().HasData(
+                new Size{Id=1,Name="S"},
+                new Size{Id=2,Name="M"},
+                new Size{Id=3,Name="L"},
+                new Size{Id=4,Name="XL"}
+             );
 
         }
 
 
 
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductColor> Colors { get; set; }
-        public virtual DbSet<ProductSize> Sizes { get; set; }
-        public virtual DbSet<ImgUrl> ImgUrls { get; set; }
+        public virtual DbSet<Colour> Colors { get; set; }
+        public virtual DbSet<Size> Sizes { get; set; }
+        public virtual DbSet<ProductColor> ProductColors { get; set; }
+        public virtual DbSet<ProductSize> ProductSizes { get; set; }
+        public virtual DbSet<ProductImgUrl> ProductImgUrls { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Buyer> Buyers { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
