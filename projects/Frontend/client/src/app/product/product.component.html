@@ -1,0 +1,75 @@
+
+
+<div class="container mt-3">
+    <div class="row">
+
+        <section class="col-lg-3 d-none-sm">
+            <ng-container>
+                <h5 class="text-warning ml-3 mt-4 mb-3">Sort</h5>
+                <select class="custom-select mb-4">
+                    <option>
+                        Alphabetical
+                    </option>
+                    <option>
+                        Price: High To Low
+                    </option>
+                    <option>
+                        Price: Low To High
+                    </option>
+                </select>
+
+                <h5 class="text-warning ml-3">Brands</h5>
+                <ul class="list-group my-3">
+                    <li class="list-group-item">
+                        Brand1
+                    </li>
+                    <li class="list-group-item">
+                        Brand2
+                    </li>
+                    <li class="list-group-item">
+                        Brand3
+                    </li>
+                </ul>
+
+                <h5 class="text-warning ml-3">Types</h5>
+                <ul class="list-group my-3">
+                    <li class="list-group-item">
+                        Type1
+                    </li>
+                    <li class="list-group-item">
+                        Type2
+                    </li>
+                    <li class="list-group-item">
+                        Type3
+                    </li>
+                </ul>
+            </ng-container>
+        </section>
+
+        <section class="col-12 col-sm-12 col-lg-9 col-xl-9 col-xxl-9 mt-4">
+
+            <div class="mt-4">
+
+                <div class="form-inline" *ngIf="products">
+                    <input (keyup.enter)="onSearch()" class="form-control mr-2" #search style="width: 300px"
+                        placeholder="Search" type="text">
+                    <button (click)="onSearch()" class="btn btn-outline-primary my-2">Search</button>
+                    <button (click)="onReset()" class="btn btn-outline-success ml-2 my-2">Reset</button>
+                </div>
+                <span>There are <strong>1 </strong> - <strong>6 </strong> Results</span>
+            </div>
+
+            <div *ngIf="products">
+                <div class="row gy-4">
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-4"
+                        *ngFor="let product of products">
+                        <app-product-item [product]="product"></app-product-item>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+    </div>
+</div>
