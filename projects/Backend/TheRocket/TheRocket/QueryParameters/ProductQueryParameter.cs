@@ -6,7 +6,8 @@ namespace TheRocket.QueryParameters
         public double?  MaxPrice { get; set; }
 
         public string Name { get; set; } = string.Empty;
-        public string Desctiption{get;set;}=string.Empty;
         public string SearchTerm { get; set; } = string.Empty;
+
+        public int? SellerId{get;set;}
     }
 }
