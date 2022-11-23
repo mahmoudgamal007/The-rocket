@@ -18,11 +18,9 @@ namespace TheRocket.Repositories
         private readonly IProductColorRepo colorRepo;
         private readonly IProductSizeRepo sizeRepo;
         private readonly IProductImgUrlRepo imgUrlRepo;
-        private readonly ISellerRepo sellerRepo;
 
-        public ProductRepo(TheRocketDbContext db, IMapper mapper, IProductColorRepo colorRepo, IProductSizeRepo sizeRepo, IProductImgUrlRepo imgUrlRepo, ISellerRepo sellerRepo)
+        public ProductRepo(TheRocketDbContext db, IMapper mapper, IProductColorRepo colorRepo, IProductSizeRepo sizeRepo, IProductImgUrlRepo imgUrlRepo)
         {
-            this.sellerRepo = sellerRepo;
             this.db = db;
             this.mapper = mapper;
             this.colorRepo = colorRepo;
@@ -39,8 +37,7 @@ namespace TheRocket.Repositories
 
             if (model == null) return new SharedResponse<ProductDto>(Status.badRequest, null);
 
-            if (!sellerRepo.IsExists(model.SellerId))
-                return new SharedResponse<ProductDto>(Status.notFound, null, "Seller Id not Found");
+
 
             Product Product = mapper.Map<Product>(model);
 
@@ -155,7 +152,7 @@ namespace TheRocket.Repositories
                         queryParameter.SortOrder);
                 }
             }
-            
+
             if (!string.IsNullOrEmpty(queryParameter.SearchTerm))
                 products = products.Where(p => p.Name.ToLower().Contains(queryParameter.SearchTerm.ToLower()) ||
                 p.Desctiption.ToLower().Contains(queryParameter.SearchTerm.ToLower()) ||
@@ -166,14 +163,14 @@ namespace TheRocket.Repositories
                 products = products.Where(p => p.Name.ToLower() == queryParameter.Name.ToLower());
 
             if (queryParameter.MinPrice != null)
-                products = products.Where(p => p.Price - (p.Price * p.Discount/100) >= queryParameter.MinPrice);
+                products = products.Where(p => p.Price - (p.Price * p.Discount / 100) >= queryParameter.MinPrice);
 
             if (queryParameter.MaxPrice != null)
-                products = products.Where(p => p.Price - (p.Price * p.Discount/100) <= queryParameter.MaxPrice);
+                products = products.Where(p => p.Price - (p.Price * p.Discount / 100) <= queryParameter.MaxPrice);
             var itemCount = products.Count();
 
-            var startIndex = queryParameter.Size * (queryParameter.Page - 1) ;
-            products = products.Skip(startIndex )
+            var startIndex = queryParameter.Size * (queryParameter.Page - 1);
+            products = products.Skip(startIndex)
             .Take(queryParameter.Size);
             var endIndex = startIndex + products.Count();
             var response = products.ToList();
@@ -187,14 +184,14 @@ namespace TheRocket.Repositories
             }
 
 
-            
+
 
             return new SharedResponse<GetAllProductDto>(Status.found, new GetAllProductDto
             {
                 products = productDtos,
                 productMatchCount = itemCount,
                 productPerPage = products.Count(),
-                startIndex = startIndex+1,
+                startIndex = startIndex + 1,
                 endIndex = endIndex
             });
 

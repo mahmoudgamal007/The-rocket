@@ -7,8 +7,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using T.Repositories;
 using TheRocket.Entities.Users;
+using TheRocket.RepoInterfaces.UsersRepoInterfaces;
 using TheRocket.Repositories;
 using TheRocket.Repositories.RepoInterfaces;
+using TheRocket.Repositories.UserRepos;
 using TheRocket.TheRocketDbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,9 +54,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-builder.Services.AddScoped<ISellerRepo, SellerRepo>();
-builder.Services.AddScoped<IBuyerRepo, BuyerRepo>();
-builder.Services.AddScoped<IAdminRepo, AdminRepo>();
+builder.Services.AddScoped<IAppUserRepo,AppUserRepo>();
 builder.Services.AddScoped<IAddressRepo, AddressRepo>();
 builder.Services.AddScoped<IPhoneRepo, PhoneRepo>();
 builder.Services.AddScoped<ILocationRepo, LocationRepo>();

@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,16 +20,12 @@ namespace TheRocket.Controllers
     {
         private readonly SignInManager<AppUser> signInManager;
         private readonly UserManager<AppUser> userManager;
-        private readonly ISellerRepo sellerRepo;
-        private readonly IBuyerRepo buyerRepo;
-        private readonly IAdminRepo adminRepo;
+        private readonly IMapper mapper;
 
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager,
-         ISellerRepo sellerRepo, IBuyerRepo buyerRepo, IAdminRepo adminRepo)
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper)
         {
-            this.adminRepo = adminRepo;
-            this.buyerRepo = buyerRepo;
-            this.sellerRepo = sellerRepo;
+            this.mapper = mapper;
+
             this.signInManager = signInManager;
             this.userManager = userManager;
         }
@@ -45,39 +42,40 @@ namespace TheRocket.Controllers
                     bool found = await userManager.CheckPasswordAsync(appUser, loginDto.Password);
                     if (found)
                     {
+                        AppUserDto appUserDto = mapper.Map<AppUserDto>(appUser);
+
                         var userRoles = await userManager.GetRolesAsync(appUser);
-                        response.UserId=appUser.Id;
-                        response.UserName = appUser.UserName;
+                        response.UserId = appUser.Id;
+                        response.UserName = appUserDto.UserName;
                         if (userRoles[0] == "Seller")
                         {
-                            SharedResponse<SellerDto> sellerResponse = await sellerRepo.GetByUserId(appUser.Id);
-                            response.AccountId = sellerResponse.data.SellerId;
-                            response.BrandName = sellerResponse.data.BrandName;
-                            response.AccountType="Seller";
+                            response.AccountId = appUserDto.Seller.SellerId;
+                            response.BrandName = appUserDto.Seller.BrandName;
+                            response.AccountType = "Seller";
                         }
 
                         if (userRoles[0] == "Buyer")
                         {
-                            SharedResponse<BuyerDto> buyerResponse = await buyerRepo.GetByUserId(appUser.Id);
-                            response.AccountId = buyerResponse.data.BuyerId;
-                            response.FirstName = buyerResponse.data.FirstName;
-                            response.LastName = buyerResponse.data.LastName;
-                            response.AccountType="Buyer";
+                            response.AccountId = appUserDto.Buyer.BuyerId;
+                            response.FirstName = appUserDto.Buyer.FirstName;
+                            response.LastName = appUserDto.Buyer.LastName;
+                            response.AccountType = "Buyer";
                         }
                         if (userRoles[0] == "Admin")
                         {
-                            SharedResponse<AdminDto> adminResponse = await adminRepo.GetByUserId(appUser.Id);
-                            response.AccountId = adminResponse.data.AdminId;
-                            response.AccountType="Admin";
+                            response.AccountId = appUserDto.Admin.AdminId;
+                            response.FirstName = appUserDto.Admin.FirstName;
+                            response.LastName = appUserDto.Admin.LastName;
+                            response.AccountType = "Admin";
                         }
                         List<Claim> claims = new();
                         foreach (var role in userRoles)
                         {
                             claims.Add(new Claim(ClaimTypes.Role, role));
                         }
-                        string jwtToken = JwtTokenGenerator.Generate(claims);
+                        string jwtToken = JwtTokenGenerator.Generate(userRoles);
                         await signInManager.SignInWithClaimsAsync(appUser, loginDto.RememberMe, claims);
-                        response.JwtToken=jwtToken;
+                        response.JwtToken = jwtToken;
                         return Ok(response);
                     }
                 }
