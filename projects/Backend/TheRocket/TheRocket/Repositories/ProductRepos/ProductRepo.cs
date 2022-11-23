@@ -166,10 +166,10 @@ namespace TheRocket.Repositories
                 products = products.Where(p => p.Name.ToLower() == queryParameter.Name.ToLower());
 
             if (queryParameter.MinPrice != null)
-                products = products.Where(p => p.Price - (p.Price * p.Discount) >= queryParameter.MinPrice);
+                products = products.Where(p => p.Price - (p.Price * p.Discount/100) >= queryParameter.MinPrice);
 
             if (queryParameter.MaxPrice != null)
-                products = products.Where(p => p.Price - (p.Price * p.Discount) <= queryParameter.MaxPrice);
+                products = products.Where(p => p.Price - (p.Price * p.Discount/100) <= queryParameter.MaxPrice);
             var itemCount = products.Count();
 
             var startIndex = queryParameter.Size * (queryParameter.Page - 1) ;
