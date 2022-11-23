@@ -23,6 +23,8 @@ namespace TheRocket.Dtos.ProductDtos
         [Required]
         public int SellerId { get; set; }
 
+        
+
 
 
         public List<ColorDto> Colors { get; set; }

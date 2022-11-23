@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TheRocket.Dtos.ProductDtos;
 using TheRocket.Entities.Products;
+using TheRocket.Extentions;
 using TheRocket.QueryParameters;
 using TheRocket.Repositories.RepoInterfaces;
 using TheRocket.Shared;
@@ -77,14 +78,7 @@ namespace TheRocket.Repositories
                     if (sizeResponse.message != "") message += sizeResponse.message + ", ";
                 }
 
-                // if (model.Imgs == null) return new SharedResponse<ProductDto>(Status.badRequest, null);
-                // SharedResponse<ProductImgUrlDto> imgResponse;
-                // foreach (var img in model.Imgs)
-                // {
-                //     img.ProductId = model.Id;
-                //     imgResponse = await imgUrlRepo.Create(img);
-                //     if (imgResponse.message != "") message += imgResponse.message + ", ";
-                // }
+
                 return new SharedResponse<ProductDto>(Status.createdAtAction, model, message);
 
             }
@@ -128,19 +122,40 @@ namespace TheRocket.Repositories
             if (product == null)
                 return new SharedResponse<ProductDto>(Status.notFound, null);
             var productDto = mapper.Map<ProductDto>(product);
+
+            var colorResponse = await colorRepo.GetColorsByProductId(productDto.Id);
+            var sizeResponse = await sizeRepo.GetSizesByProductId(productDto.Id);
+            productDto.Colors = colorResponse.data;
+            productDto.Sizes = sizeResponse.data;
+
             return new SharedResponse<ProductDto>(Status.found, productDto);
         }
 
-        public async Task<SharedResponse<List<ProductDto>>> GetProductsWithFilters(ProductQueryParameter queryParameter)
+        public async Task<SharedResponse<GetAllProductDto>> GetProductsWithFilters(ProductQueryParameter queryParameter)
         {
             if (db.Products == null)
-                return new SharedResponse<List<ProductDto>>(Status.notFound, null);
+                return new SharedResponse<GetAllProductDto>(Status.notFound, null);
 
             var products = db.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.Imgs).Where(p => p.IsDeleted == false);
 
             if (products == null)
-                return new SharedResponse<List<ProductDto>>(Status.notFound, null);
+                return new SharedResponse<GetAllProductDto>(Status.notFound, null);
 
+            if (queryParameter.SellerId > 0)
+            {
+                products = products.Where(p => p.SellerId == queryParameter.SellerId && p.IsDeleted == false);
+            }
+
+            if (!string.IsNullOrEmpty(queryParameter.SortBy))
+            {
+                if (typeof(Product).GetProperty(queryParameter.SortBy) != null)
+                {
+                    products = products.OrderByCustom(
+                        queryParameter.SortBy,
+                        queryParameter.SortOrder);
+                }
+            }
+            
             if (!string.IsNullOrEmpty(queryParameter.SearchTerm))
                 products = products.Where(p => p.Name.ToLower().Contains(queryParameter.SearchTerm.ToLower()) ||
                 p.Desctiption.ToLower().Contains(queryParameter.SearchTerm.ToLower()) ||
@@ -155,34 +170,37 @@ namespace TheRocket.Repositories
 
             if (queryParameter.MaxPrice != null)
                 products = products.Where(p => p.Price - (p.Price * p.Discount) <= queryParameter.MaxPrice);
+            var itemCount = products.Count();
 
-            products = products.Skip(queryParameter.Size * (queryParameter.Page - 1))
+            var startIndex = queryParameter.Size * (queryParameter.Page - 1) ;
+            products = products.Skip(startIndex )
             .Take(queryParameter.Size);
+            var endIndex = startIndex + products.Count();
             var response = products.ToList();
             List<ProductDto> productDtos = mapper.Map<List<ProductDto>>(response);
             foreach (var productDto in productDtos)
             {
                 var colorResponse = await colorRepo.GetColorsByProductId(productDto.Id);
-                var sizeResponse=await sizeRepo.GetSizesByProductId(productDto.Id);
+                var sizeResponse = await sizeRepo.GetSizesByProductId(productDto.Id);
                 productDto.Colors = colorResponse.data;
-                productDto.Sizes=sizeResponse.data;
+                productDto.Sizes = sizeResponse.data;
             }
-            return new SharedResponse<List<ProductDto>>(Status.found, productDtos);
 
-        }
 
-        public async Task<SharedResponse<List<ProductDto>>> GetProductsWithSellerId(int SellerId)
-        {
-            if (db.Products == null)
+            
+
+            return new SharedResponse<GetAllProductDto>(Status.found, new GetAllProductDto
             {
-                return new SharedResponse<List<ProductDto>>(Status.notFound, null);
-            }
-            var product = await db.Products.Where(p => p.SellerId == SellerId && p.IsDeleted == false).FirstOrDefaultAsync();
-            if (product == null)
-                return new SharedResponse<List<ProductDto>>(Status.notFound, null);
-            var productDto = mapper.Map<List<ProductDto>>(product);
-            return new SharedResponse<List<ProductDto>>(Status.found, productDto);
+                products = productDtos,
+                productMatchCount = itemCount,
+                productPerPage = products.Count(),
+                startIndex = startIndex+1,
+                endIndex = endIndex
+            });
+
         }
+
+
 
         public bool IsExists(int Id)
         {
