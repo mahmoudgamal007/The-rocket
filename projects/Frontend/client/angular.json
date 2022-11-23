@@ -33,40 +33,10 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
               "./node_modules/font-awesome/css/font-awesome.min.css",
-              "src/styles.scss"
-            ],
-            "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
-=======
-=======
->>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
-=======
->>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
-=======
->>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
-              "./node_modules/bootswatch/dist/United/bootstrap.min.css",
-              "./node_modules/ngx-spinner/animations/timer.css",
-              "./node_modules/font-awesome/css/font-awesome.min.css",
-              "./node_modules/ngx-toastr/toastr.css",
               "src/styles.scss"
             ],
             "scripts": []
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
-=======
->>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
-=======
->>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
-=======
->>>>>>> 3a18350ded735fc0d173dce8cf72c8ff8c23eba9
           },
           "configurations": {
             "production": {
