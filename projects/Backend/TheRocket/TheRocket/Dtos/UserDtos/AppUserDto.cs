@@ -35,5 +35,5 @@ namespace TheRocket.Dtos.UserDtos
         [Required]
         public AccountType AccountType { get; set; }
     }
-    public enum AccountType{Admin,Seller,Buyer}
+    public enum AccountType{Admin=0,Seller=1,Buyer=2}
 }

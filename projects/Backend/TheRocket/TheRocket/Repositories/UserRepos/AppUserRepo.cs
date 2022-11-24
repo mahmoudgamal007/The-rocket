@@ -37,19 +37,22 @@ namespace TheRocket.Repositories.UserRepos
             if (model.Seller == null && model.Buyer == null && model.Admin == null)
                 return new SharedResponse<LoginResponseDto>(Status.badRequest, null, "Shoul enter data for one Account and only one");
             AppUser appUser = mapper.Map<AppUser>(model);
-            var result = await userManager.CreateAsync(appUser,model.Password);
+            var result = await userManager.CreateAsync(appUser, model.Password);
             if (result.Succeeded)
             {
                 LoginResponseDto response = new();
+                AccountType type = model.AccountType;
                 model = mapper.Map<AppUserDto>(appUser);
-                if (model.AccountType == AccountType.Admin)
+                if (type == AccountType.Admin)
                 {
                     await userManager.AddToRoleAsync(appUser, "Admin");
                     response.AccountId = appUser.Admin.AdminId;
                     response.AccountType = "Admin";
+                    response.FirstName = model.Admin.FirstName;
+                    response.LastName = model.Admin.LastName;
 
                 }
-                if (model.AccountType == AccountType.Seller)
+                if (type == AccountType.Seller)
                 {
                     await userManager.AddToRoleAsync(appUser, "Seller");
                     response.AccountId = model.Seller.SellerId;
@@ -58,15 +61,15 @@ namespace TheRocket.Repositories.UserRepos
 
 
                 }
-                if (model.AccountType == AccountType.Buyer)
+                if (type == AccountType.Buyer)
                 {
                     await userManager.AddToRoleAsync(appUser, "Buyer");
                     response.AccountId = model.Buyer.BuyerId;
                     response.AccountType = "Buyer";
+                    response.FirstName = model.Buyer.FirstName;
+                    response.LastName = model.Buyer.LastName;
                 }
                 response.UserName = model.UserName;
-                response.FirstName = model.Admin.FirstName ?? model.Buyer.FirstName;
-                response.FirstName = model.Admin.LastName ?? model.Buyer.LastName;
                 response.UserId = appUser.Id;
                 var token = JwtTokenGenerator.Generate(new List<string>() { response.AccountType });
                 response.JwtToken = token;
