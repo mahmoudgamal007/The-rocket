@@ -22,7 +22,7 @@ namespace TheRocket.Controllers
         }
         // Get All SubCategories
         [HttpGet]
-        [Authorize(Roles = "Admin,Seller")]
+        [AllowAnonymous]
 
         public async Task<ActionResult<List<SubCategoryDto>>> GetAll()
         {

@@ -40,7 +40,7 @@ namespace TheRocket.Controller
         }
 
         // [HttpGet("[action]")]
-        // public async Task<ActionResult<AppUserDto>> GetAdminById([FromQuery] int Id)
+        // public async Task<ActionResult<AppUserDto>> GetAppUserById([FromQuery] int Id)
         // {
         //     SharedResponse<AppUserDto> response = await repo.GetById(Id);
         //     if (response.status == Status.notFound) return NotFound();
@@ -48,40 +48,39 @@ namespace TheRocket.Controller
 
         // }
 
-        // [HttpGet("[action]")]
+        [HttpGet("[action]")]
         
-        // public async Task<ActionResult<AppUserDto>> GetAdminByUserId([FromQuery] string AppUserId)
-        // {
-        //     SharedResponse<AppUserDto> response = await repo.GetByUserId(AppUserId);
-        //     if (response.status == Status.notFound) return NotFound();
-        //     return Ok(response.data);
+        public async Task<ActionResult<AppUserDto>> GetAppUserByUserId([FromQuery] string AppUserId)
+        {
+            SharedResponse<AppUserDto> response = await repo.GetById(AppUserId);
+            if (response.status == Status.notFound) return NotFound();
+            return Ok(response.data);
 
-        // }
+        }
 
-        // [HttpGet]
-        // public async Task<ActionResult<List<AppUserDto>>> GetAllAdmins()
-        // {
-        //     SharedResponse<List<AppUserDto>> response = await repo.GetAll();
-        //     if (response.status == Status.notFound) return NotFound();
-        //     return Ok(response.data);
-        // }
+        [HttpGet]
+        public async Task<ActionResult<List<AppUserDto>>> GetAllAppUsers()
+        {
+            SharedResponse<List<AppUserDto>> response = await repo.GetAll();
+            if (response.status == Status.notFound) return NotFound();
+            return Ok(response.data);
+        }
         
         
         // [HttpDelete]
-        // public async Task<ActionResult<AppUserDto>> DeleteAdmin([FromQuery] int Id)
+        // public async Task<ActionResult<AppUserDto>> DeleteAppUser([FromQuery] string Id)
         // {
-        //     if (Id == 0) return BadRequest();
+        //     if (Id ==null) return BadRequest();
         //     var response = await repo.Delete(Id);
         //     if (response.status == Status.notFound) return NotFound();
         //     return NoContent();
         // }
         // [HttpPut]
-        // public async Task<ActionResult<AppUserDto>> PutAdmin([FromQuery] int Id, AppUserDto AppUserDto)
+        // public async Task<ActionResult<AppUserDto>> PutAppUser([FromQuery] string Id, AppUserDto AppUserDto)
         // {
-        //     if(Id!=AppUserDto.AdminId||AppUserDto==null)return BadRequest();
+        //     if(Id!=AppUserDto.Id||AppUserDto==null)return BadRequest();
         //     var response =await repo.Update(Id,AppUserDto);
-        //     if(response.status==Status.badRequest)return BadRequest();
-        //     if(response.status==Status.notFound)return NotFound();
+        //     if(response.status==Status.problem)return Problem(response.message);
         //     return NoContent();
         // }
 

@@ -37,6 +37,7 @@ namespace TheRocket.Repositories.UserRepos
             if (model.Seller == null && model.Buyer == null && model.Admin == null)
                 return new SharedResponse<LoginResponseDto>(Status.badRequest, null, "Shoul enter data for one Account and only one");
             AppUser appUser = mapper.Map<AppUser>(model);
+            appUser.Id=Guid.NewGuid().ToString();
             var result = await userManager.CreateAsync(appUser, model.Password);
             if (result.Succeeded)
             {
@@ -82,29 +83,46 @@ namespace TheRocket.Repositories.UserRepos
 
         }
 
-        public Task<SharedResponse<AppUserDto>> Delete(int Id)
+        public async Task<SharedResponse<bool>> Delete(string Id)
         {
-            throw new NotImplementedException();
+            AppUser appUser = await userManager.FindByIdAsync(Id);
+            if (appUser != null)
+            {
+                await userManager.DeleteAsync(appUser);
+                return new SharedResponse<bool>(Status.noContent, true);
+            }
+            return new SharedResponse<bool>(Status.problem, false);
         }
 
-        public Task<SharedResponse<List<AppUserDto>>> GetAll()
+        public async Task<SharedResponse<List<AppUserDto>>> GetAll()
         {
-            throw new NotImplementedException();
+            var appUsers = userManager.Users.ToList();
+            var appUserDtos = mapper.Map<List<AppUserDto>>(appUsers);
+            if (appUsers.Count() < 1) return new SharedResponse<List<AppUserDto>>(Status.notFound, appUserDtos);
+            return new SharedResponse<List<AppUserDto>>(Status.found, appUserDtos);
         }
 
-        public Task<SharedResponse<AppUserDto>> GetById(int Id)
+      
+
+        public async Task<SharedResponse<AppUserDto>> GetById(string id)
         {
-            throw new NotImplementedException();
+            AppUser appUser = await userManager.FindByIdAsync(id);
+            if (appUser != null)
+            {
+                var appUserDto = mapper.Map<AppUserDto>(appUser);
+                return new SharedResponse<AppUserDto>(Status.found, appUserDto);
+            }
+            return new SharedResponse<AppUserDto>(Status.notFound, null);
         }
 
-        public bool IsExists(int Id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<SharedResponse<AppUserDto>> Update(int Id, AppUserDto model)
-        {
-            throw new NotImplementedException();
-        }
+        // public async Task<SharedResponse<AppUserDto>> Update(string Id, AppUserDto model)
+        // {
+        //     AppUser appUser = mapper.Map<AppUser>(model);
+        //     IdentityResult result = await userManager.UpdateAsync(appUser);
+        //     if (result.Succeeded) return new SharedResponse<AppUserDto>(Status.noContent, null);
+        //     var message=JsonConvert.SerializeObject(result);
+        //     return new SharedResponse<AppUserDto>(Status.problem,null,message);
+        // }
     }
 }

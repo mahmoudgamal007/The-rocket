@@ -12,6 +12,7 @@ namespace TheRocket.Dtos.UserDtos
             PhoneNumbers=new();
             Locations=new();
         }
+        public Guid? Id { get; set; }
         public string UserName { get; set; }
 
         [EmailAddress]
