@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductComponent } from './product.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { PaginationModule} from 'ngx-bootstrap';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 
@@ -21,7 +21,9 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     CommonModule,
     ProductRoutingModule,
     SharedModule,
-    
+    PaginationModule.forRoot()
+
+
   ],
   exports: []
 })

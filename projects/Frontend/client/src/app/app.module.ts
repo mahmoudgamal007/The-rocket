@@ -6,6 +6,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BuyerModule } from './buyer/buyer.module';
 import { CoreModule } from './core/core.module';
 
 
@@ -19,7 +20,7 @@ import { CoreModule } from './core/core.module';
     BrowserAnimationsModule,
     CoreModule,
     NgxSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
