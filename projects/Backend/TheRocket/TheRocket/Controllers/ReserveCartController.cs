@@ -10,7 +10,7 @@ namespace TheRocket.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Roles = "Buyer")]
-    
+
     public class ReserveCartController : ControllerBase
     {
 
@@ -27,9 +27,17 @@ namespace TheRocket.Controllers
             if (response.status == Status.notFound) return NotFound();
             return Ok(response.data);
         }
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult<List<ReserveCartDto>>> GetCartsByBuyerId([FromQuery] int BuyerId)
+        {
+            SharedResponse<List<ReserveCartDto>> response = await repo.GetCartByBuyerId(BuyerId);
+            if (response.status == Status.notFound) return NotFound();
+            return Ok(response.data);
+        }
         // Get By ID
-       [HttpGet("[action]")]
-        public async Task<ActionResult<ReserveCartDto>> GetById([FromQuery]int id)
+        [HttpGet("[action]")]
+        public async Task<ActionResult<ReserveCartDto>> GetById([FromQuery] int id)
         {
             SharedResponse<ReserveCartDto> response = await repo.GetById(id);
             if (response.status == Status.notFound) return NotFound();
@@ -47,7 +55,7 @@ namespace TheRocket.Controllers
 
         //Update Action
         [HttpPut]
-        public async Task<ActionResult<ReserveCartDto>> PutReserveCart([FromQuery]int id, ReserveCartDto ReserveCart)
+        public async Task<ActionResult<ReserveCartDto>> PutReserveCart([FromQuery] int id, ReserveCartDto ReserveCart)
         {
             SharedResponse<ReserveCartDto> response = await repo.Update(id, ReserveCart);
             if (response.status == Status.badRequest) return BadRequest();
@@ -57,7 +65,7 @@ namespace TheRocket.Controllers
 
         //Delete Action
         [HttpDelete]
-        public async Task<ActionResult<ReserveCartDto>> DeleteReserveCart([FromQuery]int id)
+        public async Task<ActionResult<ReserveCartDto>> DeleteReserveCart([FromQuery] int id)
         {
             SharedResponse<ReserveCartDto> response = await repo.Delete(id);
             if (response.status == Status.notFound) return NotFound();

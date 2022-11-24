@@ -85,6 +85,18 @@ namespace TheRocket.Repositories
             return new SharedResponse<ReserveCartDto>(Status.found, model);
         }
 
+        public async Task<SharedResponse<List<ReserveCartDto>>> GetCartByBuyerId(int BuyerId)
+        {
+             if (db.ReserveCarts == null)
+            {
+                return new SharedResponse<List<ReserveCartDto>>(Status.notFound, null);
+            }
+
+            var reserveCartDto = await db.ReserveCarts.Where(s => s.IsDeleted == false&& BuyerId==BuyerId).ToListAsync();
+            List<ReserveCartDto> reserveCarts = _mapper.Map<List<ReserveCartDto>>(reserveCartDto);
+            return new SharedResponse<List<ReserveCartDto>>(Status.found, reserveCarts);
+        }
+
         public bool IsExists(int Id)
         {
             return (db.ReserveCarts?.Any(a => a.Id == Id && a.IsDeleted == false)).GetValueOrDefault();
