@@ -51,22 +51,22 @@ namespace TheRocket.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1fa552a8-530f-401e-be8b-f1ff06a30d53",
-                            ConcurrencyStamp = "48141439-b625-4a09-9f52-5da66ecc2742",
+                            Id = "3abde85b-0c51-46ef-bae7-a21560978997",
+                            ConcurrencyStamp = "28650749-6d62-429e-a2c9-c0c49074e375",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d7cd762b-f98f-4d74-8dca-890155ec30b2",
-                            ConcurrencyStamp = "c2bd2f99-0879-44d2-87c2-900981587385",
+                            Id = "ac7589bd-941a-49e7-87c5-5b7136302fa8",
+                            ConcurrencyStamp = "e72117d6-2919-42a9-bf4f-141655e08202",
                             Name = "Seller",
                             NormalizedName = "SELLER"
                         },
                         new
                         {
-                            Id = "3cc0f266-fbc3-42c4-9ddd-25644b591c7b",
-                            ConcurrencyStamp = "cf6d1bd7-e510-4264-ac42-a5ea0ae34c0a",
+                            Id = "81b9c4b5-36ed-452c-86fb-ab22789852cd",
+                            ConcurrencyStamp = "8dc93681-b8cf-4940-afd7-d8f046d9aa06",
                             Name = "Buyer",
                             NormalizedName = "BUYER"
                         });
@@ -335,35 +335,35 @@ namespace TheRocket.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(320),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3760),
                             IsDeleted = false,
                             Name = "White"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3780),
                             IsDeleted = false,
                             Name = "Red"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3790),
                             IsDeleted = false,
                             Name = "Blue"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3790),
                             IsDeleted = false,
                             Name = "Yellow"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(370),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3790),
                             IsDeleted = false,
                             Name = "Black"
                         });
@@ -512,28 +512,28 @@ namespace TheRocket.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3810),
                             IsDeleted = false,
                             Name = "S"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3810),
                             IsDeleted = false,
                             Name = "M"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3810),
                             IsDeleted = false,
                             Name = "L"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390),
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3810),
                             IsDeleted = false,
                             Name = "XL"
                         });
@@ -599,6 +599,80 @@ namespace TheRocket.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SubCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3820),
+                            IsDeleted = false,
+                            MainCategory = "Men",
+                            Name = "clothes"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830),
+                            IsDeleted = false,
+                            MainCategory = "Men",
+                            Name = "shoes"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830),
+                            IsDeleted = false,
+                            MainCategory = "Men",
+                            Name = "Accessories"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830),
+                            IsDeleted = false,
+                            MainCategory = "Woman",
+                            Name = "clothes"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830),
+                            IsDeleted = false,
+                            MainCategory = "Woman",
+                            Name = "shoes"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830),
+                            IsDeleted = false,
+                            MainCategory = "Woman",
+                            Name = "Accessories"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830),
+                            IsDeleted = false,
+                            MainCategory = "Childreen",
+                            Name = "clothes"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3840),
+                            IsDeleted = false,
+                            MainCategory = "Childreen",
+                            Name = "shoes"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3840),
+                            IsDeleted = false,
+                            MainCategory = "Childreen",
+                            Name = "Accessories"
+                        });
                 });
 
             modelBuilder.Entity("TheRocket.Entities.Subscrip", b =>
@@ -1060,7 +1134,7 @@ namespace TheRocket.Migrations
             modelBuilder.Entity("TheRocket.Entities.Products.ProductImgUrl", b =>
                 {
                     b.HasOne("TheRocket.Entities.Products.Product", "Product")
-                        .WithMany("ImgsUrls")
+                        .WithMany("Imgs")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1205,7 +1279,7 @@ namespace TheRocket.Migrations
                 {
                     b.Navigation("Feedbacks");
 
-                    b.Navigation("ImgsUrls");
+                    b.Navigation("Imgs");
 
                     b.Navigation("Orders");
 

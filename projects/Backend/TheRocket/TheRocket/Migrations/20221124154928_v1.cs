@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TheRocket.Migrations
 {
-    public partial class V1 : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -608,9 +608,9 @@ namespace TheRocket.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1fa552a8-530f-401e-be8b-f1ff06a30d53", "48141439-b625-4a09-9f52-5da66ecc2742", "Admin", "ADMIN" },
-                    { "3cc0f266-fbc3-42c4-9ddd-25644b591c7b", "cf6d1bd7-e510-4264-ac42-a5ea0ae34c0a", "Buyer", "BUYER" },
-                    { "d7cd762b-f98f-4d74-8dca-890155ec30b2", "c2bd2f99-0879-44d2-87c2-900981587385", "Seller", "SELLER" }
+                    { "3abde85b-0c51-46ef-bae7-a21560978997", "28650749-6d62-429e-a2c9-c0c49074e375", "Admin", "ADMIN" },
+                    { "81b9c4b5-36ed-452c-86fb-ab22789852cd", "8dc93681-b8cf-4940-afd7-d8f046d9aa06", "Buyer", "BUYER" },
+                    { "ac7589bd-941a-49e7-87c5-5b7136302fa8", "e72117d6-2919-42a9-bf4f-141655e08202", "Seller", "SELLER" }
                 });
 
             migrationBuilder.InsertData(
@@ -618,11 +618,11 @@ namespace TheRocket.Migrations
                 columns: new[] { "Id", "CreatedAt", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(320), false, "White" },
-                    { 2, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360), false, "Red" },
-                    { 3, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360), false, "Blue" },
-                    { 4, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(360), false, "Yellow" },
-                    { 5, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(370), false, "Black" }
+                    { 1, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3760), false, "White" },
+                    { 2, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3780), false, "Red" },
+                    { 3, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3790), false, "Blue" },
+                    { 4, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3790), false, "Yellow" },
+                    { 5, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3790), false, "Black" }
                 });
 
             migrationBuilder.InsertData(
@@ -630,10 +630,26 @@ namespace TheRocket.Migrations
                 columns: new[] { "Id", "CreatedAt", "IsDeleted", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390), false, "S" },
-                    { 2, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390), false, "M" },
-                    { 3, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390), false, "L" },
-                    { 4, new DateTime(2022, 11, 22, 18, 51, 37, 93, DateTimeKind.Local).AddTicks(390), false, "XL" }
+                    { 1, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3810), false, "S" },
+                    { 2, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3810), false, "M" },
+                    { 3, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3810), false, "L" },
+                    { 4, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3810), false, "XL" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubCategories",
+                columns: new[] { "Id", "CreatedAt", "IsDeleted", "MainCategory", "Name" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3820), false, "Men", "clothes" },
+                    { 2, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830), false, "Men", "shoes" },
+                    { 3, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830), false, "Men", "Accessories" },
+                    { 4, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830), false, "Woman", "clothes" },
+                    { 5, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830), false, "Woman", "shoes" },
+                    { 6, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830), false, "Woman", "Accessories" },
+                    { 7, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3830), false, "Childreen", "clothes" },
+                    { 8, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3840), false, "Childreen", "shoes" },
+                    { 9, new DateTime(2022, 11, 24, 17, 49, 27, 944, DateTimeKind.Local).AddTicks(3840), false, "Childreen", "Accessories" }
                 });
 
             migrationBuilder.CreateIndex(

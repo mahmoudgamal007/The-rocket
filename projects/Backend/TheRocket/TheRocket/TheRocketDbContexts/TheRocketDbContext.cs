@@ -30,20 +30,32 @@ namespace TheRocket.TheRocketDbContexts
                 new IdentityRole { Name = "Buyer", NormalizedName = "BUYER" }
              );
 
-             builder.Entity<Colour>().HasData(
-                new Colour{Id=1,Name="White"},
-                new Colour{Id=2,Name="Red"},
-                new Colour{Id=3,Name="Blue"},
-                new Colour{Id=4,Name="Yellow"},
-                new Colour{Id=5,Name="Black"}
-             );
+            builder.Entity<Colour>().HasData(
+               new Colour { Id = 1, Name = "White" },
+               new Colour { Id = 2, Name = "Red" },
+               new Colour { Id = 3, Name = "Blue" },
+               new Colour { Id = 4, Name = "Yellow" },
+               new Colour { Id = 5, Name = "Black" }
+            );
 
-             builder.Entity<Size>().HasData(
-                new Size{Id=1,Name="S"},
-                new Size{Id=2,Name="M"},
-                new Size{Id=3,Name="L"},
-                new Size{Id=4,Name="XL"}
-             );
+            builder.Entity<Size>().HasData(
+               new Size { Id = 1, Name = "S" },
+               new Size { Id = 2, Name = "M" },
+               new Size { Id = 3, Name = "L" },
+               new Size { Id = 4, Name = "XL" }
+            );
+
+            builder.Entity<SubCategory>().HasData(
+               new SubCategory { Id = 1, Name = "clothes", MainCategory = "Men" },
+               new SubCategory { Id = 2, Name = "shoes", MainCategory = "Men" },
+               new SubCategory { Id = 3, Name = "Accessories", MainCategory = "Men" },
+               new SubCategory { Id = 4, Name = "clothes", MainCategory = "Woman" },
+               new SubCategory { Id = 5, Name = "shoes", MainCategory = "Woman" },
+               new SubCategory { Id = 6, Name = "Accessories", MainCategory = "Woman" },
+               new SubCategory { Id = 7, Name = "clothes", MainCategory = "Childreen" },
+               new SubCategory { Id = 8, Name = "shoes", MainCategory = "Childreen" },
+               new SubCategory { Id = 9, Name = "Accessories", MainCategory = "Childreen" }
+            );
 
         }
 
