@@ -16,9 +16,16 @@
         <a routerLink="/shop/{{product.id}}">
             <h6 class="text-uppercase prod-name">{{product.name}}</h6>
         </a>
-        <span class="mb-2 original-price mt-2">{{product.price | currency:'EGP '}}</span>
-        <span class="" *ngIf="product.discount !== 0">{{(product.price-(product.discount/100)*product.price) |
-            currency:'EGP '}}</span>
-        <span class="" *ngIf="product.discount === 0">{{product.price |currency:'EGP '}}</span>
+        <div *ngIf="product.discount === 0">
+            <span class="mb-2 mt-2">{{product.price | currency:'EGP '}}</span>
+        </div>
+        <div *ngIf="product.discount !== 0">
+            <span class="mb-2 original-price mt-2">{{product.price | currency:'EGP '}}</span>
+            <br>
+            <span class="" *ngIf="product.discount !== 0">{{(product.price-(product.discount/100)*product.price) |
+                currency:'EGP '}}</span>
+        </div>
+
+
     </div>
 </div>

@@ -21,10 +21,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     CommonModule,
     ProductRoutingModule,
     SharedModule,
-    PaginationModule.forRoot()
-
-
   ],
-  exports: []
+  exports: [ProductComponent]
 })
 export class ProductModule { }
