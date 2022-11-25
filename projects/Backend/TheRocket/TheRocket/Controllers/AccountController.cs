@@ -43,7 +43,7 @@ namespace TheRocket.Controllers
                     if (found)
                     {
                         AppUserDto appUserDto = mapper.Map<AppUserDto>(appUser);
-
+                        int AccountId=0;
                         var userRoles = await userManager.GetRolesAsync(appUser);
                         response.UserId = appUser.Id;
                         response.UserName = appUserDto.UserName;
@@ -52,6 +52,7 @@ namespace TheRocket.Controllers
                             response.AccountId = appUserDto.Seller.SellerId;
                             response.BrandName = appUserDto.Seller.BrandName;
                             response.AccountType = "Seller";
+                            AccountId=appUser.Seller.SellerId;
                         }
 
                         if (userRoles[0] == "Buyer")
@@ -60,6 +61,8 @@ namespace TheRocket.Controllers
                             response.FirstName = appUserDto.Buyer.FirstName;
                             response.LastName = appUserDto.Buyer.LastName;
                             response.AccountType = "Buyer";
+                            AccountId=appUser.Buyer.BuyerId;
+
                         }
                         if (userRoles[0] == "Admin")
                         {
@@ -67,13 +70,21 @@ namespace TheRocket.Controllers
                             response.FirstName = appUserDto.Admin.FirstName;
                             response.LastName = appUserDto.Admin.LastName;
                             response.AccountType = "Admin";
+                            AccountId=appUser.Admin.AdminId;
+
                         }
                         List<Claim> claims = new();
                         foreach (var role in userRoles)
                         {
                             claims.Add(new Claim(ClaimTypes.Role, role));
                         }
-                        string jwtToken = JwtTokenGenerator.Generate(userRoles);
+                        string jwtToken = JwtTokenGenerator.Generate(
+                            userRoles,
+                            appUser.Id,
+                            AccountId,
+                            appUser.Email,
+                            appUser.UserName
+                            );
                         await signInManager.SignInWithClaimsAsync(appUser, loginDto.RememberMe, claims);
                         response.JwtToken = jwtToken;
                         return Ok(response);
