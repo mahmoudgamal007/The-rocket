@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using TheRocket.Dtos.AccountDto;
 using TheRocket.Dtos.UserDtos;
 using TheRocket.Entities.Users;
+using TheRocket.RepoInterfaces.UsersRepoInterfaces;
 using TheRocket.Repositories.RepoInterfaces;
 using TheRocket.Shared;
 
@@ -21,9 +22,11 @@ namespace TheRocket.Controllers
         private readonly SignInManager<AppUser> signInManager;
         private readonly UserManager<AppUser> userManager;
         private readonly IMapper mapper;
+        private readonly IAppUserRepo appUserRepo;
 
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper)
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper, IAppUserRepo appUserRepo)
         {
+            this.appUserRepo = appUserRepo;
             this.mapper = mapper;
 
             this.signInManager = signInManager;
@@ -43,7 +46,7 @@ namespace TheRocket.Controllers
                     if (found)
                     {
                         AppUserDto appUserDto = mapper.Map<AppUserDto>(appUser);
-                        int AccountId=0;
+                        int AccountId = 0;
                         var userRoles = await userManager.GetRolesAsync(appUser);
                         response.UserId = appUser.Id;
                         response.UserName = appUserDto.UserName;
@@ -52,7 +55,7 @@ namespace TheRocket.Controllers
                             response.AccountId = appUserDto.Seller.SellerId;
                             response.BrandName = appUserDto.Seller.BrandName;
                             response.AccountType = "Seller";
-                            AccountId=appUser.Seller.SellerId;
+                            AccountId = appUser.Seller.SellerId;
                         }
 
                         if (userRoles[0] == "Buyer")
@@ -61,7 +64,7 @@ namespace TheRocket.Controllers
                             response.FirstName = appUserDto.Buyer.FirstName;
                             response.LastName = appUserDto.Buyer.LastName;
                             response.AccountType = "Buyer";
-                            AccountId=appUser.Buyer.BuyerId;
+                            AccountId = appUser.Buyer.BuyerId;
 
                         }
                         if (userRoles[0] == "Admin")
@@ -70,7 +73,7 @@ namespace TheRocket.Controllers
                             response.FirstName = appUserDto.Admin.FirstName;
                             response.LastName = appUserDto.Admin.LastName;
                             response.AccountType = "Admin";
-                            AccountId=appUser.Admin.AdminId;
+                            AccountId = appUser.Admin.AdminId;
 
                         }
                         List<Claim> claims = new();
@@ -101,6 +104,18 @@ namespace TheRocket.Controllers
         {
             await signInManager.SignOutAsync();
             return Ok("Signed Out");
+        }
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<ActionResult> GetUserByToken([FromQuery] string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var JsonToken = handler.ReadJwtToken(token);
+            var userId = JsonToken.Claims.First(c => c.Type == "UserId").Value;
+            SharedResponse<AppUserDto> result =await appUserRepo.GetById(userId);
+            if(result.status==Status.found)return Ok(result.data);
+            return NotFound();
         }
     }
 }
