@@ -158,9 +158,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors(cors);
+
 app.UseAuthentication();//identity and jwt
 app.UseAuthorization();
-app.UseCors(cors);
 app.MapControllers();
 
 app.Run();
