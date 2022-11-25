@@ -5,7 +5,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using TheRocket.Dtos.AccountDto;
 using TheRocket.Dtos.UserDtos;
 using TheRocket.Entities.Users;
@@ -108,14 +110,38 @@ namespace TheRocket.Controllers
 
         [HttpGet("[action]")]
         [Authorize]
-        public async Task<ActionResult> GetUserByToken([FromQuery] string token)
+        public async Task<ActionResult> GetUserByToken()
         {
+            var deSerializedResult = JsonConvert.SerializeObject(Request.Headers);
+            var serializedResult = JsonConvert.DeserializeObject<Root>(deSerializedResult);
+            var token = serializedResult.Authorization[0];
+            token = token.Remove(0, 7);
             var handler = new JwtSecurityTokenHandler();
             var JsonToken = handler.ReadJwtToken(token);
             var userId = JsonToken.Claims.First(c => c.Type == "UserId").Value;
-            SharedResponse<AppUserDto> result =await appUserRepo.GetById(userId);
-            if(result.status==Status.found)return Ok(result.data);
+            SharedResponse<AppUserDto> result = await appUserRepo.GetById(userId);
+            if (result.status == Status.found) return Ok(result.data);
             return NotFound();
         }
     }
 }
+
+public class Root
+{
+    public List<string> Accept { get; set; }
+    public List<string> Connection { get; set; }
+    public List<string> Host { get; set; }
+
+    [JsonProperty("User-Agent")]
+    public List<string> UserAgent { get; set; }
+
+    [JsonProperty("Accept-Encoding")]
+    public List<string> AcceptEncoding { get; set; }
+    public List<string> Authorization { get; set; }
+    public List<string> Cookie { get; set; }
+
+    [JsonProperty("Postman-Token")]
+    public List<string> PostmanToken { get; set; }
+}
+
+
