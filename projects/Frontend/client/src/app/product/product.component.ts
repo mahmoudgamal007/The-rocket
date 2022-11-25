@@ -20,6 +20,10 @@ export class ProductComponent implements OnInit {
     { name: 'Seller', value: 'SellerId' },
     { name: 'Category', value: 'subCategoryId' },
   ];
+  orderOptions = [
+    { name: 'Ascending', value: '' },
+    { name: 'Descending', value: 'Desc' },
+  ];
 
 
   constructor(private productService: ProductService) { }
@@ -30,7 +34,10 @@ export class ProductComponent implements OnInit {
 
   getProducts() {
     this.productService.getProducts(this.shopParams).subscribe(
-      (response) => { this.products = response?.products },
+      (response) => {
+        this.products = response!.products;
+        this.totalCount = response!.productMatchCount;
+      },
       (error) => { console.log(error) });
   }
 
@@ -48,6 +55,11 @@ export class ProductComponent implements OnInit {
 
   onSortSelected(sort: string) {
     this.shopParams.sortBy = sort;
+    this.getProducts();
+  }
+
+  onOrderSelected(order: string) {
+    this.shopParams.sortOrder = order;
     this.getProducts();
   }
 
