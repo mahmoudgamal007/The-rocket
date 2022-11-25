@@ -5,10 +5,13 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using TheRocket.Dtos.AccountDto;
 using TheRocket.Dtos.UserDtos;
 using TheRocket.Entities.Users;
+using TheRocket.RepoInterfaces.UsersRepoInterfaces;
 using TheRocket.Repositories.RepoInterfaces;
 using TheRocket.Shared;
 
@@ -21,9 +24,11 @@ namespace TheRocket.Controllers
         private readonly SignInManager<AppUser> signInManager;
         private readonly UserManager<AppUser> userManager;
         private readonly IMapper mapper;
+        private readonly IAppUserRepo appUserRepo;
 
-        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper)
+        public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IMapper mapper, IAppUserRepo appUserRepo)
         {
+            this.appUserRepo = appUserRepo;
             this.mapper = mapper;
 
             this.signInManager = signInManager;
@@ -43,7 +48,7 @@ namespace TheRocket.Controllers
                     if (found)
                     {
                         AppUserDto appUserDto = mapper.Map<AppUserDto>(appUser);
-
+                        int AccountId = 0;
                         var userRoles = await userManager.GetRolesAsync(appUser);
                         response.UserId = appUser.Id;
                         response.UserName = appUserDto.UserName;
@@ -52,6 +57,7 @@ namespace TheRocket.Controllers
                             response.AccountId = appUserDto.Seller.SellerId;
                             response.BrandName = appUserDto.Seller.BrandName;
                             response.AccountType = "Seller";
+                            AccountId = appUser.Seller.SellerId;
                         }
 
                         if (userRoles[0] == "Buyer")
@@ -60,6 +66,8 @@ namespace TheRocket.Controllers
                             response.FirstName = appUserDto.Buyer.FirstName;
                             response.LastName = appUserDto.Buyer.LastName;
                             response.AccountType = "Buyer";
+                            AccountId = appUser.Buyer.BuyerId;
+
                         }
                         if (userRoles[0] == "Admin")
                         {
@@ -67,13 +75,21 @@ namespace TheRocket.Controllers
                             response.FirstName = appUserDto.Admin.FirstName;
                             response.LastName = appUserDto.Admin.LastName;
                             response.AccountType = "Admin";
+                            AccountId = appUser.Admin.AdminId;
+
                         }
                         List<Claim> claims = new();
                         foreach (var role in userRoles)
                         {
                             claims.Add(new Claim(ClaimTypes.Role, role));
                         }
-                        string jwtToken = JwtTokenGenerator.Generate(userRoles);
+                        string jwtToken = JwtTokenGenerator.Generate(
+                            userRoles,
+                            appUser.Id,
+                            AccountId,
+                            appUser.Email,
+                            appUser.UserName
+                            );
                         await signInManager.SignInWithClaimsAsync(appUser, loginDto.RememberMe, claims);
                         response.JwtToken = jwtToken;
                         return Ok(response);
@@ -91,5 +107,41 @@ namespace TheRocket.Controllers
             await signInManager.SignOutAsync();
             return Ok("Signed Out");
         }
+
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<ActionResult> GetUserByToken()
+        {
+            var deSerializedResult = JsonConvert.SerializeObject(Request.Headers);
+            var serializedResult = JsonConvert.DeserializeObject<Root>(deSerializedResult);
+            var token = serializedResult.Authorization[0];
+            token = token.Remove(0, 7);
+            var handler = new JwtSecurityTokenHandler();
+            var JsonToken = handler.ReadJwtToken(token);
+            var userId = JsonToken.Claims.First(c => c.Type == "UserId").Value;
+            SharedResponse<AppUserDto> result = await appUserRepo.GetById(userId);
+            if (result.status == Status.found) return Ok(result.data);
+            return NotFound();
+        }
     }
 }
+
+public class Root
+{
+    public List<string> Accept { get; set; }
+    public List<string> Connection { get; set; }
+    public List<string> Host { get; set; }
+
+    [JsonProperty("User-Agent")]
+    public List<string> UserAgent { get; set; }
+
+    [JsonProperty("Accept-Encoding")]
+    public List<string> AcceptEncoding { get; set; }
+    public List<string> Authorization { get; set; }
+    public List<string> Cookie { get; set; }
+
+    [JsonProperty("Postman-Token")]
+    public List<string> PostmanToken { get; set; }
+}
+
+

@@ -72,7 +72,13 @@ namespace TheRocket.Repositories.UserRepos
                 }
                 response.UserName = model.UserName;
                 response.UserId = appUser.Id;
-                var token = JwtTokenGenerator.Generate(new List<string>() { response.AccountType });
+                var token = JwtTokenGenerator.Generate(
+                    new List<string>() { response.AccountType },
+                    response.UserId,
+                    response.AccountId,
+                    appUser.Email,
+                    response.UserName
+                    );
                 response.JwtToken = token;
                 return new SharedResponse<LoginResponseDto>(Status.createdAtAction, response);
             }
