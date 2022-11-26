@@ -21,8 +21,8 @@ export class ProductComponent implements OnInit {
     { name: 'Category', value: 'subCategoryId' },
   ];
   orderOptions = [
-    { name: 'Ascending', value: '' },
-    { name: 'Descending', value: 'Desc' },
+    { name: 'Ascending', value: 'asc' },
+    { name: 'Descending', value: 'desc' },
   ];
 
 
@@ -33,6 +33,7 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
+    console.log(this.shopParams.sortOrder);
     this.productService.getProducts(this.shopParams).subscribe(
       (response) => {
         this.products = response!.products;
@@ -59,6 +60,7 @@ export class ProductComponent implements OnInit {
   }
 
   onOrderSelected(order: string) {
+
     this.shopParams.sortOrder = order;
     this.getProducts();
   }
