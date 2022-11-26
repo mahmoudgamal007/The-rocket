@@ -12,9 +12,11 @@ import { IUser } from '../shared/models/user';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
   baseUrl: string = environment.apiUrl + 'Product/';
-  constructor(private http: HttpClient,) {
+
+  constructor(private http: HttpClient) {
   }
 
 
