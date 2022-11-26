@@ -33,7 +33,6 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
-    console.log(this.shopParams.sortOrder);
     this.productService.getProducts(this.shopParams).subscribe(
       (response) => {
         this.products = response!.products;

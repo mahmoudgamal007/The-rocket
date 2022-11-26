@@ -5,14 +5,17 @@ import { shopParams } from '../shared/models/shopParams';
 import { map, delay } from 'rxjs/operators';
 import { IPagination } from '../shared/models/pagination';
 import { environment } from 'src/environments/environment';
+import { AccountService } from '../account/account.service';
+import { Observable } from 'rxjs';
+import { IUser } from '../shared/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   baseUrl: string = environment.apiUrl + 'Product/';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,) {
+  }
 
 
   getProducts(shopParams: shopParams) {
