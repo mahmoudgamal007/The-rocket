@@ -7,6 +7,6 @@ export class shopParams {
     sellerId?: number;
     pageSize: number = 3;
     sortBy: string = 'Name';
-    sortOrder?: string;
+    sortOrder!: string;
 
 }
