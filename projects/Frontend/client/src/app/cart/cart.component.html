@@ -1,0 +1,13 @@
+<p>cart works!</p>
+<table class='table'>
+   <thead>
+   <tr>
+    <th>product id</th>
+  </tr>
+</thead>
+    <tbody>
+  <tr *ngFor="let cart of carts;">
+            <td>{{cart.productId}}</td>
+    </tr>
+   </tbody>
+    </table>
