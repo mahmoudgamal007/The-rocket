@@ -85,7 +85,7 @@ namespace TheRocket.Controllers
 
 
 
-        public async Task<LoginResponseDto> getLoginResponse(AppUser appUser)
+        private async Task<LoginResponseDto> getLoginResponse(AppUser appUser)
         {
             LoginResponseDto response = new();
             AppUserDto appUserDto = mapper.Map<AppUserDto>(appUser);
