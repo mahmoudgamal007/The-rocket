@@ -38,7 +38,7 @@ namespace TheRocket.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            LoginResponseDto response = new();
+
             if (loginDto != null)
             {
                 AppUser appUser = await userManager.FindByEmailAsync(loginDto.Email);
@@ -47,57 +47,14 @@ namespace TheRocket.Controllers
                     bool found = await userManager.CheckPasswordAsync(appUser, loginDto.Password);
                     if (found)
                     {
-                        AppUserDto appUserDto = mapper.Map<AppUserDto>(appUser);
-                        int AccountId = 0;
-                        var userRoles = await userManager.GetRolesAsync(appUser);
-                        response.UserId = appUser.Id;
-                        response.UserName = appUserDto.UserName;
-                        if (userRoles[0] == "Seller")
-                        {
-                            response.AccountId = appUserDto.Seller.SellerId;
-                            response.BrandName = appUserDto.Seller.BrandName;
-                            response.AccountType = "Seller";
-                            AccountId = appUser.Seller.SellerId;
-                        }
-
-                        if (userRoles[0] == "Buyer")
-                        {
-                            response.AccountId = appUserDto.Buyer.BuyerId;
-                            response.FirstName = appUserDto.Buyer.FirstName;
-                            response.LastName = appUserDto.Buyer.LastName;
-                            response.AccountType = "Buyer";
-                            AccountId = appUser.Buyer.BuyerId;
-
-                        }
-                        if (userRoles[0] == "Admin")
-                        {
-                            response.AccountId = appUserDto.Admin.AdminId;
-                            response.FirstName = appUserDto.Admin.FirstName;
-                            response.LastName = appUserDto.Admin.LastName;
-                            response.AccountType = "Admin";
-                            AccountId = appUser.Admin.AdminId;
-
-                        }
-                        List<Claim> claims = new();
-                        foreach (var role in userRoles)
-                        {
-                            claims.Add(new Claim(ClaimTypes.Role, role));
-                        }
-                        string jwtToken = JwtTokenGenerator.Generate(
-                            userRoles,
-                            appUser.Id,
-                            AccountId,
-                            appUser.Email,
-                            appUser.UserName
-                            );
-                        await signInManager.SignInWithClaimsAsync(appUser, loginDto.RememberMe, claims);
-                        response.JwtToken = jwtToken;
+                        var response = await getLoginResponse(appUser);
                         return Ok(response);
                     }
-                }
 
+                }
             }
             return Unauthorized("Invalid Email or Password");
+
         }
 
         [HttpGet]
@@ -120,8 +77,64 @@ namespace TheRocket.Controllers
             var JsonToken = handler.ReadJwtToken(token);
             var userId = JsonToken.Claims.First(c => c.Type == "UserId").Value;
             SharedResponse<AppUserDto> result = await appUserRepo.GetById(userId);
-            if (result.status == Status.found) return Ok(result.data);
+            AppUser appUser=mapper.Map<AppUser>(result.data);
+            var response=await getLoginResponse(appUser);
+            if (result.status == Status.found) return Ok(response);
             return NotFound();
+        }
+
+
+
+        public async Task<LoginResponseDto> getLoginResponse(AppUser appUser)
+        {
+            LoginResponseDto response = new();
+            AppUserDto appUserDto = mapper.Map<AppUserDto>(appUser);
+            int AccountId = 0;
+            var userRoles = await userManager.GetRolesAsync(appUser);
+            response.UserId = appUser.Id;
+            response.UserName = appUserDto.UserName;
+            if (userRoles[0] == "Seller")
+            {
+                response.AccountId = appUserDto.Seller.SellerId;
+                response.BrandName = appUserDto.Seller.BrandName;
+                response.AccountType = "Seller";
+                AccountId = appUser.Seller.SellerId;
+            }
+
+            if (userRoles[0] == "Buyer")
+            {
+                response.AccountId = appUserDto.Buyer.BuyerId;
+                response.FirstName = appUserDto.Buyer.FirstName;
+                response.LastName = appUserDto.Buyer.LastName;
+                response.AccountType = "Buyer";
+                AccountId = appUser.Buyer.BuyerId;
+
+            }
+            if (userRoles[0] == "Admin")
+            {
+                response.AccountId = appUserDto.Admin.AdminId;
+                response.FirstName = appUserDto.Admin.FirstName;
+                response.LastName = appUserDto.Admin.LastName;
+                response.AccountType = "Admin";
+                AccountId = appUser.Admin.AdminId;
+
+            }
+            List<Claim> claims = new();
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+            string jwtToken = JwtTokenGenerator.Generate(
+                userRoles,
+                appUser.Id,
+                AccountId,
+                appUser.Email,
+                appUser.UserName
+                );
+            // await signInManager.SignInWithClaimsAsync(appUser, loginDto.RememberMe, claims);
+            response.JwtToken = jwtToken;
+            return response;
+
         }
     }
 }

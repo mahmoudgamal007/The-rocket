@@ -66,6 +66,13 @@ namespace TheRocket.Controller
             return Ok(response.data);
         }
         
+        [HttpGet("[action]")]
+        public async Task<ActionResult>CheckIfUserExistByEmail([FromQuery] string email){
+            if(email==null)return BadRequest();
+            var result=await repo.IsExist(email);
+            if(result)return Ok(true);
+            return NotFound(false);
+        }
         
         // [HttpDelete]
         // public async Task<ActionResult<AppUserDto>> DeleteAppUser([FromQuery] string Id)
