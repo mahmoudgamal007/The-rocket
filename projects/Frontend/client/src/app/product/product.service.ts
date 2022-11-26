@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductService {
   baseUrl: string = environment.apiUrl + 'Product/';
+
   constructor(private http: HttpClient) { }
 
 
@@ -37,12 +38,9 @@ export class ProductService {
       params = params.append('SellerId', shopParams.sellerId.toString());
     }
 
-
-    if (shopParams.sortOrder && shopParams.sortBy !== '') {
+    if (shopParams.sortOrder && shopParams.sortOrder !== '') {
       params = params.append('SortOrder', shopParams.sortOrder);
     }
-
-
 
 
     params = params.append('SortBy', shopParams.sortBy);
