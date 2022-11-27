@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CarouselModule, PaginationModule } from 'ngx-bootstrap';
+import { BsDropdownModule, CarouselModule, PaginationModule } from 'ngx-bootstrap';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PagerComponent } from './components/pager/pager.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 
 
@@ -12,13 +13,15 @@ import { PagerComponent } from './components/pager/pager.component';
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
+    TextInputComponent,
 
   ],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
     ReactiveFormsModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    BsDropdownModule.forRoot(),
 
 
   ],
@@ -26,6 +29,8 @@ import { PagerComponent } from './components/pager/pager.component';
     PagingHeaderComponent,
     ReactiveFormsModule,
     PagerComponent,
-    CarouselModule]
+    CarouselModule,
+    BsDropdownModule, TextInputComponent
+  ]
 })
 export class SharedModule { }

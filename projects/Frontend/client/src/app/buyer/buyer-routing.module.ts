@@ -7,7 +7,7 @@ import { BuyerOrdersComponent } from './buyer-orders/buyer-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 
 const routes: Routes = [
-  { path: 'profile', component: BuyerComponent },
+  { path: 'profile/:id', component: BuyerComponent },
   { path: 'cart', component: BuyerCartComponent },
   { path: 'order', component: BuyerOrdersComponent },
   { path: 'order/:id', component: OrderDetailsComponent },

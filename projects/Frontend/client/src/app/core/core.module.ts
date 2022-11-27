@@ -6,6 +6,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { SectionHeaderComponent } from './section-header/section-header.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
       preventDuplicates: true,
     }),
     RouterModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    SharedModule
   ],
   exports: [
     NavBarComponent,

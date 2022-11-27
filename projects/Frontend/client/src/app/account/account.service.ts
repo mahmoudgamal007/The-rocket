@@ -13,6 +13,7 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<IUser | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
+  
   constructor(private http: HttpClient, private router: Router) { }
 
   getCurrentUserValue() {
@@ -62,7 +63,7 @@ export class AccountService {
   }
 
   checkEmailExists(email: string) {
-    return this.http.get(this.baseUrl + '/account/emailexists?email=' + email);
+    return this.http.get(this.baseUrl + '/AppUser/CheckIfUserExistByEmail?email=' + email);
   }
 
 }

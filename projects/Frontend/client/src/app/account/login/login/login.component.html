@@ -8,24 +8,20 @@
         <div class="col-10 col-xs-10 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4">
             <h2 class="text-center mb-5 text-info">Sign In</h2>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <div class="form-group mb-3">
-                    <label class="form-label" for="email">E-Mail Address</label>
-                    <input formControlName="email" type="email" name="email" id="email" class="form-control" />
+
+                <app-text-input formControlName="email" [label]="'Email Address'">
+                </app-text-input>
+
+                <app-text-input formControlName="password" [label]="'Password'" [type]="'password'">
+                </app-text-input>
+
+                <div class="form-group d-grid mt-5">
+                    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-success">Sign In</button>
                 </div>
-                <div class="form-group mb-3">
-                    <label class="form-label" for="password">Password</label>
-                    <input formControlName="password" type="password" name="password" id="password"
-                        class="form-control" />
-                </div>
-                <div class="form-check mb-3">
-                    <input type="checkbox" name="persist" id="persist" class="form-check-input" />
-                    <label class="form-check-label" for="persist">Remember my login.</label>
-                </div>
-                <div class="form-group d-grid">
-                    <button type="submit" class="btn btn-success">Sign In</button>
-                </div>
+
                 <p class="text-center text-muted">Don't have an account? <a [routerLink]="['/account/register']"
                         routerLinkActive="router-link-active">Sign Up</a>.</p>
+
             </form>
         </div>
     </div>
