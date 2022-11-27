@@ -82,14 +82,15 @@ namespace TheRocket.Controller
         //     if (response.status == Status.notFound) return NotFound();
         //     return NoContent();
         // }
-        // [HttpPut]
-        // public async Task<ActionResult<AppUserDto>> PutAppUser([FromQuery] string Id, AppUserDto AppUserDto)
-        // {
-        //     if(Id!=AppUserDto.Id||AppUserDto==null)return BadRequest();
-        //     var response =await repo.Update(Id,AppUserDto);
-        //     if(response.status==Status.problem)return Problem(response.message);
-        //     return NoContent();
-        // }
+
+        [HttpPut]
+        public async Task<ActionResult<AppUserDto>> PutAppUser([FromQuery] Guid Id, UpdateAppUserDto AppUserDto)
+        {
+            if(Id!=AppUserDto.Id||AppUserDto==null)return BadRequest();
+            var response =await repo.Update(Id,AppUserDto);
+            if(response.status==Status.problem)return Problem(response.message);
+            return NoContent();
+        }
 
     }
 }
