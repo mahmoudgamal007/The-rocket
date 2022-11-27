@@ -121,6 +121,13 @@ namespace TheRocket.Repositories.UserRepos
             return new SharedResponse<AppUserDto>(Status.notFound, null);
         }
 
+        public async Task<bool> IsExist(string email)
+        {
+           var check=await userManager.FindByEmailAsync(email);
+           if(check!=null) return true;
+           return false;
+        }
+
 
         // public async Task<SharedResponse<AppUserDto>> Update(string Id, AppUserDto model)
         // {

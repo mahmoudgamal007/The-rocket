@@ -13,7 +13,7 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new BehaviorSubject<IUser | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
-
+  
   constructor(private http: HttpClient, private router: Router) { }
 
   getCurrentUserValue() {
@@ -24,7 +24,7 @@ export class AccountService {
     let headers = new HttpHeaders();
     headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http.get(this.baseUrl + 'account/GetCurrentUser', { headers }).pipe(
+    return this.http.get(this.baseUrl + 'account/GetUserByToken', { headers }).pipe(
       map((user: IUser | any) => {
         if (user) {
           localStorage.setItem('token', user.jwtToken)
@@ -63,7 +63,7 @@ export class AccountService {
   }
 
   checkEmailExists(email: string) {
-    return this.http.get(this.baseUrl + '/account/emailexists?email=' + email);
+    return this.http.get(this.baseUrl + '/AppUser/CheckIfUserExistByEmail?email=' + email);
   }
 
 }

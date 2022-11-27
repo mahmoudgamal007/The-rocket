@@ -10,6 +10,8 @@ namespace TheRocket.RepoInterfaces.UsersRepoInterfaces
          public Task<SharedResponse<LoginResponseDto>> Create(AppUserDto model);
           public Task<SharedResponse<List<AppUserDto>>> GetAll();
          public Task<SharedResponse<AppUserDto>> GetById(string id);
+
+         public Task<bool> IsExist(string email);
         //  public Task<SharedResponse<AppUserDto>> GetByAccountId(int id);
         //  public Task<SharedResponse<AppUserDto>> Update(string Id,AppUserDto model);
         //  public Task<SharedResponse<bool>> Delete(string Id);
