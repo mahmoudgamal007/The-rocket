@@ -51,9 +51,9 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account', values).pipe(
       map((user: IUser | any) => {
         if (user) {
+          localStorage.setItem('userId', user.userId);
           localStorage.setItem('token', user.jwtToken);
           this.currentUserSource.next(user);
-
         }
       })
     )
@@ -74,6 +74,7 @@ export class AccountService {
   }
 
   logout() {
+    localStorage.removeItem('userId');
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/product');
