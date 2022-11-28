@@ -27,6 +27,7 @@ namespace TheRocket.AutoMapper
             CreateMap<ProductDto,Product>().ReverseMap();
             CreateMap<ProductImgUrlDto,ProductImgUrl>().ReverseMap();
             CreateMap<AppUserDto,AppUser>().ReverseMap();
+            CreateMap<UpdateAppUserDto,AppUser>().ReverseMap();
 
         }
     }

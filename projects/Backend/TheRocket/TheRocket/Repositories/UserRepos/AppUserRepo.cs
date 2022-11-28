@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using TheRocket.Dtos.AccountDto;
 using TheRocket.Dtos.UserDtos;
@@ -37,7 +38,7 @@ namespace TheRocket.Repositories.UserRepos
             if (model.Seller == null && model.Buyer == null && model.Admin == null)
                 return new SharedResponse<LoginResponseDto>(Status.badRequest, null, "Shoul enter data for one Account and only one");
             AppUser appUser = mapper.Map<AppUser>(model);
-            appUser.Id=Guid.NewGuid().ToString();
+            appUser.Id = Guid.NewGuid().ToString();
             var result = await userManager.CreateAsync(appUser, model.Password);
             if (result.Succeeded)
             {
@@ -108,7 +109,7 @@ namespace TheRocket.Repositories.UserRepos
             return new SharedResponse<List<AppUserDto>>(Status.found, appUserDtos);
         }
 
-      
+
 
         public async Task<SharedResponse<AppUserDto>> GetById(string id)
         {
@@ -123,19 +124,33 @@ namespace TheRocket.Repositories.UserRepos
 
         public async Task<bool> IsExist(string email)
         {
-           var check=await userManager.FindByEmailAsync(email);
-           if(check!=null) return true;
-           return false;
+            var check = await userManager.FindByEmailAsync(email);
+            if (check != null) return true;
+            return false;
         }
 
 
-        // public async Task<SharedResponse<AppUserDto>> Update(string Id, AppUserDto model)
-        // {
-        //     AppUser appUser = mapper.Map<AppUser>(model);
-        //     IdentityResult result = await userManager.UpdateAsync(appUser);
-        //     if (result.Succeeded) return new SharedResponse<AppUserDto>(Status.noContent, null);
-        //     var message=JsonConvert.SerializeObject(result);
-        //     return new SharedResponse<AppUserDto>(Status.problem,null,message);
-        // }
+
+        public async Task<SharedResponse<AppUserDto>> Update(Guid Id, UpdateAppUserDto model)
+        {
+            var appUser=await userManager.FindByIdAsync(Id.ToString());
+            if(appUser==null)return new SharedResponse<AppUserDto>(Status.notFound,null);
+            appUser.Addresses=mapper.Map<List<Address>>(model.Addresses);
+            appUser.Admin=mapper.Map<Admin>(model.Admin);
+            appUser.Seller=mapper.Map<Seller>(model.Seller);
+            appUser.Buyer=mapper.Map<Buyer>(model.Buyer);
+            appUser.Locations=mapper.Map<List<Location>>(model.Locations);
+            appUser.PhoneNumbers=mapper.Map<List<Phone>>(model.PhoneNumbers);
+            try
+            {
+                await userManager.UpdateAsync(appUser);
+                return new SharedResponse<AppUserDto>(Status.noContent, null);
+            }
+            catch (Exception ex)
+            {
+                return new SharedResponse<AppUserDto>(Status.problem,null, ex.ToString());
+            }
+
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace TheRocket.Controllers
         [HttpGet("[action]")]
         public async Task<ActionResult<ProductDto>> GetProducts([FromQuery] ProductQueryParameter queryParameter)
         {
-           var response = await repo.GetProductsWithFilters(queryParameter);
+            var response = await repo.GetProductsWithFilters(queryParameter);
             if (response.status == Status.notFound) return NotFound();
             return Ok(response.data);
         }
@@ -39,43 +39,52 @@ namespace TheRocket.Controllers
             return Ok(response.data);
         }
 
-
-        [HttpGet("[action]")]
+        [HttpGet("action")]
         [AllowAnonymous]
-        public async Task<ActionResult<ProductDto>> GetProdcutById([FromQuery] int id)
-        {
-            SharedResponse<ProductDto> response = await repo.GetById(id);
-            if (response.status == Status.notFound) return NotFound();
-            return Ok(response.data);
+        public async Task<ActionResult<List<ProductDto>>> GetProductsBySellerId([FromQuery] int sellerId){
+            if(sellerId==0)return BadRequest();
+            var response=await repo.GetProductsBySellerId(sellerId);
+            if(response.status==Status.found)return Ok(response);
+            return NotFound();
         }
 
-      
 
-        [HttpPost]
-        public async Task<ActionResult<ProductDto>> PostProduct(ProductDto Product)
-        {
-            SharedResponse<ProductDto> response = await repo.Create(Product);
-            if (response.status == Status.problem) return Problem(response.message);
-            if (response.status == Status.badRequest) return BadRequest(response.message);
-            return Ok(response.data);
-        }
-
-        [HttpPut]
-        public async Task<ActionResult<ProductDto>> PutProduct([FromQuery] int id, ProductDto Product)
-        {
-            SharedResponse<ProductDto> response = await repo.Update(id, Product);
-            if (response.status == Status.badRequest) return BadRequest();
-            else if (response.status == Status.notFound) return NotFound();
-            return NoContent();
-        }
-
-        [HttpDelete]
-        [Authorize(Roles = "Admin,Seller")]
-        public async Task<ActionResult<ProductDto>> DeleteProduct([FromQuery] int id)
-        {
-            SharedResponse<ProductDto> response = await repo.Delete(id);
-            if (response.status == Status.notFound) return NotFound();
-            return NoContent();
-        }
+    [HttpGet("[action]")]
+    [AllowAnonymous]
+    public async Task<ActionResult<ProductDto>> GetProdcutById([FromQuery] int id)
+    {
+        SharedResponse<ProductDto> response = await repo.GetById(id);
+        if (response.status == Status.notFound) return NotFound();
+        return Ok(response.data);
     }
+
+
+
+    [HttpPost]
+    public async Task<ActionResult<ProductDto>> PostProduct(ProductDto Product)
+    {
+        SharedResponse<ProductDto> response = await repo.Create(Product);
+        if (response.status == Status.problem) return Problem(response.message);
+        if (response.status == Status.badRequest) return BadRequest(response.message);
+        return Ok(response.data);
+    }
+
+    [HttpPut]
+    public async Task<ActionResult<ProductDto>> PutProduct([FromQuery] int id, ProductDto Product)
+    {
+        SharedResponse<ProductDto> response = await repo.Update(id, Product);
+        if (response.status == Status.badRequest) return BadRequest();
+        else if (response.status == Status.notFound) return NotFound();
+        return NoContent();
+    }
+
+    [HttpDelete]
+    [Authorize(Roles = "Admin,Seller")]
+    public async Task<ActionResult<ProductDto>> DeleteProduct([FromQuery] int id)
+    {
+        SharedResponse<ProductDto> response = await repo.Delete(id);
+        if (response.status == Status.notFound) return NotFound();
+        return NoContent();
+    }
+}
 }

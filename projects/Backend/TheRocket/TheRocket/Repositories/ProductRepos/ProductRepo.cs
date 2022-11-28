@@ -128,6 +128,22 @@ namespace TheRocket.Repositories
             return new SharedResponse<ProductDto>(Status.found, productDto);
         }
 
+        public async Task<SharedResponse<List<ProductDto>>> GetProductsBySellerId(int SellerId)
+        {
+            if (db.Products == null)
+                return new SharedResponse<List<ProductDto>>(Status.notFound, null);
+
+            var products = db.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.Imgs).Where(p =>p.SellerId==SellerId && p.IsDeleted == false);
+
+            if (products == null)
+                return new SharedResponse<List<ProductDto>>(Status.notFound, null);
+
+            var response=mapper.Map<List<ProductDto>>(products);
+
+
+            return new  SharedResponse<List<ProductDto>>(Status.found, response);
+        }
+
         public async Task<SharedResponse<GetAllProductDto>> GetProductsWithFilters(ProductQueryParameter queryParameter)
         {
             if (db.Products == null)
