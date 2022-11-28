@@ -14,8 +14,8 @@ namespace TheRocket.Repositories
         private readonly TheRocketDbContext Context;
         public OrderRepo(TheRocketDbContext context, IMapper mapper)
         {
-            Context=context;
-            Mapper=mapper;
+            Context = context;
+            Mapper = mapper;
         }
         public async Task<SharedResponse<OrderDto>> Create(OrderDto model)
         {
@@ -64,6 +64,15 @@ namespace TheRocket.Repositories
             return new SharedResponse<List<OrderDto>>(Status.found, Orders);
         }
 
+        public async Task<SharedResponse<List<OrderDto>>> GetByBuyerId(int BuyerId)
+        {
+            if (Context.Orders == null)
+                return new SharedResponse<List<OrderDto>>(Status.notFound, null);
+            var orders = await Context.Orders.Where(o => o.BuyerId == BuyerId && o.IsDeleted == false).ToListAsync();
+            List<OrderDto> Orders = Mapper.Map<List<OrderDto>>(orders);
+            return new SharedResponse<List<OrderDto>>(Status.found, Orders);
+        }
+
         public async Task<SharedResponse<OrderDto>> GetById(int Id)
         {
             var order = await Context.Orders.Where(o => o.Id == Id).FirstOrDefaultAsync();
@@ -71,9 +80,18 @@ namespace TheRocket.Repositories
             return new SharedResponse<OrderDto>(Status.found, Order);
         }
 
+        public async Task<SharedResponse<List<OrderDto>>> GetBySellerId(int SellerId)
+        {
+            if (Context.Orders == null)
+                return new SharedResponse<List<OrderDto>>(Status.notFound, null);
+            var orders = await Context.Orders.Where(o => o.SellerId == SellerId && o.IsDeleted == false).ToListAsync();
+            List<OrderDto> Orders = Mapper.Map<List<OrderDto>>(orders);
+            return new SharedResponse<List<OrderDto>>(Status.found, Orders);
+        }
+
         public bool IsExists(int Id)
         {
-            return (Context.Orders?.Any(o => o.Id == Id && o.IsDeleted==false)).GetValueOrDefault();
+            return (Context.Orders?.Any(o => o.Id == Id && o.IsDeleted == false)).GetValueOrDefault();
         }
 
         public async Task<SharedResponse<OrderDto>> Update(int Id, OrderDto model)
