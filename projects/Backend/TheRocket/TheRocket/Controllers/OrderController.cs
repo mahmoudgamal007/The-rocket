@@ -42,7 +42,7 @@ namespace TheRocket.Controllers
         }
 
         [HttpGet("[action]")]
-        [Authorize(Roles = "Seller")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetBySellerId([FromQuery] int SellerId)
         {
             SharedResponse<List<OrderDto>> response = await Order.GetBySellerId(SellerId);
@@ -52,10 +52,9 @@ namespace TheRocket.Controllers
         }
 
         [HttpGet("[action]")]
-        [Authorize(Roles = "Seller")]
         public async Task<IActionResult> GetByBuyerId([FromQuery] int BuyerId)
         {
-            SharedResponse<List<OrderDto>> response = await Order.GetBySellerId(BuyerId);
+            SharedResponse<List<OrderDto>> response = await Order.GetByBuyerId(BuyerId);
             if (response.status == Status.notFound) return NotFound();
             return Ok(response.data);
 
