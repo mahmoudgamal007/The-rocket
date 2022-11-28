@@ -7,5 +7,8 @@
         *ngIf="(controlDir && controlDir.control && !controlDir.control.valid && controlDir.control.touched)">
         <span *ngIf="controlDir.control.errors?.required">{{label}} is required</span>
         <span *ngIf="controlDir.control.errors?.pattern">{{label}} is invalid</span>
+        <div>
+            <span *ngIf="controlDir.control.errors?.matching">{{label}} is not matching</span>
+        </div>
     </div>
 </div>

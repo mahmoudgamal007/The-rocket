@@ -1,59 +1,65 @@
-
-
 <div class="container">
-    <header>
-      <img src="https://images.pexels.com/photos/1731427/pexels-photo-1731427.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-    </header>
-    
-      <div class="row">
-        <div class="left col-lg-4">
-          <div class="photo-left">
-            <img class="photo" src="https://images.pexels.com/photos/1804796/pexels-photo-1804796.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-            
-          </div>
-          <!-- <h4 class="name">{{(currentUser$ | async)?.userName}}</h4> -->
-          <!-- <p class="info">{{(currentUser$ | async)?.brandName}}</p> -->
-          <!-- <p class="info">{{(currentUser$ | async)?.userId}}</p> -->
-          <!-- <p class="info">{{(currentUser$ | async)?.accountId}}</p> -->
-          <!-- <p class="info">{{appUser.email}}</p> -->
-          
-    
-          <p class="desc">Hi ! My name mahmoud and i sell my homemade products here with a great price.</p>
-          
+  <header>
+    <img src="assets/{{ appUser.seller?.coverImageUrl }}" />
+  </header>
+
+  <div class="row">
+    <div class="left col-lg-4">
+      <div class="photo-left">
+        <img class="photo" src="assets/{{ appUser.seller?.profileImageUrl }}" />
+      </div>
+      <h4 class="name">{{ currentUser?.userName }}</h4>
+      <p class="info">{{ currentUser?.brandName }}</p>
+      <p class="info">{{ currentUser?.userId }}</p>
+      <p class="info">{{ currentUser?.accountId }}</p>
+      <p *ngFor="let pro of products">{{ pro.name }}</p>
+      <!-- <p class="info">{{appUser.email}}</p>-->
+
+      <p class="desc">
+        Hi ! My name mahmoud and i sell my homemade products here with a great
+        price.
+      </p>
+    </div>
+
+    <div class="right col-lg-8">
+      <ul class="nav">
+        <li>My Products</li>
+        <li><a>Edit Profile</a></li>
+      </ul>
+      <button class="btn btn-success addbtn">Add product</button>
+
+      <div class="row gallery">
+        <div class="col-md-4">
+          <img
+            src="https://images.pexels.com/photos/1036371/pexels-photo-1036371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          />
         </div>
-        
-        <div class="right col-lg-8">
-          
-          <ul class="nav">
-            <li>My Products</li>
-            <li><a>Edit Profile</a></li>
-          </ul>
-          <button class="btn btn-success addbtn">Add product</button>
-          
-          <div class="row gallery">
-            <div class="col-md-4">
-               <img src="https://images.pexels.com/photos/1036371/pexels-photo-1036371.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-            </div>
-            <div class="col-md-4">
-              <img src="https://images.pexels.com/photos/861034/pexels-photo-861034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-            </div>
-            <div class="col-md-4">
-               <img src="https://images.pexels.com/photos/113338/pexels-photo-113338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-            </div>
-            <div class="col-md-4">
-               <img src="https://images.pexels.com/photos/5049/forest-trees-fog-foggy.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-            </div>
-            <div class="col-md-4">
-              <img src="https://images.pexels.com/photos/428431/pexels-photo-428431.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-            </div>
-            <div class="col-md-4">
-              <img src="https://images.pexels.com/photos/50859/pexels-photo-50859.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-            </div>
-            
-            
-          </div>
+        <div class="col-md-4">
+          <img
+            src="https://images.pexels.com/photos/861034/pexels-photo-861034.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          />
         </div>
-    
+        <div class="col-md-4">
+          <img
+            src="https://images.pexels.com/photos/113338/pexels-photo-113338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          />
+        </div>
+        <div class="col-md-4">
+          <img
+            src="https://images.pexels.com/photos/5049/forest-trees-fog-foggy.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          />
+        </div>
+        <div class="col-md-4">
+          <img
+            src="https://images.pexels.com/photos/428431/pexels-photo-428431.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          />
+        </div>
+        <div class="col-md-4">
+          <img
+            src="https://images.pexels.com/photos/50859/pexels-photo-50859.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          />
+        </div>
+      </div>
+    </div>
   </div>
-  
-  
+</div>

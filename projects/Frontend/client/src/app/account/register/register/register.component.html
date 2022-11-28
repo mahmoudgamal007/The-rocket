@@ -2,34 +2,91 @@
     <div class="row py-5 justify-content-center">
         <div class="col-10 col-xs-10 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4">
             <h2 class="text-center mb-5">Sign Up</h2>
-            <form>
-                <div class="form-group mb-3">
-                    <label class="form-label" for="email">E-Mail Address</label>
-                    <input type="email" name="email" id="email" class="form-control" />
+            <div class="d-flex justify-content-between">
+                <div>
+                    <button (click)="createBuyerRegisterForm()" type="submit"
+                        class="btn btn-outline-info btn-lg">Sign-Up As Buyer</button>
                 </div>
-                <div class="form-group mb-3">
-                    <label class="form-label" for="confirmEmail">Confirm E-Mail Address</label>
-                    <input type="email" name="confirmEmail" id="confirmEmail" class="form-control" />
+                <div>
+                    <button (click)="createSellerRegisterForm()" type="submit"
+                        class="btn btn-outline-info btn-lg">Sign-Up As Seller</button>
                 </div>
-                <div class="form-group mb-3">
-                    <label class="form-label" for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" />
-                </div>
-                <div class="form-group mb-3">
-                    <label class="form-label" for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" />
-                </div>
-                <div class="form-check mb-3">
-                    <input type="checkbox" name="persist" id="persist" class="form-check-input" />
-                    <label class="form-check-label" for="persist">I agree to the <strong>Privacy Policy</strong> and
-                        <strong>Terms of Service</strong>.</label>
-                </div>
-                <div class="form-group d-grid">
-                    <button type="submit" class="btn btn-success">Sign Up</button>
-                </div>
-                <p class="text-center text-muted">Already have an account? <a [routerLink]="['/account/login']"
-                        routerLinkActive="router-link-active">Sign In</a>.</p>
-            </form>
+            </div>
+
+
+            <!-- Account Type Check Box -->
+            <ng-container *ngIf="registerBuyerForm">
+                <form [formGroup]="registerBuyerForm" (ngSubmit)="onBuyerSubmit()">
+                    <app-text-input formControlName="userName" [label]="'Username'"></app-text-input>
+
+                    <app-text-input formControlName="email" [label]="'Email Address'">
+                    </app-text-input>
+
+                    <app-text-input formControlName="password" [label]="'Password'" [type]="'password'">
+                    </app-text-input>
+
+                    <app-text-input formControlName="confirmPassword" [label]="'Confirm Password'" [type]="'password'">
+                    </app-text-input>
+
+                    <app-text-input formControlName="firstName" [label]="'First Name'"></app-text-input>
+
+                    <app-text-input formControlName="lastName" [label]="'Last Name'"></app-text-input>
+
+                    <label>Gender</label>
+                    <select formControlName="gender" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option value="">Please Choose your Gender</option>
+                        <option class="dropdown-item" *ngFor="let gender of genders" [ngValue]="gender.value">
+                            {{gender.sex}}
+                        </option>
+                        <div class="dropdown-divider"></div>
+                    </select>
+                    <small class="text-danger" *ngIf="registerBuyerForm.controls['gender'].errors">This Field is
+                        Required</small>
+
+                    <app-text-input formControlName="birthDate" [label]="'Birth Date'" [type]="'Date'"></app-text-input>
+
+                    <div class="form-group d-grid mt-5">
+                        <button [disabled]="registerBuyerForm.invalid" type="submit" class="btn btn-success">Sign-Up As
+                            Buyer</button>
+                    </div>
+                    <p class="text-center text-muted">Already have an account? <a [routerLink]="['/account/login']"
+                            routerLinkActive="router-link-active">Sign In</a>.</p>
+                </form>
+            </ng-container>
+
+            <ng-container *ngIf="registerSellerForm">
+                <form [formGroup]="registerSellerForm" (ngSubmit)="onSellerSubmit()">
+
+                    <app-text-input formControlName="userName" [label]="'Username'"></app-text-input>
+
+                    <app-text-input formControlName="email" [label]="'Email Address'">
+                    </app-text-input>
+
+                    <app-text-input formControlName="password" [label]="'Password'" [type]="'password'">
+                    </app-text-input>
+
+                    <app-text-input formControlName="confirmPassword" [label]="'Confirm Password'" [type]="'password'">
+                    </app-text-input>
+
+                    <app-text-input formControlName="referalCode" [label]="'Referral Code'"></app-text-input>
+
+                    <app-text-input formControlName="about" [label]="'Seller Brief'"></app-text-input>
+
+                    <app-text-input formControlName="brandName" [label]="'Seller Brand Name'"></app-text-input>
+
+
+                    <div class="form-group d-grid mt-5">
+                        <button [disabled]="registerSellerForm.invalid" type="submit" class="btn btn-success">Sign-Up As
+                            Seller</button>
+                    </div>
+                    <p class="text-center text-muted">Already have an account? <a [routerLink]="['/account/login']"
+                            routerLinkActive="router-link-active">Sign In</a>.</p>
+                </form>
+            </ng-container>
+
+
+
+
         </div>
     </div>
 </div>
