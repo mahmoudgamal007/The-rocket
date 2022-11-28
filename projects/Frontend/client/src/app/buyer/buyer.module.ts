@@ -5,6 +5,7 @@ import { BuyerRoutingModule } from './buyer-routing.module';
 import { BuyerCartComponent } from './buyer-cart/buyer-cart.component';
 import { BuyerOrdersComponent } from './buyer-orders/buyer-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { AccountService } from '../account/account.service';
 
 
 
@@ -18,6 +19,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
   imports: [
     CommonModule,
     BuyerRoutingModule
-  ]
+  ], exports: []
+
 })
 export class BuyerModule { }
