@@ -1,1 +1,58 @@
-<p>product-details works!</p>
+<div class="container py-5">
+    <div class="row gy-5">
+        <!-- product details -->
+        <div class="col-12 gy-5">
+            <div class="row gy-5">
+                <!-- carousel -->
+                <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+
+                </div>
+                <!-- carousel -->
+
+                <!-- details -->
+                <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+                    <h1>{{product.name}}</h1>
+
+                    <del class="d-block text-danger"><strong>Price: </strong> {{product.price|currency:'EGP ' }}</del>
+                    <h4 class="text-success">
+                        <strong>Price:</strong>
+                        {{product.price-((product.discount/100)*product.price) |currency:'EGP '}}
+                    </h4>
+
+                    <p><strong>Description: </strong>{{product.desctiption}}</p>
+
+                    <div class="d-grid">
+                        <button class="btn btn-warning">Add To Cart</button>
+                    </div>
+                </div>
+                <!-- details -->
+            </div>
+        </div>
+        <!-- product details -->
+
+        <!-- product reviews -->
+        <div class="col-12">
+            <h1>Reviews</h1>
+
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="d-flex align-items-center py-2">
+                        <img src="/assets/images/default-user-avatar.jpg" class="mr-2" style="border-radius: 50%;"
+                            width="25px" />
+                        <small class="text-muted">John Doe jr.</small>
+                    </div>
+                    <p>Great product!</p>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex align-items-center py-2">
+                        <img src="/assets/images/default-user-avatar.jpg" class="mr-2" style="border-radius: 50%;"
+                            width="25px" />
+                        <small class="text-muted">Marry Joe.</small>
+                    </div>
+                    <p>very helpful product, it helped me alot.</p>
+                </li>
+            </ul>
+        </div>
+        <!-- product reviews -->
+    </div>
+</div>
