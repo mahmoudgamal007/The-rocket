@@ -12,8 +12,8 @@ namespace TheRocket.Entities
         public int Id { get; set; }
         public DeliveryStatus DeliveryStatus { get; set; }
         public bool IsReturned { get; set; }
-        public DateTime ReturnDate { get; set; }
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
         public int Quantity { get; set; }
         public bool ReturnRequest { get; set; }
         public string ProductName { get; set; }
