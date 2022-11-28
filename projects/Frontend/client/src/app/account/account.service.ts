@@ -9,7 +9,7 @@ import { IAppUser } from '../shared/models/IAppUser';
 import { IUser } from '../shared/models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
   baseUrl = environment.apiUrl;
@@ -21,31 +21,27 @@ export class AccountService {
   currentAppUser$ = this.currentAppUserSource.asObservable();
   currentAppUserId?: string;
 
-
-  constructor(private http: HttpClient, private router: Router) { }
-
+  constructor(private http: HttpClient, private router: Router) {}
 
   getCurrentUserValue() {
     return this.currentUserSource.value;
   }
 
-
   loadCurrentUser(token: string) {
     let headers = new HttpHeaders();
     headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http.get(this.baseUrl + 'account/GetUserByToken', { headers }).pipe(
-      map((user: IUser | any) => {
-        if (user) {
-          localStorage.setItem('token', user.jwtToken)
-          this.currentUserSource.next(user);
-        }
-      })
-    )
+    return this.http
+      .get(this.baseUrl + 'account/GetUserByToken', { headers })
+      .pipe(
+        map((user: IUser | any) => {
+          if (user) {
+            localStorage.setItem('token', user.jwtToken);
+            this.currentUserSource.next(user);
+          }
+        })
+      );
   }
-
-
-
 
   login(values: any) {
     return this.http.post(this.baseUrl + 'account', values).pipe(
@@ -56,10 +52,8 @@ export class AccountService {
           this.currentUserSource.next(user);
         }
       })
-    )
+    );
   }
-
-
 
   register(appUser: AppUser) {
     console.log(appUser);
@@ -70,7 +64,7 @@ export class AccountService {
           this.currentUserSource.next(user);
         }
       })
-    )
+    );
   }
 
   logout() {
@@ -81,23 +75,35 @@ export class AccountService {
   }
 
   checkEmailExists(email: string) {
-    return this.http.get(this.baseUrl + '/AppUser/CheckIfUserExistByEmail?email=' + email);
+    return this.http.get(
+      this.baseUrl + '/AppUser/CheckIfUserExistByEmail?email=' + email
+    );
   }
 
   getCurrentUserId() {
-    this.currentUser$.subscribe(response => { this.currentAppUserId = response?.userId }, error => { console.log(error) });
+    this.currentUser$.subscribe(
+      (response) => {
+        this.currentAppUserId = response?.userId;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getCurrentAppUser() {
-    return this.http.get<IAppUser>(this.baseUrl + '/AppUser/GetAppUserByUserId?AppUserId=' + this.currentAppUserId).pipe(
-      map((AppUser: IAppUser | any) => {
-        if (AppUser) {
-          this.currentAppUserSource.next(AppUser);
-        }
-      })
-    )
+    return this.http
+      .get<IAppUser>(
+        this.baseUrl +
+          '/AppUser/GetAppUserByUserId?AppUserId=' +
+          this.currentAppUserId
+      )
+      .pipe(
+        map((AppUser: IAppUser | any) => {
+          if (AppUser) {
+            this.currentAppUserSource.next(AppUser);
+          }
+        })
+      );
   }
-
-
-
 }
