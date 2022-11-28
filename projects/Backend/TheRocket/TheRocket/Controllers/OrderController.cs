@@ -40,9 +40,27 @@ namespace TheRocket.Controllers
             return Ok(response.data);
 
         }
+
+        [HttpGet("[action]")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetBySellerId([FromQuery] int SellerId)
+        {
+            SharedResponse<List<OrderDto>> response = await Order.GetBySellerId(SellerId);
+            if (response.status == Status.notFound) return NotFound();
+            return Ok(response.data);
+
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetByBuyerId([FromQuery] int BuyerId)
+        {
+            SharedResponse<List<OrderDto>> response = await Order.GetByBuyerId(BuyerId);
+            if (response.status == Status.notFound) return NotFound();
+            return Ok(response.data);
+
+        }
+
         [HttpDelete]
-
-
         public async Task<ActionResult<OrderDto>> DeleteOrder([FromQuery] int id)
         {
             SharedResponse<OrderDto> response = await Order.Delete(id);
