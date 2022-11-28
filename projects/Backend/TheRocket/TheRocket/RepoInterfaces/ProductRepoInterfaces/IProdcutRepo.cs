@@ -8,6 +8,7 @@ namespace TheRocket.Repositories.RepoInterfaces
     public interface IProdcutRepo:IBaseRepo<SharedResponse<ProductDto>,SharedResponse<List<ProductDto>>,ProductDto>
     {
         public Task<SharedResponse<GetAllProductDto>> GetProductsWithFilters(ProductQueryParameter queryParameter); 
+        public Task<SharedResponse<List<ProductDto>>> GetProductsBySellerId(int SellerId); 
         
     }
 }
