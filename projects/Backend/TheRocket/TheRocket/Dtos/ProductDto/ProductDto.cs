@@ -20,6 +20,9 @@ namespace TheRocket.Dtos.ProductDtos
         public string Brand { get; set; }
 
         public int SubCategoryId { get; set; }
+
+        public SubCategoryDto? SubCategory { get; set; }
+
         [Required]
         public int SellerId { get; set; }
 
