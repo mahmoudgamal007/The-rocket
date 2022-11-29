@@ -8,7 +8,7 @@ namespace TheRocket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class FeedbacksController : ControllerBase
     {
         private readonly IFeedbackRepo feedbackRepo;
@@ -27,13 +27,20 @@ namespace TheRocket.Controllers
             if (response.status == Status.notFound) { return NotFound(); }
             else { return Ok(response.data); }
         }
-
+        [HttpGet("action")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllFeedbacsByProductId([FromQuery] int productId)
+        {
+            var response=await feedbackRepo.GetAllFeedbacsByProductId(productId);
+            if (response.status == Status.notFound) { return NotFound(); }
+            else { return Ok(response.data); }
+        }
 
         // GetById
-      [HttpGet("[action]")]
+        [HttpGet("[action]")]
         [Authorize(Roles = "Admin,Seller")]
 
-        public async Task<ActionResult<FeedbackDto>> GetById([FromQuery]int Id)
+        public async Task<ActionResult<FeedbackDto>> GetById([FromQuery] int Id)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.GetById(Id);
             if (response.status == Status.notFound) return NotFound();
@@ -45,7 +52,7 @@ namespace TheRocket.Controllers
         [HttpPost]
         [Authorize(Roles = "Buyer")]
 
-        public async Task<ActionResult<FeedbackDto>> Create([FromQuery]FeedbackDto feedback)
+        public async Task<ActionResult<FeedbackDto>> Create([FromQuery] FeedbackDto feedback)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.Create(feedback);
             if (response.status == Status.problem) return Problem(response.message);
@@ -56,7 +63,7 @@ namespace TheRocket.Controllers
         [HttpPut]
         [Authorize(Roles = "Buyer")]
 
-        public async Task<ActionResult<FeedbackDto>> Update([FromQuery]int Id, FeedbackDto feedback)
+        public async Task<ActionResult<FeedbackDto>> Update([FromQuery] int Id, FeedbackDto feedback)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.Update(Id, feedback);
             if (response.status == Status.badRequest) return BadRequest();
