@@ -1,27 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
-
-@Injectable({
-  providedIn: 'root'
-})
-export class SellerService {
-
-  SERVER_URL: string = "https://file.io/";  
-	constructor(private httpClient: HttpClient) { }
-
-  public upload(formData:any) {
-
-    return this.httpClient.post<any>(this.SERVER_URL, formData, {  
-        reportProgress: true,  
-        observe: 'events'  
-      });  
-=======
+import { Size } from '../shared/models/Size';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Color } from '../shared/models/Color';
 import { IAppUser } from '../shared/models/IAppUser';
 import { IProduct } from '../shared/models/product';
 import { IUser } from '../shared/models/user';
+import { SubCategory } from '../shared/models/subCategory';
+import { ToastInjector } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +17,7 @@ export class SellerService {
   currentUser$!: Observable<IUser | null>;
   baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   getUser(userId: any) {
     return this.http.get<IAppUser>(
       this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + userId.toString()
@@ -40,6 +27,40 @@ export class SellerService {
     return this.http.get<IProduct[]>(
       this.baseUrl + 'Product/action?sellerId=' + sellerId.toString()
     );
->>>>>>> refs/remotes/origin/newDeveloping
   }
+
+  getColors() {
+    return this.http.get<Color[]>(
+      this.baseUrl + 'Color'
+    );
+  }
+
+  getSizes() {
+    return this.http.get<Size[]>(
+      this.baseUrl + 'Size'
+    );
+  }
+
+  getSubCategory() {
+    return this.http.get<SubCategory[]>(
+      this.baseUrl + 'SubCategory'
+    );
+  }
+
+postNewProduct(product:IProduct){
+  console.log(product);
+
+  return this.http.post(this.baseUrl+'Product',product);
+}
+
+  // uploadImage(files: any) {
+
+  //   let fileToUpload = <File>files;
+  //   const formData = new FormData();
+  //   for (let i = 0; i < files.length; i++) {
+  //     formData.append(files[i].name, files[i])
+  //   }
+  //   return this.http.post(this.baseUrl + 'Image', formData, { reportProgress: true, observe: 'events' });
+
+  // }
 }

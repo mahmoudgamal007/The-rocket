@@ -1,12 +1,15 @@
 
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using T.Repositories;
 using TheRocket.Entities.Users;
+using TheRocket.RepoInterfaces;
 using TheRocket.RepoInterfaces.UsersRepoInterfaces;
 using TheRocket.Repositories;
 using TheRocket.Repositories.RepoInterfaces;
@@ -71,6 +74,7 @@ builder.Services.AddScoped<IProductImgUrlRepo, ProductImgUrlRepo>();
 
 builder.Services.AddScoped<IOrderRepo, OrderRepo>();
 builder.Services.AddScoped<ISubscripRepo, SubscripRepo>();
+builder.Services.AddScoped<IImageRepo, ImageRepo>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
@@ -147,6 +151,12 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.Configure<FormOptions>(o=>{
+     o.ValueLengthLimit=int.MaxValue;
+     o.MultipartBodyLengthLimit=int.MaxValue;
+     o.MemoryBufferThreshold=int.MaxValue;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -159,6 +169,11 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors(cors);
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions{
+    FileProvider=new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),@"Resources")),
+    RequestPath=new PathString("/Resources")
+});
 
 app.UseAuthentication();//identity and jwt
 app.UseAuthorization();
