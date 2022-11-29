@@ -53,7 +53,7 @@ namespace T.Repositories
             FeedbackDto feedbacksData = Mapper.Map<FeedbackDto>(feedbacks);
             return new SharedResponse<FeedbackDto>(Status.found, feedbacksData);
         }
-  
+
 
         //Create
         public async Task<SharedResponse<FeedbackDto>> Create(FeedbackDto model)
@@ -68,7 +68,7 @@ namespace T.Repositories
             try
             {
                 await db.SaveChangesAsync();
-             model = Mapper.Map<FeedbackDto>(feedback);
+                model = Mapper.Map<FeedbackDto>(feedback);
 
                 return new SharedResponse<FeedbackDto>(Status.createdAtAction, model);
             }
@@ -81,7 +81,7 @@ namespace T.Repositories
         //Update
         public async Task<SharedResponse<FeedbackDto>> Update(int Id, FeedbackDto model)
         {
-            if (Id!=model.Id)
+            if (Id != model.Id)
             {
                 return new SharedResponse<FeedbackDto>(Status.badRequest, null);
             }
@@ -127,6 +127,28 @@ namespace T.Repositories
             return new SharedResponse<FeedbackDto>(Status.noContent, null);
         }
 
-      
+        public async Task<SharedResponse<List<FeedbackDto>>> GetAllFeedbacsByProductId(int prodcutID)
+        {
+            if (db.Feedbacks == null)
+            {
+                return new SharedResponse<List<FeedbackDto>>(Status.notFound, null);
+            }
+            else
+            {
+                var feedbacks = await db.Feedbacks.Include(E => E.Product)
+                    .Include(E => E.Buyer).Where(n => n.IsDeleted == false&&n.ProductId==prodcutID).ToListAsync();
+                if (feedbacks.Count == 0)
+                {
+                    return new SharedResponse<List<FeedbackDto>>(Status.notFound, null);
+                }
+                else
+                {
+                    var feedbacksData = Mapper.Map<List<FeedbackDto>>(feedbacks);
+
+                    return new SharedResponse<List<FeedbackDto>>(Status.found, feedbacksData);
+                }
+
+            }
+        }
     }
 }
