@@ -11,6 +11,7 @@ namespace TheRocket.Dtos
         public int Rating { get; set; }
         public int BuyerId { get; set; }
         public int ProductId { get; set; }
+        public DateTime CreatedAt { get; set; }
 
     }
 }
