@@ -4,4 +4,5 @@ export interface IFeedBack {
     rating: number
     buyerId: number
     productId: number
+    createdAt: Date
 }

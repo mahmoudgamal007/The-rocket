@@ -21,7 +21,7 @@ export class AccountService {
   currentAppUser$ = this.currentAppUserSource.asObservable();
   currentAppUserId?: string;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   getCurrentUserValue() {
     return this.currentUserSource.value;
@@ -47,6 +47,7 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account', values).pipe(
       map((user: IUser | any) => {
         if (user) {
+          localStorage.setItem('accountId', user.accountId);
           localStorage.setItem('userId', user.userId);
           localStorage.setItem('token', user.jwtToken);
           this.currentUserSource.next(user);
@@ -60,6 +61,8 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'AppUser', appUser).pipe(
       map((user: IUser | any) => {
         if (user) {
+          localStorage.setItem('accountId', user.accountId);
+          localStorage.setItem('userId', user.userId);
           localStorage.setItem('token', user.jwtToken);
           this.currentUserSource.next(user);
         }
@@ -68,6 +71,7 @@ export class AccountService {
   }
 
   logout() {
+    localStorage.removeItem('accountId');
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
@@ -95,8 +99,8 @@ export class AccountService {
     return this.http
       .get<IAppUser>(
         this.baseUrl +
-          '/AppUser/GetAppUserByUserId?AppUserId=' +
-          this.currentAppUserId
+        '/AppUser/GetAppUserByUserId?AppUserId=' +
+        this.currentAppUserId
       )
       .pipe(
         map((AppUser: IAppUser | any) => {
@@ -106,4 +110,5 @@ export class AccountService {
         })
       );
   }
+
 }

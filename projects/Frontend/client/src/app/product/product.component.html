@@ -18,14 +18,14 @@
             <ng-container>
                 <h5 class="text-warning ml-3 mt-4 ">Sort</h5>
                 <select class="custom-select mb-3" (change)="onSortSelected($event.target.value)">
-                    <option *ngFor="let sort of sortOptions" [value]="sort.value">
+                    <option class="option-selection" *ngFor="let sort of sortOptions" [value]="sort.value">
                         {{sort.name}}
                     </option>
                 </select>
 
                 <h5 class="text-warning ml-3 mt-1 mb-3">Sort Order</h5>
                 <select class="custom-select mb-3" (change)="onOrderSelected($event.target.value)">
-                    <option *ngFor="let order of orderOptions" [value]="order.value">
+                    <option class="option-selection" *ngFor="let order of orderOptions" [value]="order.value">
                         {{order.name}}
                     </option>
                 </select>
@@ -33,27 +33,21 @@
 
                 <h5 class="text-warning ml-3">Categories</h5>
                 <ul class="list-group my-3">
-                    <li class="list-group-item">
-                        Men
+
+                    <li class="list-group-item" *ngFor="let category of categoryOptions" [value]="category.value"
+                        (click)="onCategorySelected(category.value)"
+                        [class.active]="category.value === this.shopParams.mainCategory">
+                        {{category.name}}
                     </li>
-                    <li class="list-group-item">
-                        Women
-                    </li>
-                    <li class="list-group-item">
-                        Children
-                    </li>
+
                 </ul>
 
-                <h5 class="text-warning ml-3">Sub-Categories</h5>
+                <h5 class=" text-warning ml-3">Sub-Categories</h5>
                 <ul class="list-group my-3">
-                    <li class="list-group-item">
-                        Clothes
-                    </li>
-                    <li class="list-group-item">
-                        Shoes
-                    </li>
-                    <li class="list-group-item">
-                        Accessories
+                    <li class="list-group-item" *ngFor="let subCategory of subCategoryOptions"
+                        [value]="subCategory.value" (click)="onSubCategorySelected(subCategory.value)"
+                        [class.active]="subCategory.value === this.shopParams.subCategory">
+                        {{subCategory.name}}
                     </li>
                 </ul>
             </ng-container>
