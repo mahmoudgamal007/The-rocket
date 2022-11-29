@@ -37,6 +37,6 @@ namespace TheRocket.Entities
 
     public enum DeliveryStatus
     {
-        Stock=0,Shipping=1,Delivvered=2
+        Stock=0,Shipping=1,Delivvered=2,Canceled=3
     }
 }

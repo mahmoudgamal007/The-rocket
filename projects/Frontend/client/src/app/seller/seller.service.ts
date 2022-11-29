@@ -1,5 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SellerService {
+
+  SERVER_URL: string = "https://file.io/";  
+	constructor(private httpClient: HttpClient) { }
+
+  public upload(formData:any) {
+
+    return this.httpClient.post<any>(this.SERVER_URL, formData, {  
+        reportProgress: true,  
+        observe: 'events'  
+      });  
+=======
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IAppUser } from '../shared/models/IAppUser';
@@ -23,5 +40,6 @@ export class SellerService {
     return this.http.get<IProduct[]>(
       this.baseUrl + 'Product/action?sellerId=' + sellerId.toString()
     );
+>>>>>>> refs/remotes/origin/newDeveloping
   }
 }

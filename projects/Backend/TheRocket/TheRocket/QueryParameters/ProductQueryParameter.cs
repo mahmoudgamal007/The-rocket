@@ -1,13 +1,16 @@
 namespace TheRocket.QueryParameters
 {
-    public class ProductQueryParameter:QueryParameter
+    public class ProductQueryParameter : QueryParameter
     {
-         public double?  MinPrice { get; set; }
-        public double?  MaxPrice { get; set; }
+        public double? MinPrice { get; set; }
+        public double? MaxPrice { get; set; }
 
         public string Name { get; set; } = string.Empty;
         public string SearchTerm { get; set; } = string.Empty;
 
-        public int? SellerId{get;set;}
+        public string SubCategory { get; set; } = string.Empty;
+        public string MainCategory { get; set; } = string.Empty;
+
+        public int? SellerId { get; set; }
     }
 }

@@ -133,7 +133,7 @@ namespace TheRocket.Repositories
             if (db.Products == null)
                 return new SharedResponse<List<ProductDto>>(Status.notFound, null);
 
-            var products = db.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.Imgs).Where(p =>p.SellerId==SellerId && p.IsDeleted == false);
+            var products = db.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.Imgs).Include(p=>p.SubCategory).Where(p =>p.SellerId==SellerId && p.IsDeleted == false);
 
             if (products == null)
                 return new SharedResponse<List<ProductDto>>(Status.notFound, null);
@@ -156,7 +156,17 @@ namespace TheRocket.Repositories
 
             if (queryParameter.SellerId > 0)
             {
-                products = products.Where(p => p.SellerId == queryParameter.SellerId && p.IsDeleted == false);
+                products = products.Where(p => p.SellerId == queryParameter.SellerId);
+            }
+
+            if(!string.IsNullOrEmpty(queryParameter.MainCategory))
+            {
+                products=products.Where(p=>p.SubCategory.MainCategory==queryParameter.MainCategory);
+            }
+
+             if(!string.IsNullOrEmpty(queryParameter.SubCategory))
+            {
+                products=products.Where(p=>p.SubCategory.Name==queryParameter.SubCategory);
             }
 
             if (!string.IsNullOrEmpty(queryParameter.SortBy))
