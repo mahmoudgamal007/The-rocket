@@ -5,7 +5,7 @@ using TheRocket.Shared;
     public interface IFeedbackRepo: IBaseRepo<SharedResponse<FeedbackDto>, SharedResponse<List<FeedbackDto>>, FeedbackDto>
         {
 
-            public Task<SharedResponse<List<FeedbackDto>>> GetAllFeedbacsByProductId(int id);
+            public Task<SharedResponse<List<FeedbackDto>>> GetAllFeedbacsByProductId(int ProdcutId);
 
     }
 }
