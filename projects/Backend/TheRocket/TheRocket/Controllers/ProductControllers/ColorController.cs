@@ -25,6 +25,8 @@ namespace TheRocket.Controllers
         public async Task<ActionResult<ColorDto>> AllColors(){
             SharedResponse<List<ColorDto>> response=await repo.GetAll();
             if(response.status==Status.notFound)return NotFound();
+
+            
             return Ok(response.data);
         }
 
