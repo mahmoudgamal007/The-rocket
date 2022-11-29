@@ -4,15 +4,10 @@ import { AccountService } from './account/account.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
-
-  constructor(private accountService: AccountService) {
-
-  }
-
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.loadCurrentUser();
@@ -22,10 +17,14 @@ export class AppComponent implements OnInit {
   loadCurrentUser() {
     const token = localStorage.getItem('token');
     if (token) {
-      this.accountService.loadCurrentUser(token).subscribe(() => { console.log('loaded user') }, error => { console.log(error) });
+      this.accountService.loadCurrentUser(token).subscribe(
+        () => {
+          console.log('loaded user');
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
-
   }
-
-
 }

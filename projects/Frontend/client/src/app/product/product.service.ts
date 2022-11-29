@@ -61,4 +61,8 @@ export class ProductService {
       );
   }
 
+  getProduct(id: number) {
+    return this.http.get<IProduct>(this.baseUrl + 'GetProdcutById?id=' + id.toString())
+  }
+
 }
