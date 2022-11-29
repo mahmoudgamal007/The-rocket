@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { AccountService } from '../account/account.service';
 import { Observable } from 'rxjs';
 import { IUser } from '../shared/models/user';
+import { IFeedBack } from '../shared/models/IFeedBack';
 
 @Injectable({
   providedIn: 'root'
@@ -65,4 +66,8 @@ export class ProductService {
     return this.http.get<IProduct>(this.baseUrl + 'GetProdcutById?id=' + id.toString())
   }
 
+
+  getFeedbacks() {
+
+  }
 }

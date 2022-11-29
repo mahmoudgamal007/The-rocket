@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
       this.newBuyer.buyer!.lastName = values.lastName
       this.newBuyer.buyer!.gender = values.gender
       this.newBuyer.buyer!.birthDate = values.birthDate
-      this.newBuyer.accountType= values.accountType
+      this.newBuyer.accountType = values.accountType
     }
 
     if (this.registerSellerForm?.value) {
@@ -91,7 +91,6 @@ export class RegisterComponent implements OnInit {
       this.newSeller.seller!.about = values.about
       this.newSeller.accountType = values.accountType
     }
-
   }
 
 

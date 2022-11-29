@@ -7,11 +7,11 @@ import { BuyerOrdersComponent } from './buyer-orders/buyer-orders.component';
 
 
 const routes: Routes = [
-  { path: 'profile/:id', component: BuyerComponent },
+  { path: 'profile', component: BuyerComponent },
   { path: 'cart', component: BuyerCartComponent },
   { path: 'order', component: BuyerOrdersComponent },
 
-  
+
 ]
 
 @NgModule({

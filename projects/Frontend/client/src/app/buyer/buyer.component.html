@@ -1,5 +1,4 @@
-
- <!-- <h1>Buyer :-</h1>
+<!-- <h1>Buyer :-</h1>
 <ul>
 
   <li><strong>firstName</strong>{{data.buyer.firstName}}</li>
@@ -17,7 +16,7 @@
 <!-- <div *ngIf="(currentBuyer$ | async)">
   <p>{{currentBuyer$}}</p>
 </div> -->
- <form class="needs-validation m-3" novalidate="">
+<!-- <form class="needs-validation m-3" novalidate="">
 
           <div class="row g-3">
             <div class="col-sm-1">
@@ -224,4 +223,47 @@
         </div>
         <hr class="my-4">
         <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="editbuyer()">save-info</button>
-</form> 
+</form>  -->
+
+<div>
+
+
+  <!-- <div *ngIf="data && data.address && data.address.length>0">
+    <div *ngFor="let address of data.address">
+      <form [formGroup]="buyerEditForm" (ngSubmit)="onBuyerEditFormSubmit()">
+
+        <app-text-input formControlName="country" [label]="'Country'" [placeholder]="'Country PH'"></app-text-input>
+        <app-text-input formControlName="government" [label]="'Governorate'" [placeholder]="'Governorate PH'">
+        </app-text-input>
+        <app-text-input formControlName="city" [label]="'City'" [placeholder]="'City PH'"></app-text-input>
+        <app-text-input formControlName="street" [label]="'Street'" [placeholder]="'Street PH'"></app-text-input>
+
+        <div class="form-group d-grid mt-5">
+
+          <button [disabled]="buyerEditForm.invalid" type="submit" class="btn btn-success">Edit Address</button>
+
+        </div>
+      </form>
+    </div> -->
+  <div *ngIf="!data || !data.address || data.address.length ===0">
+
+    <form [formGroup]="buyerEditForm" (ngSubmit)="onBuyerEditFormSubmit()">
+
+      <app-text-input formControlName="country" [label]="'Country'" [placeholder]="'Country PH'"></app-text-input>
+      <app-text-input formControlName="government" [label]="'Governorate'" [placeholder]="'Governorate PH'">
+      </app-text-input>
+      <app-text-input formControlName="city" [label]="'City'" [placeholder]="'City PH'"></app-text-input>
+      <app-text-input formControlName="street" [label]="'Street'" [placeholder]="'Street PH'"></app-text-input>
+
+      <div class="form-group d-grid mt-5">
+
+        <button [disabled]="buyerEditForm.invalid" type="submit" class="btn btn-success">Edit Address</button>
+
+      </div>
+    </form>
+  </div>
+
+
+
+
+</div>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IImage } from 'src/app/shared/models/img';
 import { IProduct } from 'src/app/shared/models/product';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { ProductService } from '../product.service';
@@ -19,6 +20,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProduct();
+    console.log(this.product)
   }
 
 
@@ -43,5 +45,7 @@ export class ProductDetailsComponent implements OnInit {
       console.log(error);
     });
   }
+
+  
 
 }
