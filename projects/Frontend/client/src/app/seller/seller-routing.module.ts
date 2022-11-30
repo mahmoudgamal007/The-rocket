@@ -6,6 +6,7 @@ import { SellerOrdersComponent } from './seller-orders/seller-orders.component';
 import { SellerHistoryComponent } from './seller-history/seller-history.component';
 import { SellerShippingComponent } from './seller-shipping/seller-shipping.component';
 import { SellerReturnsComponent } from './seller-returns/seller-returns.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,9 @@ const routes: Routes = [
   { path: 'orders', component: SellerOrdersComponent },
   {path:'returns',component: SellerReturnsComponent},
   {path:'history',component: SellerHistoryComponent},
-  {path:'shipping',component:SellerShippingComponent}
+  {path:'shipping',component:SellerShippingComponent},
+  { path: 'addProduct', component: AddProductComponent }
+
 
 ]
 @NgModule({
