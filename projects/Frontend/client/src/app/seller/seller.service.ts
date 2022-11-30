@@ -11,6 +11,7 @@ import { Color } from '../shared/models/Color';
 import { Size } from '../shared/models/Size';
 import { SubCategory } from '../shared/models/subCategory';
 import { IProduct } from '../shared/models/IProduct';
+import { Product } from '../shared/models/Product';
 
 @Injectable({
   providedIn: 'root',
@@ -43,10 +44,10 @@ export class SellerService {
     );
   }
 
-postNewProduct(product:IProduct){
-  console.log(product);
+postNewProduct(product:Product){
+  console.log('hello');
 
-  return this.http.post(this.baseUrl+'Product',product);
+  return this.http.post(this.baseUrl+'Product/PostProduct',product);
 }
 
   // uploadImage(files: any) {

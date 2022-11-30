@@ -60,8 +60,8 @@ namespace TheRocket.Controllers
 
 
 
-    [HttpPost]
-    public async Task<ActionResult<ProductDto>> PostProduct(ProductDto Product)
+    [HttpPost("[action]")]
+    public async Task<ActionResult<ProductDto>> PostProduct([FromBody] ProductDto Product)
     {
         SharedResponse<ProductDto> response = await repo.Create(Product);
         if (response.status == Status.problem) return Problem(response.message);
