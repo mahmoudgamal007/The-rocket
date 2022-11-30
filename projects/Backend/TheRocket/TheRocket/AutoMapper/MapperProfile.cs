@@ -4,6 +4,8 @@ using TheRocket.Dtos.UserDtos;
 using TheRocket.Dtos.ProductDtos;
 using TheRocket.Entities.Products;
 using TheRocket.Entities.Users;
+using TheRocket.Dtos;
+using TheRocket.Entities;
 
 namespace TheRocket.AutoMapper
 {
@@ -29,6 +31,12 @@ namespace TheRocket.AutoMapper
             CreateMap<AppUserDto,AppUser>().ReverseMap();
             CreateMap<UpdateAppUserDto,AppUser>().ReverseMap();
 
+            CreateMap< FeedbackDto, Feedback>().ReverseMap();
+            CreateMap<OrderDto, Order>().ReverseMap();
+            CreateMap<PlanDto, Plan>().ReverseMap();
+            CreateMap<ReserveCartDto, ReserveCart>().ReverseMap();
+            CreateMap< SubCategoryDto, SubCategory>().ReverseMap();
+            CreateMap<SubscripDto, Subscrip>().ReverseMap();
         }
     }
 }
