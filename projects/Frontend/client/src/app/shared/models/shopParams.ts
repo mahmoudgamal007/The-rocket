@@ -8,5 +8,7 @@ export class shopParams {
     pageSize: number = 3;
     sortBy: string = 'Name';
     sortOrder!: string;
+    mainCategory!: string;
+    subCategory!: string;
 
 }

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { IProduct } from '../shared/models/product';
+import { IProduct } from '../shared/models/IProduct';
 import { shopParams } from '../shared/models/shopParams';
 import { ProductService } from './product.service';
 
@@ -24,6 +24,20 @@ export class ProductComponent implements OnInit {
     { name: 'Ascending', value: 'asc' },
     { name: 'Descending', value: 'desc' },
   ];
+  categoryOptions = [
+    { name: 'All', value: '' },
+    { name: 'Men', value: 'Men' },
+    { name: 'Women', value: 'Woman' },
+    { name: 'Children', value: 'Childreen' }
+
+  ];
+  subCategoryOptions = [
+    { name: 'All', value: '' },
+    { name: 'Clothes', value: 'clothes' },
+    { name: 'Shoes', value: 'shoes' },
+    { name: 'Accessories', value: 'Accessories' }
+  ];
+
 
 
   constructor(private productService: ProductService) { }
@@ -69,6 +83,17 @@ export class ProductComponent implements OnInit {
       this.shopParams.pageNumber = event;
       this.getProducts();
     }
+  }
+
+  onCategorySelected(value: string) {
+    this.shopParams.mainCategory = value;
+    this.getProducts();
+  }
+
+  onSubCategorySelected(value: string) {
+    this.shopParams.subCategory = value;
+    this.getProducts();
+
   }
 
 }

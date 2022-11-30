@@ -1,4 +1,4 @@
-import { IProduct } from "./product";
+import { IProduct } from "./IProduct";
 
 export interface IPagination {
     products: IProduct[],

@@ -17,7 +17,7 @@
             <!-- Account Type Check Box -->
             <ng-container *ngIf="registerBuyerForm">
                 <form [formGroup]="registerBuyerForm" (ngSubmit)="onBuyerSubmit()">
-                    <app-text-input formControlName="userName" [label]="'Username'" ></app-text-input>
+                    <app-text-input formControlName="userName" [label]="'Username'"></app-text-input>
 
                     <app-text-input formControlName="email" [label]="'Email Address'">
                     </app-text-input>
@@ -31,6 +31,7 @@
                     <app-text-input formControlName="firstName" [label]="'First Name'"></app-text-input>
 
                     <app-text-input formControlName="lastName" [label]="'Last Name'"></app-text-input>
+
 
                     <label>Gender</label>
                     <select formControlName="gender" class="custom-select mr-sm-2" id="inlineFormCustomSelect">

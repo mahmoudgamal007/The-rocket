@@ -27,7 +27,7 @@ namespace TheRocket.Controllers
             if (response.status == Status.notFound) { return NotFound(); }
             else { return Ok(response.data); }
         }
-        [HttpGet("action")]
+        [HttpGet("[action]")]
         [AllowAnonymous]
         public async Task<IActionResult> GetAllFeedbacsByProductId([FromQuery] int productId)
         {
@@ -52,7 +52,7 @@ namespace TheRocket.Controllers
         [HttpPost]
         [Authorize(Roles = "Buyer")]
 
-        public async Task<ActionResult<FeedbackDto>> Create([FromQuery] FeedbackDto feedback)
+        public async Task<ActionResult<FeedbackDto>> Create([FromBody]FeedbackDto feedback)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.Create(feedback);
             if (response.status == Status.problem) return Problem(response.message);
