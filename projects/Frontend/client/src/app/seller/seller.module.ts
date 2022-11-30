@@ -5,6 +5,7 @@ import { SellerRoutingModule } from './seller-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { SellerOrdersComponent } from './seller-orders/seller-orders.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 
 
@@ -12,7 +13,8 @@ import { SellerOrdersComponent } from './seller-orders/seller-orders.component';
 @NgModule({
   declarations: [
     SellerComponent,
-    SellerOrdersComponent
+    SellerOrdersComponent,
+    AddProductComponent
     
   ],
   imports: [
