@@ -1,0 +1,44 @@
+
+  
+    <div class="container">
+
+        <div class="row" >
+    
+            <a  href="seller/history" style="margin: 10px;" class="btn btn-secondary btn-lg col">History</a>
+        
+            <a href="seller/orders" style="margin: 10px;" class="btn btn-dark btn-lg col">Orders</a>
+        
+            <a href="seller/returns"  style="margin: 10px;" class="btn btn-warning  btn-lg col" >Returns </a>
+            <a  href="seller/shipping" style="margin: 10px;" class="btn btn-secondary btn-lg col">Shipping</a>
+  
+          </div>
+    </div>
+
+
+
+    <table class="table table-striped" style="margin-top: 2rem;">
+        <thead>
+          <tr>
+            <th># </th>
+            <th scope="col">productname</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">deliverydate</th>
+            <th></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor  ="let order of  orders; let counter =index" >
+            <ng-container *ngIf="order.deliveryStatus==1">
+
+            <th scope="row" >{{counter+1}}</th>
+            <td>  {{order["productName"]}}</td>
+            <td>  {{order["quantity"]}}</td>
+            <td>  {{order["deliveryDate"]}}</td>
+            <td><button  type="button" (click)="DeliveredOrder(order.id,order)" class="btn btn-success   btn-sm">Delivered</button>
+
+          </ng-container>
+          </tr>
+         
+        </tbody>
+      </table>

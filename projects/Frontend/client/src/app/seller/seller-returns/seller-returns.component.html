@@ -1,0 +1,51 @@
+
+
+    <div class="container">
+
+        <div class="row" >
+    
+            <a  href="seller/history" style="margin: 10px;" class="btn btn-secondary btn-lg col">History</a>
+        
+            <a href="seller/orders" style="margin: 10px;" class="btn btn-dark btn-lg col">Orders</a>
+        
+            <a href="seller/returns"  style="margin: 10px;" class="btn btn-warning  btn-lg col" >Returns </a>
+            <a  href="seller/shipping" style="margin: 10px;" class="btn btn-secondary btn-lg col">Shipping</a>
+  
+          </div>
+    </div>
+
+
+    <table class="table table-striped"style="margin-top: 2rem;">
+        <thead>
+            <tr>
+                <th># </th>
+                <th scope="col">productname</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">deliverydate</th>
+                <th scope="col">productPrice</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor  ="let order of orders; let counter =index" >
+            <ng-container *ngIf="order.deliveryStatus==2 && order.returnRequest==true&&order.isReturned==false">
+
+            <th scope="row" >{{counter+1}}</th>
+            <td>  {{order["productName"]}}</td>
+            <td>  {{order["quantity"]}}</td>
+            <td>  {{order["deliveryDate"]}}</td>
+            <td>  {{order["productPrice"]}}</td>
+
+
+            <td><button type="button" (click)="AcceptReturnRequest(order.id,order)" class="btn btn-success   btn-sm">Accept</button>
+            </td>
+            <td>
+                <button type="button"  (click)="CancelReturnRequest(order.id,order)"class="btn btn-danger   btn-sm">Deny</button>
+
+            </td>
+            </ng-container>
+          </tr>
+         
+        </tbody>
+      </table>
