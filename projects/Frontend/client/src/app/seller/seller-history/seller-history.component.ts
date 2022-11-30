@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { IAppUser } from 'src/app/shared/models/IAppUser';
@@ -7,15 +7,17 @@ import { IUser } from 'src/app/shared/models/user';
 import { SellerService } from '../seller.service';
 
 @Component({
-  selector: 'app-seller-orders',
-  templateUrl: './seller-orders.component.html',
-  styleUrls: ['./seller-orders.component.scss']
+  selector: 'app-seller-history',
+  templateUrl: './seller-history.component.html',
+  styleUrls: ['./seller-history.component.scss']
 })
-@Injectable ()
-export class SellerOrdersComponent implements OnInit {
+export class SellerHistoryComponent  {
+  x=0;
   appUser!: IAppUser;
   currentUser!: IUser | null;
   id!: any;
+
+
   sellerId:any
   orders:any;
   constructor(
@@ -68,21 +70,5 @@ export class SellerOrdersComponent implements OnInit {
     );
       }
 
-      AcceptOrder(id:any,order:IOrder){
-        console.log("click");
-        order.deliveryStatus=1;
-       this.sellerService.EditOrder(id,order).subscribe(res=>{
-        console.log(res);
-
-        })
-      }
       
-      CancelOrder(id:any,order:IOrder){
-        console.log("click");
-        order.deliveryStatus=4;
-       this.sellerService.EditOrder(id,order).subscribe(res=>{
-        console.log(res);
-
-        })
-      }
 }

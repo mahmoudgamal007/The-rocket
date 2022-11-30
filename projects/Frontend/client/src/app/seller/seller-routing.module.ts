@@ -3,11 +3,17 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { SellerComponent } from './seller.component';
 import { SellerOrdersComponent } from './seller-orders/seller-orders.component';
+import { SellerHistoryComponent } from './seller-history/seller-history.component';
+import { SellerShippingComponent } from './seller-shipping/seller-shipping.component';
+import { SellerReturnsComponent } from './seller-returns/seller-returns.component';
 
 
 const routes: Routes = [
   { path: '', component: SellerComponent},
   { path: 'orders', component: SellerOrdersComponent },
+  {path:'returns',component: SellerReturnsComponent},
+  {path:'history',component: SellerHistoryComponent},
+  {path:'shipping',component:SellerShippingComponent}
 
 ]
 @NgModule({

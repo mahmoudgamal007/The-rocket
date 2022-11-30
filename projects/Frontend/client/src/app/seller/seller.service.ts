@@ -39,4 +39,13 @@ export class SellerService {
         })
       );
   }
+
+  getAllOrders(sellerId:any){
+    return this.http.get(this.baseUrl + 'Order/GetBySellerId?SellerId='+sellerId);
+  }
+
+  EditOrder(id:any,order:any={}){
+
+    return this.http.put(this.baseUrl+"Order?Id="+id,order);
+  }
 }
