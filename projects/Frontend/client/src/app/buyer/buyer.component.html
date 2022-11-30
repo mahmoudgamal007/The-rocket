@@ -1,0 +1,52 @@
+    <form [formGroup]="buyerEditForm" (ngSubmit)="onBuyerEditFormSubmit()">
+      <app-text-input formControlName="firstName" [label]="'FirstName'" placeholder={{data.buyer.firstName}}></app-text-input>
+      <app-text-input formControlName="lastName" [label]="'LastName'" placeholder={{data.buyer.lastName}}></app-text-input>
+      <app-text-input formControlName="userName" [label]="'userName'" placeholder={{data.userName}}></app-text-input>
+      <app-text-input formControlName="email" [label]="'Email'" placeholder={{data.email}}></app-text-input>
+      <app-text-input formControlName="birthDate" [label]="'birthDate'" placeholder={{data.buyer.birthDate}}></app-text-input>
+      <app-text-input formControlName="gender" [label]="'Gender'" *ngIf="data.buyer.gender===0"placeholder=Male></app-text-input>
+      <app-text-input formControlName="gender" [label]="'Gender'" *ngIf="data.buyer.gender===1"placeholder=Female></app-text-input>
+
+
+      <div class="form-group d-grid mt-5">
+
+        <button  type="submit" class="btn btn-success">Edit-Info</button>
+
+      </div>
+    </form>
+ 
+
+    <form [formGroup]="buyerEditAddressForm" (ngSubmit)="onBuyerEditAddressFormSubmit()" *ngFor="let address of data.addresses">
+      <app-text-input formControlName="country" [label]="'Country'" placeholder={{address.country}}></app-text-input>
+      <app-text-input formControlName="government" [label]="'Governorate'" placeholder={{address.government}}></app-text-input>
+      <app-text-input formControlName="city" [label]="'City'" placeholder={{address.city}}></app-text-input>
+      <app-text-input formControlName="street" [label]="'Street'" placeholder={{address.street}}></app-text-input>
+      <div class="form-group row-12 mt-5">
+        <button [disabled]="buyerEditAddressForm.invalid" type="submit" class="btn btn-primary col-6">Edit Address</button>
+        <button [disabled]="buyerEditAddressForm.invalid" type="submit" class="btn btn-danger col-6">Delete Address</button>
+      </div>
+    </form>
+   <div *ngIf="!data || !data.address || data.address.length ===0">
+    <form [formGroup]="buyerEditAddressForm" (ngSubmit)="onBuyerEditAddressFormSubmit()">
+      <app-text-input formControlName="country" [label]="'Country'" placeholder="Enter your country"></app-text-input>
+      <app-text-input formControlName="government" [label]="'Governorate'" placeholder="Enter your governorate"></app-text-input>
+      <app-text-input formControlName="city" [label]="'City'" placeholder="Enter your city"></app-text-input>
+      <app-text-input formControlName="street" [label]="'Street'" placeholder="Enter youradd street"></app-text-input>
+      <div class="form-group d-grid mt-5">
+        <button  [disabled]="buyerEditAddressForm.invalid" type="submit" class="btn btn-success">Add Address</button>
+      </div>
+    </form>
+   </div>
+   <div *ngIf="!data || !data.phone || data.phone.length ===0">
+
+    <form [formGroup]="buyerEditForm" (ngSubmit)="onBuyerEditFormSubmit()">
+
+      <app-text-input formControlName="Phone" [label]="'Phone'" [placeholder]="'phone PH'"></app-text-input>
+    
+
+      <div class="form-group d-grid  mt-5">
+        <button  [disabled]="buyerEditForm.invalid" type="submit" class="btn btn-success ">Add Phone</button>
+    
+      </div>
+    </form>
+  </div> 

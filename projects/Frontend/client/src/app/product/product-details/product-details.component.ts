@@ -85,6 +85,8 @@ export class ProductDetailsComponent implements OnInit {
 
     }, error => { console.log(error) })
     this.loadProduct();
+    this.loadProduct();
+
   }
 
 

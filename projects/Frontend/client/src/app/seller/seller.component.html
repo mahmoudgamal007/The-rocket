@@ -1,0 +1,50 @@
+<div class="container">
+  <header>
+    <img src="{{ appUser.seller?.coverImageUrl }}" />
+  </header>
+
+  <div class="row">
+    <div class="left col-lg-4">
+      <div class="photo-left">
+        <img class="photo" src="{{ appUser.seller?.profileImageUrl }}" />
+      </div>
+
+      <h4 class="name">Username : {{ appUser.userName }}</h4>
+      <p class="info"><b>Email :</b> {{ appUser.email }}</p>
+      <h4 class="name">Adresses:</h4>
+      <p class="info" *ngFor="let ad of appUser.addresses">
+        "{{ ad.country }} - {{ ad.government }} - {{ ad.city }} -
+        {{ ad.street }}"
+      </p>
+
+      <h4 class="name">Phone numbers:</h4>
+      <p class="info" *ngFor="let phone of appUser.phoneNumbers">
+        {{ phone.phone }}
+      </p>
+
+      <p class="desc">
+        Hello ! this is {{ appUser.userName }}, And this is My Rocket shop.
+      </p>
+    </div>
+
+    <div class="right col-lg-8">
+      <ul class="nav">
+        <li>My Products</li>
+        <li><a>Edit Profile</a></li>
+      </ul>
+      <button class="btn btn-success addbtn">Add product</button>
+
+      <div class="row gallery">
+        <div
+          class="col-md-4"
+          *ngFor="let product of products"
+          style="display: inline"
+        >
+          <div *ngFor="let image of product.imgs">
+            <img class="gallery img" src="{{ image.url }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

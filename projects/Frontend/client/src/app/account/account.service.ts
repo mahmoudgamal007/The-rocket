@@ -111,8 +111,4 @@ export class AccountService {
       );
   }
 
-<<<<<<< HEAD
-=======
-  
->>>>>>> 69c49fe82206ac52e26e09d50ec752ff8c3b7b83
 }

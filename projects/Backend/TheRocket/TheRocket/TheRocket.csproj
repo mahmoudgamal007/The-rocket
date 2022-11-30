@@ -43,6 +43,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.Proxies" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources\" />
     <Folder Include="TheRocketDbContexts\" />
   </ItemGroup>
 </Project>
