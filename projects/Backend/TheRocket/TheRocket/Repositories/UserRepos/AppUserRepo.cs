@@ -143,8 +143,10 @@ namespace TheRocket.Repositories.UserRepos
             appUser.PhoneNumbers=mapper.Map<List<Phone>>(model.PhoneNumbers);
             try
             {
-                await userManager.UpdateAsync(appUser);
+               var response= await userManager.UpdateAsync(appUser);
+               if(response.Succeeded)
                 return new SharedResponse<AppUserDto>(Status.noContent, null);
+                return new SharedResponse<AppUserDto>(Status.problem,null);
             }
             catch (Exception ex)
             {

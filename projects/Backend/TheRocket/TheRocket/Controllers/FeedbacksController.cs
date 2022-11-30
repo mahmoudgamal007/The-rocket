@@ -52,7 +52,7 @@ namespace TheRocket.Controllers
         [HttpPost]
         [Authorize(Roles = "Buyer")]
 
-        public async Task<ActionResult<FeedbackDto>> Create([FromBody]FeedbackDto feedback)
+        public async Task<ActionResult<FeedbackDto>> Create(FeedbackDto feedback)
         {
             SharedResponse<FeedbackDto> response = await feedbackRepo.Create(feedback);
             if (response.status == Status.problem) return Problem(response.message);
