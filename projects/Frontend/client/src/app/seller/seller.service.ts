@@ -47,7 +47,7 @@ export class SellerService {
 postNewProduct(product:Product){
   console.log('hello');
 
-  return this.http.post(this.baseUrl+'Product/PostProduct',product);
+  return this.http.post(this.baseUrl+'Product',product);
 }
 
   // uploadImage(files: any) {

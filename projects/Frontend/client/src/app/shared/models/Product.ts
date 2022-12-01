@@ -13,7 +13,7 @@ export class Product {
     brand?: string;
     subCategoryId?: number;
     sellerId?: number;
-    colors?: Color[];
-    sizes?: Size[];
-    imgs?: Image[];
+    ColorIds?: number[];
+    SizeIds?: number[];
+    ImgUrls?: string[];
 }

@@ -142,6 +142,7 @@ builder.Services.AddAuthentication(options =>
 string cors = "";
 builder.Services.AddCors(options =>
 {
+    
     options.AddPolicy(cors,
     builder =>
     {

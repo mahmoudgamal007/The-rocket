@@ -6,7 +6,7 @@
         <form [formGroup]="addProdcutFrom!" (ngSubmit)="onSubmit()">
           <app-text-input formControlName="name" [label]="'name'"></app-text-input>
           <app-text-input formControlName="desctiption" [label]="'Desctiption'"></app-text-input>
-          <app-text-input formControlName="quantity" [label]="'Quantity'"></app-text-input>
+          <app-text-input formControlName="quantity" [label]="'Quantity'" [type]="'Number'"></app-text-input>
           <app-text-input formControlName="price" [label]="'Price'" [type]="'Number'"></app-text-input>
           <app-text-input formControlName="discount" [label]="'discount'" [type]="'Number'"></app-text-input>
           <app-text-input formControlName="brand" [label]="'Brand'"></app-text-input>
@@ -41,10 +41,10 @@
           <div class="row">
             <label for="file">Add Images</label>
             <div class="form-group">
-              <input name="file" class="form-control form-control-sm" type="file" if="file" #file
+              <input formControlName="file" class="form-control form-control-sm" type="file" if="file" #file
                 placeholder="Choose file" multiple (change)="catchSelectedImages(file.files)">
-              <br>
-              <button class="btn btn-success" type="button" (click)="uploadImage()">Upload Image</button>
+              <!-- <br>
+              <button class="btn btn-success" type="button" (click)="uploadImage()">Upload Image</button> -->
             </div>
             <div class="col-md-4">
               <span class="upload" *ngIf="progress!>0">
@@ -57,7 +57,7 @@
           </div>
   
           <div class="form-group d-grid mt-5">
-            <button type="submit" class="btn btn-success" >Add Product</button>
+            <button [disabled]="addProdcutFrom?.invalid" type="submit" class="btn btn-success" >Add Product</button>
           </div>
         </form>
   

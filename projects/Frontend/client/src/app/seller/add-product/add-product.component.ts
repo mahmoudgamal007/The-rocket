@@ -11,6 +11,8 @@ import { Product } from 'src/app/shared/models/Product';
 import { visitValue } from '@angular/compiler/src/util';
 import { AppUser } from 'src/app/shared/models/appUser';
 import { AccountService } from 'src/app/account/account.service';
+import { map } from 'rxjs/operators';
+import { observable, Observable } from 'rxjs';
 
 
 
@@ -65,30 +67,31 @@ export class AddProductComponent implements OnInit {
 
 
 
-  onSubmit() {
+  // onSubmit() {
 
-    this.uploadImage();
-    this.mapAddProductFromValues(this.addProdcutFrom?.value);
-    console.log(this.newProduct);
-    this.service.postNewProduct(this.newProduct).subscribe(data => {
-      console.log(data)}, error => { console.log(error) }
-    );
-  }
+  //   this.uploadImage().pipe(map(response => {
+  //     if (response === true) {
+      
+  //     }
+  //   }
+  //   ))
+
+  // }
+
+
 
 
 
   mapAddProductFromValues(values: any) {
 
-    console.log(this.newProduct.colors)
     this.newProduct.brand = values.brand;
-    this.newProduct.colors = values.colors;
+    this.newProduct.ColorIds = values.colors;
     this.newProduct.desctiption = values.desctiption;
     this.newProduct.discount = values.discount;
-    this.newProduct.imgs = values.imgs;
     this.newProduct.name = values.name;
     this.newProduct.price = values.price;
     this.newProduct.quantity = values.quantity;
-    this.newProduct.sizes = values.sizes;
+    this.newProduct.SizeIds = values.sizes;
     this.newProduct.subCategoryId = values.subCategory;
     this.newProduct.sellerId = +this.accountId!;
   }
@@ -103,11 +106,12 @@ export class AddProductComponent implements OnInit {
       desctiption: new FormControl('', [Validators.required]),
       quantity: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
-      discount: new FormControl('', [Validators.required]),
       brand: new FormControl('', [Validators.required]),
       subCategory: new FormControl('', [Validators.required]),
+      discount: new FormControl(),
       colors: new FormControl('', [Validators.required]),
-      sizes: new FormControl('', [Validators.required])
+      sizes: new FormControl('', [Validators.required]),
+      file: new FormControl(null, [Validators.required])
     }
     )
   }
@@ -121,18 +125,26 @@ export class AddProductComponent implements OnInit {
   @Output() public onUploadFinshed = new EventEmitter();
   files: any;
   public catchSelectedImages(files: any) {
-    this.files = files
+    this.files = files;
+    console.log('hello');
   }
-  pths: any;
-  public uploadImage() {
-    if (!(this.files === undefined || this.files.length==0)) {
+
+
+  public onSubmit() {
+
+    if (!(this.files === undefined || this.files.length == 0)) {
       this.sharedService.uploadImage(this.files).subscribe((event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
         }
         else if (event.type === HttpEventType.Response) {
           this.message = 'Upload success.';
-          this.newProduct.imgs = event.body.paths;
+          this.newProduct.ImgUrls = event.body.paths;
+          this.mapAddProductFromValues(this.addProdcutFrom?.value);
+          console.log(this.newProduct);
+          this.service.postNewProduct(this.newProduct).subscribe(data => {
+            console.log(data)
+          }, error => { console.log(error) });
         }
       });
     }
@@ -143,5 +155,6 @@ export class AddProductComponent implements OnInit {
 
 
 
-
 }
+
+
