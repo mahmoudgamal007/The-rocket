@@ -23,8 +23,8 @@ export class SellerService {
   baseUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
- 
- 
+
+
 
   getColors() {
     return this.http.get<Color[]>(
@@ -44,11 +44,11 @@ export class SellerService {
     );
   }
 
-postNewProduct(product:Product){
-  console.log('hello');
+  postNewProduct(product: Product) {
+    console.log('hello');
 
-  return this.http.post(this.baseUrl+'Product',product);
-}
+    return this.http.post(this.baseUrl + 'Product', product);
+  }
 
   // uploadImage(files: any) {
 
@@ -88,12 +88,12 @@ postNewProduct(product:Product){
       );
   }
 
-  getAllOrders(sellerId:any){
-    return this.http.get(this.baseUrl + 'Order/GetBySellerId?SellerId='+sellerId);
+  getAllOrders(sellerId: any) {
+    return this.http.get(this.baseUrl + 'Order/GetBySellerId?SellerId=' + sellerId);
   }
 
-  EditOrder(id:any,order:any={}){
+  EditOrder(id: any, order: any = {}) {
 
-    return this.http.put(this.baseUrl+"Order?Id="+id,order);
+    return this.http.put(this.baseUrl + "Order?Id=" + id, order);
   }
 }

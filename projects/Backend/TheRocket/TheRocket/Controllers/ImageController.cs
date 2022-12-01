@@ -15,7 +15,7 @@ namespace TheRocket.Controllers
         }
 
         [HttpPost,DisableRequestSizeLimit]
-        public async Task<ActionResult> Upload(){
+        public  ActionResult Upload(){
             var files=Request.Form.Files.ToList();
             if(!(files.Count>0))return BadRequest();
             var folderName=Path.Combine("Resources","Images");

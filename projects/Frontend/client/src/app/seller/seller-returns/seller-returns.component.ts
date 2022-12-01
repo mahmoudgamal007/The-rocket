@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { IAppUser } from 'src/app/shared/models/IAppUser';
@@ -7,16 +7,15 @@ import { IUser } from 'src/app/shared/models/user';
 import { SellerService } from '../seller.service';
 
 @Component({
-  selector: 'app-seller-orders',
-  templateUrl: './seller-orders.component.html',
-  styleUrls: ['./seller-orders.component.scss']
+  selector: 'app-seller-returns',
+  templateUrl: './seller-returns.component.html',
+  styleUrls: ['./seller-returns.component.scss']
 })
-@Injectable ()
-export class SellerOrdersComponent implements OnInit {
+export class SellerReturnsComponent  {
   appUser!: IAppUser;
   currentUser!: IUser | null;
   id!: any;
-  sellerId:any
+ sellerId:any
   orders:any;
   constructor(
     private accountService: AccountService,
@@ -33,8 +32,6 @@ export class SellerOrdersComponent implements OnInit {
         
       });
   }
-
-
   getUser() {
     return this.sellerService.getUser(this.id).subscribe(
       (response) => {
@@ -67,22 +64,23 @@ export class SellerOrdersComponent implements OnInit {
       }
     );
       }
-
-      AcceptOrder(id:any,order:IOrder){
+      AcceptReturnRequest(id:any,order:IOrder){
         console.log("click");
         order.deliveryStatus=1;
+        order.isReturned=true;
+        order.returnRequest=false;
        this.sellerService.EditOrder(id,order).subscribe(res=>{
         console.log(res);
 
         })
       }
-      
-      CancelOrder(id:any,order:IOrder){
+      CancelReturnRequest(id:any,order:IOrder){
         console.log("click");
         order.deliveryStatus=4;
        this.sellerService.EditOrder(id,order).subscribe(res=>{
         console.log(res);
 
         })
-      }
+      }      
+
 }

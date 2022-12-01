@@ -39,14 +39,14 @@ namespace TheRocket.Controller
             return BadRequest(response.message);
         }
 
-        // [HttpGet("[action]")]
-        // public async Task<ActionResult<AppUserDto>> GetAppUserById([FromQuery] int Id)
-        // {
-        //     SharedResponse<AppUserDto> response = await repo.GetById(Id);
-        //     if (response.status == Status.notFound) return NotFound();
-        //     return Ok(response.data);
+        [HttpGet("[action]")]
+        public async Task<ActionResult<BuyerDto>> GetBuyerByAccountId([FromQuery] int Id)
+        {
+            SharedResponse<BuyerDto> response = await repo.GeBuyerByAccountId(Id);
+            if (response.status == Status.notFound) return NotFound();
+            return Ok(response.data);
 
-        // }
+        }
 
         [HttpGet("[action]")]
         

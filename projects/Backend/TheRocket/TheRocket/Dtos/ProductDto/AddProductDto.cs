@@ -5,41 +5,29 @@ using TheRocket.Entities.Users;
 
 namespace TheRocket.Dtos.ProductDtos
 {
-    public class ProductDto
+    public class AddProductDto
     {
-        public ProductDto()
-        {
-            Colors=new();
-            Sizes=new();
-            Imgs=new();
-        }
      
-        public int Id { get; set; }
+        
         [Required]
         public string Name { get; set; }
+        [Required]
         public string Desctiption { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
         public double Price { get; set; }
         public int Discount { get; set; }
+        [Required]
         public string Brand { get; set; }
-
+        [Required]
         public int SubCategoryId { get; set; }
-
-        public SubCategoryDto? SubCategory { get; set; }
-
         [Required]
         public int SellerId { get; set; }
 
-        
-
-
-
-        public List<ColorDto> Colors { get; set; }
-        public List<SizeDto> Sizes { get; set; }
-        [Required]
-        public List<ProductImgUrlDto> Imgs { get; set; }
+        public List<int> ColorIds { get; set; }
+        public List<int> SizeIds { get; set; }
+        public List<string>? ImgUrls { get; set; }
    
     }
 }
