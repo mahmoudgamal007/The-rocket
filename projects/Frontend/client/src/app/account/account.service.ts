@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AppUser } from '../shared/models/appUser';
@@ -14,20 +14,20 @@ import { IUser } from '../shared/models/user';
 export class AccountService {
   baseUrl = environment.apiUrl;
 
-  private currentUserSource = new BehaviorSubject<IUser | null>(null);
-  currentUser$ = this.currentUserSource.asObservable();
+  private currentUserSource = new ReplaySubject<IUser>(1);
+  currentUser$ = this.currentUserSource!.asObservable();
 
-  private currentAppUserSource = new BehaviorSubject<IAppUser | null>(null);
-  currentAppUser$ = this.currentAppUserSource.asObservable();
+
   currentAppUserId?: string;
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getCurrentUserValue() {
-    return this.currentUserSource.value;
-  }
+  loadCurrentUser(token: string): Observable<IUser | null | void> {
+    if (token === null || token === '') {
+      this.currentUserSource.next(null!);
+      return of(null);
+    }
 
-  loadCurrentUser(token: string) {
     let headers = new HttpHeaders();
     headers.set('Authorization', `Bearer ${token}`);
 
@@ -50,7 +50,7 @@ export class AccountService {
           localStorage.setItem('accountId', user.accountId);
           localStorage.setItem('userId', user.userId);
           localStorage.setItem('token', user.jwtToken);
-          this.currentUserSource.next(user);
+          this.currentUserSource?.next(user);
         }
       })
     );
@@ -64,7 +64,7 @@ export class AccountService {
           localStorage.setItem('accountId', user.accountId);
           localStorage.setItem('userId', user.userId);
           localStorage.setItem('token', user.jwtToken);
-          this.currentUserSource.next(user);
+          this.currentUserSource?.next(user);
         }
       })
     );
@@ -74,7 +74,7 @@ export class AccountService {
     localStorage.removeItem('accountId');
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
-    this.currentUserSource.next(null);
+    this.currentUserSource?.next(null!);
     this.router.navigateByUrl('/product');
   }
 
@@ -95,20 +95,9 @@ export class AccountService {
     );
   }
 
-  getCurrentAppUser() {
-    return this.http
-      .get<IAppUser>(
-        this.baseUrl +
-        '/AppUser/GetAppUserByUserId?AppUserId=' +
-        this.currentAppUserId
-      )
-      .pipe(
-        map((AppUser: IAppUser | any) => {
-          if (AppUser) {
-            this.currentAppUserSource.next(AppUser);
-          }
-        })
-      );
+  setCurrentUserToNull() {
+    this.currentUserSource.next(null!);
   }
+
 
 }

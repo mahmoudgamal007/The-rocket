@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
 import { IUser } from 'src/app/shared/models/user';
@@ -10,7 +11,7 @@ import { IUser } from 'src/app/shared/models/user';
 })
 export class NavBarComponent implements OnInit {
   currentUser$!: Observable<IUser | null>;
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService, private ts: ToastrService) { }
 
   ngOnInit(): void {
     this.currentUser$ = this.accountService.currentUser$;
@@ -18,5 +19,6 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     this.accountService.logout();
+    this.ts.success('Logged out successfully', 'Logged out');
   }
 }

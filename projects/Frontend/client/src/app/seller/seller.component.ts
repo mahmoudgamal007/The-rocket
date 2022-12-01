@@ -7,6 +7,9 @@ import { IAppUser } from '../shared/models/IAppUser';
 import { IUser } from '../shared/models/user';
 import { SellerService } from './seller.service';
 import { shopParams } from '../shared/models/shopParams';
+import { Product } from '../shared/models/product';
+import { Color } from '../shared/models/Color';
+import { Image } from '../shared/models/image';
 
 @Component({
   selector: 'app-seller',
@@ -24,7 +27,7 @@ export class SellerComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$
@@ -60,5 +63,20 @@ export class SellerComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  addProd() {
+    let prod = new Product();
+    prod.brand = 'sadsadsa'
+    prod.colors = ['red', 'green'];
+    prod.sizes = ['small', 'large'];
+    prod.desctiption = 'sadasda';
+    prod.imgs = [new Image(), new Image()];
+    prod.price = 1200;
+    prod.discount = 12;
+    prod.quantity = 19;
+    prod.sellerId = this.appUser.seller?.sellerId;
+    prod.subCategoryId = 1;
+    console.log(prod);
+    this.sellerService.postNewProduct(prod).subscribe(resp => { console.log(resp) }, error => { console.log(error) });
   }
 }
