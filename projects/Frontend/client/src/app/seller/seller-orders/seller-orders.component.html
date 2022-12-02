@@ -22,6 +22,8 @@
           <th scope="col">productName</th>
           <th scope="col">Quantity</th>
           <th scope="col">productPrice</th>
+          <th scope="col">Buyer Name</th>
+
           <th></th>
           <th></th>
         </tr>
@@ -35,6 +37,8 @@
        
           <td>  {{order["quantity"]}}</td>
           <td>  {{order["productPrice"]}}</td>
+         <td> <a href="/product/{{order.productId}}"> View Details</a></td>
+          <!-- <td> {{getBuyerName(order.buyerId)}}</td> -->
           <td><button  type="button" (click)="AcceptOrder(order.id,order)" class="btn btn-success   btn-sm">Accept</button>
           </td>
           <td>

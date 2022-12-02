@@ -13,6 +13,7 @@
         productId: number;
         buyerId: number;
         sellerId: number;
+        buyerName:string;
     }
 
 

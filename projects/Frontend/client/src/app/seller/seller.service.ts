@@ -68,6 +68,12 @@ postNewProduct(product:IProduct){
       this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + userId.toString()
     );
   }
+  getAllusers(){
+    return this.http.get<IAppUser>(
+      this.baseUrl + 'AppUser'
+    
+    );
+  }
   getProducts(shopParams: shopParams) {
     let params = new HttpParams();
 
