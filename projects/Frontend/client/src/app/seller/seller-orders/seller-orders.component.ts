@@ -19,9 +19,7 @@ export class SellerOrdersComponent implements OnInit {
   id!: any;
   sellerId:any
   orders:any;
-  users:any;
-  buyer:any;
-  buyername:any;
+  flag:boolean=true;  
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
@@ -76,7 +74,7 @@ export class SellerOrdersComponent implements OnInit {
       AcceptOrder(id:any,order:IOrder){
         console.log("click");
         order.deliveryStatus=1;
-       this.sellerService.EditOrder(id,order).subscribe(res=>{
+       this.sellerService.AcceptOrReturnOrder(id,order.quantity,this.flag).subscribe(res=>{
         console.log(res);
 
         })
@@ -84,7 +82,7 @@ export class SellerOrdersComponent implements OnInit {
       
       CancelOrder(id:any,order:IOrder){
         console.log("click");
-        order.deliveryStatus=4;
+        order.deliveryStatus=3;
        this.sellerService.EditOrder(id,order).subscribe(res=>{
         console.log(res);
 

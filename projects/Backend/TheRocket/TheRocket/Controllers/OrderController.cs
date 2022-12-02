@@ -63,10 +63,12 @@ namespace TheRocket.Controllers
         [HttpPut("[action]")]
         [AllowAnonymous]
 
-        public async Task<IActionResult> AcceptOrReturnOrder([FromQuery] int orderId,[FromQuery]int ammount,[FromQuery] bool Accept){
-            var response=await Order.AcceptOrReturnOrder(orderId,ammount,Accept);
-            if(response.data==true)
-            return Ok("Done");
+        public async Task<IActionResult> AcceptOrReturnOrder([FromQuery] int orderId, [FromQuery] int ammount, [FromQuery] bool Accept)
+        {
+            if (orderId == 0 || ammount == 0 || Accept == null) return BadRequest();
+            var response = await Order.AcceptOrReturnOrder(orderId, ammount, Accept);
+            if (response.data == true)
+                return Ok("Done");
             return Problem("problem");
 
         }
@@ -80,6 +82,7 @@ namespace TheRocket.Controllers
 
         [HttpPut]
 
+        [Authorize(Roles = "Seller,Buyer")]
         public async Task<ActionResult<OrderDto>> PutOrder([FromQuery] int id, OrderDto order)
         {
             SharedResponse<OrderDto> response = await Order.Update(id, order);
