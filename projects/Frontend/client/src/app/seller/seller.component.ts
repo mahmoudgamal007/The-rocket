@@ -7,6 +7,7 @@ import { IAppUser } from '../shared/models/IAppUser';
 import { IUser } from '../shared/models/user';
 import { SellerService } from './seller.service';
 import { shopParams } from '../shared/models/shopParams';
+import { Color } from '../shared/models/Color';
 
 @Component({
   selector: 'app-seller',
@@ -24,7 +25,7 @@ export class SellerComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$
@@ -61,4 +62,5 @@ export class SellerComponent implements OnInit {
       }
     );
   }
+
 }

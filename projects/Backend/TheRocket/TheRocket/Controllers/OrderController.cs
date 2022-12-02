@@ -70,7 +70,6 @@ namespace TheRocket.Controllers
 
         [HttpPut]
 
-        [Authorize(Roles ="Seller,Buyer")]
         public async Task<ActionResult<OrderDto>> PutOrder([FromQuery] int id, OrderDto order)
         {
             SharedResponse<OrderDto> response = await Order.Update(id, order);

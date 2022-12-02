@@ -26,6 +26,8 @@
 
           <th></th>
           <th></th>
+
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -37,8 +39,9 @@
        
           <td>  {{order["quantity"]}}</td>
           <td>  {{order["productPrice"]}}</td>
+          <!-- <td> {{order.buyerId}}</td> -->
          <td> <a href="/product/{{order.productId}}"> View Details</a></td>
-          <!-- <td> {{getBuyerName(order.buyerId)}}</td> -->
+          <td> {{order.buyername}}</td>
           <td><button  type="button" (click)="AcceptOrder(order.id,order)" class="btn btn-success   btn-sm">Accept</button>
           </td>
           <td>

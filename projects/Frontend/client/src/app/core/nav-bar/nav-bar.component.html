@@ -22,18 +22,43 @@
     <ng-container *ngIf="currentUser$ | async">
       <div class="dropdown ml-3 mr-5 mt-2" dropdown>
         <a class="dropdown-toggle" style="cursor: pointer" dropdownToggle>
-          <strong *ngIf="(currentUser$ | async)!.firstName && (currentUser$ | async)!.firstName!==''"> Welcome {{
+          <strong *ngIf="(currentUser$ | async)!.firstName && (currentUser$ | async)!.firstName!==''"> Welcome, {{
             (currentUser$ | async)!.firstName }} </strong>
-          <strong *ngIf="(currentUser$ | async)!.brandName && (currentUser$ | async)!.brandName!==''"> Welcome {{
+          <strong *ngIf="(currentUser$ | async)!.brandName && (currentUser$ | async)!.brandName!==''"> Welcome, {{
             (currentUser$ | async)!.brandName }} </strong>
         </a>
         <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer" *dropdownMenu>
-          <a class="dropdown-item d-flex align-items-center py-2">
-            <i routerLink="/cart" class="fa fa-shopping-cart mr-3"></i>View Cart
-          </a>
-          <a class="dropdown-item d-flex align-items-center py-2">
-            <i routerLink="/orders" class="fa fa-history mr-3"></i>View Orders
-          </a>
+
+          <div *ngIf="(currentUser$| async)!.accountType ==='Seller'">
+            <a [routerLink]="['/seller']" class="dropdown-item d-flex align-items-center py-2">
+              <i class="fa fa-user-circle mr-3"></i>My Profile
+            </a>
+          </div>
+
+          <div *ngIf="(currentUser$| async)!.accountType ==='Buyer'">
+            <a [routerLink]="['/buyer']" class="dropdown-item d-flex align-items-center py-2">
+              <i class="fa fa-user-circle mr-3"></i>My Profile
+            </a>
+          </div>
+
+          <div *ngIf="(currentUser$| async)!.accountType ==='Buyer'">
+            <a [routerLink]="['/buyer/cart']" class="dropdown-item d-flex align-items-center py-2">
+              <i class="fa fa-shopping-cart mr-3"></i>View Cart
+            </a>
+          </div>
+
+          <div *ngIf="(currentUser$| async)!.accountType ==='Buyer'">
+            <a [routerLink]="['/buyer/order']" class="dropdown-item d-flex align-items-center py-2">
+              <i class="fa fa-history mr-3"></i>My Orders
+            </a>
+          </div>
+
+          <div *ngIf="(currentUser$| async)!.accountType ==='Seller'">
+            <a [routerLink]="['/seller/orders']" class="dropdown-item d-flex align-items-center py-2">
+              <i class="fa fa-history mr-3"></i>View Orders
+            </a>
+          </div>
+
           <div class="dropdown-divider"></div>
           <a (click)="logout()" class="dropdown-item d-flex align-items-center py-2">
             <i class="fa fa-sign-out mr-3"></i>Logout

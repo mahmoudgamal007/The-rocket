@@ -142,6 +142,7 @@ builder.Services.AddAuthentication(options =>
 string cors = "";
 builder.Services.AddCors(options =>
 {
+    
     options.AddPolicy(cors,
     builder =>
     {
@@ -180,4 +181,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-

@@ -11,6 +11,7 @@ import { Color } from '../shared/models/Color';
 import { Size } from '../shared/models/Size';
 import { SubCategory } from '../shared/models/subCategory';
 import { IProduct } from '../shared/models/IProduct';
+import { Product } from '../shared/models/Product';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +23,8 @@ export class SellerService {
   baseUrl: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
- 
- 
+
+
 
   getColors() {
     return this.http.get<Color[]>(
@@ -43,11 +44,11 @@ export class SellerService {
     );
   }
 
-postNewProduct(product:IProduct){
-  console.log(product);
+  postNewProduct(product: Product) {
+    console.log('hello');
 
-  return this.http.post(this.baseUrl+'Product',product);
-}
+    return this.http.post(this.baseUrl + 'Product', product);
+  }
 
   // uploadImage(files: any) {
 
@@ -93,12 +94,18 @@ postNewProduct(product:IProduct){
       );
   }
 
-  getAllOrders(sellerId:any){
-    return this.http.get(this.baseUrl + 'Order/GetBySellerId?SellerId='+sellerId);
+  getAllOrders(sellerId: any) {
+    return this.http.get(this.baseUrl + 'Order/GetBySellerId?SellerId=' + sellerId);
   }
 
-  EditOrder(id:any,order:any={}){
+  EditOrder(id: any, order: any = {}) {
 
-    return this.http.put(this.baseUrl+"Order?Id="+id,order);
+    return this.http.put(this.baseUrl + "Order?Id=" + id, order);
+  }
+  
+  getBuyer(userId: any) {
+    return this.http.get<IAppUser>(
+      this.baseUrl + 'AppUser/GetBuyerByAccountId?Id=' + userId
+    );
   }
 }

@@ -1,10 +1,10 @@
 export class Feedback {
-    Id?: number
-    Comment?: string
-    Rating?: number
-    BuyerId?: number
-    ProductId?: number
-    CreatedAt?: Date
+    id?: number
+    comment?: string
+    rating?: number
+    buyerId?: number
+    productId?: number
+    createdAt?: Date
 
     constructor() {
     }

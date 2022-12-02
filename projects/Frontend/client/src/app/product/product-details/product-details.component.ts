@@ -2,11 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Cart } from 'src/app/shared/models/cart';
 import { Feedback } from 'src/app/shared/models/feedback';
 import { IAppUser } from 'src/app/shared/models/IAppUser';
 import { IFeedBack } from 'src/app/shared/models/IFeedBack';
 import { IImage } from 'src/app/shared/models/img';
 import { IProduct } from 'src/app/shared/models/IProduct';
+import { SharedService } from 'src/app/shared/shared.service';
 import { environment } from 'src/environments/environment';
 
 import { BreadcrumbService } from 'xng-breadcrumb';
@@ -21,12 +24,12 @@ export class ProductDetailsComponent implements OnInit {
   baseUrl: string = environment.apiUrl;
   product!: IProduct;
   quantity = 1;
-  productFeedBacks: IFeedBack[] = [];
+  productFeedBacks: Feedback[] = [];
   feedbackForm!: FormGroup;
 
 
   constructor(private shopService: ProductService, private activateRoute: ActivatedRoute, private bcService: BreadcrumbService
-    , private fb: FormBuilder) {
+    , private fb: FormBuilder, private sharedService: SharedService, private ts: ToastrService) {
     this.bcService.set('@productDetails', '');
   }
 
@@ -44,6 +47,16 @@ export class ProductDetailsComponent implements OnInit {
 
 
   addItemToCart() {
+    let cart = new Cart();
+    cart.quantity = this.quantity;
+    cart.productId = this.product.id;
+    this.sharedService.getAppUeserByUsrId(localStorage.getItem('userId')).subscribe(resp => {
+      cart.buyerId = resp.buyer?.buyerId;
+      this.shopService.addItemToCart(cart).subscribe(resp => {
+        console.log(resp);
+        this.ts.success(`${cart.quantity} pcs of ${this.product.name} has been added to your cart`)
+      }, err => { console.log(err) });
+    });
   }
 
   incrementQuantity() {
@@ -70,23 +83,22 @@ export class ProductDetailsComponent implements OnInit {
 
   getFeedBacks() {
     this.shopService.getFeedbacks(this.product!.id).subscribe(response => { this.productFeedBacks = response },
-      error => { console.log(error) })
+      error => { })
   }
   onFeedbackSubmit() {
 
     let feedback = new Feedback();
-    feedback.ProductId = this.product.id;
-    feedback.Rating = +this.feedbackForm.value.rating;
-    feedback.Comment = this.feedbackForm.value.comment;
 
+    feedback.productId = this.product.id;
+    feedback.rating = +this.feedbackForm.value.rating;
+    feedback.comment = this.feedbackForm.value.comment;
+    feedback.createdAt = new Date();
     this.shopService.getCurrentBuyer().subscribe(response => {
-      feedback.BuyerId = response.buyer?.buyerId;
-      this.shopService.postFeedback(feedback).subscribe((response) => { }, (error) => { });
-
+      feedback.buyerId = response.buyer?.buyerId;
+      this.shopService.postFeedback(feedback).subscribe((response) => { this.ts.success('Feedback has been submitted') }, (error) => { });
     }, error => { console.log(error) })
+    this.productFeedBacks.push(feedback);
     this.loadProduct();
-    this.loadProduct();
-
   }
 
 

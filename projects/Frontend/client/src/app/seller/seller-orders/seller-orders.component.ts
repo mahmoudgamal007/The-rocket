@@ -21,6 +21,7 @@ export class SellerOrdersComponent implements OnInit {
   orders:any;
   users:any;
   buyer:any;
+  buyername:any;
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
@@ -48,20 +49,8 @@ export class SellerOrdersComponent implements OnInit {
         (response)=>{
           
           this.orders=response;
-          console.log(this.orders);
-          this.sellerService.getAllusers().subscribe(
-            (response) => {
-           
-              this.users=response;
-              
-               console.log(response)
-              // this.getBuyerName(2);
-             
-             // console.log(this.users[0].buyer)
-             ;}
-          )
-        }
-      )
+          console.log(this.orders);          
+        })
       },
       (error) => {
         console.log(error);
@@ -70,12 +59,9 @@ export class SellerOrdersComponent implements OnInit {
   }
   getBuyerName(buyerId:number)
   {
-    this.users.forEach(function(Value:any)  {
-      if (Value.buyer.buyerId!=null && Value.buyer.buyerId==buyerId)
-      console.log(Value.buyer.firstName)
-    });
-  
-
+    
+    return this.sellerService.getBuyer(buyerId)
+ 
   
   }
 
@@ -111,3 +97,7 @@ export class SellerOrdersComponent implements OnInit {
         })
       }
 }
+function getBuyerName(buyerId: any): any {
+  throw new Error('Function not implemented.');
+}
+

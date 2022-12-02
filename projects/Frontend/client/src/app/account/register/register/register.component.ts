@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AppUser } from 'src/app/shared/models/appUser';
 import { Buyer } from 'src/app/shared/models/buyer';
 import { IAppUser } from 'src/app/shared/models/IAppUser';
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
   registerSellerForm!: FormGroup | null;
   newBuyer: AppUser = new AppUser();
   newSeller: AppUser = new AppUser();
+  errors: string[] = [];
 
 
   genders = [
@@ -27,7 +29,7 @@ export class RegisterComponent implements OnInit {
     { sex: 'Female', value: 1 }
   ]
 
-  constructor(private fb: FormBuilder, private router: Router, private accountService: AccountService) { }
+  constructor(private fb: FormBuilder, private router: Router, private accountService: AccountService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -97,12 +99,29 @@ export class RegisterComponent implements OnInit {
   onBuyerSubmit() {
     this.mapRegisterFormValues(this.registerBuyerForm?.value);
     this.accountService.register(this.newBuyer)
-      .subscribe(response => { this.router.navigateByUrl('/product'); }, error => { console.log(error) })
+      .subscribe(response => {
+        this.router.navigateByUrl('/product');
+        this.toastrService.success('Account registered successfully');
+      }, err => {
+        err.error.Errors.forEach((error: any) => {
+          this.errors = [];
+          this.errors.push(error.Description)
+        });
+      })
+
   }
   onSellerSubmit() {
     this.mapRegisterFormValues(this.registerSellerForm?.value);
     this.accountService.register(this.newSeller)
-      .subscribe(response => { this.router.navigateByUrl('/product'); }, error => { console.log(error) })
+      .subscribe(response => {
+        this.router.navigateByUrl('/product');
+        this.toastrService.success('Account registered successfully');
+      }, err => {
+        err.error.Errors.forEach((error: any) => {
+          this.errors = [];
+          this.errors.push(error.Description)
+        });
+      })
   }
 
 

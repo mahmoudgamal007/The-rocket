@@ -4,12 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { BuyerComponent } from './buyer.component';
 import { BuyerCartComponent } from './buyer-cart/buyer-cart.component';
 import { BuyerOrdersComponent } from './buyer-orders/buyer-orders.component';
+import { BuyerAuthGuard } from '../core/guards/buyer-auth.guard';
 
 
 const routes: Routes = [
-  { path: 'profile', component: BuyerComponent },
-  { path: 'cart', component: BuyerCartComponent },
-  { path: 'order', component: BuyerOrdersComponent },
+  { path: '', canActivate: [BuyerAuthGuard], component: BuyerComponent },
+  { path: 'cart', canActivate: [BuyerAuthGuard], component: BuyerCartComponent },
+  { path: 'order', canActivate: [BuyerAuthGuard], component: BuyerOrdersComponent },
 
 
 ]

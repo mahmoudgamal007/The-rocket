@@ -7,7 +7,7 @@ import { IAppUser } from './models/IAppUser';
   providedIn: 'root'
 })
 export class SharedService {
-  
+
 
   constructor(private http: HttpClient) { }
   baseUrl: string = environment.apiUrl;
@@ -23,7 +23,9 @@ export class SharedService {
   }
 
 
-  getAppUeserByUsrId(userId:any){
-    return this.http.get<IAppUser>(this.baseUrl+'AppUser/GetAppUserByUserId');
+  getAppUeserByUsrId(userId: any) {
+    return this.http.get<IAppUser>(this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + userId);
   }
+
+
 }

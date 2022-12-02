@@ -5,7 +5,7 @@ export class shopParams {
     maxPrice?: number;
     name?: string;
     sellerId?: number;
-    pageSize: number = 3;
+    pageSize: number = 15;
     sortBy: string = 'Name';
     sortOrder!: string;
     mainCategory!: string;
