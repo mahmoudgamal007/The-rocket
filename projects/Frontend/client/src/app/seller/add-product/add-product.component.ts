@@ -7,7 +7,7 @@ import { SellerService } from '../seller.service';
 import { SubCategory } from 'src/app/shared/models/subCategory';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { SharedService } from 'src/app/shared/shared.service';
-import { Product } from 'src/app/shared/models/Product';
+import { Product } from 'src/app/shared/models/product';
 import { visitValue } from '@angular/compiler/src/util';
 import { AppUser } from 'src/app/shared/models/appUser';
 import { AccountService } from 'src/app/account/account.service';

@@ -1,1 +1,86 @@
-<p>editprofile works!</p>
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input
+      type="text"
+      class="form-control"
+      id="about"
+      aria-describedby="emailHelp"
+      placeholder="Enter email"
+    />
+  </div>
+
+  <button (click)="onSellerEditFormSubmit()" type="button">edit</button>
+  <div class="row">
+    <label for="file">Upload Profile picture.</label>
+    <div class="form-group">
+      <!-- <br>
+              <button class="btn btn-success" type="button" (click)="uploadImage()">Upload Image</button> -->
+    </div>
+    <div class="col-md-4">
+      <span class="upload" *ngIf="progress! > 0"> {{ progress }}% </span>
+      <span class="upload" *ngIf="message">
+        {{ message }}
+      </span>
+      <button (click)="onSubmit()" type="button">pic</button>
+    </div>
+  </div>
+</form>
+<div class="container">
+  <!-- code here -->
+  <div class="card">
+    <form class="card-form">
+      <div class="input" *ngFor="let adress of data.addresses">
+        <input type="text" class="input-field" value="{{ adress.country }} " />
+        <p style="color: rgb(67, 114, 67)">country</p>
+
+        <input
+          type="text"
+          class="input-field"
+          value=" {{ adress.government }}"
+        />
+        <p style="color: green">government</p>
+        <input type="text" class="input-field" value=" {{ adress.city }}" />
+        <p style="color: green">city</p>
+        <input type="text" class="input-field" value="{{ adress.street }}" />
+        <p style="color: green; margin-top: 2em">street</p>
+        <label class="input-label">Adresses</label>
+      </div>
+      <div class="input" *ngFor="let phone of data.phoneNumbers">
+        <input
+          type="text"
+          class="input-field"
+          value="{{ phone.phone }}"
+          required
+        />
+        <label class="input-label">Phones</label>
+      </div>
+      <div class="input">
+        <input type="password" class="input-field" required />
+        <label class="input-label">Password</label>
+      </div>
+      <div class="input">
+        <input
+          formControlName="file"
+          class="input-field"
+          type="file"
+          if="file"
+          #file
+          placeholder="Choose file"
+          multiple
+          (change)="catchSelectedImages(file.files)"
+        />
+        <label class="input-label">Upload Profile Picture</label>
+      </div>
+      <div class="action">
+        <button class="action-button">Get started</button>
+      </div>
+    </form>
+    <div class="card-info">
+      <p>
+        By signing up you are agreeing to our
+        <a href="#">Terms and Conditions</a>
+      </p>
+    </div>
+  </div>
+</div>
