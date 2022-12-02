@@ -101,6 +101,17 @@ namespace TheRocket.Repositories.UserRepos
             return new SharedResponse<bool>(Status.problem, false);
         }
 
+        public async Task<SharedResponse<BuyerDto>> GeBuyerByAccountId(int id)
+        {
+            Buyer buyer = await db.Buyers.FindAsync(id);
+            if (buyer != null)
+            {
+                var buyerDto = mapper.Map<BuyerDto>(buyer);
+                return new SharedResponse<BuyerDto>(Status.found, buyerDto);
+            }
+            return new SharedResponse<BuyerDto>(Status.notFound, null);
+        }
+
         public async Task<SharedResponse<List<AppUserDto>>> GetAll()
         {
             var appUsers = userManager.Users.ToList();
@@ -109,7 +120,7 @@ namespace TheRocket.Repositories.UserRepos
             return new SharedResponse<List<AppUserDto>>(Status.found, appUserDtos);
         }
 
-
+        
 
         public async Task<SharedResponse<AppUserDto>> GetById(string id)
         {
@@ -133,14 +144,14 @@ namespace TheRocket.Repositories.UserRepos
 
         public async Task<SharedResponse<AppUserDto>> Update(Guid Id, UpdateAppUserDto model)
         {
-            var appUser=await userManager.FindByIdAsync(Id.ToString());
-            if(appUser==null)return new SharedResponse<AppUserDto>(Status.notFound,null);
-            appUser.Addresses=mapper.Map<List<Address>>(model.Addresses);
-            appUser.Admin=mapper.Map<Admin>(model.Admin);
-            appUser.Seller=mapper.Map<Seller>(model.Seller);
-            appUser.Buyer=mapper.Map<Buyer>(model.Buyer);
-            appUser.Locations=mapper.Map<List<Location>>(model.Locations);
-            appUser.PhoneNumbers=mapper.Map<List<Phone>>(model.PhoneNumbers);
+            var appUser = await userManager.FindByIdAsync(Id.ToString());
+            if (appUser == null) return new SharedResponse<AppUserDto>(Status.notFound, null);
+            appUser.Addresses = mapper.Map<List<Address>>(model.Addresses);
+            appUser.Admin = mapper.Map<Admin>(model.Admin);
+            appUser.Seller = mapper.Map<Seller>(model.Seller);
+            appUser.Buyer = mapper.Map<Buyer>(model.Buyer);
+            appUser.Locations = mapper.Map<List<Location>>(model.Locations);
+            appUser.PhoneNumbers = mapper.Map<List<Phone>>(model.PhoneNumbers);
             try
             {
                 await userManager.UpdateAsync(appUser);
@@ -148,7 +159,7 @@ namespace TheRocket.Repositories.UserRepos
             }
             catch (Exception ex)
             {
-                return new SharedResponse<AppUserDto>(Status.problem,null, ex.ToString());
+                return new SharedResponse<AppUserDto>(Status.problem, null, ex.ToString());
             }
 
         }

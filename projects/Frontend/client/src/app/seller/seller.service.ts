@@ -12,6 +12,7 @@ import { Size } from '../shared/models/Size';
 import { SubCategory } from '../shared/models/subCategory';
 import { IProduct } from '../shared/models/IProduct';
 import { AppUser } from '../shared/models/appUser';
+import { Product } from '../shared/models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -34,14 +35,14 @@ export class SellerService {
     return this.http.get<SubCategory[]>(this.baseUrl + 'SubCategory');
   }
 
-  postNewProduct(product: IProduct) {
-    console.log(product);
-
-    return this.http.post(this.baseUrl + 'Product', product);
-  }
   editseller(id: any, seller: AppUser) {
     id = localStorage.getItem('userId');
     return this.http.put(this.baseUrl + 'AppUser?Id=' + id, seller);
+  }
+  postNewProduct(product: Product) {
+    console.log('hello');
+
+    return this.http.post(this.baseUrl + 'Product', product);
   }
 
   // uploadImage(files: any) {
@@ -85,17 +86,26 @@ export class SellerService {
     );
   }
 
-  EditOrder(id: any, order: any = {}) {
-    return this.http.put(this.baseUrl + 'Order?Id=' + id, order);
-  }
   getCurrentSeller() {
     let id = localStorage.getItem('userId');
-    console.log(id);
     return this.http.get<IAppUser>(
       this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + id
     );
   }
-  editSeller(id: any, seller: IAppUser) {
+  editSeller(id: any, seller: AppUser) {
     return this.http.put('http://localhost:52437/Api/AppUser?Id=' + id, seller);
+  }
+
+  EditOrder(id: any, order: any = {}) {
+    return this.http.put(this.baseUrl + 'Order?Id=' + id, order);
+  }
+  editAdress(id: any, address: any) {
+    id = localStorage.getItem('userId');
+    console.log(address);
+    console.log(id);
+    return this.http.put(
+      'http://localhost:52437/Api/Address?id=' + id,
+      address
+    );
   }
 }

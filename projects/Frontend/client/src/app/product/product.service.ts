@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { IFeedBack } from '../shared/models/IFeedBack';
 import { Feedback } from '../shared/models/feedback';
 import { IAppUser } from '../shared/models/IAppUser';
+import { Cart } from '../shared/models/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -74,18 +75,20 @@ export class ProductService {
   }
 
   getFeedbacks(productId: number) {
-    return this.http.get<IFeedBack[]>(this.baseUrl + 'Feedbacks/GetAllFeedbacsByProductId?productId=' + productId.toString())
+    return this.http.get<Feedback[]>(this.baseUrl + 'Feedbacks/GetAllFeedbacsByProductId?productId=' + productId.toString())
   }
 
   postFeedback(feedback: Feedback) {
-
-
     return this.http.post(this.baseUrl + 'Feedbacks', feedback);
   }
 
   getCurrentBuyer() {
     let guid = localStorage.getItem('userId');
     return this.http.get<IAppUser>(this.baseUrl + 'appuser/getappuserbyuserid?AppUserId=' + guid)
+  }
+
+  addItemToCart(item: Cart) {
+    return this.http.post(this.baseUrl + 'ReserveCart', item);
   }
 
 }

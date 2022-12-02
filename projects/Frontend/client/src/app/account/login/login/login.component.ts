@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../../account.service';
 
 @Component({
@@ -10,10 +11,12 @@ import { AccountService } from '../../account.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  returnUrl?: string;
 
-  constructor(private accountService: AccountService, private router: Router) { }
+  constructor(private accountService: AccountService, private router: Router, private activatedRoute: ActivatedRoute, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
+    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/product';
     this.createLoginForm();
   }
 
@@ -25,7 +28,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.accountService.login(this.loginForm.value).subscribe(() => this.router.navigateByUrl('/product'),
+    this.accountService.login(this.loginForm.value).subscribe(() => {
+      this.router.navigateByUrl(this.returnUrl!);
+      this.toastrService.success('Logged in Successfully', 'Login');
+    },
       error => { console.log(error) });
   }
 
