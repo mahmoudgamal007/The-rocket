@@ -30,12 +30,12 @@ namespace TheRocket.Repositories
                 Amount = Amount * -1;
             }
             else
-                order.DeliveryStatus = DeliveryStatus.Returned;
+                order.ReturnRequest = ReturnRequest.Returned;
 
             try
             {
-                var product=await Context.Products.FindAsync(order.ProductId);
-                product.Quantity+=Amount;
+                var product = await Context.Products.FindAsync(order.ProductId);
+                product.Quantity += Amount;
                 Context.SaveChanges();
                 return new SharedResponse<bool>(Status.noContent, true);
 
@@ -123,6 +123,21 @@ namespace TheRocket.Repositories
         public bool IsExists(int Id)
         {
             return (Context.Orders?.Any(o => o.Id == Id && o.IsDeleted == false)).GetValueOrDefault();
+        }
+
+        public async Task<SharedResponse<bool>> RequestReturn(int orderId)
+        {
+            var order = await Context.Orders.FindAsync(orderId);
+            order.ReturnRequest = ReturnRequest.Request;
+            try
+            {
+                Context.SaveChanges();
+                return new SharedResponse<bool>(Status.noContent, true);
+            }
+            catch (Exception ex)
+            {
+                return new SharedResponse<bool>(Status.problem, false, ex.ToString());
+            }
         }
 
         public async Task<SharedResponse<OrderDto>> Update(int Id, OrderDto model)
