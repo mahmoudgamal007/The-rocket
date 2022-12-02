@@ -18,21 +18,27 @@
     <table class="table table-striped" style="margin-top: 2rem;">
         <thead>
           <tr>
-            <th># </th>
-            <th scope="col">productname</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">deliverydate</th>
-
+            <th></th>
+          <th scope="col">productName</th>
+          <th scope="col">Buyer Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">productPrice</th>
+          <th scope="col">deliverydate</th>
+         <th></th>
+         <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor  ="let order of  orders; let counter =index" >
             <ng-container *ngIf="order.deliveryStatus==2">
-
-            <th scope="row" >{{counter+1}}</th>
-            <td>  {{order["productName"]}}</td>
-            <td>  {{order["quantity"]}}</td>
+              <th scope="row" > </th>
+              <td>  {{order["productName"]}}</td>
+              <td> {{order.buyer.firstName}}</td>
+              <td>  {{order["quantity"]}}</td>
+              <td>  {{order["productPrice"]}}</td>
             <td>  {{order["deliveryDate"]}}</td>
+            <td > <input hidden="true" type="text"></td>
+            <td > <input hidden="true" type="text"></td>
           </ng-container>
           </tr>
          

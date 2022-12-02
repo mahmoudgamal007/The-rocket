@@ -61,6 +61,8 @@ namespace TheRocket.Controllers
         }
 
         [HttpPut("[action]")]
+        [AllowAnonymous]
+
         public async Task<IActionResult> AcceptOrReturnOrder([FromQuery] int orderId,[FromQuery]int ammount,[FromQuery] bool Accept){
             var response=await Order.AcceptOrReturnOrder(orderId,ammount,Accept);
             if(response.data==true)

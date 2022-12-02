@@ -18,11 +18,11 @@
   <table class="table table-striped" style="margin-top: 2rem;">
       <thead>
         <tr>
-          <th  ># </th>
+          <th></th>
           <th scope="col">productName</th>
+          <th scope="col">Buyer Name</th>
           <th scope="col">Quantity</th>
           <th scope="col">productPrice</th>
-          <th scope="col">Buyer Name</th>
 
           <th></th>
           <th></th>
@@ -34,20 +34,15 @@
         
         <tr *ngFor  ="let order of orders;let counter =index "  >
           <ng-container *ngIf="order.deliveryStatus==0">
-          <th scope="row" >{{counter+1}} </th>
+          <th scope="row" > </th>
           <td>  {{order["productName"]}}</td>
-       
+          <td> {{order.buyer.firstName}}</td>
           <td>  {{order["quantity"]}}</td>
           <td>  {{order["productPrice"]}}</td>
-          <td> {{order.buyer.firstName}}</td>
          <td> <a href="/product/{{order.productId}}"> View Details</a></td>
-          <td> {{order.buyername}}</td>
-          <td><button  type="button" (click)="AcceptOrder(order.id,order)" class="btn btn-success   btn-sm">Accept</button>
-          </td>
+          <td><button  type="button" (click)="AcceptOrder(order.id,order)" class="btn btn-success   btn-sm">Accept</button></td>
           <td>
-              <button type="button" (click)="CancelOrder(order.id,order)" class="btn btn-danger   btn-sm">Cancel</button>
-  
-          </td>
+              <button type="button" (click)="CancelOrder(order.id,order)" class="btn btn-danger   btn-sm">Cancel</button> </td>
         </ng-container>
         </tr>
     

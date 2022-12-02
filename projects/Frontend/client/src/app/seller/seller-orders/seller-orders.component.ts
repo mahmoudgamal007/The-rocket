@@ -57,13 +57,7 @@ export class SellerOrdersComponent implements OnInit {
       }
     );
   }
-  getBuyerName(buyerId:number)
-  {
-    
-    return this.sellerService.getBuyer(buyerId)
- 
-  
-  }
+
 
   getOrders(){
     this.getUser();
