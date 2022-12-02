@@ -12,9 +12,14 @@ import { buyerService } from '../buyer.service';
   styleUrls: ['./buyer-orders.component.scss']
 })
 export class BuyerOrdersComponent implements OnInit {
+  requestReturn(id: number) {
+    this.buyerService.requestRturnOrder(id).subscribe(
+
+    )
+  }
   ds: any;
   orders: IOrder[] = [];
-  buyerid!:any;
+  buyerid!: any;
 
   constructor(private buyerService: buyerService, private route: ActivatedRoute) { }
 
@@ -24,15 +29,16 @@ export class BuyerOrdersComponent implements OnInit {
 
 
   getOrders() {
-    let id: number |undefined;
-    
-    this.buyerService.getCurrentBuyerAppUser().subscribe(response => {this.buyerid = response.buyer?.buyerId; 
-    console.log(response.buyer?.buyerId)
-    
-    console.log(this.buyerid)
-    this.buyerService.getAllOrdersByBuyerId(this.buyerid!).subscribe(response => {
-      this.orders=response
-    })
+    let id: number | undefined;
+
+    this.buyerService.getCurrentBuyerAppUser().subscribe(response => {
+      this.buyerid = response.buyer?.buyerId;
+      console.log(response.buyer?.buyerId)
+
+      console.log(this.buyerid)
+      this.buyerService.getAllOrdersByBuyerId(this.buyerid!).subscribe(response => {
+        this.orders = response
+      })
     })
   }
 

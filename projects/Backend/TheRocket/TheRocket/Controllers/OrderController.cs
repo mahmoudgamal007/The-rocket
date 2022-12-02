@@ -80,6 +80,15 @@ namespace TheRocket.Controllers
             return NoContent();
         }
 
+        [HttpPut("[action]")]
+        [Authorize(Roles ="Buyer")]
+        public async Task<ActionResult<OrderDto>> RequestReturn([FromQuery] int OrderId){
+            if(OrderId==0)return BadRequest();
+            var response=await Order.RequestReturn(OrderId);
+            if(response.status==Status.noContent)return Ok(true);
+            return Problem("false");
+        }
+
         [HttpPut]
 
         [Authorize(Roles = "Seller,Buyer")]

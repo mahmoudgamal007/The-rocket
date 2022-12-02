@@ -44,4 +44,8 @@ export class buyerService {
     console.log(id)
     return this.http.put("http://localhost:52437/Api/Address?id=" + id, address);
  }
+
+  requestRturnOrder(id:number){
+    return this.http.put(this.baseUrl+"Order/RequestReturn?OrderId="+id,null);
+  }
 }
