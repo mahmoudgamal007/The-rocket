@@ -11,12 +11,43 @@ namespace TheRocket.Repositories
     public class OrderRepo : IOrderRepo
     {
         private readonly IMapper Mapper;
+        private readonly IProdcutRepo prodcutRepo;
         private readonly TheRocketDbContext Context;
-        public OrderRepo(TheRocketDbContext context, IMapper mapper)
+        public OrderRepo(TheRocketDbContext context, IMapper mapper, IProdcutRepo prodcutRepo)
         {
             Context = context;
             Mapper = mapper;
+            this.prodcutRepo = prodcutRepo;
         }
+
+        public async Task<SharedResponse<bool>> AcceptOrReturnOrder(int orderId, int Amount, bool Accept)
+        {
+            var order = await Context.Orders.FindAsync(orderId);
+            if (Accept)
+            {
+                order.DeliveryStatus = DeliveryStatus.Shipping;
+                Amount = Amount * -1;
+            }
+            else
+                order.DeliveryStatus = DeliveryStatus.Returned;
+
+            var orderDto = Mapper.Map<OrderDto>(order);
+            var response = await Update(orderId, orderDto);
+            if (response.status == Status.noContent)
+            {
+                var productResponse = await prodcutRepo.GetById(order.ProductId);
+                if (productResponse.status == Status.found)
+                {
+                    var ProductDto = productResponse.data;
+                    ProductDto.Quantity += Amount;
+                    productResponse = await prodcutRepo.Update(order.ProductId, ProductDto);
+                    return new SharedResponse<bool>(Status.noContent, true);
+                }
+            }
+            return new SharedResponse<bool>(Status.problem, false);
+
+        }
+
         public async Task<SharedResponse<OrderDto>> Create(OrderDto model)
         {
             if (Context.Orders == null)

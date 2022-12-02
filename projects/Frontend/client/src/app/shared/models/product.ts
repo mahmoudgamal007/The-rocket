@@ -1,6 +1,4 @@
-import { Color } from "./Color";
-import { Image } from "./Image";
-import { Size } from "./Size";
+
 
 export class Product {
  

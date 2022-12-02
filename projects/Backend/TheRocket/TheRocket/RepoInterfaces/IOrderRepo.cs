@@ -7,5 +7,6 @@ namespace TheRocket.Repositories.RepoInterfaces
     {
          public Task<SharedResponse<List<OrderDto>>> GetBySellerId(int SellerId);
          public Task<SharedResponse<List<OrderDto>>> GetByBuyerId(int BuyerId);
+         public Task<SharedResponse<Boolean>> AcceptOrReturnOrder(int orderId,int Amount,bool Accept);
     }
 }
