@@ -27,7 +27,7 @@
       <td class="table-warning">{{order.isReturned}}</td>
       <td class="table-secondary">{{order.returnDate}}</td>
       <td class="table-secondary">
-        <a  style="margin: 10px;" class="btn btn-secondary btn-lg col">History</a>
+        <a  style="margin: 10px;" class="btn btn-secondary btn-lg col" (click)="requestReturn(order.id)">Return Request</a>
       </td>
     </tr>
   </tbody>

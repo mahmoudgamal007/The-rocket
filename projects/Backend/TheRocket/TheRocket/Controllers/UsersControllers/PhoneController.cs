@@ -55,7 +55,7 @@ namespace TheRocket.Controllers
             return Ok(response.data);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<ActionResult<PhoneDto>> PutPhone([FromQuery] int id, PhoneDto Phone)
         {
             SharedResponse<PhoneDto> response = await repo.Update(id, Phone);
@@ -64,7 +64,7 @@ namespace TheRocket.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<ActionResult<PhoneDto>> DeletePhone([FromQuery] int id)
         {
             SharedResponse<PhoneDto> response = await repo.Delete(id);

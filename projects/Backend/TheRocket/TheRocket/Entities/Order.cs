@@ -15,7 +15,7 @@ namespace TheRocket.Entities
         public DateTime? ReturnDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public int Quantity { get; set; }
-        public bool ReturnRequest { get; set; }
+        public ReturnRequest? ReturnRequest { get; set; }=null;
         public string ProductName { get; set; }
         public double ProductPrice { get; set; }
 
@@ -38,5 +38,9 @@ namespace TheRocket.Entities
     public enum DeliveryStatus
     {
         Stock=0,Shipping=1,Delivvered=2,Canceled=3
+    }
+
+    public enum ReturnRequest{
+        Request=0,Returned=1,Canceled=2
     }
 }

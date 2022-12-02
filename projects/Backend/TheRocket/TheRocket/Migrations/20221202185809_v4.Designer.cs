@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheRocket.TheRocketDbContexts;
 
@@ -11,9 +12,10 @@ using TheRocket.TheRocketDbContexts;
 namespace TheRocket.Migrations
 {
     [DbContext(typeof(TheRocketDbContext))]
-    partial class TheRocketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221202185809_v4")]
+    partial class v4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
