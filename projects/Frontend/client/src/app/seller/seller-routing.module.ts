@@ -7,24 +7,20 @@ import { SellerHistoryComponent } from './seller-history/seller-history.componen
 import { SellerShippingComponent } from './seller-shipping/seller-shipping.component';
 import { SellerReturnsComponent } from './seller-returns/seller-returns.component';
 import { AddProductComponent } from './add-product/add-product.component';
-
+import { EditprofileComponent } from './editprofile/editprofile.component';
 
 const routes: Routes = [
-  { path: '', component: SellerComponent},
+  { path: '', component: SellerComponent },
   { path: 'orders', component: SellerOrdersComponent },
-  {path:'returns',component: SellerReturnsComponent},
-  {path:'history',component: SellerHistoryComponent},
-  {path:'shipping',component:SellerShippingComponent},
-  { path: 'addProduct', component: AddProductComponent }
-
-
-]
+  { path: 'edit', component: EditprofileComponent },
+  { path: 'returns', component: SellerReturnsComponent },
+  { path: 'history', component: SellerHistoryComponent },
+  { path: 'shipping', component: SellerShippingComponent },
+  { path: 'addProduct', component: AddProductComponent },
+];
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ],
-  exports:[RouterModule]
+  imports: [CommonModule, RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class SellerRoutingModule { }
+export class SellerRoutingModule {}

@@ -11,43 +11,38 @@ import { Color } from '../shared/models/Color';
 import { Size } from '../shared/models/Size';
 import { SubCategory } from '../shared/models/subCategory';
 import { IProduct } from '../shared/models/IProduct';
+import { AppUser } from '../shared/models/appUser';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SellerService {
-
-
   currentUser$!: Observable<IUser | null>;
   baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
- 
- 
+  constructor(private http: HttpClient) {}
 
   getColors() {
-    return this.http.get<Color[]>(
-      this.baseUrl + 'Color'
-    );
+    return this.http.get<Color[]>(this.baseUrl + 'Color');
   }
 
   getSizes() {
-    return this.http.get<Size[]>(
-      this.baseUrl + 'Size'
-    );
+    return this.http.get<Size[]>(this.baseUrl + 'Size');
   }
 
   getSubCategory() {
-    return this.http.get<SubCategory[]>(
-      this.baseUrl + 'SubCategory'
-    );
+    return this.http.get<SubCategory[]>(this.baseUrl + 'SubCategory');
   }
 
-postNewProduct(product:IProduct){
-  console.log(product);
+  postNewProduct(product: IProduct) {
+    console.log(product);
 
-  return this.http.post(this.baseUrl+'Product',product);
-}
+    return this.http.post(this.baseUrl + 'Product', product);
+  }
+  editseller(id: any, seller: AppUser) {
+    id = localStorage.getItem('userId');
+    return this.http.put(this.baseUrl + 'AppUser?Id=' + id, seller);
+  }
 
   // uploadImage(files: any) {
 
@@ -59,9 +54,6 @@ postNewProduct(product:IProduct){
   //   return this.http.post(this.baseUrl + 'Image', formData, { reportProgress: true, observe: 'events' });
 
   // }
-
-
-
 
   getUser(userId: any) {
     return this.http.get<IAppUser>(
@@ -87,12 +79,23 @@ postNewProduct(product:IProduct){
       );
   }
 
-  getAllOrders(sellerId:any){
-    return this.http.get(this.baseUrl + 'Order/GetBySellerId?SellerId='+sellerId);
+  getAllOrders(sellerId: any) {
+    return this.http.get(
+      this.baseUrl + 'Order/GetBySellerId?SellerId=' + sellerId
+    );
   }
 
-  EditOrder(id:any,order:any={}){
-
-    return this.http.put(this.baseUrl+"Order?Id="+id,order);
+  EditOrder(id: any, order: any = {}) {
+    return this.http.put(this.baseUrl + 'Order?Id=' + id, order);
+  }
+  getCurrentSeller() {
+    let id = localStorage.getItem('userId');
+    console.log(id);
+    return this.http.get<IAppUser>(
+      this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + id
+    );
+  }
+  editSeller(id: any, seller: IAppUser) {
+    return this.http.put('http://localhost:52437/Api/AppUser?Id=' + id, seller);
   }
 }
