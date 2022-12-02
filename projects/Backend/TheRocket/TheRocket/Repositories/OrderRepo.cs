@@ -5,6 +5,7 @@ using TheRocket.Shared;
 using TheRocket.TheRocketDbContexts;
 using TheRocket.Entities;
 using Microsoft.EntityFrameworkCore;
+using TheRocket.Dtos.ProductDtos;
 
 namespace TheRocket.Repositories
 {
@@ -31,20 +32,19 @@ namespace TheRocket.Repositories
             else
                 order.DeliveryStatus = DeliveryStatus.Returned;
 
-            var orderDto = Mapper.Map<OrderDto>(order);
-            var response = await Update(orderId, orderDto);
-            if (response.status == Status.noContent)
+            try
             {
-                var productResponse = await prodcutRepo.GetById(order.ProductId);
-                if (productResponse.status == Status.found)
-                {
-                    var ProductDto = productResponse.data;
-                    ProductDto.Quantity += Amount;
-                    productResponse = await prodcutRepo.Update(order.ProductId, ProductDto);
-                    return new SharedResponse<bool>(Status.noContent, true);
-                }
+                var product=await Context.Products.FindAsync(order.ProductId);
+                product.Quantity+=Amount;
+                Context.SaveChanges();
+                return new SharedResponse<bool>(Status.noContent, true);
+
             }
-            return new SharedResponse<bool>(Status.problem, false);
+            catch (Exception ex)
+            {
+                return new SharedResponse<bool>(Status.problem, false, ex.ToString());
+            }
+
 
         }
 
