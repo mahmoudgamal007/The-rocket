@@ -39,7 +39,7 @@
        
           <td>  {{order["quantity"]}}</td>
           <td>  {{order["productPrice"]}}</td>
-          <!-- <td> {{order.buyerId}}</td> -->
+          <td> {{order.buyer.firstName}}</td>
          <td> <a href="/product/{{order.productId}}"> View Details</a></td>
           <td> {{order.buyername}}</td>
           <td><button  type="button" (click)="AcceptOrder(order.id,order)" class="btn btn-success   btn-sm">Accept</button>
