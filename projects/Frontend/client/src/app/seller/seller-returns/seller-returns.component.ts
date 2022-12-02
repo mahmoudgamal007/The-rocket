@@ -67,9 +67,9 @@ export class SellerReturnsComponent  {
       }
       AcceptReturnRequest(id:any,order:IOrder){
         console.log("click");
-        order.deliveryStatus=4;
+        order.deliveryStatus=0;
         order.isReturned=true;
-        order.returnRequest=false;
+        order.returnRequest=1;
        this.sellerService.AcceptOrReturnOrder(id,order.quantity,this.flag).subscribe(res=>{
         console.log(res);
 
@@ -77,7 +77,7 @@ export class SellerReturnsComponent  {
       }
       CancelReturnRequest(id:any,order:IOrder){
         console.log("click");
-        order.deliveryStatus=5;
+        order.returnRequest=2;
        this.sellerService.EditOrder(id,order).subscribe(res=>{
         console.log(res);
 

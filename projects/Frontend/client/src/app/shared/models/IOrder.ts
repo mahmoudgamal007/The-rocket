@@ -7,7 +7,7 @@
         returnDate: Date;
         deliveryDate: Date;
         quantity: number;
-        returnRequest: boolean;
+        returnRequest: number;
         productName: string;
         productPrice: number;
         productId: number;
