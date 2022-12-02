@@ -1,4 +1,5 @@
-﻿using TheRocket.Entities;
+﻿using TheRocket.Dtos.UserDtos;
+using TheRocket.Entities;
 
 namespace TheRocket.Dtos
 {
@@ -16,6 +17,7 @@ namespace TheRocket.Dtos
         public int ProductId { get; set; }
         public int BuyerId { get; set; }
         public int SellerId { get; set; }
+        public BuyerDto Buyer { get; set; }
  
 
     }
