@@ -2,12 +2,13 @@
   class="d-flex flex-column flex-md-row align-items-center justify-content-between p-3 px-md-4 mb-1 bg-white border-bottom shadow-sm">
   <img [routerLink]="['/product']" id="logo" src="../assets/images/Rocket.PNG" alt="logo" style="cursor:pointer ;" />
   <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" [routerLink]="['/account']">Account</a>
+    <!-- <a class="p-2 text-dark" [routerLink]="['/account']">Account</a> -->
     <a class="p-2 text-dark" [routerLink]="['/product']">Products</a>
-    <a class="p-2 text-dark" [routerLink]="['/seller']">Sellers</a>
-    <a class="p-2 text-dark" [routerLink]="['/buyer']">Buyer</a>
-    <a class="p-2 text-dark" [routerLink]="['/cart']">Cart</a>
-    <a class="p-2 text-dark" [routerLink]="['/order']">Orders</a>
+    <a *ngIf="localStorage.getItem('accountType')=='Seller'" class="p-2 text-dark" [routerLink]="['/seller']">Sellers</a>
+    <a *ngIf="localStorage.getItem('accountType')=='Buyer'" class="p-2 text-dark" [routerLink]="['/buyer']">Buyer</a>
+    <!-- <a class="p-2 text-dark" [routerLink]="['/cart']">Cart</a> -->
+    <a  *ngIf="localStorage.getItem('accountType')=='Buyer'" class="p-2 text-dark" [routerLink]="['buyer/order']">Orders</a>
+    <a *ngIf="localStorage.getItem('accountType')=='Seller'" class="p-2 text-dark" [routerLink]="['seller/orders']">Orders</a>
   </nav>
   <div class="nav-menu d-flex">
     <ng-container *ngIf="(currentUser$ | async) !== null">
