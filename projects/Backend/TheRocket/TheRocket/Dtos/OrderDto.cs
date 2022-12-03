@@ -17,8 +17,10 @@ namespace TheRocket.Dtos
         public int ProductId { get; set; }
         public int BuyerId { get; set; }
         public int SellerId { get; set; }
-        public BuyerDto Buyer { get; set; }
- 
+        public BuyerDto? Buyer { get; set; }
+        public SellerDto? Seller { get; set; }
+
+
 
     }
 }

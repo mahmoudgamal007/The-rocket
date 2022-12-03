@@ -19,7 +19,7 @@
                 <form [formGroup]="registerBuyerForm" (ngSubmit)="onBuyerSubmit()">
                     <app-text-input formControlName="userName" [label]="'Username'"></app-text-input>
 
-                    <app-text-input formControlName="email" [label]="'Email Address'">
+                    <app-text-input formControlName="email" [value]="'email@email.com'" [label]="'Email Address'">
                     </app-text-input>
 
                     <app-text-input formControlName="password" [label]="'Password'" [type]="'password'">
