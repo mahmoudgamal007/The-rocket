@@ -69,6 +69,12 @@ export class SellerService {
       this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + userId.toString()
     );
   }
+  getAllusers(){
+    return this.http.get<IAppUser>(
+      this.baseUrl + 'AppUser'
+    
+    );
+  }
   getProducts(shopParams: shopParams) {
     let params = new HttpParams();
 
@@ -96,4 +102,10 @@ export class SellerService {
 
     return this.http.put(this.baseUrl + "Order?Id=" + id, order);
   }
+  AcceptOrReturnOrder(id: any,Ammount:any, Accept:boolean) {
+
+    return this.http.put(this.baseUrl + "Order/AcceptOrReturnOrder?orderId="+id+"&ammount="+Ammount+"&Accept="+Accept,null);
+  }
+  
+
 }
