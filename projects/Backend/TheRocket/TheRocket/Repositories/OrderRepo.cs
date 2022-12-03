@@ -28,10 +28,12 @@ namespace TheRocket.Repositories
             {
                 order.DeliveryStatus = DeliveryStatus.Shipping;
                 Amount = Amount * -1;
+               
             }
-            else
+            else{
                 order.ReturnRequest = ReturnRequest.Returned;
-
+                 order.ReturnDate=DateTime.Now;
+            }
             try
             {
                 var product = await Context.Products.FindAsync(order.ProductId);

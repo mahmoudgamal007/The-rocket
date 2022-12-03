@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from './account/account.service';
+import { buyerService } from './buyer/buyer.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,12 @@ import { AccountService } from './account/account.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private accountService: AccountService) { }
+
+  constructor(private accountService: AccountService, private buyerService: buyerService) { }
 
   ngOnInit(): void {
     this.loadCurrentUser();
+    this.LoadCurrentUserBasket();
   }
   title = 'Rocket';
 
@@ -27,4 +30,17 @@ export class AppComponent implements OnInit {
       );
     } else { this.accountService.setCurrentUserToNull(); }
   }
+
+  LoadCurrentUserBasket() {
+    const accType = localStorage.getItem('accountType');
+    if (accType === 'Buyer') {
+      this.buyerService.getCurrentBuyer().subscribe(res => {
+        this.buyerService.getBasket(res.buyer?.buyerId!)
+      }, error => { console.log(error) })
+
+    }
+
+  }
+
+
 }
