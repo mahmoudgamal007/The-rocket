@@ -10,12 +10,16 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
-import { IAddress } from 'src/app/shared/models/address';
+import { Address } from 'src/app/shared/models/address';
 import { AppUser } from 'src/app/shared/models/appUser';
+import { IAddress } from 'src/app/shared/models/IAddress';
 import { IAppUser } from 'src/app/shared/models/IAppUser';
 import { Seller } from 'src/app/shared/models/seller';
 import { SharedService } from 'src/app/shared/shared.service';
 import { SellerService } from '../seller.service';
+import { FormsModule } from '@angular/forms';
+import { IPhoneNumber } from 'src/app/shared/models/phoneNumber';
+import { Phone } from 'src/app/shared/models/phone';
 
 @Component({
   selector: 'app-editprofile',
@@ -129,10 +133,78 @@ export class EditprofileComponent implements OnInit {
     this.files = files;
     console.log('hello');
   }
-  // addressId!: number;
-  // address!: IAddress;
-  // onClick(id: number, address: IAddress) {
-  //   this.addressId = id;
-  //   this.address = address;
-  // }
+  addressId!: number;
+  address = new Address();
+
+  onAddressEdit(
+    id: number,
+    country: any,
+    government: any,
+    city: any,
+    street: any
+  ) {
+    this.address.id = id;
+    this.address.country = country;
+    this.address.government = government;
+    this.address.city = city;
+    this.address.street = street;
+    this.address.appUserId = localStorage.getItem('userId')!;
+
+    this.sellerservice.editAdress(id, this.address).subscribe((response) => {
+      console.log('edited');
+    });
+  }
+  phone = new Phone();
+  onPhoneEdit(id: number, number: any) {
+    this.phone.id = id;
+    this.phone.phone = number;
+    this.phone.appUserId = localStorage.getItem('userId')!;
+
+    this.sellerservice.editPhone(id, this.phone).subscribe((response) => {
+      console.log('edited');
+    });
+  }
+
+  deleteAddress(id: any) {
+    this.sellerservice.deleteAddress(id).subscribe((response) => {
+      alert('Deleted.');
+    });
+  }
+  deletePhone(id: any) {
+    this.sellerservice.deletePhone(id).subscribe((response) => {
+      alert('Deleted.');
+    });
+  }
+  newAddress = new Address();
+  addAddress(country: any, government: any, city: any, street: any) {
+    this.newAddress.appUserId = localStorage.getItem('userId')!;
+    this.newAddress.country = country;
+    this.newAddress.government = government;
+    this.newAddress.city = city;
+    this.newAddress.street = street;
+    this.sellerservice.addAddress(this.newAddress).subscribe(
+      (resp) => {
+        alert('Added new address');
+      },
+      (err) => {
+        console.log(err);
+        alert('not a valid address');
+      }
+    );
+  }
+  newPhone = new Phone();
+  addPhone(number: any) {
+    this.newPhone.appUserId = localStorage.getItem('userId')!;
+    this.newPhone.phone = number;
+
+    this.sellerservice.addPhone(this.newPhone).subscribe(
+      (resp) => {
+        alert('Added new phone');
+      },
+      (err) => {
+        console.log(err);
+        alert('not a valid phone');
+      }
+    );
+  }
 }

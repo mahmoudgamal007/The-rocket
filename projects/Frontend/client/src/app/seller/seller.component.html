@@ -5,11 +5,9 @@
     </a>
   </header>
 
-  <div class="row">
+  <div class="row" style="width: 100%">
     <div class="left col-lg-4">
-      <div class="photo-left">
-        <img class="photo" src="{{ appUser.seller?.profileImageUrl }}" />
-      </div>
+      <img class="photo" src="{{ appUser.seller?.profileImageUrl }}" />
 
       <h4 class="name">Username : {{ appUser.userName }}</h4>
       <p class="info"><b>Email :</b> {{ appUser.email }}</p>
@@ -32,22 +30,14 @@
     <div class="right col-lg-8">
       <ul class="nav">
         <li>My Products</li>
-        <li><a>Edit Profile</a></li>
+        <li><a href="seller/edit">Edit Profile</a></li>
       </ul>
+      <a href="/seller" style="margin: 10px" class="button-3">Orders</a>
       <!-- <button class="btn btn-success addbtn">Add product</button> -->
-      <a
-        href="seller/addProduct"
-        style="margin: 10px"
-        class="btn btn-success addbtn"
+      <a href="seller/addProduct" style="margin: 10px" class="button-3"
         >Add Product</a
       >
       <br />
-      <a
-        href="seller/orders"
-        style="margin: 10px"
-        class="btn btn-success addbtn"
-        >Order</a
-      >
 
       <div class="row gallery">
         <div
@@ -77,7 +67,12 @@
                 </li>
               </ul>
               <div class="card-body">
-                <a href="#" class="card-link">Delete</a>
+                <a
+                  href="."
+                  class="card-link"
+                  (click)="deleteProduct(product.id)"
+                  >Delete</a
+                >
               </div>
             </div>
           </div>

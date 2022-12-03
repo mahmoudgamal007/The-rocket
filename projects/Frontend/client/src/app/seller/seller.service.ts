@@ -13,6 +13,9 @@ import { SubCategory } from '../shared/models/subCategory';
 import { IProduct } from '../shared/models/IProduct';
 import { AppUser } from '../shared/models/appUser';
 import { Product } from '../shared/models/product';
+import { Address } from '../shared/models/address';
+import { IPhoneNumber } from '../shared/models/phoneNumber';
+import { Phone } from '../shared/models/phone';
 
 @Injectable({
   providedIn: 'root',
@@ -61,11 +64,8 @@ export class SellerService {
       this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + userId.toString()
     );
   }
-  getAllusers(){
-    return this.http.get<IAppUser>(
-      this.baseUrl + 'AppUser'
-    
-    );
+  getAllusers() {
+    return this.http.get<IAppUser>(this.baseUrl + 'AppUser');
   }
   getProducts(shopParams: shopParams) {
     let params = new HttpParams();
@@ -99,22 +99,44 @@ export class SellerService {
     );
   }
   editSeller(id: any, seller: AppUser) {
-    return this.http.put('http://localhost:52437/Api/AppUser?Id=' + id, seller);
+    return this.http.put(this.baseUrl + 'AppUser?Id=' + id, seller);
   }
 
   EditOrder(id: any, order: any = {}) {
     return this.http.put(this.baseUrl + 'Order?Id=' + id, order);
   }
   editAdress(id: any, address: any) {
+    return this.http.put(this.baseUrl + 'Address?id=' + id, address);
+  }
+  AcceptOrReturnOrder(id: any, Ammount: any, Accept: boolean) {
     return this.http.put(
-      'http://localhost:52437/Api/Address?id=' + id,
-      address
+      this.baseUrl +
+        'Order/AcceptOrReturnOrder?orderId=' +
+        id +
+        '&ammount=' +
+        Ammount +
+        '&Accept=' +
+        Accept,
+      null
     );
   }
-  AcceptOrReturnOrder(id: any,Ammount:any, Accept:boolean) {
-
-    return this.http.put(this.baseUrl + "Order/AcceptOrReturnOrder?orderId="+id+"&ammount="+Ammount+"&Accept="+Accept,null);
+  editPhone(id: any, phone: any) {
+    return this.http.put(this.baseUrl + 'Phone?id=' + id, phone);
   }
-  
 
+  deleteAddress(id: any) {
+    return this.http.delete(this.baseUrl + 'Address?id=' + id);
+  }
+  addPhone(phone: Phone) {
+    return this.http.post(this.baseUrl + 'Phone', phone);
+  }
+  deletePhone(id: any) {
+    return this.http.delete(this.baseUrl + 'Phone?id=' + id);
+  }
+  deleteProduct(id: any) {
+    return this.http.delete(this.baseUrl + 'Product?id=' + id);
+  }
+  addAddress(address: Address) {
+    return this.http.post(this.baseUrl + 'Address', address);
+  }
 }
