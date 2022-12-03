@@ -68,4 +68,10 @@ export class SellerComponent implements OnInit {
       alert('Deleted');
     });
   }
+  getlink(id: any) {
+    navigator.clipboard.writeText(
+      'http://localhost:4200/product/sellerProdcut/' + id
+    );
+    alert('link copied to Clipboard');
+  }
 }
