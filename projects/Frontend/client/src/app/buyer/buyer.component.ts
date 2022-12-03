@@ -87,25 +87,6 @@ export class BuyerComponent implements OnInit {
       this.data.buyer.birthDate=bDate;
     }
     this.newbuyer=this.data;
-    // this.newbuyer.id!=localStorage.getItem('userId');
-    // this.newbuyer.buyer?.buyerId!= this.data.buyer.buyerId;
-    // this.newbuyer.buyer?.appUserId!=localStorage.getItem('userId');
-    // this.newbuyer.buyer?.firstName!=this.buyerEditForm.value.firstName;
-    // console.log(this.buyerEditForm.value.firstName)
-    // this.newbuyer.buyer?.lastName!=this.buyerEditForm.value.lastName;
-    // this.newbuyer.buyer?.birthDate!=this.buyerEditForm.value.birthDate;
-    // this.newbuyer.userName=uname;
-
-    // buyer.id = localStorage.getItem('userId')!;
-    // buyer.userName = this.data.userName
-    // buyer.buyer = new Buyer();
-    // buyer.buyer.buyerId = this.data.buyer.buyerId;
-    // buyer.buyer.appUserId = localStorage.getItem('userId')!;
-    // this.newbuyer.buyer?.firstName!= firstName;
-    // this.newbuyer.buyer?.lastName!= lastName;
-    // buyer.buyer.gender = this.data.buyer.gender
-    // this.newbuyer.buyer?.birthDate!=birthDate;
-    // console.log(buyer)
     this.buyerService.editbuyer(this.id,this.newbuyer).subscribe(res => {
       alert("Edit Info Success")
     })
@@ -145,7 +126,6 @@ export class BuyerComponent implements OnInit {
         addgovernment: new FormControl('', [Validators.required]),
         addcity: new FormControl('', [Validators.required]),
         addstreet: new FormControl('', [Validators.required]),
-        // id: new FormControl(value.id, [Validators.required]),
       }
    )
  }
