@@ -1,6 +1,7 @@
 <div class="container">
-  <!-- code here -->
-  <div class="card">
+  <div class="row">
+    <!-- code here -->
+    <label class="input-label">Upload Profile Picture</label>
     <div class="input">
       <input
         formControlName="file"
@@ -12,8 +13,9 @@
         multiple
         (change)="catchSelectedImages(file.files)"
       />
-
-      <label class="input-label">Upload Profile Picture</label>
+      <button class="button-3" (click)="onSubmit()" type="button">
+        Update Profile
+      </button>
     </div>
     <p style="margin: 5px">update Info</p>
     <table class="table">
@@ -139,6 +141,7 @@
         <tr>
           <th scope="col">Phone</th>
           <th scope="col">Number</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -191,11 +194,5 @@
         </tr>
       </tbody>
     </table>
-
-    <div class="action">
-      <button class="action-button" (click)="onSubmit()" type="button">
-        Update Profile
-      </button>
-    </div>
   </div>
 </div>
