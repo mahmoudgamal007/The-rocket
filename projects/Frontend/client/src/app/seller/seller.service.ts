@@ -14,7 +14,7 @@ import { IProduct } from '../shared/models/IProduct';
 import { AppUser } from '../shared/models/appUser';
 import { Product } from '../shared/models/product';
 import { Address } from '../shared/models/address';
-import { IPhoneNumber } from '../shared/models/phoneNumber';
+
 import { Phone } from '../shared/models/phone';
 
 @Injectable({

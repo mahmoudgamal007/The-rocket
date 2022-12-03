@@ -18,7 +18,7 @@ import { Seller } from 'src/app/shared/models/seller';
 import { SharedService } from 'src/app/shared/shared.service';
 import { SellerService } from '../seller.service';
 import { FormsModule } from '@angular/forms';
-import { IPhoneNumber } from 'src/app/shared/models/phoneNumber';
+
 import { Phone } from 'src/app/shared/models/phone';
 
 @Component({
