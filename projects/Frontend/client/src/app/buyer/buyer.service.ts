@@ -27,7 +27,8 @@ export class buyerService {
     return this.http.get<IAppUser>(this.baseUrl + "AppUser/GetAppUserByUserId?AppUserId=" + id);
   }
 
-  editbuyer(id: any, buyer: AppUser) {
+  editbuyer(id: any, buyer: any) {
+    console.log(buyer)
     id = localStorage.getItem('userId');
     return this.http.put("http://localhost:52437/Api/AppUser?Id=" + id, buyer);
   }

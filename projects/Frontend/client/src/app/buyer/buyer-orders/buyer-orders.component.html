@@ -1,6 +1,6 @@
-<table class="table  container">
-  <thead>
-    <tr style="color:rgb(183, 5, 88)">
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr >
       <th scope="col">ProductName</th>
       <th scope="col">ProductPrice</th>
       <th scope="col">Quantity</th>
@@ -15,26 +15,27 @@
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
-      <td class="table-primary">{{order.productName}}</td>
-      <td class="table-secondary">{{order.productPrice}}</td>
-      <td class="table-success">{{order.quantity}}</td>
-      <td class="table-warning" *ngIf="order.deliveryStatus===0">Stock</td>
-      <td class="table-warning" *ngIf="order.deliveryStatus===1">Shipping</td>
-      <td class="table-warning" *ngIf="order.deliveryStatus===2">delivered</td>
-      <td class="table-warning" *ngIf="order.deliveryStatus===3">Canceled</td>
-      <td class="table-info"*ngIf="order.deliveryDate">{{order.deliveryDate}}</td>
-      <td class="table-info" *ngIf="!order.deliveryDate">____</td>
-      <td class="table-danger" *ngIf="order.isReturned">Yes</td>
-      <td class="table-danger" *ngIf="!order.isReturned">____</td>
-      <td class="table-secondary"*ngIf="order.returnDate">{{order.returnDate}}</td>
-      <td class="table-secondary" *ngIf="!order.returnDate">____</td>
-      <td class="table-danger" *ngIf="order.deliveryStatus===0">Stock</td>
-      <td class="table-danger" *ngIf="order.deliveryStatus===1">Shipping</td>
-      <td class="table-danger" *ngIf="order.deliveryStatus===2">delivverd</td>
-      <td class="table-info">{{order.deliveryDate}}</td>
-      <td class="table-warning">{{order.isReturned}}</td>
-      <td class="table-secondary">{{order.returnDate}}</td>
-      <td class="table-secondary">
+      <td >{{order.productName}}</td>
+      <td >{{order.productPrice}}</td>
+      <td >{{order.quantity}}</td>
+     <td *ngIf="order.deliveryStatus===0">Stock</td>
+      <td  *ngIf="order.deliveryStatus===1">Shipping</td>
+      <td  *ngIf="order.deliveryStatus===2">delivered</td>
+      <td *ngIf="order.deliveryStatus===3">Canceled</td>
+      <td *ngIf="order.deliveryDate">{{order.deliveryDate}}</td>
+      <td *ngIf="!order.deliveryDate">____</td>
+      <td *ngIf="order.isReturned">Yes</td>
+      <td *ngIf="!order.isReturned">____</td>
+      <td *ngIf="order.returnDate">{{order.returnDate}}</td>
+      <td  *ngIf="!order.returnDate">____</td>
+      <td  *ngIf="order.deliveryStatus===0">Stock</td>
+      <td  *ngIf="order.deliveryStatus===1">Shipping</td>
+      <td  *ngIf="order.deliveryStatus===2">delivverd</td>
+      <td  *ngIf="order.deliveryStatus===3">canceled</td> -->
+      <td >{{order.deliveryDate}}</td>
+      <td >{{order.isReturned}}</td>
+      <td>{{order.returnDate}}</td>
+      <td >
         <a  style="margin: 10px;" class="btn btn-secondary btn-lg col" (click)="requestReturn(order.id)">Return Request</a>
       </td>
     </tr>

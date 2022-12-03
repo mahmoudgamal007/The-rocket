@@ -14,7 +14,7 @@ import { Phone } from '../shared/models/phone';
 })
 export class BuyerComponent implements OnInit {
   id: any
-  isMale: boolean = false
+  isMale: string = "Female"
   buyer: any = {}
   data!: any;
   buyerEditForm!: FormGroup;
@@ -41,6 +41,9 @@ export class BuyerComponent implements OnInit {
       this.data = res
       this.data.buyer = res.buyer
       console.log(res)
+      if(res.buyer?.gender==0){
+        this.isMale="Male";
+      }
     })
   }
   createBuyerEditForm() {
@@ -67,19 +70,43 @@ export class BuyerComponent implements OnInit {
       }
     )
   }
-  onBuyerEditFormSubmit() {
-    let buyer: AppUser = new AppUser();
-    buyer.id = localStorage.getItem('userId')!;
-    buyer.userName = this.buyerEditForm.value.userName
-    buyer.buyer = new Buyer();
-    buyer.buyer.buyerId = this.data.buyer.buyerId;
-    buyer.buyer.appUserId = localStorage.getItem('userId')!;
-    buyer.buyer.firstName = this.buyerEditForm.value.firstName
-    buyer.buyer.lastName = this.buyerEditForm.value.lastName
-    buyer.buyer.gender = this.buyerEditForm.value.gender
-    buyer.buyer.birthDate = this.buyerEditForm.value.birthDate
-    console.log(buyer)
-    this.buyerService.editbuyer(this.id, buyer).subscribe(res => {
+  newbuyer: AppUser = new AppUser();
+  nbuyer:Buyer = new Buyer();
+
+  onBuyerEditFormSubmit(fname:any,lname:any,bDate:any,uname:any) {
+     this.data.buyer.firstName=this.buyerEditForm.value.firstName;
+    this.data.buyer.lastName=this.buyerEditForm.value.lastName;
+    this.data.buyer.birthDate=this.buyerEditForm.value.birthDate;
+    if(this.buyerEditForm.value.firstName===''){
+      this.data.buyer.firstName=fname;
+    }
+    if(this.buyerEditForm.value.lastName===''){
+      this.data.buyer.lastName=lname;
+    }
+    if(this.buyerEditForm.value.birthDate===''){
+      this.data.buyer.birthDate=bDate;
+    }
+    this.newbuyer=this.data;
+    // this.newbuyer.id!=localStorage.getItem('userId');
+    // this.newbuyer.buyer?.buyerId!= this.data.buyer.buyerId;
+    // this.newbuyer.buyer?.appUserId!=localStorage.getItem('userId');
+    // this.newbuyer.buyer?.firstName!=this.buyerEditForm.value.firstName;
+    // console.log(this.buyerEditForm.value.firstName)
+    // this.newbuyer.buyer?.lastName!=this.buyerEditForm.value.lastName;
+    // this.newbuyer.buyer?.birthDate!=this.buyerEditForm.value.birthDate;
+    // this.newbuyer.userName=uname;
+
+    // buyer.id = localStorage.getItem('userId')!;
+    // buyer.userName = this.data.userName
+    // buyer.buyer = new Buyer();
+    // buyer.buyer.buyerId = this.data.buyer.buyerId;
+    // buyer.buyer.appUserId = localStorage.getItem('userId')!;
+    // this.newbuyer.buyer?.firstName!= firstName;
+    // this.newbuyer.buyer?.lastName!= lastName;
+    // buyer.buyer.gender = this.data.buyer.gender
+    // this.newbuyer.buyer?.birthDate!=birthDate;
+    // console.log(buyer)
+    this.buyerService.editbuyer(this.id,this.newbuyer).subscribe(res => {
       alert("Edit Info Success")
     })
   }
