@@ -48,6 +48,7 @@ export class AccountService {
       map((user: IUser | any) => {
         if (user) {
           localStorage.setItem('accountId', user.accountId);
+          localStorage.setItem('accountType', user.accountType);
           localStorage.setItem('userId', user.userId);
           localStorage.setItem('token', user.jwtToken);
           this.currentUserSource?.next(user);
@@ -62,6 +63,7 @@ export class AccountService {
       map((user: IUser | any) => {
         if (user) {
           localStorage.setItem('accountId', user.accountId);
+          localStorage.setItem('accountType', user.accountType);
           localStorage.setItem('userId', user.userId);
           localStorage.setItem('token', user.jwtToken);
           this.currentUserSource?.next(user);
@@ -73,6 +75,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('accountId');
     localStorage.removeItem('userId');
+    localStorage.removeItem('accountType');
     localStorage.removeItem('token');
     this.currentUserSource?.next(null!);
     this.router.navigateByUrl('/product');

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/account/account.service';
-import { IOrder } from 'src/app/shared/models/order';
+import { IOrder } from 'src/app/shared/models/IOrder';
 import { buyerService } from '../buyer.service';
 
 

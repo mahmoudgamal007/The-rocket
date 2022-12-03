@@ -10,10 +10,15 @@
     <a class="p-2 text-dark" [routerLink]="['/order']">Orders</a>
   </nav>
   <div class="nav-menu d-flex">
-    <a [routerLink]="['/buyer/cart']" class="position-relative">
-      <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
-      <div class="cart-no">5</div>
-    </a>
+    <ng-container *ngIf="(currentUser$ | async) !== null">
+      <a [routerLink]="['/buyer/cart']" class="position-relative"
+        *ngIf="(currentUser$ | async)!.accountType ==='Buyer'">
+        <i class="fa fa-shopping-cart fa-2x mr-5 text-dark"></i>
+        <ng-container *ngIf="(basket$|async)">
+          <div class="cart-no"></div>
+        </ng-container>
+      </a>
+    </ng-container>
     <ng-container *ngIf="(currentUser$ | async) === null">
       <a routerLink="/account/login" class="btn btn-outline-info mx-2">Login</a>
       <a routerLink="/account/register" class="btn btn-outline-info mx-2">Sign up</a>

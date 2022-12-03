@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { IAppUser } from 'src/app/shared/models/IAppUser';
-import { IOrder } from 'src/app/shared/models/IOrder';
 import { IUser } from 'src/app/shared/models/user';
 import { SellerService } from '../seller.service';
 
@@ -11,19 +10,19 @@ import { SellerService } from '../seller.service';
   templateUrl: './seller-history.component.html',
   styleUrls: ['./seller-history.component.scss']
 })
-export class SellerHistoryComponent  {
-  x=0;
+export class SellerHistoryComponent {
+  x = 0;
   appUser!: IAppUser;
   currentUser!: IUser | null;
   id!: any;
 
 
-  sellerId:any
-  orders:any;
+  sellerId: any
+  orders: any;
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$
@@ -31,8 +30,8 @@ export class SellerHistoryComponent  {
       .subscribe((res) => {
         this.id = res?.userId;
         this.getUser();
-        
-        
+
+
       });
   }
 
@@ -42,14 +41,14 @@ export class SellerHistoryComponent  {
       (response) => {
         this.appUser = response;
         console.log(this.appUser.seller?.sellerId);
-        this.sellerId=this.appUser.seller?.sellerId;
-      this.sellerService.getAllOrders(this.sellerId).subscribe(
-        (response)=>{
-          
-          this.orders=response;
-          console.log(this.orders);
-        }
-      )
+        this.sellerId = this.appUser.seller?.sellerId;
+        this.sellerService.getAllOrders(this.sellerId).subscribe(
+          (response) => {
+
+            this.orders = response;
+            console.log(this.orders);
+          }
+        )
       },
       (error) => {
         console.log(error);
@@ -57,18 +56,18 @@ export class SellerHistoryComponent  {
     );
   }
 
-  getOrders(){
+  getOrders() {
     this.getUser();
     return this.sellerService.getAllOrders(this.sellerId).subscribe(
       (response) => {
-         
+
         console.log(response);
       },
       (error) => {
         console.log(error);
       }
     );
-      }
+  }
 
-      
+
 }

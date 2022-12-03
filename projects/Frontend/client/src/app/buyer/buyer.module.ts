@@ -5,6 +5,8 @@ import { BuyerRoutingModule } from './buyer-routing.module';
 import { BuyerCartComponent } from './buyer-cart/buyer-cart.component';
 import { BuyerOrdersComponent } from './buyer-orders/buyer-orders.component';
 import { SharedModule } from '../shared/shared.module';
+import { CartItemComponent } from './cart-item/cart-item.component';
+import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 
 
 
@@ -14,6 +16,8 @@ import { SharedModule } from '../shared/shared.module';
     BuyerComponent,
     BuyerCartComponent,
     BuyerOrdersComponent,
+    CartItemComponent,
+    CartCheckoutComponent,
 
   ],
   imports: [

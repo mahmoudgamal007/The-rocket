@@ -8,12 +8,13 @@ import { idLocale } from 'ngx-bootstrap';
 import { __values } from 'tslib';
 import { ThrowStmt } from '@angular/compiler';
 import { IAppUser } from '../shared/models/IAppUser';
-import { IOrder } from '../shared/models/order';
+import { IOrder } from '../shared/models/IOrder';
 import { Buyer } from '../shared/models/buyer';
 import { FormControl } from '@angular/forms';
 import { AppUser } from '../shared/models/appUser';
 import { ICart } from '../shared/models/ICart';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Order } from '../shared/models/order';
 
 
 @Injectable({
@@ -21,6 +22,10 @@ import { Observable, of } from 'rxjs';
 })
 export class buyerService {
   baseUrl = environment.apiUrl;
+  private basketSource = new BehaviorSubject<ICart[] | null>(null);
+  basket$ = this.basketSource.asObservable();
+
+
   constructor(private http: HttpClient) {
   }
   getCurrentBuyer() {
@@ -55,4 +60,27 @@ export class buyerService {
     return this.http.get<ICart[]>(this.baseUrl + 'ReserveCart/GetCartsByBuyerId?BuyerId=' + buyerId.toString());
   }
 
+  removeFromCart(id: number) {
+    return this.http.delete(this.baseUrl + 'ReserveCart?id=' + id.toString())
+  }
+
+  getBasket(buyerId: number) {
+    return this.http.get<ICart[]>(this.baseUrl + 'ReserveCart/GetCartsByBuyerId?BuyerId=' + buyerId.toString())
+      .pipe(
+        map((carts: ICart[]) => {
+          this.basketSource.next(carts);
+        }
+        )
+      );
+  }
+
+  getCurrentBasketValue() {
+    return this.basketSource.value;
+  }
+
+  postOrder(order: Order) {
+    return this.http.post(this.baseUrl+'Order',order);
+  }
+
+ 
 }
