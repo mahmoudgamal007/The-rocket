@@ -1,4 +1,4 @@
-import { IAddress } from "./address";
+import { IAddress } from "./IAddress";
 import { IAdmin } from "./admin";
 import { ILocation } from "./location";
 import { IPhoneNumber } from "./phoneNumber";

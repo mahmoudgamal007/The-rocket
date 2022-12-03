@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IAddress } from '../shared/models/address';
+import { IAddress } from '../shared/models/IAddress';
 import { AppUser } from '../shared/models/appUser';
 import { Buyer } from '../shared/models/buyer';
 import { buyerService } from './buyer.service';
@@ -19,7 +19,7 @@ export class BuyerComponent implements OnInit {
   buyerEditForm!: FormGroup;
   buyerEditAddressForm!: FormGroup;
   addresses: IAddress[] = [];
-  appuser! : AppUser;
+  appuser!: AppUser;
   constructor(private buyerService: buyerService, private route: ActivatedRoute, private fb: FormBuilder) {
     // this.id = this.route.snapshot.paramMap.get("id")
     // console.log(this.id)
@@ -36,7 +36,7 @@ export class BuyerComponent implements OnInit {
       {
         firstName: new FormControl('', [Validators.required]),
         lastName: new FormControl('', [Validators.required]),
-        userName: new FormControl('', [Validators.required]), 
+        userName: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required]),
         birthDate: new FormControl('', [Validators.required]),
         gender: new FormControl('', [Validators.required]),
@@ -51,7 +51,7 @@ export class BuyerComponent implements OnInit {
         city: new FormControl('', [Validators.required]),
         street: new FormControl('', [Validators.required]),
       }
-   )
+    )
   }
   getbuyer() {
     this.buyerService.getCurrentBuyer().subscribe(res => {
@@ -61,26 +61,26 @@ export class BuyerComponent implements OnInit {
     })
   }
   onBuyerEditFormSubmit() {
-    let buyer:AppUser = new AppUser();
+    let buyer: AppUser = new AppUser();
     buyer.id = localStorage.getItem('userId')!;
     buyer.userName = this.buyerEditForm.value.userName
     buyer.buyer = new Buyer();
-    buyer.buyer.buyerId=this.data.buyer.buyerId;
-    buyer.buyer.appUserId=localStorage.getItem('userId')!;
+    buyer.buyer.buyerId = this.data.buyer.buyerId;
+    buyer.buyer.appUserId = localStorage.getItem('userId')!;
     buyer.buyer.firstName = this.buyerEditForm.value.firstName
     buyer.buyer.lastName = this.buyerEditForm.value.firstName
     buyer.buyer.gender = this.buyerEditForm.value.gender
     buyer.buyer.birthDate = this.buyerEditForm.value.birthDate
-console.log(buyer)
-    this.buyerService.editbuyer(this.id,buyer).subscribe(res => {
+    console.log(buyer)
+    this.buyerService.editbuyer(this.id, buyer).subscribe(res => {
       alert("Edit Info Success")
     })
   }
   onBuyerEditAddressFormSubmit() {
-    const address=this.buyerEditAddressForm.value;
+    const address = this.buyerEditAddressForm.value;
     console.log(address)
     address.id = localStorage.getItem('userId');
-    this.buyerService.editAddressbuyer(this.id,address).subscribe(res => {
+    this.buyerService.editAddressbuyer(this.id, address).subscribe(res => {
       alert("Edit Address Success")
     })
   }
