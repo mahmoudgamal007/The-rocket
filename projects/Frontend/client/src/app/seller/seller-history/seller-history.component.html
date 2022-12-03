@@ -38,8 +38,9 @@
               <td>  {{order["quantity"]}}</td>
               <td>  {{order["productPrice"]}}</td>
             <td>  {{order["deliveryDate"]|date}}</td>
-            <td > <input hidden="true" type="text"></td>
-            <td > <input hidden="true" type="text"></td>
+            <td><button type="button" (click)="test(order.buyerId)" class="btn btn-info   btn-sm">Buyer Details</button> </td>
+
+        
           </ng-container>
           </tr>
          

@@ -18,6 +18,9 @@ export class SellerReturnsComponent {
   sellerId: any
   orders: any;
   flag: boolean = false;
+  BuyerID:any;
+  Adresses:any 
+  phone:any
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
@@ -83,6 +86,20 @@ export class SellerReturnsComponent {
       console.log(res);
 
     })
+  }
+
+  test(BuyerID:number){
+    this.sellerService.getBuyerData(BuyerID).subscribe(
+      data=>{
+      this.Adresses=data;
+        alert('Adresses:'+this.Adresses.addresses+'\nPhones:'+this.Adresses.phones);
+        console.log(this.Adresses);
+      },
+      error=>{
+        console.log(error);
+      }
+
+    );
   }
 
 }
