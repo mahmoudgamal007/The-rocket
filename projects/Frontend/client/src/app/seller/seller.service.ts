@@ -110,4 +110,8 @@ export class SellerService {
   getSellerNameBySellerId(id:any){
     return this.http.get(this.baseUrl+'AppUser/GeSellerByAccountId?Id='+id);
   }
+  getBuyerData(id:any){
+    return this.http.get(this.baseUrl+'AppUser/GetAppUserByBuyrId?Id='+id);
+  }
+ 
 }
