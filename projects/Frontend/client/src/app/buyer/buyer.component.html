@@ -1,53 +1,115 @@
-    <form [formGroup]="buyerEditForm" (ngSubmit)="onBuyerEditFormSubmit()">
-      <app-text-input formControlName="firstName" [label]="'FirstName'" placeholder={{data.buyer.firstName}}></app-text-input>
-      <app-text-input formControlName="lastName" [label]="'LastName'" placeholder={{data.buyer.lastName}}></app-text-input>
-      <app-text-input formControlName="userName" [label]="'userName'" placeholder={{data.userName}}></app-text-input>
-      <app-text-input formControlName="email" [label]="'Email'" placeholder={{data.email}}></app-text-input>
-      <app-text-input formControlName="birthDate" [label]="'birthDate'" placeholder={{data.buyer.birthDate}}></app-text-input>
-      <label for=""> gender</label> <br>
+<div class="container ">
+  <div class="row py-12 justify-content-center">
+   <h5 class="text-left mb-5">Hello,{{data.buyer.firstName}}›Manage your Profile</h5>
+   <div class="col-5 justify-content-between">
+   <form [formGroup]="buyerEditForm" (ngSubmit)="onBuyerEditFormSubmit()">
+     <app-text-input  formControlName="firstName" label="FirstName" [placeholder]='data.buyer.firstName'></app-text-input>
+     <app-text-input formControlName="lastName" label="LastName" [placeholder]=data.buyer.lastName></app-text-input>
+     <app-text-input formControlName="userName"  label="UserName" [placeholder]=data.userName></app-text-input><span>Not available to edit,Enter your old userName</span>
+     <app-text-input formControlName="email"  label="Email"  [placeholder]=data.email></app-text-input><span>Not available to edit ,Enter your old Email</span>
+     <app-text-input formControlName="birthDate" label="BirthDate" placeholder={{data.buyer.birthDate}}></app-text-input>
+     <label for=""> Gender</label> <br>
      <select formControlName="gender">
-<option  [selected]="data.buyer.gender===0" value="0">Male</option>
-<option [selected]="data.buyer.gender===1" value="1">Female</option>
+          <option  [selected]="data.buyer.gender===0" value="0">Male</option>
+          <option [selected]="data.buyer.gender===1" value="1">Female</option>
       </select>
-
-
-      <div class="form-group d-grid mt-5">
-        <button  type="submit" class="btn btn-success">Edit-Info</button>
-      </div>
-    </form>
+     <div class="form-group d-grid mt-5">
+       <button [disabled]="buyerEditForm.invalid" type="submit" class="btn btn-success">Edit-Info</button>
+     </div>
+   </form>  </div>
+</div>
+<div class="row py-12 justify-content-center">
+ <h5 class="text-left ">Your Address</h5>
+ <div class="col-5 justify-content-between">
+   <table class="table  container">
+     <thead>
+       <tr class="table-active">
+         <th>Country</th>
+         <th>Governorate</th>
+         <th>City</th>
+         <th>Street</th>
+         <th colspan="2"><button style="min-width: 100%;"(click)="createBuyerAddAddressForm()" type="button" class="btn btn-success">Add Address</button></th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let address of data.addresses">
+         <td class="table-primary">{{address.country}}</td>
+         <td class="table-success">{{address.government}}</td>
+         <td class="table-secondary">{{address.city}}</td>
+         <td class="table-info">{{address.street}}</td>
+         <td class="table-primary"><button class="btn btn-primary"(click)="createBuyerEditAddressForm(address)" type="button">Edit</button></td>
+         <td class="table-danger"><button (click)="onBuyerDeleteAddress(address)" type="button" class="btn btn-danger">Delete</button></td>
+       </tr>
+     </tbody>
+   </table>
+ </div></div>
+ <ng-container *ngIf="buyerEditAddressForm && !buyerAddAddressForm">
+ <div class="row py-12 justify-content-center">
+     <div class="col-5 justify-content-between">
+       <form [formGroup]="buyerEditAddressForm">
+         <app-text-input formControlName="editcountry" label="Country"></app-text-input>
+         <app-text-input formControlName="editgovernment" label="Governorate" ></app-text-input>
+         <app-text-input formControlName="editcity" label="City" ></app-text-input>
+         <app-text-input formControlName="editstreet" label="Street" ></app-text-input>
+         <div class="form-group d-grid mt-5">
+           <button *ngIf="buyerEditAddressForm" [disabled]="buyerEditAddressForm.invalid" (click)="onBuyerEditAddressFormSubmit()" type="button" class="btn btn-primary">Edit Address</button>
+         </div>
+       </form>
+     </div></div>
+  </ng-container>
+  <ng-container *ngIf="buyerAddAddressForm">
+   <div class="row py-12 justify-content-center">
+       <div class="col-5 justify-content-between">
+         <form [formGroup]="buyerAddAddressForm">
+           <app-text-input formControlName="addcountry" label="Country"></app-text-input>
+           <app-text-input formControlName="addgovernment" label="Governorate" ></app-text-input>
+           <app-text-input formControlName="addcity" label="City" ></app-text-input>
+           <app-text-input formControlName="addstreet" label="Street" ></app-text-input>
+           <div class="form-group d-grid mt-5">
+             <button *ngIf="buyerAddAddressForm"[disabled]="buyerAddAddressForm.invalid" (click)="onBuyerAddAddressFormSubmit()" type="button" class="btn btn-success">Add Address</button>
+           </div>
+         </form>
+       </div></div>
+    </ng-container>
+   <div class="row py-12 justify-content-center">
+     <div class="col-5 justify-content-between">
+       <table class="table  container">
+         <thead>
+           <tr class="table-active">
+             <th>PhoneNumber</th>
+             <th colspan="2"><button style="min-width: 100%;" (click)="createBuyerAddPhoneForm()" type="button" class="btn btn-success">Add PhoneNumber</button></th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let phone of data.phoneNumbers">
+             <td class="table-primary" >{{phone.phone}}</td>
+             <td class="table-primary"><button class="btn btn-primary" type="button" (click)="createBuyerEditPhoneForm(phone)">Edit</button></td>
+             <td class="table-danger"><button (click)="onBuyerDeletePhone(phone)" type="button" class="btn btn-danger">Delete</button></td>
+           </tr>
+         </tbody>
+       </table>
+     </div></div>
+     <ng-container *ngIf="buyerEditPhoneForm  &&!buyerAddPhoneForm">
+     <div class="row py-12 justify-content-center">
+         <div class="col-5 justify-content-between">
+           <form [formGroup]="buyerEditPhoneForm">
+             <app-text-input formControlName="editphone" label="PhoneNumber"></app-text-input>
+             <div class="form-group d-grid mt-5">
+               <button *ngIf="buyerEditPhoneForm" [disabled]="buyerEditPhoneForm.invalid" (click)="onBuyerEditPhoneFormSubmit()" type="button" class="btn btn-primary">Edit Phone</button>
+             </div>
+           </form>
+         </div></div>
+      </ng-container>
+      <ng-container *ngIf="buyerAddPhoneForm">
+       <div class="row py-12 justify-content-center">
+           <div class="col-5 justify-content-between">
+             <form [formGroup]="buyerAddPhoneForm">
+               <app-text-input formControlName="addphone" label="PhoneNumber"></app-text-input>
+               <div class="form-group d-grid mt-5">
+                 <button *ngIf="buyerAddPhoneForm" [disabled]="buyerAddPhoneForm.invalid" (click)="onBuyerAddPhoneFormSubmit()" type="button" class="btn btn-success">Add Phone</button>    
+               </div>
+             </form>
+           </div></div>
+        </ng-container>
+ </div>  
  
-
-    <form [formGroup]="buyerEditAddressForm" (ngSubmit)="onBuyerEditAddressFormSubmit()" *ngFor="let address of data.addresses">
-      <app-text-input formControlName="country" [label]="'Country'" placeholder={{address.country}}></app-text-input>
-      <app-text-input formControlName="government" [label]="'Governorate'" placeholder={{address.government}}></app-text-input>
-      <app-text-input formControlName="city" [label]="'City'" placeholder={{address.city}}></app-text-input>
-      <app-text-input formControlName="street" [label]="'Street'" placeholder={{address.street}}></app-text-input>
-      <div class="form-group row-12 mt-5">
-        <button [disabled]="buyerEditAddressForm.invalid" type="submit" class="btn btn-primary col-6">Edit Address</button>
-        <button [disabled]="buyerEditAddressForm.invalid" type="reset" class="btn btn-danger col-6">Delete Address</button>
-      </div>
-    </form>
-   <div *ngIf="!data || !data.address || data.address.length ===0">
-    <form [formGroup]="buyerEditAddressForm" (ngSubmit)="onBuyerEditAddressFormSubmit()">
-      <app-text-input formControlName="country" [label]="'Country'" placeholder="Enter your country"></app-text-input>
-      <app-text-input formControlName="government" [label]="'Governorate'" placeholder="Enter your governorate"></app-text-input>
-      <app-text-input formControlName="city" [label]="'City'" placeholder="Enter your city"></app-text-input>
-      <app-text-input formControlName="street" [label]="'Street'" placeholder="Enter youradd street"></app-text-input>
-      <div class="form-group d-grid mt-5">
-        <button  [disabled]="buyerEditAddressForm.invalid" type="submit" class="btn btn-success">Add Address</button>
-      </div>
-    </form>
-   </div>
-   <div *ngIf="!data || !data.phone || data.phone.length ===0">
-
-    <form [formGroup]="buyerEditForm" (ngSubmit)="onBuyerEditFormSubmit()">
-
-      <app-text-input formControlName="Phone" [label]="'Phone'" [placeholder]="'phone PH'"></app-text-input>
-    
-
-      <div class="form-group d-grid  mt-5">
-        <button  [disabled]="buyerEditForm.invalid" type="submit" class="btn btn-success ">Add Phone</button>
-    
-      </div>
-    </form>
-  </div> 

@@ -1,7 +1,6 @@
 <table class="table  container">
   <thead>
     <tr style="color:rgb(183, 5, 88)">
-      <th></th>
       <th scope="col">ProductName</th>
       <th scope="col">ProductPrice</th>
       <th scope="col">Quantity</th>
@@ -16,10 +15,19 @@
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
-      <th scope="row"></th>
       <td class="table-primary">{{order.productName}}</td>
       <td class="table-secondary">{{order.productPrice}}</td>
       <td class="table-success">{{order.quantity}}</td>
+      <td class="table-warning" *ngIf="order.deliveryStatus===0">Stock</td>
+      <td class="table-warning" *ngIf="order.deliveryStatus===1">Shipping</td>
+      <td class="table-warning" *ngIf="order.deliveryStatus===2">delivered</td>
+      <td class="table-warning" *ngIf="order.deliveryStatus===3">Canceled</td>
+      <td class="table-info"*ngIf="order.deliveryDate">{{order.deliveryDate}}</td>
+      <td class="table-info" *ngIf="!order.deliveryDate">____</td>
+      <td class="table-danger" *ngIf="order.isReturned">Yes</td>
+      <td class="table-danger" *ngIf="!order.isReturned">____</td>
+      <td class="table-secondary"*ngIf="order.returnDate">{{order.returnDate}}</td>
+      <td class="table-secondary" *ngIf="!order.returnDate">____</td>
       <td class="table-danger" *ngIf="order.deliveryStatus===0">Stock</td>
       <td class="table-danger" *ngIf="order.deliveryStatus===1">Shipping</td>
       <td class="table-danger" *ngIf="order.deliveryStatus===2">delivverd</td>

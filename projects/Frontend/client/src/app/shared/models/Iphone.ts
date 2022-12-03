@@ -1,4 +1,4 @@
-export interface IPhoneNumber {
+export interface IPhone {
     id: number;
     phone: string;
     appUserId: string;
