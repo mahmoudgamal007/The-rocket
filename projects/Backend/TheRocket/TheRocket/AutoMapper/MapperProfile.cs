@@ -36,8 +36,14 @@ namespace TheRocket.AutoMapper
             CreateMap<OrderDto, Order>().ReverseMap();
             CreateMap< SubCategoryDto, SubCategory>().ReverseMap();
             CreateMap<SubscripDto, Subscrip>().ReverseMap();
+<<<<<<< HEAD
             
             
+=======
+            CreateMap<ReserveCartDto, ReserveCart>().ReverseMap();
+
+
+>>>>>>> refs/remotes/origin/FinalDeveloping
         }
     }
 }
