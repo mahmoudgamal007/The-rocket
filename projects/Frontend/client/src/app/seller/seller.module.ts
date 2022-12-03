@@ -9,6 +9,8 @@ import { SellerReturnsComponent } from './seller-returns/seller-returns.componen
 import { SellerHistoryComponent } from './seller-history/seller-history.component';
 import { SellerShippingComponent } from './seller-shipping/seller-shipping.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
+import { EditcoverComponent } from './editcover/editcover.component';
 
 
 
@@ -20,7 +22,9 @@ import { AddProductComponent } from './add-product/add-product.component';
     SellerReturnsComponent,
     SellerHistoryComponent,
     SellerShippingComponent,
-    AddProductComponent
+    AddProductComponent,
+    EditprofileComponent,
+    EditcoverComponent
     
   ],
   imports: [

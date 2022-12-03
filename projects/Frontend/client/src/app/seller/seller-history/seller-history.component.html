@@ -36,7 +36,7 @@
               <td> {{order.buyer.firstName}}</td>
               <td>  {{order["quantity"]}}</td>
               <td>  {{order["productPrice"]}}</td>
-            <td>  {{order["deliveryDate"]}}</td>
+            <td>  {{order["deliveryDate"]|date}}</td>
             <td > <input hidden="true" type="text"></td>
             <td > <input hidden="true" type="text"></td>
           </ng-container>

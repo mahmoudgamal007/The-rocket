@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="row">
+    <!-- code here -->
+    <label class="input-label">Upload Profile Picture</label>
+    <div class="input">
+      <input
+        formControlName="file"
+        class="input-field"
+        type="file"
+        if="file"
+        #file
+        placeholder="Choose file"
+        multiple
+        (change)="catchSelectedImages(file.files)"
+      />
+      <button class="button-3" (click)="onSubmit()" type="button">
+        Update Profile
+      </button>
+    </div>
+    <p style="margin: 5px">update Info</p>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Adress</th>
+          <th scope="col">Country</th>
+          <th scope="col">Government</th>
+          <th scope="col">City</th>
+          <th scope="col">Street</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let address of data.addresses">
+          <th scope="row">-</th>
+          <td>
+            <input
+              #country
+              id="country"
+              class="input-field"
+              name="country"
+              value="{{ address.country }}"
+            />
+          </td>
+          <td>
+            <input
+              #government
+              id="government"
+              class="input-field"
+              value="{{ address.government }}"
+            />
+          </td>
+          <td>
+            <input
+              #city
+              id="city"
+              class="input-field"
+              value="{{ address.city }}"
+            />
+          </td>
+          <td>
+            <input
+              #street
+              id="street"
+              class="input-field"
+              value="{{ address.street }}"
+            />
+          </td>
+          <button
+            type="button"
+            class="button-3"
+            (click)="
+              onAddressEdit(
+                address.id,
+                country.value,
+                government.value,
+                city.value,
+                street.value
+              )
+            "
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            class="button-4"
+            (click)="deleteAddress(address.id)"
+          >
+            Delete
+          </button>
+        </tr>
+        <tr>
+          <th scope="row">-</th>
+          <td>
+            <input
+              #newcountry
+              id="country"
+              class="input-field"
+              name="country"
+              value="New Country"
+            />
+          </td>
+          <td>
+            <input
+              #newgovernment
+              id="government"
+              class="input-field"
+              value="New Government"
+            />
+          </td>
+          <td>
+            <input #newcity id="city" class="input-field" value="New City" />
+          </td>
+          <td>
+            <input
+              #newstreet
+              id="street"
+              class="input-field"
+              value="New Street"
+            />
+          </td>
+          <button
+            type="button"
+            class="button-3"
+            (click)="
+              addAddress(
+                newcountry.value,
+                newgovernment.value,
+                newcity.value,
+                newstreet.value
+              )
+            "
+          >
+            Add New Address
+          </button>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Phone</th>
+          <th scope="col">Number</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let phone of data.phoneNumbers">
+          <th scope="row">-</th>
+          <td>
+            <input
+              #number
+              id="number"
+              class="input-field"
+              name="number"
+              value="{{ phone.phone }}"
+            />
+          </td>
+
+          <button
+            type="button"
+            class="button-3"
+            (click)="onPhoneEdit(phone.id, number.value)"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            class="button-4"
+            (click)="deletePhone(phone.id)"
+          >
+            Delete
+          </button>
+        </tr>
+        <tr>
+          <th scope="row">-</th>
+          <td>
+            <input
+              #newphone
+              id="newphone"
+              class="input-field"
+              name="newphone"
+              value="New Phone"
+            />
+          </td>
+
+          <button
+            type="button"
+            class="button-3"
+            (click)="addPhone(newphone.value)"
+          >
+            Add New Phone
+          </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
