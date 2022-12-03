@@ -32,7 +32,7 @@
         <li>My Products</li>
         <li><a href="seller/edit">Edit Profile</a></li>
       </ul>
-      <a href="/seller" style="margin: 10px" class="button-3">Orders</a>
+      <a href="seller/orders" style="margin: 10px" class="button-3">Orders</a>
       <!-- <button class="btn btn-success addbtn">Add product</button> -->
       <a href="seller/addProduct" style="margin: 10px" class="button-3"
         >Add Product</a
@@ -43,7 +43,9 @@
           class="button-3"
           (click)="getlink(appUser.seller?.sellerId)"
           >Get Link</a
+         
         >
+        <input class="form-control" value="http://localhost:4200/product/sellerProdcut/{{appUser.seller?.sellerId}}" disabled>
       </div>
 
       <br />

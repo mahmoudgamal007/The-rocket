@@ -71,6 +71,7 @@ export class SellerComponent implements OnInit {
   getlink(id: any) {
     navigator.clipboard.writeText(
       'http://localhost:4200/product/sellerProdcut/' + id
+      
     );
     alert('link copied to Clipboard');
   }

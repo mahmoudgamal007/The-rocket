@@ -23,6 +23,7 @@ header img {
   position: center;
   size: cover;
   height: 250px;
+  object-fit: cover;
 }
 
 header i {
@@ -62,6 +63,7 @@ main {
   margin: 0;
   border-radius: 100px;
   border: 4px solid #fff;
+  object-fit: cover;
 }
 
 @media (max-width: 990px) {
