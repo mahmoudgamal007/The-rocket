@@ -38,7 +38,7 @@
               <td> {{order.buyer.firstName}}</td>
               <td>  {{order["quantity"]}}</td>
               <td>  {{order["productPrice"]}}</td>
-              <td>  {{order.deliveryDate}}</td>
+              <td>  {{order.deliveryDate |date}}</td>
 
              <td><button type="button" (click)="AcceptReturnRequest(order.id,order)" class="btn btn-success   btn-sm">Accept</button></td>
             <td><button type="button"  (click)="CancelReturnRequest(order.id,order)"class="btn btn-danger   btn-sm">Deny</button></td>
