@@ -3,11 +3,11 @@
   <img [routerLink]="['/product']" id="logo" src="../assets/images/Rocket.PNG" alt="logo" style="cursor:pointer ;" />
   <nav class="my-2 my-md-0 mr-md-3">
     <!-- <a class="p-2 text-dark" [routerLink]="['/account']">Account</a> -->
-    <a class="p-2 text-dark" [routerLink]="['/product']">Products</a>
-    <a *ngIf="localStorage.getItem('accountType')=='Seller'" class="p-2 text-dark" [routerLink]="['/seller']">Sellers</a>
-    <a *ngIf="localStorage.getItem('accountType')=='Buyer'" class="p-2 text-dark" [routerLink]="['/buyer']">Buyer</a>
+    <a *ngIf="localStorage.getItem('accountType')=='Seller'" class="p-2 text-dark" [routerLink]="['/seller']">My Account</a>
+    <a *ngIf="localStorage.getItem('accountType')=='Buyer'" class="p-2 text-dark" [routerLink]="['/buyer']">My Account</a>
+    <a class="p-2 text-dark" [routerLink]="['/product']">Shop</a>
     <!-- <a class="p-2 text-dark" [routerLink]="['/cart']">Cart</a> -->
-    <a  *ngIf="localStorage.getItem('accountType')=='Buyer'" class="p-2 text-dark" [routerLink]="['buyer/order']">Orders</a>
+    <a  *ngIf="localStorage.getItem('accountType')=='Buyer'" class="p-2 text-dark" [routerLink]="['buyer/order']">My Orders</a>
     <a *ngIf="localStorage.getItem('accountType')=='Seller'" class="p-2 text-dark" [routerLink]="['seller/orders']">Orders</a>
   </nav>
   <div class="nav-menu d-flex">

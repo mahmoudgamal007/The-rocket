@@ -5,7 +5,7 @@ export interface IOrder {
     returnDate?: Date,
     deliveryDate?: Date,
     quantity: number,
-    returnRequest: number,
+    returnRequest?: number,
     productName: string,
     productPrice: number,
     productId: number,

@@ -31,7 +31,7 @@
         </thead>
         <tbody>
           <tr *ngFor  ="let order of orders; let counter =index" >
-            <ng-container *ngIf="order.deliveryStatus==2 && order.returnRequest==true&&order.isReturned==false">
+            <ng-container *ngIf="order.deliveryStatus==2 && order.returnRequest==0&&order.isReturned==false">
 
               <th scope="row" > </th>
               <td>  {{order["productName"]}}</td>
