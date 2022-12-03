@@ -73,6 +73,7 @@ export class SellerShippingComponent implements OnInit {
       DeliveredOrder(id:any,order:IOrder){
         console.log("click");
         order.deliveryStatus=2;
+        order.deliveryDate= new Date ();
        this.sellerService.EditOrder(id,order).subscribe(res=>{
         console.log(res);
 
