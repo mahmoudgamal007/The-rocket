@@ -92,8 +92,9 @@ export class SellerReturnsComponent {
     this.sellerService.getBuyerData(BuyerID).subscribe(
       data=>{
       this.Adresses=data;
-        alert('Adresses:'+this.Adresses.addresses+'\nPhones:'+this.Adresses.phones);
-        console.log(this.Adresses);
+      console.log(this.Adresses);
+        alert('Adresses:\n'+this.Adresses.addresses[0].government+'\n'+this.Adresses.addresses[0].city+
+        '\nPhones: '+this.Adresses.phones[0].phone);
       },
       error=>{
         console.log(error);

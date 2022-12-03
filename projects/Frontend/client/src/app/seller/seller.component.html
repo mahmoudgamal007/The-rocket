@@ -43,14 +43,13 @@
           class="button-3"
           (click)="getlink(appUser.seller?.sellerId)"
           >Get Link</a
-         
         >
         <input class="form-control" value="http://localhost:4200/product/sellerProdcut/{{appUser.seller?.sellerId}}" disabled>
       </div>
 
       <br />
 
-      <div class="row ">
+      <div class="row gallery">
         <div
           class="col-md-4"
           *ngFor="let product of products"
@@ -58,7 +57,7 @@
         >
           <div *ngFor="let image of product.imgs">
             <div class="card" style="width: 18rem">
-              <img 
+              <img
                 class="card-img-top"
                 src="{{ image.url }}"
                 alt="Card image cap"
