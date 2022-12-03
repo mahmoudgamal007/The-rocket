@@ -60,6 +60,18 @@ namespace TheRocket.Controllers
 
         }
 
+        [HttpPut("[action]")]
+        [AllowAnonymous]
+
+        public async Task<IActionResult> AcceptOrReturnOrder([FromQuery] int orderId, [FromQuery] int ammount, [FromQuery] bool Accept)
+        {
+            if (orderId == 0 || ammount == 0 || Accept == null) return BadRequest();
+            var response = await Order.AcceptOrReturnOrder(orderId, ammount, Accept);
+            if (response.data == true)
+                return Ok("Done");
+            return Problem("problem");
+
+        }
         [HttpDelete]
         public async Task<ActionResult<OrderDto>> DeleteOrder([FromQuery] int id)
         {
@@ -68,9 +80,19 @@ namespace TheRocket.Controllers
             return NoContent();
         }
 
+        [HttpPut("[action]")]
+        [Authorize(Roles ="Buyer")]
+        public async Task<ActionResult<OrderDto>> RequestReturn([FromQuery] int OrderId){
+            if(OrderId==0)return BadRequest();
+            var response=await Order.RequestReturn(OrderId);
+            if(response.status==Status.noContent)return Ok(true);
+            return Problem("false");
+        }
+
         [HttpPut]
 
-        [Authorize(Roles ="Seller,Buyer")]
+        [AllowAnonymous]
+
         public async Task<ActionResult<OrderDto>> PutOrder([FromQuery] int id, OrderDto order)
         {
             SharedResponse<OrderDto> response = await Order.Update(id, order);

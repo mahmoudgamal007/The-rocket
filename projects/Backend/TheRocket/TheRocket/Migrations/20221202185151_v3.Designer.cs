@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheRocket.TheRocketDbContexts;
 
@@ -11,9 +12,10 @@ using TheRocket.TheRocketDbContexts;
 namespace TheRocket.Migrations
 {
     [DbContext(typeof(TheRocketDbContext))]
-    partial class TheRocketDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221202185151_v3")]
+    partial class v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,22 +53,22 @@ namespace TheRocket.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8db0f07f-e57e-4ec0-aea0-3ae823239469",
-                            ConcurrencyStamp = "f97aa0cb-552b-49ab-bfbd-7c45a0198ca7",
+                            Id = "9cdfaffc-5957-4776-a6a1-52f47f8c95a6",
+                            ConcurrencyStamp = "24787264-2f33-42b8-bd56-9a0cfb4e98d4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4c48eaa4-fdbf-4a32-b16b-76e488dbfc4d",
-                            ConcurrencyStamp = "8fc16f75-ec10-4714-b8cf-449fb2bc5d6d",
+                            Id = "26efc1a7-cae9-41e8-af60-4030d582d5f4",
+                            ConcurrencyStamp = "0968639a-ef19-4b20-80e7-aade7d6253ff",
                             Name = "Seller",
                             NormalizedName = "SELLER"
                         },
                         new
                         {
-                            Id = "d20afb06-5132-4409-b512-0987cf78b05b",
-                            ConcurrencyStamp = "adc1cbd0-dd4e-48fe-a026-c0271bdb16ed",
+                            Id = "b26dba05-6702-4eea-b6f9-ae94f9ec5319",
+                            ConcurrencyStamp = "ab90632a-955d-4f14-b929-d1a9f41efab6",
                             Name = "Buyer",
                             NormalizedName = "BUYER"
                         });
@@ -256,7 +258,7 @@ namespace TheRocket.Migrations
                     b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ReturnRequest")
+                    b.Property<int>("ReturnRequest")
                         .HasColumnType("int");
 
                     b.Property<int>("SellerId")

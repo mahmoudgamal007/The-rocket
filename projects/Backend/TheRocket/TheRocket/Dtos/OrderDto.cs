@@ -1,4 +1,5 @@
-﻿using TheRocket.Entities;
+﻿using TheRocket.Dtos.UserDtos;
+using TheRocket.Entities;
 
 namespace TheRocket.Dtos
 {
@@ -10,12 +11,13 @@ namespace TheRocket.Dtos
         public DateTime? ReturnDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public int Quantity { get; set; }
-        public bool ReturnRequest { get; set; }
+        public ReturnRequest ReturnRequest { get; set; }
         public string ProductName { get; set; }
         public double ProductPrice { get; set; }
         public int ProductId { get; set; }
         public int BuyerId { get; set; }
         public int SellerId { get; set; }
+        public BuyerDto Buyer { get; set; }
  
 
     }

@@ -5,18 +5,49 @@ using TheRocket.Shared;
 using TheRocket.TheRocketDbContexts;
 using TheRocket.Entities;
 using Microsoft.EntityFrameworkCore;
+using TheRocket.Dtos.ProductDtos;
 
 namespace TheRocket.Repositories
 {
     public class OrderRepo : IOrderRepo
     {
         private readonly IMapper Mapper;
+        private readonly IProdcutRepo prodcutRepo;
         private readonly TheRocketDbContext Context;
-        public OrderRepo(TheRocketDbContext context, IMapper mapper)
+        public OrderRepo(TheRocketDbContext context, IMapper mapper, IProdcutRepo prodcutRepo)
         {
             Context = context;
             Mapper = mapper;
+            this.prodcutRepo = prodcutRepo;
         }
+
+        public async Task<SharedResponse<bool>> AcceptOrReturnOrder(int orderId, int Amount, bool Accept)
+        {
+            var order = await Context.Orders.FindAsync(orderId);
+            if (Accept)
+            {
+                order.DeliveryStatus = DeliveryStatus.Shipping;
+                Amount = Amount * -1;
+            }
+            else
+                order.ReturnRequest = ReturnRequest.Returned;
+
+            try
+            {
+                var product = await Context.Products.FindAsync(order.ProductId);
+                product.Quantity += Amount;
+                Context.SaveChanges();
+                return new SharedResponse<bool>(Status.noContent, true);
+
+            }
+            catch (Exception ex)
+            {
+                return new SharedResponse<bool>(Status.problem, false, ex.ToString());
+            }
+
+
+        }
+
         public async Task<SharedResponse<OrderDto>> Create(OrderDto model)
         {
             if (Context.Orders == null)
@@ -92,6 +123,21 @@ namespace TheRocket.Repositories
         public bool IsExists(int Id)
         {
             return (Context.Orders?.Any(o => o.Id == Id && o.IsDeleted == false)).GetValueOrDefault();
+        }
+
+        public async Task<SharedResponse<bool>> RequestReturn(int orderId)
+        {
+            var order = await Context.Orders.FindAsync(orderId);
+            order.ReturnRequest = ReturnRequest.Request;
+            try
+            {
+                Context.SaveChanges();
+                return new SharedResponse<bool>(Status.noContent, true);
+            }
+            catch (Exception ex)
+            {
+                return new SharedResponse<bool>(Status.problem, false, ex.ToString());
+            }
         }
 
         public async Task<SharedResponse<OrderDto>> Update(int Id, OrderDto model)

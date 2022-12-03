@@ -133,15 +133,15 @@ namespace TheRocket.Repositories
             if (db.Products == null)
                 return new SharedResponse<List<ProductDto>>(Status.notFound, null);
 
-            var products = db.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.Imgs).Include(p=>p.SubCategory).Where(p =>p.SellerId==SellerId && p.IsDeleted == false);
+            var products = db.Products.Include(p => p.ProductColors).Include(p => p.ProductSizes).Include(p => p.Imgs).Include(p => p.SubCategory).Where(p => p.SellerId == SellerId && p.IsDeleted == false);
 
             if (products == null)
                 return new SharedResponse<List<ProductDto>>(Status.notFound, null);
 
-            var response=mapper.Map<List<ProductDto>>(products);
+            var response = mapper.Map<List<ProductDto>>(products);
 
 
-            return new  SharedResponse<List<ProductDto>>(Status.found, response);
+            return new SharedResponse<List<ProductDto>>(Status.found, response);
         }
 
         public async Task<SharedResponse<GetAllProductDto>> GetProductsWithFilters(ProductQueryParameter queryParameter)
@@ -159,14 +159,14 @@ namespace TheRocket.Repositories
                 products = products.Where(p => p.SellerId == queryParameter.SellerId);
             }
 
-            if(!string.IsNullOrEmpty(queryParameter.MainCategory))
+            if (!string.IsNullOrEmpty(queryParameter.MainCategory))
             {
-                products=products.Where(p=>p.SubCategory.MainCategory==queryParameter.MainCategory);
+                products = products.Where(p => p.SubCategory.MainCategory == queryParameter.MainCategory);
             }
 
-             if(!string.IsNullOrEmpty(queryParameter.SubCategory))
+            if (!string.IsNullOrEmpty(queryParameter.SubCategory))
             {
-                products=products.Where(p=>p.SubCategory.Name==queryParameter.SubCategory);
+                products = products.Where(p => p.SubCategory.Name == queryParameter.SubCategory);
             }
 
             if (!string.IsNullOrEmpty(queryParameter.SortBy))
@@ -238,17 +238,17 @@ namespace TheRocket.Repositories
             }
 
             Product Product = mapper.Map<Product>(model);
-
-            db.Entry(Product).State = EntityState.Modified;
-
             try
             {
+                db.Entry(Product).State = EntityState.Modified;
+
+
                 if (IsExists(Id))
                     await db.SaveChangesAsync();
                 else
                     return new SharedResponse<ProductDto>(Status.notFound, null);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
                 throw;
             }
