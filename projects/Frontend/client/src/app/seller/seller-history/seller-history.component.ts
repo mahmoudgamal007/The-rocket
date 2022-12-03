@@ -16,7 +16,9 @@ export class SellerHistoryComponent {
   currentUser!: IUser | null;
   id!: any;
 
-
+  BuyerID:any;
+  Adresses:any 
+  phone:any
   sellerId: any
   orders: any;
   constructor(
@@ -68,6 +70,18 @@ export class SellerHistoryComponent {
       }
     );
   }
+  test(BuyerID:number){
+    this.sellerService.getBuyerData(BuyerID).subscribe(
+      data=>{
+      this.Adresses=data;
+        alert('Adresses:'+this.Adresses.addresses+'\nPhones:'+this.Adresses.phones);
+        console.log(this.Adresses);
+      },
+      error=>{
+        console.log(error);
+      }
 
+    );
+  }
 
 }

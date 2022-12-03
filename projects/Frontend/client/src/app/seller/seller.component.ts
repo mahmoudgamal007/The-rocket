@@ -8,6 +8,7 @@ import { IUser } from '../shared/models/user';
 import { SellerService } from './seller.service';
 import { shopParams } from '../shared/models/shopParams';
 import { Color } from '../shared/models/Color';
+import { Address } from '../shared/models/address';
 
 @Component({
   selector: 'app-seller',
@@ -25,7 +26,7 @@ export class SellerComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.accountService.currentUser$
@@ -62,5 +63,15 @@ export class SellerComponent implements OnInit {
       }
     );
   }
-
+  deleteProduct(id: any) {
+    this.sellerService.deleteProduct(id).subscribe((resp) => {
+      alert('Deleted');
+    });
+  }
+  getlink(id: any) {
+    navigator.clipboard.writeText(
+      'http://localhost:4200/product/sellerProdcut/' + id
+    );
+    alert('link copied to Clipboard');
+  }
 }

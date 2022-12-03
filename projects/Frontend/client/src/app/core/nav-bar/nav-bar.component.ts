@@ -12,6 +12,7 @@ import { IUser } from 'src/app/shared/models/user';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
+  localStorage=localStorage;
   currentUser$!: Observable<IUser | null>;
   basket$!: Observable<ICart[] | null>;
 

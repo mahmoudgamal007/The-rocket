@@ -24,6 +24,7 @@
               <th scope="col">Quantity</th>
               <th scope="col">productPrice</th>
               <th scope="col">deliverydate</th>
+              <th></th>
              <th></th>
              <th></th>
              <th></th>
@@ -31,14 +32,16 @@
         </thead>
         <tbody>
           <tr *ngFor  ="let order of orders; let counter =index" >
-            <ng-container *ngIf="order.deliveryStatus==2 && order.returnRequest==true&&order.isReturned==false">
+            <ng-container *ngIf="order.deliveryStatus==2 && order.returnRequest==0&&order.isReturned==false">
 
               <th scope="row" > </th>
               <td>  {{order["productName"]}}</td>
               <td> {{order.buyer.firstName}}</td>
               <td>  {{order["quantity"]}}</td>
               <td>  {{order["productPrice"]}}</td>
-              <td>  {{order.deliveryDate}}</td>
+              <td>  {{order.deliveryDate |date}}</td>
+              <td><button type="button" (click)="test(order.buyerId)" class="btn btn-info   btn-sm">Buyer Details</button> </td>
+
 
              <td><button type="button" (click)="AcceptReturnRequest(order.id,order)" class="btn btn-success   btn-sm">Accept</button></td>
             <td><button type="button"  (click)="CancelReturnRequest(order.id,order)"class="btn btn-danger   btn-sm">Deny</button></td>

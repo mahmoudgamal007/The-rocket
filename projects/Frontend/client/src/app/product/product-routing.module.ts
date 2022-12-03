@@ -5,6 +5,7 @@ import { ProductComponent } from './product.component';
 
 const routes: Routes = [
   { path: '', component: ProductComponent },
+  { path: 'sellerProdcut/:id', component: ProductComponent, data: { breadcrumb: { alias: 'SellerProduct' } } },
   { path: ':id', component: ProductDetailsComponent, data: { breadcrumb: { alias: 'productDetails' } } }
 ]
 
