@@ -148,9 +148,9 @@ namespace TheRocket.Repositories.UserRepos
         public async Task<SharedResponse<AppUserDto>> Update(Guid Id, UpdateAppUserDto model)
         {
             var appUser = await userManager.FindByIdAsync(Id.ToString());
-            appUser.Addresses = appUser.Addresses.Where(a => a.IsDeleted == false).ToList();
-            appUser.PhoneNumbers = appUser.PhoneNumbers.Where(a => a.IsDeleted == false).ToList();
-            appUser.Locations = appUser.Locations.Where(a => a.IsDeleted == false).ToList();
+            // appUser.Addresses = appUser.Addresses.Where(a => a.IsDeleted == false).ToList();
+            // appUser.PhoneNumbers = appUser.PhoneNumbers.Where(a => a.IsDeleted == false).ToList();
+            // appUser.Locations = appUser.Locations.Where(a => a.IsDeleted == false).ToList();
             if (appUser == null) return new SharedResponse<AppUserDto>(Status.notFound, null);
             appUser.Addresses = mapper.Map<List<Address>>(model.Addresses);
             appUser.Admin = mapper.Map<Admin>(model.Admin);
