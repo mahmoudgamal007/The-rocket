@@ -5,7 +5,7 @@
    <form [formGroup]="buyerEditForm" (ngSubmit)="onBuyerEditFormSubmit(fname.value,lname.value,bdate.value,uname.value)">
      <app-text-input #fname  formControlName="firstName" label="FirstName" [value]="data.buyer.firstName"></app-text-input>
      <app-text-input #lname formControlName="lastName" label="LastName" [value]="data.buyer.lastName"></app-text-input>
-     <app-text-input #bdate formControlName="birthDate" label="BirthDate"  [value]="data.buyer.birthDate"></app-text-input>
+     <app-text-input #bdate formControlName="birthDate" label="BirthDate"  [value]="data.buyer.birthDate|date"></app-text-input>
      <app-text-input #uname formControlName="userName"  label="UserName" [disabled]="true" [value]="data.userName"></app-text-input>
      <app-text-input formControlName="email"  label="Email" [disabled]="true" [value]="data.email"></app-text-input>
      <app-text-input formControlName="gender" label="Gender" [disabled]="true" [value]="isMale"></app-text-input>

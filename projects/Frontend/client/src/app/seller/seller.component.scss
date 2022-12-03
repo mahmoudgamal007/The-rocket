@@ -303,6 +303,13 @@ main {
     text-align: center;
   }
 }
+
+.img{
+width: 200;
+height: 250;
+object-fit: cover;
+}
+
 .gallery {
   margin-top: 35px;
   display: flex;

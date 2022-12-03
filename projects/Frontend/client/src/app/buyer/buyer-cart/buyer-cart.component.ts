@@ -42,7 +42,7 @@ export class BuyerCartComponent implements OnInit {
     this.buyerService.removeFromCart(cart.id).subscribe(resp => {
       this.toastrService.info(`${cart.quantity} of ${cart.product.name} has been removed from the cart`);
     }, err => { console.log(err) });
-    delay(200)
+    delay(500)
     this.LoadCurrentBuyerCarts();
   }
 
