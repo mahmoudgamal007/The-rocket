@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ICart } from 'src/app/shared/models/ICart';
+import { buyerService } from '../buyer.service';
 
 @Component({
   selector: 'app-buyer-cart',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./buyer-cart.component.scss']
 })
 export class BuyerCartComponent implements OnInit {
-
-  constructor() { }
+  carts: ICart[] = [];
+  cartsProductsIds:number[]=[];
+  
+  constructor(private buyerService: buyerService) { }
 
   ngOnInit(): void {
   }
+
+  
 
 }

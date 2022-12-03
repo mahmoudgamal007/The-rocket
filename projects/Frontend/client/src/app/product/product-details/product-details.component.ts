@@ -27,7 +27,7 @@ export class ProductDetailsComponent implements OnInit {
   quantity = 1;
   productFeedBacks: Feedback[] = [];
   feedbackForm!: FormGroup;
-  addresses:any=[{id:1,address:'addr1'},{id:2,address:'addr2'},{id:3,address:'addr3'}]
+  addresses: any = [{ id: 1, address: 'addr1' }, { id: 2, address: 'addr2' }, { id: 3, address: 'addr3' }]
 
 
   constructor(private shopService: ProductService, private activateRoute: ActivatedRoute, private bcService: BreadcrumbService
@@ -100,10 +100,9 @@ export class ProductDetailsComponent implements OnInit {
       this.shopService.postFeedback(feedback).subscribe((response) => { this.ts.success('Feedback has been submitted') }, (error) => { });
     }, error => { console.log(error) })
     this.productFeedBacks.push(feedback);
-    this.loadProduct();
   }
 
-  EditAddress(value:any){
+  EditAddress(value: any) {
     console.log(value)
   }
 
