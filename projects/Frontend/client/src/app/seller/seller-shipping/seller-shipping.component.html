@@ -10,32 +10,36 @@
         
             <a href="seller/returns"  style="margin: 10px;" class="btn btn-warning  btn-lg col" >Returns </a>
             <a  href="seller/shipping" style="margin: 10px;" class="btn btn-secondary btn-lg col">Shipping</a>
-  
+            
           </div>
     </div>
 
 
 
-    <table class="table table-striped" style="margin-top: 2rem;">
+    <table class="table table-striped" style="margin-top: 2rem;padding-right: 2rem;">
         <thead>
           <tr>
-            <th># </th>
-            <th scope="col">productname</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">deliverydate</th>
             <th></th>
-
+              <th scope="col">productName</th>
+              <th scope="col">Buyer Name</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">productPrice</th>
+             <th scope="col-2"> </th>
+             <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor  ="let order of  orders; let counter =index" >
             <ng-container *ngIf="order.deliveryStatus==1">
+              <th scope="row" > </th>
+              <td>  {{order["productName"]}}</td>
+              <td> {{order.buyer.firstName}}</td>
+              <td>  {{order["quantity"]}}</td>
+              <td>  {{order["productPrice"]}}</td>
+              <td> <a href="/product/{{order.productId}}"> View Details</a></td>
 
-            <th scope="row" >{{counter+1}}</th>
-            <td>  {{order["productName"]}}</td>
-            <td>  {{order["quantity"]}}</td>
-            <td>  {{order["deliveryDate"]}}</td>
-            <td><button  type="button" (click)="DeliveredOrder(order.id,order)" class="btn btn-success   btn-sm">Delivered</button>
+            <td><button style="width: 100%;" type="button" (click)="DeliveredOrder(order.id,order)" class="btn btn-success   btn-sm">Delivered</button>
+            
 
           </ng-container>
           </tr>

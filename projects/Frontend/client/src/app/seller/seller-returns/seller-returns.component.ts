@@ -17,6 +17,7 @@ export class SellerReturnsComponent  {
   id!: any;
  sellerId:any
   orders:any;
+  flag:boolean=false;
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
@@ -66,17 +67,17 @@ export class SellerReturnsComponent  {
       }
       AcceptReturnRequest(id:any,order:IOrder){
         console.log("click");
-        order.deliveryStatus=1;
+        order.deliveryStatus=0;
         order.isReturned=true;
-        order.returnRequest=false;
-       this.sellerService.EditOrder(id,order).subscribe(res=>{
+        order.returnRequest=1;
+       this.sellerService.AcceptOrReturnOrder(id,order.quantity,this.flag).subscribe(res=>{
         console.log(res);
 
         })
       }
       CancelReturnRequest(id:any,order:IOrder){
         console.log("click");
-        order.deliveryStatus=4;
+        order.returnRequest=2;
        this.sellerService.EditOrder(id,order).subscribe(res=>{
         console.log(res);
 

@@ -1,3 +1,4 @@
+import { NgForOf } from '@angular/common';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
@@ -18,6 +19,7 @@ export class SellerOrdersComponent implements OnInit {
   id!: any;
   sellerId:any
   orders:any;
+  flag:boolean=true;  
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
@@ -45,9 +47,8 @@ export class SellerOrdersComponent implements OnInit {
         (response)=>{
           
           this.orders=response;
-          console.log(this.orders);
-        }
-      )
+          console.log(this.orders);          
+        })
       },
       (error) => {
         console.log(error);
@@ -55,12 +56,14 @@ export class SellerOrdersComponent implements OnInit {
     );
   }
 
+
   getOrders(){
     this.getUser();
     return this.sellerService.getAllOrders(this.sellerId).subscribe(
       (response) => {
          
         console.log(response);
+        
       },
       (error) => {
         console.log(error);
@@ -71,7 +74,7 @@ export class SellerOrdersComponent implements OnInit {
       AcceptOrder(id:any,order:IOrder){
         console.log("click");
         order.deliveryStatus=1;
-       this.sellerService.EditOrder(id,order).subscribe(res=>{
+       this.sellerService.AcceptOrReturnOrder(id,order.quantity,this.flag).subscribe(res=>{
         console.log(res);
 
         })
@@ -79,10 +82,14 @@ export class SellerOrdersComponent implements OnInit {
       
       CancelOrder(id:any,order:IOrder){
         console.log("click");
-        order.deliveryStatus=4;
+        order.deliveryStatus=3;
        this.sellerService.EditOrder(id,order).subscribe(res=>{
         console.log(res);
 
         })
       }
 }
+function getBuyerName(buyerId: any): any {
+  throw new Error('Function not implemented.');
+}
+

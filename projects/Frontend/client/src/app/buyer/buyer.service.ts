@@ -12,6 +12,8 @@ import { IOrder } from '../shared/models/order';
 import { Buyer } from '../shared/models/buyer';
 import { FormControl } from '@angular/forms';
 import { AppUser } from '../shared/models/appUser';
+import { ICart } from '../shared/models/ICart';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -26,15 +28,15 @@ export class buyerService {
     return this.http.get<IAppUser>(this.baseUrl + "AppUser/GetAppUserByUserId?AppUserId=" + id);
   }
 
-  editbuyer(id:any, buyer: AppUser) {
-     id = localStorage.getItem('userId');
-     return this.http.put("http://localhost:52437/Api/AppUser?Id=" + id, buyer);
+  editbuyer(id: any, buyer: AppUser) {
+    id = localStorage.getItem('userId');
+    return this.http.put("http://localhost:52437/Api/AppUser?Id=" + id, buyer);
   }
   getAllOrdersByBuyerId(BuyerId: number) {
     let id = BuyerId.toString();
     return this.http.get<IOrder[]>("http://localhost:52437/api/Order/GetByBuyerId?BuyerId=" + id);
   }
-  getCurrentBuyerAppUser(){
+  getCurrentBuyerAppUser() {
     let id = localStorage.getItem('userId');
     return this.http.get<IAppUser>(this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + id);
   }
@@ -43,9 +45,14 @@ export class buyerService {
     console.log(address);
     console.log(id)
     return this.http.put("http://localhost:52437/Api/Address?id=" + id, address);
- }
-
-  requestRturnOrder(id:number){
-    return this.http.put(this.baseUrl+"Order/RequestReturn?OrderId="+id,null);
   }
+
+  requestRturnOrder(id: number) {
+    return this.http.put(this.baseUrl + "Order/RequestReturn?OrderId=" + id, null);
+  }
+
+  getCurrentCartsByBuyerId(buyerId: number) {
+    return this.http.get<ICart[]>(this.baseUrl + 'ReserveCart/GetCartsByBuyerId?BuyerId=' + buyerId.toString());
+  }
+
 }
