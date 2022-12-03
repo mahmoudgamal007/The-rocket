@@ -139,4 +139,7 @@ export class SellerService {
   addAddress(address: Address) {
     return this.http.post(this.baseUrl + 'Address', address);
   }
+  getSellerNameBySellerId(id: any) {
+    return this.http.get(this.baseUrl + 'AppUser/GeSellerByAccountId?Id=' + id);
+  }
 }
