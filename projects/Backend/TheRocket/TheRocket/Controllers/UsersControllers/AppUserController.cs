@@ -49,7 +49,25 @@ namespace TheRocket.Controller
         }
 
         [HttpGet("[action]")]
-        
+        public async Task<ActionResult<SellerDto>> GeSellerByAccountId([FromQuery] int Id)
+        {
+            SharedResponse<SellerDto> response = await repo.GeSellerByAccountId(Id);
+            if (response.status == Status.notFound) return NotFound();
+            return Ok(response.data);
+
+        }
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult<object>> GetAppUserByBuyrId([FromQuery] int Id)
+        {
+            var response = await repo.GetAppUserByBuyrId(Id);
+            if (response.status == Status.notFound) return NotFound();
+            return Ok(new {Addresses=response.data.Addresses,Phones=response.data.PhoneNumbers});
+
+        }
+
+        [HttpGet("[action]")]
+
         public async Task<ActionResult<AppUserDto>> GetAppUserByUserId([FromQuery] string AppUserId)
         {
             SharedResponse<AppUserDto> response = await repo.GetById(AppUserId);
@@ -65,15 +83,16 @@ namespace TheRocket.Controller
             if (response.status == Status.notFound) return NotFound();
             return Ok(response.data);
         }
-        
+
         [HttpGet("[action]")]
-        public async Task<ActionResult>CheckIfUserExistByEmail([FromQuery] string email){
-            if(email==null)return BadRequest();
-            var result=await repo.IsExist(email);
-            if(result)return Ok(true);
+        public async Task<ActionResult> CheckIfUserExistByEmail([FromQuery] string email)
+        {
+            if (email == null) return BadRequest();
+            var result = await repo.IsExist(email);
+            if (result) return Ok(true);
             return NotFound(false);
         }
-        
+
         // [HttpDelete]
         // public async Task<ActionResult<AppUserDto>> DeleteAppUser([FromQuery] string Id)
         // {
@@ -86,9 +105,9 @@ namespace TheRocket.Controller
         [HttpPut]
         public async Task<ActionResult<AppUserDto>> PutAppUser([FromQuery] Guid Id, UpdateAppUserDto AppUserDto)
         {
-            if(Id!=AppUserDto.Id||AppUserDto==null)return BadRequest();
-            var response =await repo.Update(Id,AppUserDto);
-            if(response.status==Status.problem)return Problem(response.message);
+            if (Id != AppUserDto.Id || AppUserDto == null) return BadRequest();
+            var response = await repo.Update(Id, AppUserDto);
+            if (response.status == Status.problem) return Problem(response.message);
             return NoContent();
         }
 

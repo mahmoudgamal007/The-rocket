@@ -112,6 +112,17 @@ namespace TheRocket.Repositories.UserRepos
             return new SharedResponse<BuyerDto>(Status.notFound, null);
         }
 
+        public async Task<SharedResponse<SellerDto>> GeSellerByAccountId(int id)
+        {
+            Seller seller = await db.Sellers.FindAsync(id);
+            if (seller != null)
+            {
+                var sellerDto = mapper.Map<SellerDto>(seller);
+                return new SharedResponse<SellerDto>(Status.found, sellerDto);
+            }
+            return new SharedResponse<SellerDto>(Status.notFound, null);
+        }
+
         public async Task<SharedResponse<List<AppUserDto>>> GetAll()
         {
             var appUsers = userManager.Users.ToList();
@@ -120,7 +131,18 @@ namespace TheRocket.Repositories.UserRepos
             return new SharedResponse<List<AppUserDto>>(Status.found, appUserDtos);
         }
 
+        public async Task<SharedResponse<AppUserDto>> GetAppUserByBuyrId(int id)
+        {
 
+            var buyer = await db.Buyers.FindAsync(id);
+            if (buyer != null)
+            {
+                var appUserDto = mapper.Map<AppUserDto>(buyer.AppUser);
+                return new SharedResponse<AppUserDto>(Status.found, appUserDto);
+            }
+            return new SharedResponse<AppUserDto>(Status.notFound, null);
+
+        }
 
         public async Task<SharedResponse<AppUserDto>> GetById(string id)
         {
