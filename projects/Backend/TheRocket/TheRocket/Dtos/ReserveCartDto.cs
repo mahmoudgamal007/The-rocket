@@ -11,7 +11,6 @@ namespace TheRocket.Dtos
         public bool IsSubmitted { get; set; }
         public int ProductId { get; set; }
         public int BuyerId { get; set; }
-        public int MyProperty { get; set; }
         public  ProductDto Product { get; set; }
     }
 }
