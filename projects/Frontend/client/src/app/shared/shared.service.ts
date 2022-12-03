@@ -27,5 +27,9 @@ export class SharedService {
     return this.http.get<IAppUser>(this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + userId);
   }
 
+  getCurrentAppUser() {
+    return this.http.get<IAppUser>(this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + localStorage.getItem('userId'));
+  }
+
 
 }

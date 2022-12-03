@@ -51,12 +51,8 @@ export class buyerService {
     return this.http.put(this.baseUrl + "Order/RequestReturn?OrderId=" + id, null);
   }
 
-  // getCurrentBuyerCarts() {
-    
-  //   this.getCurrentBuyerAppUser().subscribe(res => {
-  //     return this.http.get<ICart[]>(this.baseUrl + 'ReserveCart/GetCartsByBuyerId?BuyerId=' + );
-  //   }, err => { console.log(err); return of(null) })
-    
-    
-  // }
+  getCurrentCartsByBuyerId(buyerId: number) {
+    return this.http.get<ICart[]>(this.baseUrl + 'ReserveCart/GetCartsByBuyerId?BuyerId=' + buyerId.toString());
+  }
+
 }
