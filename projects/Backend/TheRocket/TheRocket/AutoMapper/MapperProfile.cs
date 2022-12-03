@@ -37,6 +37,7 @@ namespace TheRocket.AutoMapper
             CreateMap< SubCategoryDto, SubCategory>().ReverseMap();
             CreateMap<SubscripDto, Subscrip>().ReverseMap();
             
+            
         }
     }
 }
