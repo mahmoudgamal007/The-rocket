@@ -64,14 +64,15 @@ export class SellerReturnsComponent {
         console.log(error);
       }
     );
-  }
-  AcceptReturnRequest(id: any, order: IOrder) {
-    console.log("click");
-    order.deliveryStatus = 0;
-    order.isReturned = true;
-    order.returnRequest = 1;
-    this.sellerService.AcceptOrReturnOrder(id, order.quantity, this.flag).subscribe(res => {
-      console.log(res);
+      }
+      AcceptReturnRequest(id:any,order:IOrder){
+        console.log("click");
+        order.returnDate= new Date ();
+        order.deliveryStatus=0;
+        order.isReturned=true;
+        order.returnRequest=1;
+       this.sellerService.AcceptOrReturnOrder(id,order.quantity,this.flag).subscribe(res=>{
+        console.log(res);
 
     })
   }
