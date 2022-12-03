@@ -11,39 +11,37 @@ import { Color } from '../shared/models/Color';
 import { Size } from '../shared/models/Size';
 import { SubCategory } from '../shared/models/subCategory';
 import { IProduct } from '../shared/models/IProduct';
-import { Product } from '../shared/models/Product';
+import { AppUser } from '../shared/models/appUser';
+import { Product } from '../shared/models/product';
+import { Address } from '../shared/models/address';
+
+import { Phone } from '../shared/models/phone';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SellerService {
-
-
   currentUser$!: Observable<IUser | null>;
   baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
-
-
+  constructor(private http: HttpClient) {}
 
   getColors() {
-    return this.http.get<Color[]>(
-      this.baseUrl + 'Color'
-    );
+    return this.http.get<Color[]>(this.baseUrl + 'Color');
   }
 
   getSizes() {
-    return this.http.get<Size[]>(
-      this.baseUrl + 'Size'
-    );
+    return this.http.get<Size[]>(this.baseUrl + 'Size');
   }
 
   getSubCategory() {
-    return this.http.get<SubCategory[]>(
-      this.baseUrl + 'SubCategory'
-    );
+    return this.http.get<SubCategory[]>(this.baseUrl + 'SubCategory');
   }
 
+  editseller(id: any, seller: AppUser) {
+    id = localStorage.getItem('userId');
+    return this.http.put(this.baseUrl + 'AppUser?Id=' + id, seller);
+  }
   postNewProduct(product: Product) {
     console.log('hello');
 
@@ -61,19 +59,13 @@ export class SellerService {
 
   // }
 
-
-
-
   getUser(userId: any) {
     return this.http.get<IAppUser>(
       this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + userId.toString()
     );
   }
-  getAllusers(){
-    return this.http.get<IAppUser>(
-      this.baseUrl + 'AppUser'
-    
-    );
+  getAllusers() {
+    return this.http.get<IAppUser>(this.baseUrl + 'AppUser');
   }
   getProducts(shopParams: shopParams) {
     let params = new HttpParams();
@@ -95,20 +87,60 @@ export class SellerService {
   }
 
   getAllOrders(sellerId: any) {
-    return this.http.get(this.baseUrl + 'Order/GetBySellerId?SellerId=' + sellerId);
+    return this.http.get(
+      this.baseUrl + 'Order/GetBySellerId?SellerId=' + sellerId
+    );
+  }
+
+  getCurrentSeller() {
+    let id = localStorage.getItem('userId');
+    return this.http.get<IAppUser>(
+      this.baseUrl + 'AppUser/GetAppUserByUserId?AppUserId=' + id
+    );
+  }
+  editSeller(id: any, seller: AppUser) {
+    return this.http.put(this.baseUrl + 'AppUser?Id=' + id, seller);
   }
 
   EditOrder(id: any, order: any = {}) {
-
-    return this.http.put(this.baseUrl + "Order?Id=" + id, order);
+    return this.http.put(this.baseUrl + 'Order?Id=' + id, order);
   }
-  AcceptOrReturnOrder(id: any,Ammount:any, Accept:boolean) {
-
-    return this.http.put(this.baseUrl + "Order/AcceptOrReturnOrder?orderId="+id+"&ammount="+Ammount+"&Accept="+Accept,null);
+  editAdress(id: any, address: any) {
+    return this.http.put(this.baseUrl + 'Address?id=' + id, address);
   }
-  
-  getSellerNameBySellerId(id:any){
-    return this.http.get(this.baseUrl+'AppUser/GeSellerByAccountId?Id='+id);
+  AcceptOrReturnOrder(id: any, Ammount: any, Accept: boolean) {
+    return this.http.put(
+      this.baseUrl +
+        'Order/AcceptOrReturnOrder?orderId=' +
+        id +
+        '&ammount=' +
+        Ammount +
+        '&Accept=' +
+        Accept,
+      null
+    );
+  }
+  editPhone(id: any, phone: any) {
+    return this.http.put(this.baseUrl + 'Phone?id=' + id, phone);
+  }
+
+  deleteAddress(id: any) {
+    return this.http.delete(this.baseUrl + 'Address?id=' + id);
+  }
+  addPhone(phone: Phone) {
+    return this.http.post(this.baseUrl + 'Phone', phone);
+  }
+  deletePhone(id: any) {
+    return this.http.delete(this.baseUrl + 'Phone?id=' + id);
+  }
+  deleteProduct(id: any) {
+    return this.http.delete(this.baseUrl + 'Product?id=' + id);
+  }
+  addAddress(address: Address) {
+    return this.http.post(this.baseUrl + 'Address', address);
+  }
+  getSellerNameBySellerId(id: any) {
+    return this.http.get(this.baseUrl + 'AppUser/GeSellerByAccountId?Id=' + id);
   }
   getBuyerData(id:any){
     return this.http.get(this.baseUrl+'AppUser/GetAppUserByBuyrId?Id='+id);
