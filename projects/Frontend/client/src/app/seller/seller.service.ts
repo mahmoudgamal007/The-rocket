@@ -107,5 +107,7 @@ export class SellerService {
     return this.http.put(this.baseUrl + "Order/AcceptOrReturnOrder?orderId="+id+"&ammount="+Ammount+"&Accept="+Accept,null);
   }
   
-
+  getSellerNameBySellerId(id:any){
+    return this.http.get(this.baseUrl+'AppUser/GeSellerByAccountId?Id='+id);
+  }
 }

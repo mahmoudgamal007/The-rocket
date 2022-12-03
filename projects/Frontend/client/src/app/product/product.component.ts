@@ -1,4 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BreadcrumbService } from 'xng-breadcrumb';
+import { Breadcrumb } from 'xng-breadcrumb/lib/breadcrumb';
+import { SellerService } from '../seller/seller.service';
 import { IProduct } from '../shared/models/IProduct';
 import { shopParams } from '../shared/models/shopParams';
 import { ProductService } from './product.service';
@@ -39,11 +43,31 @@ export class ProductComponent implements OnInit {
   ];
 
 
+  sellerId!: number;
+  brandName!: string;
+  seller: any
+  constructor(private productService: ProductService, private activateRoute: ActivatedRoute, private bcService: BreadcrumbService, private sellerService: SellerService) {
 
-  constructor(private productService: ProductService) { }
+    this.sellerId = +this.activateRoute.snapshot.paramMap.get('id')!;
+    if (this.sellerId > 0) {
+      this.shopParams.sellerId = this.sellerId;
+      sellerService.getSellerNameBySellerId(this.sellerId).subscribe(data => {
+        this.seller = data;
+        this.brandName = this.seller.brandName;
+        this.bcService.set('@SellerProduct', this.brandName);
+      }, error => {
+        console.log(error);
+      });
+
+      
+
+    }
+    this.getProducts();
+  }
+
 
   ngOnInit(): void {
-    this.getProducts();
+
   }
 
   getProducts() {
