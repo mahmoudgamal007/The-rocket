@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+    <div class="d-flex flex-row">
+        <img class="rounded" src="{{cart.product.imgs[0].url}}" width="40" height="55">
+        <div class="ml-4">
+            <span class="font-weight-bold d-block">{{cart.product.name}}</span>
+            <span class="spec">{{cart.product.brand}}</span>
+        </div>
+    </div>
+    <div class="d-flex flex-row align-items-center">
+        <span class="d-block">{{cart.quantity}} pc(s)</span>
+        <span class="d-block ml-5 font-weight-bold">
+            {{(cart.product.price-(cart.product.price*(cart.product.discount/100)))*cart.quantity|currency:'EGP '}}
+        </span>
+        <i (click)="removeFromCart(this.cart)" class="fa fa-trash-o ml-3 text-black-50" style="cursor: pointer;"></i>
+    </div>
+</div>

@@ -15,7 +15,7 @@ namespace TheRocket.Entities
         public DateTime? ReturnDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public int Quantity { get; set; }
-        public ReturnRequest? ReturnRequest { get; set; }=null;
+        public ReturnRequest? ReturnRequest { get; set; }
         public string ProductName { get; set; }
         public double ProductPrice { get; set; }
 

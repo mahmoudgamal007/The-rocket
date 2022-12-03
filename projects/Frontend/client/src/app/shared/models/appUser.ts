@@ -1,7 +1,7 @@
-import { IAddress } from "./address";
+import { IAddress } from "./IAddress";
 import { IAdmin } from "./admin";
 import { ILocation } from "./location";
-import { IPhoneNumber } from "./phoneNumber";
+import { IPhone} from "./Iphone";
 import { Seller } from "./seller";
 import { Buyer } from "./buyer";
 
@@ -14,7 +14,7 @@ export class AppUser {
     seller?: Seller;
     buyer?: Buyer;
     admin?: IAdmin;
-    phoneNumbers?: IPhoneNumber[];
+    phoneNumbers?: IPhone[];
     addresses?: IAddress[];
     locations?: ILocation[];
     accountType?: number;

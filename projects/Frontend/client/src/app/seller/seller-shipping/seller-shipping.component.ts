@@ -18,12 +18,12 @@ export class SellerShippingComponent implements OnInit {
   id!: any;
 
 
-  sellerId:any
-  orders:any;
+  sellerId: any
+  orders: any;
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$
@@ -31,8 +31,8 @@ export class SellerShippingComponent implements OnInit {
       .subscribe((res) => {
         this.id = res?.userId;
         this.getUser();
-        
-        
+
+
       });
   }
 
@@ -42,14 +42,14 @@ export class SellerShippingComponent implements OnInit {
       (response) => {
         this.appUser = response;
         console.log(this.appUser.seller?.sellerId);
-        this.sellerId=this.appUser.seller?.sellerId;
-      this.sellerService.getAllOrders(this.sellerId).subscribe(
-        (response)=>{
-          
-          this.orders=response;
-          console.log(this.orders);
-        }
-      )
+        this.sellerId = this.appUser.seller?.sellerId;
+        this.sellerService.getAllOrders(this.sellerId).subscribe(
+          (response) => {
+
+            this.orders = response;
+            console.log(this.orders);
+          }
+        )
       },
       (error) => {
         console.log(error);
@@ -57,18 +57,18 @@ export class SellerShippingComponent implements OnInit {
     );
   }
 
-  getOrders(){
+  getOrders() {
     this.getUser();
     return this.sellerService.getAllOrders(this.sellerId).subscribe(
       (response) => {
-         
+
         console.log(response);
       },
       (error) => {
         console.log(error);
       }
     );
-      }
+  }
 
       DeliveredOrder(id:any,order:IOrder){
         console.log("click");
@@ -77,7 +77,7 @@ export class SellerShippingComponent implements OnInit {
        this.sellerService.EditOrder(id,order).subscribe(res=>{
         console.log(res);
 
-        })
-      }
+    })
+  }
 
 }

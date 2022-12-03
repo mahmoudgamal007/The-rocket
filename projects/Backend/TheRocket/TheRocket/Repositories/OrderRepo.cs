@@ -31,6 +31,7 @@ namespace TheRocket.Repositories
             }
             else
                 order.ReturnRequest = ReturnRequest.Returned;
+                order.ReturnDate=DateTime.Now;
 
             try
             {

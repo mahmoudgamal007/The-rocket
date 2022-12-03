@@ -12,17 +12,17 @@ import { SellerService } from '../seller.service';
   templateUrl: './seller-returns.component.html',
   styleUrls: ['./seller-returns.component.scss']
 })
-export class SellerReturnsComponent  {
+export class SellerReturnsComponent {
   appUser!: IAppUser;
   currentUser!: IUser | null;
   id!: any;
- sellerId:any
-  orders:any;
-  flag:boolean=false;
+  sellerId: any
+  orders: any;
+  flag: boolean = false;
   constructor(
     private accountService: AccountService,
     private sellerService: SellerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.accountService.currentUser$
@@ -30,8 +30,8 @@ export class SellerReturnsComponent  {
       .subscribe((res) => {
         this.id = res?.userId;
         this.getUser();
-        
-        
+
+
       });
   }
   getUser() {
@@ -39,14 +39,14 @@ export class SellerReturnsComponent  {
       (response) => {
         this.appUser = response;
         console.log(this.appUser.seller?.sellerId);
-        this.sellerId=this.appUser.seller?.sellerId;
-      this.sellerService.getAllOrders(this.sellerId).subscribe(
-        (response)=>{
-          
-          this.orders=response;
-          console.log(this.orders);
-        }
-      )
+        this.sellerId = this.appUser.seller?.sellerId;
+        this.sellerService.getAllOrders(this.sellerId).subscribe(
+          (response) => {
+
+            this.orders = response;
+            console.log(this.orders);
+          }
+        )
       },
       (error) => {
         console.log(error);
@@ -54,11 +54,11 @@ export class SellerReturnsComponent  {
     );
   }
 
-  getOrders(){
+  getOrders() {
     this.getUser();
     return this.sellerService.getAllOrders(this.sellerId).subscribe(
       (response) => {
-         
+
         console.log(response);
       },
       (error) => {
@@ -75,15 +75,15 @@ export class SellerReturnsComponent  {
        this.sellerService.AcceptOrReturnOrder(id,order.quantity,this.flag).subscribe(res=>{
         console.log(res);
 
-        })
-      }
-      CancelReturnRequest(id:any,order:IOrder){
-        console.log("click");
-        order.returnRequest=2;
-       this.sellerService.EditOrder(id,order).subscribe(res=>{
-        console.log(res);
+    })
+  }
+  CancelReturnRequest(id: any, order: IOrder) {
+    console.log("click");
+    order.returnRequest = 2;
+    this.sellerService.EditOrder(id, order).subscribe(res => {
+      console.log(res);
 
-        })
-      }      
+    })
+  }
 
 }

@@ -1,0 +1,26 @@
+<div class="payment-info mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <span>Card details</span>
+
+    </div>
+    <span class="type d-block mt-3 mb-1">Payment Option
+    </span>
+    <label class="radio">
+        <input type="radio" name="card" value="payment" checked>
+        <span>
+            <h4>Cash on delivery</h4>
+        </span>
+    </label>
+
+    <hr class="line">
+    <div class="d-flex justify-content-between information"><span>Subtotal</span><span>{{cartsPrice |
+            currency:'EGP '}}</span></div>
+    <div class="d-flex justify-content-between information"><span>Discount</span><span>-{{cartsDiscount |
+            currency:'EGP '}}</span></div>
+    <div class="d-flex justify-content-between information"><span>Shipping</span><span>As per Seller</span></div>
+    <div class="d-flex justify-content-between information"><span>Total</span><span>{{cartsPrice-cartsDiscount|
+            currency:'EGP ' }}</span></div><button [disabled]="carts.length===0"
+        class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"
+        (click)="onOrderSubmit()"><span>{{cartsPrice-cartsDiscount|
+            currency:'EGP ' }}</span><span>Submit Order<i class="fa fa-long-arrow-right ml-1"></i></span></button>
+</div>

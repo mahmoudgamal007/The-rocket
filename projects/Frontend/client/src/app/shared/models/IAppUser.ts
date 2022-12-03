@@ -1,8 +1,8 @@
-import { IAddress } from "./address";
+import { IAddress } from "./IAddress";
 import { IAdmin } from "./admin";
 import { IBuyer } from "./Ibuyer";
 import { ILocation } from "./location";
-import { IPhoneNumber } from "./phoneNumber";
+import { IPhone } from "./Iphone";
 import { ISeller } from "./Iseller";
 
 export interface IAppUser {
@@ -14,7 +14,7 @@ export interface IAppUser {
     seller?: ISeller;
     buyer?: IBuyer;
     admin?: IAdmin;
-    phoneNumbers?: IPhoneNumber[];
+    phoneNumbers?: IPhone[];
     addresses?: IAddress[];
     locations?: ILocation[];
     accountType?: number;
