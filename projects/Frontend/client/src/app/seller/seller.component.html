@@ -1,6 +1,8 @@
 <div class="container">
   <header>
-    <img src="{{ appUser.seller?.coverImageUrl }}" />
+    <a routerLink="/seller/editcover">
+      <img src="{{ appUser.seller?.coverImageUrl }}" />
+    </a>
   </header>
 
   <div class="row">
@@ -33,10 +35,19 @@
         <li><a>Edit Profile</a></li>
       </ul>
       <!-- <button class="btn btn-success addbtn">Add product</button> -->
-      <a  href="seller/addProduct" style="margin: 10px;" class="btn btn-success addbtn">Add Product</a>
-      <br>
-      <a  href="seller/orders" style="margin: 10px;" class="btn btn-success addbtn">Order</a>
-
+      <a
+        href="seller/addProduct"
+        style="margin: 10px"
+        class="btn btn-success addbtn"
+        >Add Product</a
+      >
+      <br />
+      <a
+        href="seller/orders"
+        style="margin: 10px"
+        class="btn btn-success addbtn"
+        >Order</a
+      >
 
       <div class="row gallery">
         <div
@@ -45,19 +56,28 @@
           style="display: inline"
         >
           <div *ngFor="let image of product.imgs">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src={{image.url}} alt="Card image cap">
+            <div class="card" style="width: 18rem">
+              <img
+                class="card-img-top"
+                src="{{ image.url }}"
+                alt="Card image cap"
+              />
               <div class="card-body">
-                <h5 class="card-title">{{product.name}}</h5>
-                <p class="card-text">{{product.desctiption}}</p>
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.desctiption }}</p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"><h5 style="display:inline">Price : </h5>{{product.price-(product.price*product.discount)/100}}</li>
-                <li class="list-group-item"><h5 style="display:inline ;">Brand : </h5>{{product.brand}}</li>
+                <li class="list-group-item">
+                  <h5 style="display: inline">Price :</h5>
+                  {{ product.price - (product.price * product.discount) / 100 }}
+                </li>
+                <li class="list-group-item">
+                  <h5 style="display: inline">Brand :</h5>
+                  {{ product.brand }}
+                </li>
               </ul>
               <div class="card-body">
                 <a href="#" class="card-link">Delete</a>
-                
               </div>
             </div>
           </div>

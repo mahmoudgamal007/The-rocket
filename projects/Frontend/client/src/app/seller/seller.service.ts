@@ -100,9 +100,6 @@ export class SellerService {
     return this.http.put(this.baseUrl + 'Order?Id=' + id, order);
   }
   editAdress(id: any, address: any) {
-    id = localStorage.getItem('userId');
-    console.log(address);
-    console.log(id);
     return this.http.put(
       'http://localhost:52437/Api/Address?id=' + id,
       address

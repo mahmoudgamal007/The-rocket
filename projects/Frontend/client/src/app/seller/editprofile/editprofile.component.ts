@@ -1,4 +1,5 @@
 import { HttpEventType } from '@angular/common/http';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import {
   FormBuilder,
@@ -9,6 +10,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
+import { IAddress } from 'src/app/shared/models/address';
 import { AppUser } from 'src/app/shared/models/appUser';
 import { IAppUser } from 'src/app/shared/models/IAppUser';
 import { Seller } from 'src/app/shared/models/seller';
@@ -90,7 +92,6 @@ export class EditprofileComponent implements OnInit {
 
     const value = about?.value;
     this.newperson.seller!.about = value;
-    this.newperson.seller!.profileImageUrl = this.newpp;
     this.sellerservice.editSeller(this.id, this.newperson).subscribe((res) => {
       alert('Edit Info Success');
     });
@@ -128,4 +129,10 @@ export class EditprofileComponent implements OnInit {
     this.files = files;
     console.log('hello');
   }
+  // addressId!: number;
+  // address!: IAddress;
+  // onClick(id: number, address: IAddress) {
+  //   this.addressId = id;
+  //   this.address = address;
+  // }
 }

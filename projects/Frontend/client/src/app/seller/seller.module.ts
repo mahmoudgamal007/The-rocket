@@ -10,6 +10,7 @@ import { SellerHistoryComponent } from './seller-history/seller-history.componen
 import { SellerShippingComponent } from './seller-shipping/seller-shipping.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { EditcoverComponent } from './editcover/editcover.component';
 
 
 
@@ -22,7 +23,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     SellerHistoryComponent,
     SellerShippingComponent,
     AddProductComponent,
-    EditprofileComponent
+    EditprofileComponent,
+    EditcoverComponent
     
   ],
   imports: [

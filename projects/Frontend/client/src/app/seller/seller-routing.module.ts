@@ -8,11 +8,13 @@ import { SellerShippingComponent } from './seller-shipping/seller-shipping.compo
 import { SellerReturnsComponent } from './seller-returns/seller-returns.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { EditcoverComponent } from './editcover/editcover.component';
 
 const routes: Routes = [
   { path: '', component: SellerComponent },
   { path: 'orders', component: SellerOrdersComponent },
   { path: 'edit', component: EditprofileComponent },
+  { path: 'editcover', component: EditcoverComponent },
   { path: 'returns', component: SellerReturnsComponent },
   { path: 'history', component: SellerHistoryComponent },
   { path: 'shipping', component: SellerShippingComponent },

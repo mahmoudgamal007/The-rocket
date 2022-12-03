@@ -1,0 +1,31 @@
+<div class="container">
+  <!-- code here -->
+  <div class="card">
+    <form class="card-form">
+      <div class="input">
+        <input
+          formControlName="file"
+          class="input-field"
+          type="file"
+          if="file"
+          #file
+          placeholder="Choose file"
+          multiple
+          (change)="catchSelectedImages(file.files)"
+        />
+        <label class="input-label">Upload Profile Picture</label>
+      </div>
+      <div class="action">
+        <button class="action-button" (click)="onSubmit()" type="button">
+          Update Profile
+        </button>
+      </div>
+    </form>
+    <div class="card-info">
+      <p>
+        By signing up you are agreeing to our
+        <a href="#">Terms and Conditions</a>
+      </p>
+    </div>
+  </div>
+</div>

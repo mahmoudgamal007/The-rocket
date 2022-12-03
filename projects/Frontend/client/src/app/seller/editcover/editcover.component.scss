@@ -12,13 +12,6 @@ body {
   background-color: #f1f3fb;
   padding: 0 2rem;
 }
-.mybtn {
-  width: auto;
-  height: auto;
-  background-color: forestgreen;
-  border-radius: 15px;
-  color: white;
-}
 
 img {
   max-width: 100%;
@@ -35,12 +28,23 @@ input {
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
-  width: fit-content;
-
+  width: 100%;
+  max-width: 100%;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
   padding: 0.75rem;
+}
+
+.card-image {
+  border-radius: 8px;
+  overflow: hidden;
+  padding-bottom: 65%;
+  background-image: url("https://assets.codepen.io/285131/coffee_1.jpg");
+  background-repeat: no-repeat;
+  background-size: 150%;
+  background-position: 0 5%;
+  position: relative;
 }
 
 .card-heading {
@@ -129,58 +133,4 @@ input {
     color: #6658d3;
     text-decoration: none;
   }
-}
-
-/* CSS */
-.button-3 {
-  appearance: none;
-  background-color: #2ea44f;
-  border: 1px solid rgba(27, 31, 35, 0.15);
-  border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 6px 16px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-  margin: 5px;
-}
-
-.button-3:focus:not(:focus-visible):not(.focus-visible) {
-  box-shadow: none;
-  outline: none;
-}
-
-.button-3:hover {
-  background-color: #2c974b;
-}
-
-.button-3:focus {
-  box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
-  outline: none;
-}
-
-.button-3:disabled {
-  background-color: #94d3a2;
-  border-color: rgba(27, 31, 35, 0.1);
-  color: rgba(255, 255, 255, 0.8);
-  cursor: default;
-}
-
-.button-3:active {
-  background-color: #298e46;
-  box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
 }
